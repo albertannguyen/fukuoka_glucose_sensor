@@ -27,9 +27,8 @@ void user_on_connection(const uint8_t conidx, struct gapc_connection_req_ind con
 
 void user_on_disconnect(struct gapc_disconnect_ind const *param);
 
-void user_catch_rest_hndl(ke_msg_id_t const msgid,
-                          void const *param,
-                          ke_task_id_t const dest_id,
-                          ke_task_id_t const src_id);
+void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id);
+
+// custom
 
 #endif
