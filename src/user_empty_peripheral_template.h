@@ -22,6 +22,7 @@
  */
 
 // template
+// yellow warning only shows up after building the project (they can safely be ignored)
 void user_on_connection(const uint8_t conidx, struct gapc_connection_req_ind const *param);
 
 void user_on_disconnect(struct gapc_disconnect_ind const *param);
