@@ -1,22 +1,26 @@
 /*
  ****************************************************************************************
- * INCLUDE FILES
+ * INCLUDE FILES - TEMPLATE (DO NOT MODIFY)
  ****************************************************************************************
  */
-
-// template
+ 
 #include "rwip_config.h" // SW configuration
 #include "gattc_task.h"
 #include "app_api.h"
 #include "user_empty_peripheral_template.h"
 
-// custom
+/*
+ ****************************************************************************************
+ * INCLUDE FILES - ALBERT NGUYEN
+ ****************************************************************************************
+ */
+
 #include "gpio.h"
 #include "user_periph_setup.h"
 
 /*
  ****************************************************************************************
- * GLOBAL VARIABLE DEFINITIONS
+ * GLOBAL VARIABLE DEFINITIONS - ALBERT NGUYEN
  ****************************************************************************************
  */
  
@@ -24,11 +28,10 @@
 
 /*
  ****************************************************************************************
- * FUNCTION DEFINITIONS
+ * FUNCTION DEFINITIONS - TEMPLATE (DO NOT MODIFY)
  ****************************************************************************************
 */
 
-// template
 void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind const *param)
 {
     default_app_on_connection(connection_idx, param);
@@ -60,7 +63,12 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid,
     }
 }
 
-// custom
+/*
+ ****************************************************************************************
+ * FUNCTION DEFINITIONS - ALBERT NGUYEN
+ ****************************************************************************************
+*/
+
 int main (void)
 {
 	// run indefinitely

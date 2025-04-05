@@ -1,6 +1,6 @@
 /*
  ****************************************************************************************
- * INCLUDE FILES
+ * INCLUDE FILES - TEMPLATE (DO NOT MODIFY)
  ****************************************************************************************
  */
 
@@ -14,7 +14,7 @@
 
 /*
  ****************************************************************************************
- * GPIO RESERVATIONS
+ * GPIO RESERVATIONS - TEMPLATE (DO NOT MODIFY)
  ****************************************************************************************
 		i.e. to reserve P0_1 as Generic Purpose I/O:
 		RESERVE_GPIO(DESCRIPTIVE_NAME, GPIO_PORT_0, GPIO_PIN_1, PID_GPIO);
@@ -25,7 +25,6 @@
 
 void GPIO_reservations(void)
 {
-// template
 #if defined (CFG_PRINTF_UART2)
     RESERVE_GPIO(UART2_TX, UART2_TX_PORT, UART2_TX_PIN, PID_UART2_TX);
 #endif
@@ -34,18 +33,24 @@ void GPIO_reservations(void)
     RESERVE_GPIO(SPI_EN, SPI_EN_PORT, SPI_EN_PIN, PID_SPI_EN);
 #endif
 	
-// custom
+/*
+ ****************************************************************************************
+ * GPIO RESERVATIONS - ALBERT NGUYEN
+ ****************************************************************************************
+ */
+
 // reserve pins 8 and 9 as GPIO
-// not sure what ports do so left it alone at port 0, seems to be the default for most things
 RESERVE_GPIO(UVP_TRIGGER, UVP_TRIGGER_PORT, UVP_TRIGGER_PIN, PID_GPIO);
 RESERVE_GPIO(MAX_SHDN, MAX_SHDN_PORT, MAX_SHDN_PIN, PID_GPIO);
+	
+// not sure what ports do so left it alone at port 0, seems to be the default for most things
 }
 
 #endif
 
 /*
  ****************************************************************************************
- * GPIO CONFIGURATION
+ * GPIO CONFIGURATION - TEMPLATE (DO NOT MODIFY)
  ****************************************************************************************
 		i.e. to set P0_1 as Generic purpose Output:
 		GPIO_ConfigurePin(GPIO_PORT_0, GPIO_PIN_1, OUTPUT, PID_GPIO, false);
@@ -70,7 +75,12 @@ void set_pad_functions(void)
     GPIO_ConfigurePin(UART2_TX_PORT, UART2_TX_PIN, OUTPUT, PID_UART2_TX, false);
 #endif
 
-// custom
+/*
+ ****************************************************************************************
+ * GPIO CONFIGURATION - ALBERT NGUYEN
+ ****************************************************************************************
+ */
+	
 // set pin 8 (UVP_TRIGGER) as input
 GPIO_ConfigurePin(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN, INPUT, PID_GPIO, false);
 // set pin 9 (MAX_SHDN) as digital output high

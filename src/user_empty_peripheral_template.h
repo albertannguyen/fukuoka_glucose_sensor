@@ -3,11 +3,10 @@
 
 /*
  ****************************************************************************************
- * INCLUDE FILES
+ * INCLUDE FILES - TEMPLATE (DO NOT MODIFY)
  ****************************************************************************************
  */
 
-// template
 #include "rwble_config.h"
 #include "app_task.h"                  // application task
 #include "gapc_task.h"                 // gap functions and messages
@@ -17,11 +16,10 @@
 
 /*
  ****************************************************************************************
- * FUNCTION DECLARATIONS
+ * FUNCTION DECLARATIONS - TEMPLATE (DO NOT MODIFY)
  ****************************************************************************************
  */
 
-// template
 // yellow warning only shows up after building the project (they can safely be ignored)
 void user_on_connection(const uint8_t conidx, struct gapc_connection_req_ind const *param);
 
