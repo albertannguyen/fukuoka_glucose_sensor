@@ -18,7 +18,10 @@
  */
 
 // custom
-
+#define UVP_TRIGGER_PORT            GPIO_PORT_0
+#define UVP_TRIGGER_PIN             GPIO_PIN_8
+#define MAX_SHDN_PORT               GPIO_PORT_0
+#define MAX_SHDN_PIN                GPIO_PIN_9
 
 /****************************************************************************************/
 /* UART2 configuration to use with arch_console print messages                          */

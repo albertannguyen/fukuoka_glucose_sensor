@@ -37,8 +37,8 @@ void GPIO_reservations(void)
 // custom
 // reserve pins 8 and 9 as GPIO
 // not sure what ports do so left it alone at port 0, seems to be the default for most things
-RESERVE_GPIO(UVP_TRIGGER, GPIO_PORT_0, GPIO_PIN_8, PID_GPIO);
-RESERVE_GPIO(MAX_SHDN, GPIO_PORT_0, GPIO_PIN_9, PID_GPIO);
+RESERVE_GPIO(UVP_TRIGGER, UVP_TRIGGER_PORT, UVP_TRIGGER_PIN, PID_GPIO);
+RESERVE_GPIO(MAX_SHDN, MAX_SHDN_PORT, MAX_SHDN_PIN, PID_GPIO);
 }
 
 #endif
@@ -72,9 +72,9 @@ void set_pad_functions(void)
 
 // custom
 // set pin 8 (UVP_TRIGGER) as input
-GPIO_ConfigurePin(GPIO_PORT_0, GPIO_PIN_8, INPUT, PID_GPIO, false);
+GPIO_ConfigurePin(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN, INPUT, PID_GPIO, false);
 // set pin 9 (MAX_SHDN) as digital output high
-GPIO_ConfigurePin(GPIO_PORT_0, GPIO_PIN_9, OUTPUT, PID_GPIO, true);
+GPIO_ConfigurePin(MAX_SHDN_PORT, MAX_SHDN_PIN, OUTPUT, PID_GPIO, true);
 }
 
 #if defined (CFG_PRINTF_UART2)

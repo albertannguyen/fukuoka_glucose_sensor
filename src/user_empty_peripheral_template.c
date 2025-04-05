@@ -65,10 +65,9 @@ int main (void)
 {
 	// run indefinitely
 	while(1){
-		// if UVP_TRIGGER reads low, then sets MAX_SHDN pin to low which turns off MAX9913
-		// # WIP may need to use defines/alias rather than typing in port and pin as arguments
-		if(GPIO_GetPinStatus(GPIO_PORT_0, GPIO_PIN_8) == false){
-			GPIO_SetInactive(GPIO_PORT_0, GPIO_PIN_9);
+		// if voltage supervisor drives pin low, then shutdown MAX9913 and go to sleep/hibernate #WIP
+		if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
+			GPIO_SetInactive(MAX_SHDN_PORT, MAX_SHDN_PIN);
 		}
 	}
 }
