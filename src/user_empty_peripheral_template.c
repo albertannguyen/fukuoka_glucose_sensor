@@ -69,6 +69,9 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid,
  ****************************************************************************************
 */
 
+// #WIP for some reason main loop is preventing project from being built
+
+/*
 int main (void)
 {
 	// run indefinitely
@@ -79,3 +82,4 @@ int main (void)
 		}
 	}
 }
+*/
