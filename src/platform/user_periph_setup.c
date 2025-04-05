@@ -61,7 +61,6 @@ RESERVE_GPIO(MAX_SHDN, MAX_SHDN_PORT, MAX_SHDN_PIN, PID_GPIO);
 
 void set_pad_functions(void)
 {
-// template
 #if defined (__DA14586__)
     // Disallow spontaneous DA14586 SPI Flash wake-up
     GPIO_ConfigurePin(GPIO_PORT_2, GPIO_PIN_3, OUTPUT, PID_GPIO, true);
@@ -86,6 +85,12 @@ GPIO_ConfigurePin(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN, INPUT, PID_GPIO, false);
 // set pin 9 (MAX_SHDN) as digital output high
 GPIO_ConfigurePin(MAX_SHDN_PORT, MAX_SHDN_PIN, OUTPUT, PID_GPIO, true);
 }
+
+/*
+ ****************************************************************************************
+ * TEMPLATE (DO NOT MODIFY)
+ ****************************************************************************************
+ */
 
 #if defined (CFG_PRINTF_UART2)
 // Configuration struct for UART2
