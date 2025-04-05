@@ -96,6 +96,7 @@ void periph_init(void)
 {
 #if defined (__DA14531__)
     // In Boost mode enable the DCDC converter to supply VBAT_HIGH for the used GPIOs
+		// #WIP need to check this function and use it to set the DCDC converter
     syscntl_dcdc_turn_on_in_boost(SYSCNTL_DCDC_LEVEL_3V0);
 #else
     // Power up peripherals' power domain

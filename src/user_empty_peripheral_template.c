@@ -61,3 +61,14 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid,
 }
 
 // custom
+int main (void)
+{
+	// run indefinitely
+	while(1){
+		// if UVP_TRIGGER reads low, then sets MAX_SHDN pin to low which turns off MAX9913
+		// # WIP may need to use defines/alias rather than typing in port and pin as arguments
+		if(GPIO_GetPinStatus(GPIO_PORT_0, GPIO_PIN_8) == false){
+			GPIO_SetInactive(GPIO_PORT_0, GPIO_PIN_9);
+		}
+	}
+}
