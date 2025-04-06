@@ -32,7 +32,8 @@
  ****************************************************************************************
  */
  
- // bool my_led_state __SECTION_ZERO("retention_mem_area0"); // @RETENTION MEMORY
+ // define global variable to watch when debugging
+ bool uvp_status __SECTION_ZERO("retention_mem_area0"); // @RETENTION MEMORY
 
 /*
  ****************************************************************************************
@@ -51,11 +52,14 @@ void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind c
 	arch_printf_process();
 	arch_printf_process();
 
+	// set global watch variable
+	uvp_status = GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN);
+	
 	// if voltage supervisor drives pin low, then start system shutdown
-	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
+	if(uvp_status == false){
 		// shutdown MAX9913 by driving pin low
 		GPIO_SetInactive(MAX_SHDN_PORT, MAX_SHDN_PIN);
-		// #WIP set DA14531 to sleep
+		// #WIP set DA14531 to hibernate (lowest power mode)
 	}
 }
 
