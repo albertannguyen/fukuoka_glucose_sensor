@@ -1,3 +1,12 @@
+/**
+ ****************************************************************************************
+ * @file user_empty_peripheral_template.c
+ * @brief Empty peripheral template project source code.
+ * @addtogroup APP
+ * @{
+ ****************************************************************************************
+ */
+
 /*
  ****************************************************************************************
  * INCLUDE FILES
@@ -76,3 +85,5 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid,
             break;
     }
 }
+
+/// @} APP
