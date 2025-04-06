@@ -3,7 +3,7 @@
 
 /*
  ****************************************************************************************
- * INCLUDE FILES - TEMPLATE (DO NOT MODIFY)
+ * INCLUDE FILES
  ****************************************************************************************
  */
 
@@ -13,11 +13,11 @@
 
 /*
  ****************************************************************************************
- * DEFINES - ALBERT NGUYEN
+ * DEFINES
  ****************************************************************************************
  */
 
-// custom
+// Albert: define UVP circuit pins
 #define UVP_TRIGGER_PORT            GPIO_PORT_0
 #define UVP_TRIGGER_PIN             GPIO_PIN_8
 #define MAX_SHDN_PORT               GPIO_PORT_0
@@ -25,14 +25,14 @@
 
 /*
  ****************************************************************************************
- * UART2 configuration to use with arch_console print messages - TEMPLATE (DO NOT MODIFY)
+ * UART2 configuration to use with arch_console print messages
  ****************************************************************************************
  */
 
 // Define UART2 Tx Pad
 #if defined (__DA14531__)
     #define UART2_TX_PORT           GPIO_PORT_0
-		// custom: changed from pin 6 to pin 5 for USB devkit
+		// Albert: changed from pin 6 to pin 5 for USB devkit
     #define UART2_TX_PIN            GPIO_PIN_5
 #else
     #define UART2_TX_PORT           GPIO_PORT_0
@@ -51,13 +51,13 @@
 
 /*
  ****************************************************************************************
- * SPI configuration - TEMPLATE (DO NOT MODIFY)
+ * SPI configuration
  ****************************************************************************************
  */
 
 // Define SPI Pads
 #if defined (__DA14531__)
-    #define SPI_EN_PORT             GPIO_PORT_0
+		#define SPI_EN_PORT             GPIO_PORT_0
     #define SPI_EN_PIN              GPIO_PIN_1
 
     #define SPI_CLK_PORT            GPIO_PORT_0
@@ -85,7 +85,7 @@
 
 /*
  ****************************************************************************************
- * Production debug output configuration - TEMPLATE (DO NOT MODIFY)
+ * Production debug output configuration
  ****************************************************************************************
  */
 
@@ -101,7 +101,7 @@
 
 /*
  ****************************************************************************************
- * FUNCTION DECLARATIONS - TEMPLATE (DO NOT MODIFY)
+ * FUNCTION DECLARATIONS
  ****************************************************************************************
  */
 

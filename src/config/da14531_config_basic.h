@@ -90,8 +90,7 @@
 /* will be used.                                                                                                */
 /****************************************************************************************************************/
 
-// Albert: enabled UART by defining CFG_PRINTF, see Section 10.2 of SDK Tutorial
-// you can also see the arch_console.h file
+// Albert: enabled UART by defining CFG_PRINTF, see Section 10.2 of SDK Tutorial and arch_console.h file
 #define CFG_PRINTF
 
 #ifdef CFG_PRINTF

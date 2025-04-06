@@ -3,7 +3,7 @@
 
 /*
  ****************************************************************************************
- * INCLUDE FILES - TEMPLATE (DO NOT MODIFY)
+ * INCLUDE FILES
  ****************************************************************************************
  */
 
@@ -16,11 +16,11 @@
 
 /*
  ****************************************************************************************
- * FUNCTION DECLARATIONS - TEMPLATE (DO NOT MODIFY)
+ * FUNCTION DECLARATIONS
  ****************************************************************************************
  */
 
-// yellow warning only shows up after building the project (they can safely be ignored)
+// Albert: yellow warning only shows up after building the project (they can be ignored for now)
 void user_on_connection(const uint8_t conidx, struct gapc_connection_req_ind const *param);
 
 void user_on_disconnect(struct gapc_disconnect_ind const *param);

@@ -1,6 +1,6 @@
 /*
  ****************************************************************************************
- * INCLUDE FILES - TEMPLATE (DO NOT MODIFY)
+ * INCLUDE FILES
  ****************************************************************************************
  */
  
@@ -9,22 +9,17 @@
 #include "app_api.h"
 #include "user_empty_peripheral_template.h"
 
-/*
- ****************************************************************************************
- * INCLUDE FILES - ALBERT NGUYEN
- ****************************************************************************************
- */
 
-// for GPIO settings
+// Albert: for GPIO settings
 #include "gpio.h"
 #include "user_periph_setup.h"
 
-// for UART serial port output
+// Albert: for UART serial port output
 #include "arch_console.h"
 
 /*
  ****************************************************************************************
- * GLOBAL VARIABLE DEFINITIONS - ALBERT NGUYEN
+ * GLOBAL VARIABLE DEFINITIONS
  ****************************************************************************************
  */
  
@@ -32,15 +27,13 @@
 
 /*
  ****************************************************************************************
- * FUNCTION DEFINITIONS - TEMPLATE & ALBERT NGUYEN
+ * FUNCTION DEFINITIONS
  ****************************************************************************************
-		You can modify this one, treat it as the int main loop
 */
 
-// Will run if DA14531 is connected
+// Albert: will run if DA14531 is connected
 void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind const *param)
 {
-	// template code - DO NOT MODIFY
 	default_app_on_connection(connection_idx, param);
 	
 	// print statements
@@ -49,17 +42,17 @@ void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind c
 	arch_printf_process();
 	arch_printf_process();
 
-	// Albert's code
-	// if voltage supervisor drives pin low, then shutdown MAX9913 and go to sleep/hibernate #WIP
+	// if voltage supervisor drives pin low, then start system shutdown
 	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
+		// shutdown MAX9913 by driving pin low
 		GPIO_SetInactive(MAX_SHDN_PORT, MAX_SHDN_PIN);
+		// #WIP set DA14531 to sleep
 	}
 }
 
-// Will run if DA14531 is disconnected
+// ALbert: will run if DA14531 is disconnected
 void user_on_disconnect( struct gapc_disconnect_ind const *param )
 {
-	// template code - DO NOT MODIFY
 	default_app_on_disconnect(param);
 }
 
