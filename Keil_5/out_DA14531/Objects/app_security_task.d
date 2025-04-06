@@ -100,4 +100,5 @@
   ..\src\config\user_periph_setup.h \
   ..\..\..\..\..\sdk\platform\driver\uart\uart.h \
   ..\..\..\..\..\sdk\platform\driver\dma\dma.h \
-  ..\src\user_empty_peripheral_template.h
+  ..\src\user_empty_peripheral_template.h \
+  ..\..\..\..\..\sdk\platform\core_modules\arch_console\arch_console.h

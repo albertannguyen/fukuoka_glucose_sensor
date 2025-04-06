@@ -89,7 +89,11 @@
 /* If CFG_PRINTF_UART2 is defined, then serial interface logging mechanism is implented using UART2, else UART1 */
 /* will be used.                                                                                                */
 /****************************************************************************************************************/
-#undef CFG_PRINTF
+
+// Albert: enabled UART by defining CFG_PRINTF, see Section 10.2 of SDK Tutorial
+// you can also see the arch_console.h file
+#define CFG_PRINTF
+
 #ifdef CFG_PRINTF
     #define CFG_PRINTF_UART2
 #endif

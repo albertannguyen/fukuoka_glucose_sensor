@@ -198,7 +198,9 @@ static const struct advertise_configuration user_adv_conf = {
  ****************************************************************************************
  */
 /// Device name
-#define USER_DEVICE_NAME        "DIALOG-TMPL"
+
+// custom: changed name to match project
+#define USER_DEVICE_NAME        "FUKUOKA-GLUCOSE-SENSOR"
 
 /// Device name length
 #define USER_DEVICE_NAME_LEN    (sizeof(USER_DEVICE_NAME)-1)

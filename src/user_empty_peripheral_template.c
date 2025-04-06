@@ -15,8 +15,12 @@
  ****************************************************************************************
  */
 
+// for GPIO settings
 #include "gpio.h"
 #include "user_periph_setup.h"
+
+// for UART serial port output
+#include "arch_console.h"
 
 /*
  ****************************************************************************************
@@ -28,18 +32,35 @@
 
 /*
  ****************************************************************************************
- * FUNCTION DEFINITIONS - TEMPLATE (DO NOT MODIFY)
+ * FUNCTION DEFINITIONS - TEMPLATE & ALBERT NGUYEN
  ****************************************************************************************
+		You can modify this one, treat it as the int main loop
 */
 
+// Will run if DA14531 is connected
 void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind const *param)
 {
-    default_app_on_connection(connection_idx, param);
+	// template code - DO NOT MODIFY
+	default_app_on_connection(connection_idx, param);
+	
+	// print statements
+	// process needed to push string to UART during debugging
+	arch_printf("UVP Check Running \n \r");
+	arch_printf_process();
+	arch_printf_process();
+
+	// Albert's code
+	// if voltage supervisor drives pin low, then shutdown MAX9913 and go to sleep/hibernate #WIP
+	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
+		GPIO_SetInactive(MAX_SHDN_PORT, MAX_SHDN_PIN);
+	}
 }
 
+// Will run if DA14531 is disconnected
 void user_on_disconnect( struct gapc_disconnect_ind const *param )
 {
-    default_app_on_disconnect(param);
+	// template code - DO NOT MODIFY
+	default_app_on_disconnect(param);
 }
 
 void user_catch_rest_hndl(ke_msg_id_t const msgid,
@@ -62,24 +83,3 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid,
             break;
     }
 }
-
-/*
- ****************************************************************************************
- * FUNCTION DEFINITIONS - ALBERT NGUYEN
- ****************************************************************************************
-*/
-
-// #WIP for some reason main loop is preventing project from being built
-
-/*
-int main (void)
-{
-	// run indefinitely
-	while(1){
-		// if voltage supervisor drives pin low, then shutdown MAX9913 and go to sleep/hibernate #WIP
-		if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
-			GPIO_SetInactive(MAX_SHDN_PORT, MAX_SHDN_PIN);
-		}
-	}
-}
-*/
