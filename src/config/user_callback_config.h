@@ -103,6 +103,8 @@ static const struct app_suotar_cb user_app_suotar_cb = {
 };
 #endif
 
+// Albert: not sure why there are a bunch of errors here, does not stop from building correctly
+// This is all template code nothing has been changed here
 static const struct app_callbacks user_app_callbacks = {
     .app_on_connection                  = user_on_connection,
     .app_on_disconnect                  = user_on_disconnect,
