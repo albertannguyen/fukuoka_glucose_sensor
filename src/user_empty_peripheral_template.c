@@ -74,7 +74,7 @@ void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind c
 	}
 }
 
-// ALbert: will run if DA14531 is disconnected
+// Albert: will run if DA14531 is disconnected
 void user_on_disconnect( struct gapc_disconnect_ind const *param )
 {
 	default_app_on_disconnect(param);
@@ -100,10 +100,9 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id
 }
 
 // Albert: ADC initialization function
-// #WIP go through the adc_531.h file for additional settings and confirm with Jerry and datasheet for the specifications
 // #TODO remember to use adc_disable(); to stop ADC later based on callback function tree and desired behavior
-// #FIXME ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF
-void adc_init_continuous(void)
+// #TODO ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF
+void adc_initialize(void)
 {
     // ADC config structure
     adc_config_t adc_config_struct =
@@ -112,10 +111,8 @@ void adc_init_continuous(void)
         .input_mode = ADC_INPUT_MODE_SINGLE_ENDED,
 				// Set pin 6 for single ended input mode
         .input = ADC_INPUT_SE_P0_6,
-			
-				// #WIP Sets sample time multiplier i.e. how long ADC samples before converting data to digital
-        .smpl_time_mult = 1,
-			
+				// Sets sample time multiplier, see adc_set_sample_time() function
+        .smpl_time_mult = 0,
 				// Set continous measurement mode
         .continuous = true,
 				// Set conversion to have no wait interval
@@ -130,44 +127,60 @@ void adc_init_continuous(void)
 				// Disables oversampling, which can improve accuracy at cost of sample rate
         .oversampling = 0,
     };
-		
 		// Initialize ADC with structure defined above
     adc_init(&adc_config_struct);
+		// Disable input shifter (for measuring negative values)
+		adc_input_shift_disable();
+		// Disable die temperature sensor
+		adc_temp_sensor_disable();
 
     // Perform offset calibration of the ADC
+		adc_reset_offsets();
     adc_offset_calibrate(ADC_INPUT_MODE_SINGLE_ENDED);
 		
-		// Start the ADC
-    adc_start();
+		// #WIP consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
 }
 
 // Albert: ADC collect data function
-// #WIP call this occasionally based on BLE code specification, check with Dhruv
+// ADC is 10 bits long, but can be extended to 16 bits via oversampling
+// #WIP call this repeatedly based on BLE GATT profile specification
 uint16_t adc_collect_sample(void)
 {
+	// Power on the ADC
+	adc_enable();
+	
+	// Start a conversion and collect sample
+	adc_start();
 	uint16_t sample = adc_correct_sample(adc_get_sample());
+	
+	// Power down the ADC
+	adc_disable();
+	
 	return (sample);
 }
 
-/*
-Albert: template code to edit later
-You can also use arch print variable to print data as value in UART terminal for debugging
 
-timer_id = app_easy_timer(200, timer_cb);
+// Albert: #WIP check this
+// You can also use arch print variable to print data as value in UART terminal for debugging
+
+// timer_id = app_easy_timer(200, timer_cb);
+
 static uint16_t gpadc_sample_to_mv(uint16_t sample)
 {
-    // Resolution of ADC sample depends on oversampling rate
-    uint32_t adc_res = 10 + ((6 < adc_get_oversampling()) ? 6 : adc_get_oversampling());
+    // Resolution of ADC sample depends on oversampling rate	
+    uint32_t adc_resolution = 10 + ((6 < adc_get_oversampling()) ? 6 : adc_get_oversampling());
 
     // Reference voltage is 900mv but scale based in input attenation
     uint32_t ref_mv = 900 * (GetBits16(GP_ADC_CTRL2_REG, GP_ADC_ATTN) + 1);
 
-    return (uint16_t)((((uint32_t)sample) * ref_mv) >> adc_res);
+    return (uint16_t)((((uint32_t)sample) * ref_mv) >> adc_resolution);
 }
+
+/*
 static void timer_cb(void)
 {
     // Perform single ADC conversion
-    uint16_t result = gpadc_read();
+    uint16_t result = adc_init_continuous();
 
     arch_printf("\n\radc result: %dmv", gpadc_sample_to_mv(result));
 
