@@ -33,6 +33,7 @@
 ".\out_da14531\objects\hw_otpc_531.o"
 ".\out_da14531\objects\dma.o"
 ".\out_da14531\objects\i2c.o"
+".\out_da14531\objects\timer2.o"
 ".\out_da14531\objects\rf_585.o"
 ".\out_da14531\objects\rwble.o"
 ".\out_da14531\objects\rwip.o"

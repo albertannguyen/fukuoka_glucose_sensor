@@ -36,6 +36,12 @@
 #define ADC_INPUT_PORT              GPIO_PORT_0
 #define ADC_INPUT_PIN               GPIO_PIN_6
 
+//Albert: define PWM pins
+#define PWM2_PORT               GPIO_PORT_0
+#define PWM2_PIN                GPIO_PIN_7
+#define PWM3_PORT               GPIO_PORT_0
+#define PWM3_PIN                GPIO_PIN_11
+
 /*
  ****************************************************************************************
  * UART2 configuration to use with arch_console print messages

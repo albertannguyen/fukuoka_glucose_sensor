@@ -45,9 +45,17 @@ i.e.
  ****************************************************************************************
  */
  
+// Albert: Custom callback function for initialization
+void user_app_on_init(void);
+
 // Albert: ADC functions
-void adc_init_continuous(void);
+void adc_initialize(void);
 uint16_t adc_collect_sample(void);
+uint16_t gpadc_sample_to_mv(uint16_t sample);
+
+// Albert: PWM functions
+void timer2_initialize_pwm(void);
+void timer2_enable_pwm(void);
 
 /**
  ****************************************************************************************

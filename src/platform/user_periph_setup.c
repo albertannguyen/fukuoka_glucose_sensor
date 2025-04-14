@@ -47,6 +47,10 @@ void GPIO_reservations(void)
 	
 	// Albert: reserve ADC pins
 	RESERVE_GPIO(ADC_INPUT, ADC_INPUT_PORT, ADC_INPUT_PIN, PID_ADC);
+	
+	// Albert: reserve PWM pins
+	RESERVE_GPIO(PWM2_OUTPUT, PWM2_PORT, PWM2_PIN, PID_PWM2);
+	RESERVE_GPIO(PWM3_OUTPUT, PWM3_PORT, PWM3_PIN, PID_PWM3);
 }
 
 #endif
@@ -84,7 +88,12 @@ void set_pad_functions(void)
 	GPIO_ConfigurePin(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN, OUTPUT, PID_GPIO, true);
 	
 	// Albert: set ADC pin as input
+	// #WIP debug and check if last arguments can be false for both ADC and PWM
 	GPIO_ConfigurePin(ADC_INPUT_PORT, ADC_INPUT_PIN, INPUT, PID_ADC, false);
+	
+	// Albert: set PWM pins
+	GPIO_ConfigurePin(PWM2_PORT, PWM2_PIN, OUTPUT, PID_PWM2, false);
+	GPIO_ConfigurePin(PWM3_PORT, PWM3_PIN, OUTPUT, PID_PWM3, false);
 }
 
 #if defined (CFG_PRINTF_UART2)

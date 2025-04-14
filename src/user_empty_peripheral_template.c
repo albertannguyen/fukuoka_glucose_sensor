@@ -25,10 +25,15 @@
 
 // Albert: for UART serial port output
 #include "arch_console.h"
+// #include "uart.h"
 
 // Albert: for ADC functions
 #include "adc.h"
 #include "adc_531.h"
+
+// Albert: for timer functions
+#include "timer0_2.h"
+#include "timer2.h"
 
 /*
  ****************************************************************************************
@@ -36,12 +41,11 @@
  ****************************************************************************************
  */
  
- // Albert: define global variable to watch when debugging
- bool uvp_status __SECTION_ZERO("retention_mem_area0");
- int uart_status __SECTION_ZERO("retention_mem_area0");
+ // Albert: debug watch variables
+ bool uart_busy_status __SECTION_ZERO("retention_mem_area0");
  
  // Albert: define timer for ADC data collection
- timer_hnd timer_id __SECTION_ZERO("retention_mem_area0");
+ // timer_hnd timer_id __SECTION_ZERO("retention_mem_area0");
 
 /*
  ****************************************************************************************
@@ -49,33 +53,37 @@
  ****************************************************************************************
 */
 
-// Albert: will run if DA14531 is connected
-void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind const *param)
+// Albert: callback function runs on startup/reset
+void user_app_on_init(void)
 {
-	default_app_on_connection(connection_idx, param);
-	
-	// print statements
-	// process needed to push string to UART during debugging
-	// #FIXME loop logic is not working to print whole long statement
+	// #TODO find way to flush UART string buffer to terminal during debugging line by line
 	arch_printf("UVP Check Running and test string: JKABEGIJSDKFGIAWKBGDSFBWAIELBEWIOBFJK \n \r");
-	uart_status = GetBits32(UART2_USR_REG, UART_BUSY);
-	while(uart_status != 0){
+	
+	// #FIXME bad code
+	uart_busy_status = GetBits32(UART2_USR_REG, UART_BUSY);
+	while(uart_busy_status){
 		arch_printf_process();
 	}
-
-	// set global watch variable
-	uvp_status = GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN);
 	
 	// if voltage supervisor drives pin low, then start system shutdown
-	if(uvp_status == false){
+	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
 		// shutdown MAX9913 by driving pin low
 		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN);
 		// #TODO set DA14531 to hibernate (lowest power mode)
 	}
+	
+	// start the default initialization process for BLE user application
+	default_app_on_init();
+}
+
+// Albert: will run if DA14531 is connected
+void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind const *param)
+{
+	default_app_on_connection(connection_idx, param);
 }
 
 // Albert: will run if DA14531 is disconnected
-void user_on_disconnect( struct gapc_disconnect_ind const *param )
+void user_on_disconnect(struct gapc_disconnect_ind const *param )
 {
 	default_app_on_disconnect(param);
 }
@@ -125,7 +133,7 @@ void adc_initialize(void)
         .chopping = true,
 					
 				// Disables oversampling, which can improve accuracy at cost of sample rate
-        .oversampling = 0,
+        .oversampling = 0
     };
 		// Initialize ADC with structure defined above
     adc_init(&adc_config_struct);
@@ -159,25 +167,22 @@ uint16_t adc_collect_sample(void)
 	return (sample);
 }
 
-
-// Albert: #WIP check this
-// You can also use arch print variable to print data as value in UART terminal for debugging
-
-// timer_id = app_easy_timer(200, timer_cb);
-
-static uint16_t gpadc_sample_to_mv(uint16_t sample)
+// Albert: code taken and adjusted from ADC peripheral driver example section 10
+// #TODO you can also use arch print variable to print data as value in UART terminal for debugging
+uint16_t gpadc_sample_to_mv(uint16_t sample)
 {
-    // Resolution of ADC sample depends on oversampling rate	
+    // Effective resolution of ADC sample based on oversampling rate	
     uint32_t adc_resolution = 10 + ((6 < adc_get_oversampling()) ? 6 : adc_get_oversampling());
 
-    // Reference voltage is 900mv but scale based in input attenation
+    // Reference voltage is 900mv but can be scaled based on input attenation
     uint32_t ref_mv = 900 * (GetBits16(GP_ADC_CTRL2_REG, GP_ADC_ATTN) + 1);
 
     return (uint16_t)((((uint32_t)sample) * ref_mv) >> adc_resolution);
 }
 
 /*
-static void timer_cb(void)
+// Test callback code
+void timer_cb(void)
 {
     // Perform single ADC conversion
     uint16_t result = adc_init_continuous();
@@ -188,5 +193,56 @@ static void timer_cb(void)
     timer_id = app_easy_timer(200, timer_cb);
 }
 */
+
+// Albert: config timer 2 and PWM frequencies
+void timer2_initialize_pwm(void)
+{
+	// #TODO move config files outside of these functions, maybe in header file?
+	// Define input clock division factor
+	tim0_2_clk_div_config_t timer_clk_config = {
+		.clk_div = TIM0_2_CLK_DIV_1
+	};
+	
+	timer0_2_clk_div_set(&timer_clk_config);
+	
+	// Define timer 2 config for max performance
+	tim2_config_t timer_hw_config =
+	{
+    .hw_pause = TIM2_HW_PAUSE_OFF,
+		.clk_source = TIM2_CLK_SYS
+	};
+	
+	timer2_config(&timer_hw_config);
+
+	// System clock (16 MHz), divided by a factor defined by the timer_clk_config, is the input frequency of this function
+	// #TODO make a header variable for the PWM frequency (set at the max output frequency of the timer according to the datasheet for now)
+	timer2_pwm_freq_set(16000000 / 2, 16000000 / 1);
+}
+
+// Albert: enable timer 2's PWM 2 and PWM 3 output
+// #TODO pass config parameters as arguments in this function and call it in app_init
+void timer2_enable_pwm(void)
+{
+	// Set PWM parameters
+	tim2_pwm_config_t pwm_2_config = {
+		.pwm_signal = TIM2_PWM_2,
+		.pwm_dc = 50,
+		.pwm_offset = 0
+	};
+	
+	timer2_pwm_signal_config(&pwm_2_config);
+	
+	// Enable timer input clock
+	timer0_2_clk_enable();
+	
+	// Enable PWM signal
+	timer2_start();
+	
+	// Disbale PWM signal
+	timer2_stop();
+
+	// Disable the input clock
+	timer0_2_clk_disable();
+}
 
 /// @} APP

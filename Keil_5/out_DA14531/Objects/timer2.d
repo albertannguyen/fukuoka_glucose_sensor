@@ -1,5 +1,5 @@
-./out_da14531/objects/user_empty_peripheral_template.o: \
-  ..\src\user_empty_peripheral_template.c \
+./out_da14531/objects/timer2.o: \
+  ..\..\..\..\..\sdk\platform\driver\timer\timer2.c \
   ..\src\config\da1458x_config_basic.h \
   ..\src\config\da14531_config_basic.h \
   ..\..\..\..\..\sdk\common_project_files\da1458x_stack_config.h \
@@ -73,28 +73,4 @@
   ..\..\..\..\..\sdk\ble_stack\profiles\prf.h \
   ..\..\..\..\..\sdk\app_modules\api\app_security.h \
   ..\..\..\..\..\sdk\app_modules\api\app_adv_data.h \
-  ..\..\..\..\..\sdk\app_modules\api\app_api.h \
-  ..\..\..\..\..\sdk\ble_stack\host\gatt\gattm\gattm_task.h \
-  ..\..\..\..\..\sdk\ble_stack\host\gatt\gattm\gattm.h \
-  ..\..\..\..\..\sdk\app_modules\api\app_task.h \
-  ..\..\..\..\..\sdk\app_modules\api\app_entry_point.h \
-  ..\..\..\..\..\sdk\app_modules\api\app_callback.h \
-  ..\..\..\..\..\sdk\ble_stack\host\l2c\l2cc\l2cc_task.h \
-  ..\..\..\..\..\sdk\app_modules\api\app_prf_perm_types.h \
-  ..\..\..\..\..\sdk\app_modules\api\app_easy_security.h \
-  ..\..\..\..\..\sdk\app_modules\api\app_mid.h \
-  ..\..\..\..\..\sdk\ble_stack\controller\llm\llm.h \
-  ..\..\..\..\..\sdk\platform\core_modules\common\api\co_math.h \
-  ..\..\..\..\..\sdk\platform\core_modules\common\api\co_buf.h \
-  ..\..\..\..\..\sdk\ble_stack\controller\llm\llm_task.h \
-  ..\..\..\..\..\sdk\platform\core_modules\rwip\api\rwip.h \
-  ..\..\..\..\..\sdk\ble_stack\ea\api\ea.h \
-  ..\src\user_empty_peripheral_template.h \
-  ..\src\config\user_periph_setup.h \
-  ..\..\..\..\..\sdk\platform\driver\uart\uart.h \
-  ..\..\..\..\..\sdk\platform\driver\dma\dma.h \
-  ..\..\..\..\..\sdk\platform\core_modules\arch_console\arch_console.h \
-  ..\..\..\..\..\sdk\platform\driver\adc\adc.h \
-  ..\..\..\..\..\sdk\platform\driver\adc\adc_531.h \
-  ..\..\..\..\..\sdk\platform\driver\timer\timer0_2.h \
   ..\..\..\..\..\sdk\platform\driver\timer\timer2.h

@@ -1033,6 +1033,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\sdk\platform\driver\i2c\i2c.c</FilePath>
             </File>
+            <File>
+              <FileName>timer2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\sdk\platform\driver\timer\timer2.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2897,6 +2902,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\sdk\platform\driver\i2c\i2c.c</FilePath>
             </File>
+            <File>
+              <FileName>timer2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\sdk\platform\driver\timer\timer2.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4658,6 +4668,11 @@
               <FileName>i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\sdk\platform\driver\i2c\i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\sdk\platform\driver\timer\timer2.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -6421,6 +6436,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\sdk\platform\driver\i2c\i2c.c</FilePath>
             </File>
+            <File>
+              <FileName>timer2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\sdk\platform\driver\timer\timer2.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -8182,6 +8202,11 @@
               <FileName>i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\sdk\platform\driver\i2c\i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\sdk\platform\driver\timer\timer2.c</FilePath>
             </File>
           </Files>
         </Group>
