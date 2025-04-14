@@ -90,11 +90,11 @@
   ..\..\..\..\..\sdk\platform\core_modules\rwip\api\rwip.h \
   ..\..\..\..\..\sdk\ble_stack\ea\api\ea.h \
   ..\src\user_empty_peripheral_template.h \
+  ..\..\..\..\..\sdk\platform\driver\timer\timer0_2.h \
+  ..\..\..\..\..\sdk\platform\driver\timer\timer2.h \
   ..\src\config\user_periph_setup.h \
   ..\..\..\..\..\sdk\platform\driver\uart\uart.h \
   ..\..\..\..\..\sdk\platform\driver\dma\dma.h \
   ..\..\..\..\..\sdk\platform\core_modules\arch_console\arch_console.h \
   ..\..\..\..\..\sdk\platform\driver\adc\adc.h \
-  ..\..\..\..\..\sdk\platform\driver\adc\adc_531.h \
-  ..\..\..\..\..\sdk\platform\driver\timer\timer0_2.h \
-  ..\..\..\..\..\sdk\platform\driver\timer\timer2.h
+  ..\..\..\..\..\sdk\platform\driver\adc\adc_531.h

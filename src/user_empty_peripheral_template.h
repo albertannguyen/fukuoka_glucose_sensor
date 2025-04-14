@@ -39,6 +39,10 @@ i.e.
 #endif
 *****************************************************************************/
 
+// Albert: includes for personal functions
+#include "timer0_2.h"
+#include "timer2.h"
+
 /*
  ****************************************************************************************
  * FUNCTION DECLARATIONS
@@ -48,14 +52,18 @@ i.e.
 // Albert: Custom callback function for initialization
 void user_app_on_init(void);
 
+// Albert: UVP functions
+void uvp_shdn(void);
+
 // Albert: ADC functions
-void adc_initialize(void);
-uint16_t adc_collect_sample(void);
+void gpadc_init(void);
+uint16_t gpadc_collect_sample(void);
 uint16_t gpadc_sample_to_mv(uint16_t sample);
 
 // Albert: PWM functions
-void timer2_initialize_pwm(void);
-void timer2_enable_pwm(void);
+void timer2_pwm_init(tim0_2_clk_div_t clk_div, tim2_clk_src_t clk_src, tim2_hw_pause_t hw_pause, uint16_t pwm_div);
+void timer2_pwm_enable(uint8_t dc_pwm2, uint8_t offset_pwm2, uint8_t dc_pwm3, uint8_t offset_pwm3);
+void timer2_pwm_disable(void);
 
 /**
  ****************************************************************************************

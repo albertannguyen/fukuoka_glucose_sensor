@@ -18,22 +18,30 @@
 #include "app_api.h"
 #include "user_empty_peripheral_template.h"
 
-
-// Albert: for GPIO settings
+// Albert:
+// for GPIO settings
 #include "gpio.h"
 #include "user_periph_setup.h"
-
-// Albert: for UART serial port output
+// for UART serial port output
 #include "arch_console.h"
 // #include "uart.h"
-
-// Albert: for ADC functions
+// for ADC functions
 #include "adc.h"
 #include "adc_531.h"
-
-// Albert: for timer functions
+// for timer functions
 #include "timer0_2.h"
 #include "timer2.h"
+
+/*
+ ****************************************************************************************
+ * DEFINES
+ ****************************************************************************************
+ */
+
+#define MIN_PWM_DIV 2
+#define MAX_PWM_DIV 16383
+#define SYS_CLK_FREQ_HZ 16000000
+#define LP_CLK_FREQ_HZ 32000
 
 /*
  ****************************************************************************************
@@ -41,10 +49,10 @@
  ****************************************************************************************
  */
  
- // Albert: debug watch variables
+ // Albert:
+ // debug watch variables
  bool uart_busy_status __SECTION_ZERO("retention_mem_area0");
- 
- // Albert: define timer for ADC data collection
+ // define timer for ADC data collection
  // timer_hnd timer_id __SECTION_ZERO("retention_mem_area0");
 
 /*
@@ -58,37 +66,30 @@ void user_app_on_init(void)
 {
 	// #TODO find way to flush UART string buffer to terminal during debugging line by line
 	arch_printf("UVP Check Running and test string: JKABEGIJSDKFGIAWKBGDSFBWAIELBEWIOBFJK \n \r");
-	
-	// #FIXME bad code
 	uart_busy_status = GetBits32(UART2_USR_REG, UART_BUSY);
 	while(uart_busy_status){
 		arch_printf_process();
 	}
 	
-	// if voltage supervisor drives pin low, then start system shutdown
-	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
-		// shutdown MAX9913 by driving pin low
-		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN);
-		// #TODO set DA14531 to hibernate (lowest power mode)
-	}
+	uvp_shdn();
 	
 	// start the default initialization process for BLE user application
 	default_app_on_init();
 }
 
-// Albert: will run if DA14531 is connected
+// will run if DA14531 is connected
 void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind const *param)
 {
 	default_app_on_connection(connection_idx, param);
 }
 
-// Albert: will run if DA14531 is disconnected
+// will run if DA14531 is disconnected
 void user_on_disconnect(struct gapc_disconnect_ind const *param )
 {
 	default_app_on_disconnect(param);
 }
 
-// template code that handles unhandled messages from BLE
+// template code that catches unhandled messages from BLE
 void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id)
 {
     switch(msgid)
@@ -107,10 +108,31 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id
     }
 }
 
-// Albert: ADC initialization function
+/*
+ ****************************************************************************************
+ * UVP FUNCTIONS (Albert)
+ ****************************************************************************************
+*/
+
+void uvp_shdn(void)
+{
+	// if voltage supervisor drives pin low, then start system shutdown
+	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
+		// shutdown MAX9913 by driving pin low
+		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN);
+		// #TODO set DA14531 to hibernate (lowest power mode)
+	}
+}
+
+/*
+ ****************************************************************************************
+ * ADC FUNCTIONS (Albert)
+ ****************************************************************************************
+*/
+
 // #TODO remember to use adc_disable(); to stop ADC later based on callback function tree and desired behavior
 // #TODO ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF
-void adc_initialize(void)
+void gpadc_init(void)
 {
     // ADC config structure
     adc_config_t adc_config_struct =
@@ -149,10 +171,8 @@ void adc_initialize(void)
 		// #WIP consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
 }
 
-// Albert: ADC collect data function
-// ADC is 10 bits long, but can be extended to 16 bits via oversampling
-// #WIP call this repeatedly based on BLE GATT profile specification
-uint16_t adc_collect_sample(void)
+// #WIP call this repeatedly based on BLE transmission specifications
+uint16_t gpadc_collect_sample(void)
 {
 	// Power on the ADC
 	adc_enable();
@@ -167,7 +187,7 @@ uint16_t adc_collect_sample(void)
 	return (sample);
 }
 
-// Albert: code taken and adjusted from ADC peripheral driver example section 10
+// code taken and adjusted from ADC peripheral driver example section 10
 // #TODO you can also use arch print variable to print data as value in UART terminal for debugging
 uint16_t gpadc_sample_to_mv(uint16_t sample)
 {
@@ -194,54 +214,75 @@ void timer_cb(void)
 }
 */
 
-// Albert: config timer 2 and PWM frequencies
-void timer2_initialize_pwm(void)
-{
-	// #TODO move config files outside of these functions, maybe in header file?
-	// Define input clock division factor
-	tim0_2_clk_div_config_t timer_clk_config = {
-		.clk_div = TIM0_2_CLK_DIV_1
-	};
-	
-	timer0_2_clk_div_set(&timer_clk_config);
-	
-	// Define timer 2 config for max performance
-	tim2_config_t timer_hw_config =
-	{
-    .hw_pause = TIM2_HW_PAUSE_OFF,
-		.clk_source = TIM2_CLK_SYS
-	};
-	
-	timer2_config(&timer_hw_config);
+/*
+ ****************************************************************************************
+ * PWM FUNCTIONS (Albert)
+ ****************************************************************************************
+*/
 
-	// System clock (16 MHz), divided by a factor defined by the timer_clk_config, is the input frequency of this function
-	// #TODO make a header variable for the PWM frequency (set at the max output frequency of the timer according to the datasheet for now)
-	timer2_pwm_freq_set(16000000 / 2, 16000000 / 1);
+// NOTE THAT pwm_div IS ONLY LIMITED TO VALUES FROM 2 TO (2^14 - 1)
+// #TODO implement a protection for this so that pwm_div never goes outside of this range
+void timer2_pwm_init(tim0_2_clk_div_t clk_div, tim2_clk_src_t clk_src, tim2_hw_pause_t hw_pause, uint16_t pwm_div)
+{
+	// Define timer parameters in struct
+	tim0_2_clk_div_config_t clk_cfg = {
+		.clk_div = clk_div
+	};
+	
+	tim2_config_t tmr_cfg =
+	{
+		.clk_source = clk_src,
+    .hw_pause = hw_pause
+	};
+	
+	// Set timer parameters
+	timer0_2_clk_div_set(&clk_cfg);
+	timer2_config(&tmr_cfg);
+	
+	// Define PWM parameters
+	uint32_t clk_freq = (clk_src == TIM2_CLK_SYS) ? SYS_CLK_FREQ_HZ : LP_CLK_FREQ_HZ,
+					 clk_div_int = (clk_div == TIM0_2_CLK_DIV_1) ? 1 :
+																(clk_div == TIM0_2_CLK_DIV_2) ? 2 :
+																(clk_div == TIM0_2_CLK_DIV_4) ? 4 : 8,
+					 input_freq = clk_freq / clk_div_int;
+
+	// Set PWM parameters
+	// Input and output frequency of this function is defined and set based on datasheet for timer 2
+	timer2_pwm_freq_set(input_freq / pwm_div, input_freq);
 }
 
-// Albert: enable timer 2's PWM 2 and PWM 3 output
-// #TODO pass config parameters as arguments in this function and call it in app_init
-void timer2_enable_pwm(void)
+void timer2_pwm_enable(uint8_t dc_pwm2, uint8_t offset_pwm2, uint8_t dc_pwm3, uint8_t offset_pwm3)
 {
-	// Set PWM parameters
-	tim2_pwm_config_t pwm_2_config = {
+	// Define PWM parameters in struct
+	tim2_pwm_config_t pwm2_cfg = {
 		.pwm_signal = TIM2_PWM_2,
-		.pwm_dc = 50,
-		.pwm_offset = 0
+		.pwm_dc = dc_pwm2,
+		.pwm_offset = offset_pwm2
 	};
 	
-	timer2_pwm_signal_config(&pwm_2_config);
+	tim2_pwm_config_t pwm3_cfg = {
+		.pwm_signal = TIM2_PWM_3,
+		.pwm_dc = dc_pwm3,
+		.pwm_offset = offset_pwm3
+	};
+	
+	// Set PWM parameters
+	timer2_pwm_signal_config(&pwm2_cfg);
+	timer2_pwm_signal_config(&pwm3_cfg);
 	
 	// Enable timer input clock
 	timer0_2_clk_enable();
 	
 	// Enable PWM signal
 	timer2_start();
-	
-	// Disbale PWM signal
+}
+
+void timer2_pwm_disable(void)
+{
+	// Disable PWM signal
 	timer2_stop();
 
-	// Disable the input clock
+	// Disable timer input clock
 	timer0_2_clk_disable();
 }
 
