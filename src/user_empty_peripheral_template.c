@@ -18,16 +18,19 @@
 #include "app_api.h"
 #include "user_empty_peripheral_template.h"
 
-// Albert:
 // for GPIO settings
 #include "gpio.h"
 #include "user_periph_setup.h"
+
 // for UART serial port output
 #include "arch_console.h"
+// #include "systick.h"
 // #include "uart.h"
+
 // for ADC functions
 #include "adc.h"
 #include "adc_531.h"
+
 // for timer functions
 #include "timer0_2.h"
 #include "timer2.h"
@@ -48,65 +51,16 @@
  * GLOBAL VARIABLE DEFINITIONS
  ****************************************************************************************
  */
- 
- // Albert:
- // debug watch variables
- bool uart_busy_status __SECTION_ZERO("retention_mem_area0");
- // define timer for ADC data collection
- // timer_hnd timer_id __SECTION_ZERO("retention_mem_area0");
 
-/*
- ****************************************************************************************
- * FUNCTION DEFINITIONS
- ****************************************************************************************
-*/
+// UVP debug variables
+bool uart_busy_status __SECTION_ZERO("retention_mem_area0");
+bool uvp_trigger_status __SECTION_ZERO("retention_mem_area0");
 
-// Albert: callback function runs on startup/reset
-void user_app_on_init(void)
-{
-	// #TODO find way to flush UART string buffer to terminal during debugging line by line
-	arch_printf("UVP Check Running and test string: JKABEGIJSDKFGIAWKBGDSFBWAIELBEWIOBFJK \n \r");
-	uart_busy_status = GetBits32(UART2_USR_REG, UART_BUSY);
-	while(uart_busy_status){
-		arch_printf_process();
-	}
-	
-	uvp_shdn();
-	
-	// start the default initialization process for BLE user application
-	default_app_on_init();
-}
-
-// will run if DA14531 is connected
-void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind const *param)
-{
-	default_app_on_connection(connection_idx, param);
-}
-
-// will run if DA14531 is disconnected
-void user_on_disconnect(struct gapc_disconnect_ind const *param )
-{
-	default_app_on_disconnect(param);
-}
-
-// template code that catches unhandled messages from BLE
-void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id)
-{
-    switch(msgid)
-    {
-        case GATTC_EVENT_REQ_IND:
-        {
-            // Confirm unhandled indication to avoid GATT timeout
-            struct gattc_event_ind const *ind = (struct gattc_event_ind const *) param;
-            struct gattc_event_cfm *cfm = KE_MSG_ALLOC(GATTC_EVENT_CFM, src_id, dest_id, gattc_event_cfm);
-            cfm->handle = ind->handle;
-            KE_MSG_SEND(cfm);
-        } break;
-
-        default:
-            break;
-    }
-}
+// ADC debug variables
+timer_hnd adc_timer __SECTION_ZERO("retention_mem_area0");
+uint16_t adc_input __SECTION_ZERO("retention_mem_area0");
+uint16_t adc_input_volt __SECTION_ZERO("retention_mem_area0");
+bool adc_timer_started __SECTION_ZERO("retention_mem_area0");
 
 /*
  ****************************************************************************************
@@ -130,65 +84,76 @@ void uvp_shdn(void)
  ****************************************************************************************
 */
 
-// #TODO remember to use adc_disable(); to stop ADC later based on callback function tree and desired behavior
-// #TODO ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF
-void gpadc_init(void)
+// ADC timer code, reads and prints to UART terminal in a callback loop
+void gpadc_timer_cb(void)
 {
-    // ADC config structure
-    adc_config_t adc_config_struct =
-    {
-				// Measure from 1 pin with respect to ground
-        .input_mode = ADC_INPUT_MODE_SINGLE_ENDED,
-				// Set pin 6 for single ended input mode
-        .input = ADC_INPUT_SE_P0_6,
-				// Sets sample time multiplier, see adc_set_sample_time() function
-        .smpl_time_mult = 0,
-				// Set continous measurement mode
-        .continuous = true,
-				// Set conversion to have no wait interval
-        .interval_mult = 0,
-				// Set no attenuation of input
-        .input_attenuator = ADC_INPUT_ATTN_NO,
-				
-				// Enable chopping algorithm, refer to datasheet
-				// #WIP check with sponsor if this is desired
-        .chopping = true,
-					
-				// Disables oversampling, which can improve accuracy at cost of sample rate
-        .oversampling = 0
-    };
-		// Initialize ADC with structure defined above
-    adc_init(&adc_config_struct);
-		// Disable input shifter (for measuring negative values)
-		adc_input_shift_disable();
-		// Disable die temperature sensor
-		adc_temp_sensor_disable();
-
-    // Perform offset calibration of the ADC
-		adc_reset_offsets();
-    adc_offset_calibrate(ADC_INPUT_MODE_SINGLE_ENDED);
-		
-		// #WIP consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
+	// Read and print ADC value (validated)
+	adc_input = gpadc_collect_sample();
+	adc_input_volt = gpadc_sample_to_mv(adc_input);
+	
+	// arch_printf will only print once callback function returns
+	arch_printf("ADC voltage: %d mV\n\r", adc_input_volt);
+	
+	// Restart the timer
+	adc_timer = app_easy_timer(100, gpadc_timer_cb);
 }
 
-// #WIP call this repeatedly based on BLE transmission specifications
+// ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF
+void gpadc_init(void)
+{
+	// ADC config structure, details about range of inputs for parameters found in adc_531.h
+	adc_config_t adc_config_struct =
+	{
+			// Measure from 1 pin with respect to ground
+			.input_mode = ADC_INPUT_MODE_SINGLE_ENDED,
+			// Set pin 6 for single ended input mode
+			.input = ADC_INPUT_SE_P0_6,
+		
+			// Sets sample time multiplier
+			// #WIP check effect on ADC measurements
+			.smpl_time_mult = 0,
+		
+			// Set continuous measurement mode
+			.continuous = true,
+			// Set conversion to have no interval in continuous mode 
+			.interval_mult = 0,
+			// Set no attenuation of input
+			.input_attenuator = ADC_INPUT_ATTN_NO,
+			
+			// Enable chopping algorithm, refer to datasheet
+			// #WIP check effect on ADC measurements
+			.chopping = true,
+			
+			// Enable oversampling to increase accuracy and stability
+			// #WIP check effect on ADC measurements
+			.oversampling = 7
+	};
+	// Initialize ADC with structure defined above
+	adc_init(&adc_config_struct);
+	// Disable input shifter (for measuring negative values)
+	adc_input_shift_disable();
+	// Disable die temperature sensor
+	adc_temp_sensor_disable();
+
+	// Perform offset calibration of the ADC
+	adc_reset_offsets();
+	adc_offset_calibrate(ADC_INPUT_MODE_SINGLE_ENDED);
+
+	// #WIP consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
+}
+
 uint16_t gpadc_collect_sample(void)
 {
-	// Power on the ADC
-	adc_enable();
+	// Details on adc_get_sample() is in adc_531.c, not in the header file
+	// adc_get_sample() will stall if in continuous mode due to ADC always being busy
 	
-	// Start a conversion and collect sample
-	adc_start();
-	uint16_t sample = adc_correct_sample(adc_get_sample());
-	
-	// Power down the ADC
-	adc_disable();
+	// Read data from ADC register, which always holds the latest conversion results and can be read at any time
+	uint16_t sample = adc_correct_sample(GetWord16(GP_ADC_RESULT_REG));
 	
 	return (sample);
 }
 
 // code taken and adjusted from ADC peripheral driver example section 10
-// #TODO you can also use arch print variable to print data as value in UART terminal for debugging
 uint16_t gpadc_sample_to_mv(uint16_t sample)
 {
     // Effective resolution of ADC sample based on oversampling rate	
@@ -196,23 +161,10 @@ uint16_t gpadc_sample_to_mv(uint16_t sample)
 
     // Reference voltage is 900mv but can be scaled based on input attenation
     uint32_t ref_mv = 900 * (GetBits16(GP_ADC_CTRL2_REG, GP_ADC_ATTN) + 1);
-
+		
+		// Returns mV value read by the ADC
     return (uint16_t)((((uint32_t)sample) * ref_mv) >> adc_resolution);
 }
-
-/*
-// Test callback code
-void timer_cb(void)
-{
-    // Perform single ADC conversion
-    uint16_t result = adc_init_continuous();
-
-    arch_printf("\n\radc result: %dmv", gpadc_sample_to_mv(result));
-
-    // Restart the timer
-    timer_id = app_easy_timer(200, timer_cb);
-}
-*/
 
 /*
  ****************************************************************************************
@@ -220,8 +172,6 @@ void timer_cb(void)
  ****************************************************************************************
 */
 
-// NOTE THAT pwm_div IS ONLY LIMITED TO VALUES FROM 2 TO (2^14 - 1)
-// #TODO implement a protection for this so that pwm_div never goes outside of this range
 void timer2_pwm_init(tim0_2_clk_div_t clk_div, tim2_clk_src_t clk_src, tim2_hw_pause_t hw_pause, uint16_t pwm_div)
 {
 	// Define timer parameters in struct
@@ -247,6 +197,12 @@ void timer2_pwm_init(tim0_2_clk_div_t clk_div, tim2_clk_src_t clk_src, tim2_hw_p
 					 input_freq = clk_freq / clk_div_int;
 
 	// Set PWM parameters
+	// Ensure pwm_div is not beyond datasheet stated range of 2 to (2^14 - 1)
+	if(pwm_div < MIN_PWM_DIV || pwm_div > MAX_PWM_DIV){
+		// Set to min value
+		pwm_div = MIN_PWM_DIV;
+		arch_printf("pwm_div is beyond min-max range specified by datasheet; it is now set to min value\n\r");
+	}
 	// Input and output frequency of this function is defined and set based on datasheet for timer 2
 	timer2_pwm_freq_set(input_freq / pwm_div, input_freq);
 }
@@ -284,6 +240,77 @@ void timer2_pwm_disable(void)
 
 	// Disable timer input clock
 	timer0_2_clk_disable();
+}
+
+/*
+ ****************************************************************************************
+ * DEFAULT CALLBACK FUNCTIONS (Albert)
+ ****************************************************************************************
+*/
+
+void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind const *param)
+{
+	default_app_on_connection(connection_idx, param);
+	
+	// Ensures that code only runs once
+	if (!adc_timer_started)
+	{
+		// ADC test code
+		gpadc_init();
+		adc_enable(); // powers on ADC
+		adc_timer = app_easy_timer(100, gpadc_timer_cb);
+		adc_timer_started = true;
+	}
+}
+
+void user_on_disconnect(struct gapc_disconnect_ind const *param )
+{
+	default_app_on_disconnect(param);
+}
+
+void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id)
+{
+    switch(msgid)
+    {
+        case GATTC_EVENT_REQ_IND:
+        {
+            // Confirm unhandled indication to avoid GATT timeout
+            struct gattc_event_ind const *ind = (struct gattc_event_ind const *) param;
+            struct gattc_event_cfm *cfm = KE_MSG_ALLOC(GATTC_EVENT_CFM, src_id, dest_id, gattc_event_cfm);
+            cfm->handle = ind->handle;
+            KE_MSG_SEND(cfm);
+        } break;
+
+        default:
+            break;
+    }
+}
+
+/*
+ ****************************************************************************************
+ * STARTUP LOOP (Albert)
+ ****************************************************************************************
+*/
+
+// Albert: user callback function that runs on startup/reset, good for running some peripherals quickly
+void user_app_on_init(void)
+{
+	// start the default initialization process for BLE user application
+	default_app_on_init();
+	
+	// test PWM code with oscilloscope, done
+	/*
+	timer2_pwm_init(TIM0_2_CLK_DIV_1, TIM2_CLK_SYS, TIM2_HW_PAUSE_OFF, 2);
+	timer2_pwm_enable(50, 0, 25, 0);
+	*/
+	
+	// test uvp code, done
+	/*
+	uvp_trigger_status = GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN);
+	while(1){
+		uvp_shdn();
+	}
+	*/
 }
 
 /// @} APP
