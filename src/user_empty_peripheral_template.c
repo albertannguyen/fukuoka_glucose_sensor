@@ -145,7 +145,7 @@ void gpadc_init(void)
 uint16_t gpadc_collect_sample(void)
 {
 	// Details on adc_get_sample() is in adc_531.c, not in the header file
-	// adc_get_sample() will stall if in continuous mode due to ADC always being busy
+	// adc_get_sample() will stall if in continuous mode due to ADC always being busy, which is why it is not used here
 	
 	// Read data from ADC register, which always holds the latest conversion results and can be read at any time
 	uint16_t sample = adc_correct_sample(GetWord16(GP_ADC_RESULT_REG));
