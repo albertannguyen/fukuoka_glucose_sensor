@@ -41,10 +41,16 @@ void GPIO_reservations(void)
 			RESERVE_GPIO(SPI_EN, SPI_EN_PORT, SPI_EN_PIN, PID_SPI_EN);
 	#endif
 
-	// Albert: reserve pins 8 and 9 as GPIO
-	// not sure what ports do so left it alone at port 0, seems to be the default for most things
+	// Albert: reserve UVP pins as GPIO
 	RESERVE_GPIO(UVP_TRIGGER, UVP_TRIGGER_PORT, UVP_TRIGGER_PIN, PID_GPIO);
-	RESERVE_GPIO(MAX_SHDN, MAX_SHDN_PORT, MAX_SHDN_PIN, PID_GPIO);
+	RESERVE_GPIO(UVP_MAX_SHDN, UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN, PID_GPIO);
+	
+	// Albert: reserve ADC pins
+	RESERVE_GPIO(ADC_INPUT, ADC_INPUT_PORT, ADC_INPUT_PIN, PID_ADC);
+	
+	// Albert: reserve PWM pins
+	RESERVE_GPIO(PWM2_OUTPUT, PWM2_PORT, PWM2_PIN, PID_PWM2);
+	RESERVE_GPIO(PWM3_OUTPUT, PWM3_PORT, PWM3_PIN, PID_PWM3);
 }
 
 #endif
@@ -78,8 +84,16 @@ void set_pad_functions(void)
 	
 	// Albert: set pin 8 (UVP_TRIGGER) as input
 	GPIO_ConfigurePin(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN, INPUT, PID_GPIO, false);
-	// Albert: set pin 9 (MAX_SHDN) as digital output high
-	GPIO_ConfigurePin(MAX_SHDN_PORT, MAX_SHDN_PIN, OUTPUT, PID_GPIO, true);
+	// Albert: set pin 9 (UVP_MAX_SHDN) as digital output high
+	GPIO_ConfigurePin(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN, OUTPUT, PID_GPIO, true);
+	
+	// Albert: set ADC pin as input
+	GPIO_ConfigurePin(ADC_INPUT_PORT, ADC_INPUT_PIN, INPUT, PID_ADC, false);
+	
+	// Albert: set PWM pins
+	// #WIP debug and check if last arguments can be false for PWM
+	GPIO_ConfigurePin(PWM2_PORT, PWM2_PIN, OUTPUT, PID_PWM2, false);
+	GPIO_ConfigurePin(PWM3_PORT, PWM3_PIN, OUTPUT, PID_PWM3, false);
 }
 
 #if defined (CFG_PRINTF_UART2)

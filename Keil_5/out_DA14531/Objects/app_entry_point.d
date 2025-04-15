@@ -100,6 +100,8 @@
   ..\..\..\..\..\sdk\platform\driver\uart\uart.h \
   ..\..\..\..\..\sdk\platform\driver\dma\dma.h \
   ..\src\user_empty_peripheral_template.h \
+  ..\..\..\..\..\sdk\platform\driver\timer\timer0_2.h \
+  ..\..\..\..\..\sdk\platform\driver\timer\timer2.h \
   ..\src\config\user_modules_config.h \
   ..\..\..\..\..\sdk\app_modules\api\app_security_task.h \
   ..\..\..\..\..\sdk\app_modules\api\app_customs_task.h \

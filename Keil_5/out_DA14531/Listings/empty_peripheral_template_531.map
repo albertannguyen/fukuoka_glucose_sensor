@@ -79,7 +79,7 @@ Section Cross References
     arch_system.o(.text) refers to trng.o(.text) for init_rand_seed_from_trng
     arch_system.o(.text) refers to arch_sleep.o(.text) for arch_disable_sleep
     arch_system.o(.text) refers to app.o(.text) for app_init
-    arch_system.o(.text) refers to app_default_handlers.o(.text) for default_app_on_init
+    arch_system.o(.text) refers to user_empty_peripheral_template.o(.text) for user_app_on_init
     arch_system.o(.text) refers to rf_diag.o(.text) for enable_rf_diag_irq
     arch_system.o(.text) refers to arch_system.o(.bss.otp_hdr_timestamp) for otp_hdr_timestamp
     arch_system.o(.ARM.exidx) refers to arch_system.o(.text) for [Anonymous Symbol]
@@ -153,6 +153,7 @@ Section Cross References
     hw_otpc_531.o(.ARM.exidx) refers to hw_otpc_531.o(.text) for [Anonymous Symbol]
     i2c.o(.text) refers to i2c.o(.bss.retention_mem_area0) for [Anonymous Symbol]
     i2c.o(.ARM.exidx) refers to i2c.o(.text) for [Anonymous Symbol]
+    timer2.o(.ARM.exidx) refers to timer2.o(.text) for [Anonymous Symbol]
     rwble.o(.text) refers to arch_system.o(.text) for lld_sleep_lpcycles_2_us_sel_func
     rwble.o(.text) refers to rwble.o(.bss.retention_mem_area0) for ble_finetim_corr
     rwble.o(.text) refers to rwip.o(.bss.retention_mem_area0) for slp_period_retained
@@ -309,10 +310,13 @@ Section Cross References
     user_periph_setup.o(.text) refers to uart.o(.text) for uart_initialize
     user_periph_setup.o(.text) refers to user_periph_setup.o(.rodata.uart_cfg) for [Anonymous Symbol]
     user_periph_setup.o(.ARM.exidx) refers to user_periph_setup.o(.text) for [Anonymous Symbol]
-    user_empty_peripheral_template.o(.text) refers to app_default_handlers.o(.text) for default_app_on_connection
     user_empty_peripheral_template.o(.text) refers to gpio.o(.text) for GPIO_GetPinStatus
-    user_empty_peripheral_template.o(.text) refers to user_empty_peripheral_template.o(.rodata.str1.1) for [Anonymous Symbol]
+    user_empty_peripheral_template.o(.text) refers to app_easy_timer.o(.text) for app_easy_timer
     user_empty_peripheral_template.o(.text) refers to user_empty_peripheral_template.o(.bss.retention_mem_area0) for [Anonymous Symbol]
+    user_empty_peripheral_template.o(.text) refers to adc_531.o(.text) for adc_correct_sample
+    user_empty_peripheral_template.o(.text) refers to timer2.o(.text) for timer2_config
+    user_empty_peripheral_template.o(.text) refers to user_empty_peripheral_template.o(.rodata.str1.1) for [Anonymous Symbol]
+    user_empty_peripheral_template.o(.text) refers to app_default_handlers.o(.text) for default_app_on_connection
     user_empty_peripheral_template.o(.ARM.exidx) refers to user_empty_peripheral_template.o(.text) for [Anonymous Symbol]
     patch_1.o(.text) refers to system_library_531.o(.bss.retention_mem_area0) for lld_force_timeout_refresh
     rf_ldo_calibration.o(.text) refers to arch_asm.o(.text) for arch_asm_delay_us
@@ -394,6 +398,7 @@ Removing Unused input sections from the image.
     Removing hw_otpc_531.o(.ARM.exidx), (104 bytes).
     Removing dma.o(.text), (0 bytes).
     Removing i2c.o(.ARM.exidx), (168 bytes).
+    Removing timer2.o(.ARM.exidx), (24 bytes).
     Removing rf_585.o(.text), (0 bytes).
     Removing rwble.o(.ARM.exidx), (56 bytes).
     Removing rwip.o(.ARM.exidx), (24 bytes).
@@ -515,9 +520,9 @@ Removing Unused input sections from the image.
     Removing user_custs1_def.o(.rodata.custs1_att_max_nb), (2 bytes).
     Removing user_periph_setup.o(.ARM.exidx), (24 bytes).
     Removing fpga.o(.text), (0 bytes).
-    Removing user_empty_peripheral_template.o(.ARM.exidx), (24 bytes).
+    Removing user_empty_peripheral_template.o(.ARM.exidx), (96 bytes).
 
-174 unused section(s) (total 11509 bytes) removed from the image.
+175 unused section(s) (total 11605 bytes) removed from the image.
 
 ==============================================================================
 
@@ -686,6 +691,7 @@ Image Symbol Table
     system_library_535.c                     0x00000000   Number         0  system_library_535.o ABSOLUTE
     system_library_585_586.c                 0x00000000   Number         0  system_library_585_586.o ABSOLUTE
     systick.c                                0x00000000   Number         0  systick.o ABSOLUTE
+    timer2.c                                 0x00000000   Number         0  timer2.o ABSOLUTE
     tipc.c                                   0x00000000   Number         0  tipc.o ABSOLUTE
     tipc_task.c                              0x00000000   Number         0  tipc_task.o ABSOLUTE
     tips.c                                   0x00000000   Number         0  tips.o ABSOLUTE
@@ -1166,485 +1172,503 @@ Image Symbol Table
     __arm_cp.20_0                            0x07fc3198   Number         4  i2c.o(.text)
     __arm_cp.20_1                            0x07fc319c   Number         4  i2c.o(.text)
     __arm_cp.20_2                            0x07fc31a0   Number         4  i2c.o(.text)
-    [Anonymous Symbol]                       0x07fc31a4   Section        0  rwble.o(.text)
-    __arm_cp.0_0                             0x07fc31e4   Number         4  rwble.o(.text)
-    __arm_cp.0_1                             0x07fc31e8   Number         4  rwble.o(.text)
-    __arm_cp.0_2                             0x07fc31ec   Number         4  rwble.o(.text)
-    __arm_cp.0_3                             0x07fc31f0   Number         4  rwble.o(.text)
-    __arm_cp.0_4                             0x07fc31f4   Number         4  rwble.o(.text)
-    __arm_cp.1_0                             0x07fc3230   Number         4  rwble.o(.text)
-    __arm_cp.1_1                             0x07fc3234   Number         4  rwble.o(.text)
-    __arm_cp.1_2                             0x07fc3238   Number         4  rwble.o(.text)
-    __arm_cp.1_3                             0x07fc323c   Number         4  rwble.o(.text)
-    __arm_cp.1_4                             0x07fc3240   Number         4  rwble.o(.text)
-    __arm_cp.2_0                             0x07fc3288   Number         4  rwble.o(.text)
-    __arm_cp.2_1                             0x07fc328c   Number         4  rwble.o(.text)
-    __arm_cp.3_0                             0x07fc337c   Number         4  rwble.o(.text)
-    __arm_cp.3_1                             0x07fc3380   Number         4  rwble.o(.text)
-    __arm_cp.3_2                             0x07fc3384   Number         4  rwble.o(.text)
-    __arm_cp.3_3                             0x07fc3388   Number         4  rwble.o(.text)
-    __arm_cp.6_1                             0x07fc33cc   Number         4  rwble.o(.text)
-    __arm_cp.6_2                             0x07fc33d0   Number         4  rwble.o(.text)
-    [Anonymous Symbol]                       0x07fc33d4   Section        0  rwip.o(.text)
-    __arm_cp.0_0                             0x07fc33e4   Number         4  rwip.o(.text)
-    __arm_cp.0_1                             0x07fc33e8   Number         4  rwip.o(.text)
-    __arm_cp.1_0                             0x07fc33fc   Number         4  rwip.o(.text)
-    __arm_cp.1_1                             0x07fc3400   Number         4  rwip.o(.text)
-    __arm_cp.2_0                             0x07fc3578   Number         4  rwip.o(.text)
-    __arm_cp.2_1                             0x07fc357c   Number         4  rwip.o(.text)
-    __arm_cp.2_2                             0x07fc3580   Number         4  rwip.o(.text)
-    __arm_cp.2_4                             0x07fc3584   Number         4  rwip.o(.text)
-    __arm_cp.2_5                             0x07fc3588   Number         4  rwip.o(.text)
-    __arm_cp.2_6                             0x07fc358c   Number         4  rwip.o(.text)
-    __arm_cp.2_7                             0x07fc3590   Number         4  rwip.o(.text)
-    __arm_cp.2_8                             0x07fc3594   Number         4  rwip.o(.text)
-    __arm_cp.2_9                             0x07fc3598   Number         4  rwip.o(.text)
-    __arm_cp.2_10                            0x07fc359c   Number         4  rwip.o(.text)
-    __arm_cp.2_11                            0x07fc35a0   Number         4  rwip.o(.text)
-    __arm_cp.2_12                            0x07fc35a4   Number         4  rwip.o(.text)
-    __arm_cp.2_13                            0x07fc35a8   Number         4  rwip.o(.text)
-    __arm_cp.2_14                            0x07fc35ac   Number         4  rwip.o(.text)
-    __arm_cp.2_15                            0x07fc35b0   Number         4  rwip.o(.text)
-    __arm_cp.2_16                            0x07fc35b4   Number         4  rwip.o(.text)
-    __arm_cp.2_17                            0x07fc35b8   Number         4  rwip.o(.text)
-    __arm_cp.2_19                            0x07fc35bc   Number         4  rwip.o(.text)
-    [Anonymous Symbol]                       0x07fc35c0   Section        0  ble_arp.o(.text)
-    __arm_cp.2_0                             0x07fc36b8   Number         4  ble_arp.o(.text)
-    __arm_cp.2_1                             0x07fc36bc   Number         4  ble_arp.o(.text)
-    __arm_cp.2_2                             0x07fc36c0   Number         4  ble_arp.o(.text)
-    __arm_cp.2_3                             0x07fc36c4   Number         4  ble_arp.o(.text)
-    __arm_cp.2_4                             0x07fc36c8   Number         4  ble_arp.o(.text)
-    __arm_cp.2_5                             0x07fc36cc   Number         4  ble_arp.o(.text)
-    __arm_cp.2_6                             0x07fc36d0   Number         4  ble_arp.o(.text)
-    __arm_cp.2_7                             0x07fc36d4   Number         4  ble_arp.o(.text)
-    __arm_cp.2_8                             0x07fc36d8   Number         4  ble_arp.o(.text)
-    __arm_cp.2_9                             0x07fc36dc   Number         4  ble_arp.o(.text)
-    __arm_cp.2_10                            0x07fc36e0   Number         4  ble_arp.o(.text)
-    __arm_cp.2_11                            0x07fc36e4   Number         4  ble_arp.o(.text)
-    __arm_cp.2_12                            0x07fc36e8   Number         4  ble_arp.o(.text)
-    __arm_cp.2_13                            0x07fc36ec   Number         4  ble_arp.o(.text)
-    __arm_cp.2_14                            0x07fc36f0   Number         4  ble_arp.o(.text)
-    __arm_cp.2_15                            0x07fc36f4   Number         4  ble_arp.o(.text)
-    __arm_cp.2_16                            0x07fc36f8   Number         4  ble_arp.o(.text)
-    rf_txpwr_dbm_get                         0x07fc36fd   Thumb Code    36  ble_arp.o(.text)
-    rf_sleep                                 0x07fc3721   Thumb Code    24  ble_arp.o(.text)
-    __arm_cp.4_0                             0x07fc3738   Number         4  ble_arp.o(.text)
-    __arm_cp.4_1                             0x07fc373c   Number         4  ble_arp.o(.text)
-    rf_reset                                 0x07fc3741   Thumb Code     2  ble_arp.o(.text)
-    RADIOCNTL_Handler                        0x07fc3743   Thumb Code     2  ble_arp.o(.text)
-    rf_force_agc_enable                      0x07fc3745   Thumb Code     2  ble_arp.o(.text)
-    rf_rssi_convert                          0x07fc3747   Thumb Code    36  ble_arp.o(.text)
-    update_radiopwrupdn_pref_setting         0x07fc376d   Thumb Code    36  ble_arp.o(.text)
-    __arm_cp.9_0                             0x07fc3790   Number         4  ble_arp.o(.text)
-    __arm_cp.9_1                             0x07fc3794   Number         4  ble_arp.o(.text)
-    __arm_cp.9_2                             0x07fc3798   Number         4  ble_arp.o(.text)
-    rf_regs                                  0x07fc379d   Thumb Code    56  ble_arp.o(.text)
-    __arm_cp.10_0                            0x07fc37d4   Number         4  ble_arp.o(.text)
-    __arm_cp.11_0                            0x07fc3834   Number         4  ble_arp.o(.text)
-    ble_update_arp_adpll_div_val             0x07fc3839   Thumb Code    32  ble_arp.o(.text)
-    __arm_cp.12_0                            0x07fc3858   Number         4  ble_arp.o(.text)
-    __arm_cp.12_1                            0x07fc385c   Number         4  ble_arp.o(.text)
-    __arm_cp.12_2                            0x07fc3860   Number         4  ble_arp.o(.text)
-    __arm_cp.13_0                            0x07fc3880   Number         4  ble_arp.o(.text)
-    __arm_cp.13_1                            0x07fc3884   Number         4  ble_arp.o(.text)
-    __arm_cp.13_2                            0x07fc3888   Number         4  ble_arp.o(.text)
-    __arm_cp.13_3                            0x07fc388c   Number         4  ble_arp.o(.text)
-    ble_update_arp_adpll_calib_vals          0x07fc38b1   Thumb Code    32  ble_arp.o(.text)
-    __arm_cp.15_0                            0x07fc38d0   Number         4  ble_arp.o(.text)
-    __arm_cp.15_1                            0x07fc38d4   Number         4  ble_arp.o(.text)
-    __arm_cp.15_2                            0x07fc38d8   Number         4  ble_arp.o(.text)
-    [Anonymous Symbol]                       0x07fc38dc   Section        0  rf_531.o(.text)
-    __arm_cp.0_0                             0x07fc3a48   Number         4  rf_531.o(.text)
-    __arm_cp.0_1                             0x07fc3a4c   Number         4  rf_531.o(.text)
-    __arm_cp.0_2                             0x07fc3a50   Number         4  rf_531.o(.text)
-    __arm_cp.0_3                             0x07fc3a54   Number         4  rf_531.o(.text)
-    __arm_cp.0_4                             0x07fc3a58   Number         4  rf_531.o(.text)
-    __arm_cp.0_5                             0x07fc3a5c   Number         4  rf_531.o(.text)
-    __arm_cp.0_6                             0x07fc3a60   Number         4  rf_531.o(.text)
-    __arm_cp.0_7                             0x07fc3a64   Number         4  rf_531.o(.text)
-    __arm_cp.0_8                             0x07fc3a68   Number         4  rf_531.o(.text)
-    __arm_cp.0_9                             0x07fc3a6c   Number         4  rf_531.o(.text)
-    __arm_cp.0_10                            0x07fc3a70   Number         4  rf_531.o(.text)
-    __arm_cp.0_11                            0x07fc3a74   Number         4  rf_531.o(.text)
-    __arm_cp.0_12                            0x07fc3a78   Number         4  rf_531.o(.text)
-    __arm_cp.0_13                            0x07fc3a7c   Number         4  rf_531.o(.text)
-    __arm_cp.0_14                            0x07fc3a80   Number         4  rf_531.o(.text)
-    __arm_cp.0_15                            0x07fc3a84   Number         4  rf_531.o(.text)
-    __arm_cp.0_16                            0x07fc3a88   Number         4  rf_531.o(.text)
-    __arm_cp.0_17                            0x07fc3a8c   Number         4  rf_531.o(.text)
-    __arm_cp.0_18                            0x07fc3a90   Number         4  rf_531.o(.text)
-    __arm_cp.0_19                            0x07fc3a94   Number         4  rf_531.o(.text)
-    __arm_cp.0_20                            0x07fc3a98   Number         4  rf_531.o(.text)
-    __arm_cp.0_21                            0x07fc3a9c   Number         4  rf_531.o(.text)
-    __arm_cp.0_22                            0x07fc3aa0   Number         4  rf_531.o(.text)
-    __arm_cp.0_23                            0x07fc3aa4   Number         4  rf_531.o(.text)
-    __arm_cp.0_24                            0x07fc3aa8   Number         4  rf_531.o(.text)
-    __arm_cp.0_25                            0x07fc3aac   Number         4  rf_531.o(.text)
-    __arm_cp.0_26                            0x07fc3ab0   Number         4  rf_531.o(.text)
-    __arm_cp.0_27                            0x07fc3ab4   Number         4  rf_531.o(.text)
-    __arm_cp.0_28                            0x07fc3ab8   Number         4  rf_531.o(.text)
-    __arm_cp.0_29                            0x07fc3abc   Number         4  rf_531.o(.text)
-    __arm_cp.0_30                            0x07fc3ac0   Number         4  rf_531.o(.text)
-    __arm_cp.0_31                            0x07fc3ac4   Number         4  rf_531.o(.text)
-    __arm_cp.1_0                             0x07fc3b98   Number         4  rf_531.o(.text)
-    __arm_cp.1_1                             0x07fc3b9c   Number         4  rf_531.o(.text)
-    __arm_cp.1_2                             0x07fc3ba0   Number         4  rf_531.o(.text)
-    __arm_cp.1_3                             0x07fc3ba4   Number         4  rf_531.o(.text)
-    __arm_cp.1_4                             0x07fc3ba8   Number         4  rf_531.o(.text)
-    __arm_cp.1_5                             0x07fc3bac   Number         4  rf_531.o(.text)
-    __arm_cp.1_6                             0x07fc3bb0   Number         4  rf_531.o(.text)
-    __arm_cp.2_0                             0x07fc3cb0   Number         4  rf_531.o(.text)
-    __arm_cp.2_1                             0x07fc3cb4   Number         4  rf_531.o(.text)
-    __arm_cp.2_2                             0x07fc3cb8   Number         4  rf_531.o(.text)
-    __arm_cp.2_3                             0x07fc3cbc   Number         4  rf_531.o(.text)
-    __arm_cp.2_4                             0x07fc3cc0   Number         4  rf_531.o(.text)
-    __arm_cp.2_5                             0x07fc3cc4   Number         4  rf_531.o(.text)
-    __arm_cp.2_6                             0x07fc3cc8   Number         4  rf_531.o(.text)
-    __arm_cp.2_7                             0x07fc3ccc   Number         4  rf_531.o(.text)
-    __arm_cp.2_8                             0x07fc3cd0   Number         4  rf_531.o(.text)
-    __arm_cp.2_9                             0x07fc3cd4   Number         4  rf_531.o(.text)
-    __arm_cp.2_10                            0x07fc3cd8   Number         4  rf_531.o(.text)
-    __arm_cp.2_11                            0x07fc3cdc   Number         4  rf_531.o(.text)
-    __arm_cp.2_12                            0x07fc3ce0   Number         4  rf_531.o(.text)
-    __arm_cp.3_0                             0x07fc3cec   Number         4  rf_531.o(.text)
-    __arm_cp.4_0                             0x07fc3d54   Number         4  rf_531.o(.text)
-    __arm_cp.4_1                             0x07fc3d58   Number         4  rf_531.o(.text)
-    __arm_cp.5_0                             0x07fc3d64   Number         4  rf_531.o(.text)
-    __arm_cp.6_0                             0x07fc3d78   Number         4  rf_531.o(.text)
-    __arm_cp.7_0                             0x07fc3dac   Number         4  rf_531.o(.text)
-    __arm_cp.7_1                             0x07fc3db0   Number         4  rf_531.o(.text)
-    __arm_cp.7_2                             0x07fc3db4   Number         4  rf_531.o(.text)
-    __arm_cp.7_3                             0x07fc3db8   Number         4  rf_531.o(.text)
-    __arm_cp.8_0                             0x07fc3de0   Number         4  rf_531.o(.text)
-    __arm_cp.8_1                             0x07fc3de4   Number         4  rf_531.o(.text)
-    __arm_cp.8_2                             0x07fc3de8   Number         4  rf_531.o(.text)
-    __arm_cp.9_0                             0x07fc3e04   Number         4  rf_531.o(.text)
-    __arm_cp.10_0                            0x07fc3e14   Number         4  rf_531.o(.text)
-    __arm_cp.11_0                            0x07fc3e64   Number         4  rf_531.o(.text)
-    __arm_cp.11_1                            0x07fc3e68   Number         4  rf_531.o(.text)
-    __arm_cp.12_0                            0x07fc3fc8   Number         4  rf_531.o(.text)
-    __arm_cp.12_1                            0x07fc3fcc   Number         4  rf_531.o(.text)
-    __arm_cp.12_2                            0x07fc3fd0   Number         4  rf_531.o(.text)
-    __arm_cp.12_3                            0x07fc3fd4   Number         4  rf_531.o(.text)
-    __arm_cp.12_4                            0x07fc3fd8   Number         4  rf_531.o(.text)
-    __arm_cp.12_5                            0x07fc3fdc   Number         4  rf_531.o(.text)
-    __arm_cp.16_0                            0x07fc3ff4   Number         4  rf_531.o(.text)
-    __arm_cp.17_0                            0x07fc4004   Number         4  rf_531.o(.text)
-    __arm_cp.18_0                            0x07fc401c   Number         4  rf_531.o(.text)
-    __arm_cp.18_1                            0x07fc4020   Number         4  rf_531.o(.text)
-    __arm_cp.19_0                            0x07fc4034   Number         4  rf_531.o(.text)
-    __arm_cp.19_1                            0x07fc4038   Number         4  rf_531.o(.text)
-    __arm_cp.20_0                            0x07fc4054   Number         4  rf_531.o(.text)
-    __arm_cp.21_0                            0x07fc40a8   Number         4  rf_531.o(.text)
-    __arm_cp.22_0                            0x07fc40c0   Number         4  rf_531.o(.text)
-    __arm_cp.23_0                            0x07fc40d0   Number         4  rf_531.o(.text)
-    __arm_cp.24_0                            0x07fc40dc   Number         4  rf_531.o(.text)
-    __arm_cp.25_0                            0x07fc40e8   Number         4  rf_531.o(.text)
-    __arm_cp.26_0                            0x07fc40f4   Number         4  rf_531.o(.text)
-    __arm_cp.27_0                            0x07fc4110   Number         4  rf_531.o(.text)
-    __arm_cp.27_1                            0x07fc4114   Number         4  rf_531.o(.text)
-    __arm_cp.28_0                            0x07fc412c   Number         4  rf_531.o(.text)
-    gattc_write_req_ind_handler              0x07fc4131   Thumb Code   320  custs1_task.o(.text)
-    [Anonymous Symbol]                       0x07fc4130   Section        0  custs1_task.o(.text)
-    __arm_cp.0_0                             0x07fc4270   Number         4  custs1_task.o(.text)
-    __arm_cp.0_1                             0x07fc4274   Number         4  custs1_task.o(.text)
-    __arm_cp.0_2                             0x07fc4278   Number         4  custs1_task.o(.text)
-    custs1_value_req_rsp_handler             0x07fc427d   Thumb Code   116  custs1_task.o(.text)
-    __arm_cp.1_0                             0x07fc42f0   Number         4  custs1_task.o(.text)
-    [Anonymous Symbol]                       0x07fc42f4   Section        0  prf.o(.text)
-    __arm_cp.0_0                             0x07fc4354   Number         4  prf.o(.text)
-    __arm_cp.1_0                             0x07fc4388   Number         4  prf.o(.text)
-    __arm_cp.1_1                             0x07fc438c   Number         4  prf.o(.text)
-    [Anonymous Symbol]                       0x07fc4390   Section        0  app_default_handlers.o(.text)
-    __arm_cp.2_0                             0x07fc43c8   Number         4  app_default_handlers.o(.text)
-    __arm_cp.6_0                             0x07fc4400   Number         4  app_default_handlers.o(.text)
-    __arm_cp.7_0                             0x07fc440c   Number         4  app_default_handlers.o(.text)
-    __arm_cp.9_0                             0x07fc4458   Number         4  app_default_handlers.o(.text)
-    __arm_cp.12_0                            0x07fc4500   Number         4  app_default_handlers.o(.text)
-    __arm_cp.14_0                            0x07fc4578   Number         4  app_default_handlers.o(.text)
-    __arm_cp.17_0                            0x07fc4660   Number         4  app_default_handlers.o(.text)
-    __arm_cp.17_1                            0x07fc4664   Number         4  app_default_handlers.o(.text)
-    __arm_cp.18_0                            0x07fc4680   Number         4  app_default_handlers.o(.text)
-    __arm_cp.19_0                            0x07fc46b8   Number         4  app_default_handlers.o(.text)
-    [Anonymous Symbol]                       0x07fc46d4   Section        0  app.o(.text)
-    __arm_cp.0_0                             0x07fc4720   Number         4  app.o(.text)
-    __arm_cp.0_1                             0x07fc4724   Number         4  app.o(.text)
-    __arm_cp.0_2                             0x07fc4728   Number         4  app.o(.text)
-    __arm_cp.1_0                             0x07fc4754   Number         4  app.o(.text)
-    __arm_cp.2_0                             0x07fc4788   Number         4  app.o(.text)
-    __arm_cp.2_1                             0x07fc478c   Number         4  app.o(.text)
-    __arm_cp.2_2                             0x07fc4790   Number         4  app.o(.text)
-    app_easy_gap_undirected_advertise_start_create_msg 0x07fc479d   Thumb Code    72  app.o(.text)
-    __arm_cp.4_0                             0x07fc47e4   Number         4  app.o(.text)
-    __arm_cp.4_1                             0x07fc47e8   Number         4  app.o(.text)
-    __arm_cp.4_2                             0x07fc47ec   Number         4  app.o(.text)
-    __arm_cp.4_3                             0x07fc47f0   Number         4  app.o(.text)
-    __arm_cp.5_0                             0x07fc4810   Number         4  app.o(.text)
-    app_easy_gap_directed_advertise_start_create_msg 0x07fc481d   Thumb Code    92  app.o(.text)
-    __arm_cp.7_0                             0x07fc4878   Number         4  app.o(.text)
-    __arm_cp.7_1                             0x07fc487c   Number         4  app.o(.text)
-    __arm_cp.7_2                             0x07fc4880   Number         4  app.o(.text)
-    user_adv_conf                            0x07fc4884   Number         0  app.o(.text)
-    __arm_cp.8_0                             0x07fc48b0   Number         4  app.o(.text)
-    app_easy_gap_non_connectable_advertise_start_create_msg 0x07fc48bd   Thumb Code    72  app.o(.text)
-    __arm_cp.10_0                            0x07fc4904   Number         4  app.o(.text)
-    __arm_cp.10_1                            0x07fc4908   Number         4  app.o(.text)
-    __arm_cp.10_2                            0x07fc490c   Number         4  app.o(.text)
-    __arm_cp.10_3                            0x07fc4910   Number         4  app.o(.text)
-    __arm_cp.11_0                            0x07fc4938   Number         4  app.o(.text)
-    __arm_cp.12_0                            0x07fc4964   Number         4  app.o(.text)
-    __arm_cp.12_1                            0x07fc4968   Number         4  app.o(.text)
-    app_easy_gap_advertise_stop_handler      0x07fc496d   Thumb Code    24  app.o(.text)
-    __arm_cp.13_0                            0x07fc4984   Number         4  app.o(.text)
-    __arm_cp.14_0                            0x07fc49a0   Number         4  app.o(.text)
-    app_easy_gap_param_update_msg_create     0x07fc49ad   Thumb Code    68  app.o(.text)
-    __arm_cp.16_0                            0x07fc49f0   Number         4  app.o(.text)
-    __arm_cp.16_1                            0x07fc49f4   Number         4  app.o(.text)
-    __arm_cp.17_0                            0x07fc4a10   Number         4  app.o(.text)
-    app_easy_gap_start_connection_to_msg_create 0x07fc4a1d   Thumb Code    68  app.o(.text)
-    __arm_cp.19_0                            0x07fc4a60   Number         4  app.o(.text)
-    __arm_cp.19_1                            0x07fc4a64   Number         4  app.o(.text)
-    __arm_cp.21_0                            0x07fc4aa4   Number         4  app.o(.text)
-    app_easy_gap_dev_config_create_msg       0x07fc4ab1   Thumb Code    68  app.o(.text)
-    __arm_cp.23_0                            0x07fc4af4   Number         4  app.o(.text)
-    __arm_cp.23_1                            0x07fc4af8   Number         4  app.o(.text)
-    __arm_cp.23_2                            0x07fc4afc   Number         4  app.o(.text)
-    __arm_cp.24_0                            0x07fc4b14   Number         4  app.o(.text)
-    __arm_cp.25_0                            0x07fc4b34   Number         4  app.o(.text)
-    [Anonymous Symbol]                       0x07fc4b38   Section        0  app_task.o(.text)
-    __arm_cp.0_0                             0x07fc4b54   Number         4  app_task.o(.text)
-    gapm_device_ready_ind_handler            0x07fc4b59   Thumb Code    40  app_task.o(.text)
-    __arm_cp.1_0                             0x07fc4b80   Number         4  app_task.o(.text)
-    gapm_cmp_evt_handler                     0x07fc4b85   Thumb Code    76  app_task.o(.text)
-    __arm_cp.2_0                             0x07fc4bd0   Number         4  app_task.o(.text)
-    __arm_cp.2_1                             0x07fc4bd4   Number         4  app_task.o(.text)
-    gapc_cmp_evt_handler                     0x07fc4bd9   Thumb Code    44  app_task.o(.text)
-    __arm_cp.3_0                             0x07fc4c04   Number         4  app_task.o(.text)
-    gapc_connection_req_ind_handler          0x07fc4c09   Thumb Code   104  app_task.o(.text)
-    __arm_cp.4_0                             0x07fc4c70   Number         4  app_task.o(.text)
-    __arm_cp.4_1                             0x07fc4c74   Number         4  app_task.o(.text)
-    gapc_disconnect_ind_handler              0x07fc4c79   Thumb Code    44  app_task.o(.text)
-    __arm_cp.5_0                             0x07fc4ca4   Number         4  app_task.o(.text)
-    gapc_get_dev_info_req_ind_handler        0x07fc4ca9   Thumb Code   164  app_task.o(.text)
-    __arm_cp.6_0                             0x07fc4d4c   Number         4  app_task.o(.text)
-    [Anonymous Symbol]                       0x07fc4d50   Section        0  app_security.o(.text)
-    __arm_cp.0_0                             0x07fc4d64   Number         4  app_security.o(.text)
-    __arm_cp.0_1                             0x07fc4d68   Number         4  app_security.o(.text)
-    __arm_cp.1_0                             0x07fc4da0   Number         4  app_security.o(.text)
-    [Anonymous Symbol]                       0x07fc4dc4   Section        0  app_security_task.o(.text)
-    __arm_cp.0_0                             0x07fc4de0   Number         4  app_security_task.o(.text)
-    gapc_bond_req_ind_handler                0x07fc4de5   Thumb Code   100  app_security_task.o(.text)
-    __arm_cp.1_0                             0x07fc4e48   Number         4  app_security_task.o(.text)
-    __arm_cp.1_1                             0x07fc4e4c   Number         4  app_security_task.o(.text)
-    gapc_bond_ind_handler                    0x07fc4e51   Thumb Code   268  app_security_task.o(.text)
-    __arm_cp.2_0                             0x07fc4f5c   Number         4  app_security_task.o(.text)
-    __arm_cp.2_3                             0x07fc4f74   Number         4  app_security_task.o(.text)
-    __arm_cp.2_4                             0x07fc4f78   Number         4  app_security_task.o(.text)
-    gapc_encrypt_req_ind_handler             0x07fc4f7d   Thumb Code     4  app_security_task.o(.text)
-    gapc_encrypt_ind_handler                 0x07fc4f81   Thumb Code    20  app_security_task.o(.text)
-    __arm_cp.4_0                             0x07fc4f94   Number         4  app_security_task.o(.text)
-    gapm_addr_solved_ind_handler             0x07fc4f99   Thumb Code     4  app_security_task.o(.text)
-    gapm_ral_size_ind_handler                0x07fc4f9d   Thumb Code     4  app_security_task.o(.text)
-    gapm_ral_addr_ind_handler                0x07fc4fa1   Thumb Code     4  app_security_task.o(.text)
-    [Anonymous Symbol]                       0x07fc4fa4   Section        0  app_diss.o(.text)
-    __arm_cp.1_0                             0x07fc4fdc   Number         4  app_diss.o(.text)
-    [Anonymous Symbol]                       0x07fc4fe0   Section        0  app_diss_task.o(.text)
-    __arm_cp.0_0                             0x07fc4ffc   Number         4  app_diss_task.o(.text)
-    diss_value_req_ind_handler               0x07fc5001   Thumb Code   124  app_diss_task.o(.text)
-    __arm_cp.1_2                             0x07fc508c   Number         4  app_diss_task.o(.text)
-    __arm_cp.1_3                             0x07fc5090   Number         4  app_diss_task.o(.text)
-    __arm_cp.1_7                             0x07fc50b4   Number         4  app_diss_task.o(.text)
-    [Anonymous Symbol]                       0x07fc50b8   Section        0  app_msg_utils.o(.text)
-    __arm_cp.0_0                             0x07fc50d8   Number         4  app_msg_utils.o(.text)
-    __arm_cp.0_1                             0x07fc50dc   Number         4  app_msg_utils.o(.text)
-    __arm_cp.0_2                             0x07fc50e0   Number         4  app_msg_utils.o(.text)
-    [Anonymous Symbol]                       0x07fc50fc   Section        0  app_easy_msg_utils.o(.text)
-    __arm_cp.0_0                             0x07fc5128   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.0_1                             0x07fc512c   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.1_0                             0x07fc5154   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.1_1                             0x07fc5158   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.1_2                             0x07fc515c   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.2_0                             0x07fc5188   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.2_1                             0x07fc518c   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.2_2                             0x07fc5190   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.3_0                             0x07fc51b0   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.4_0                             0x07fc51c4   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.5_0                             0x07fc51dc   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.6_0                             0x07fc5210   Number         4  app_easy_msg_utils.o(.text)
-    __arm_cp.6_1                             0x07fc5214   Number         4  app_easy_msg_utils.o(.text)
-    [Anonymous Symbol]                       0x07fc5218   Section        0  app_easy_security.o(.text)
-    pairing_rsp_create_msg                   0x07fc5221   Thumb Code    52  app_easy_security.o(.text)
-    __arm_cp.1_0                             0x07fc5254   Number         4  app_easy_security.o(.text)
-    __arm_cp.1_1                             0x07fc5258   Number         4  app_easy_security.o(.text)
-    __arm_cp.1_2                             0x07fc525c   Number         4  app_easy_security.o(.text)
-    __arm_cp.2_0                             0x07fc5278   Number         4  app_easy_security.o(.text)
-    tk_exch_create_msg                       0x07fc5285   Thumb Code    40  app_easy_security.o(.text)
-    __arm_cp.4_0                             0x07fc52ac   Number         4  app_easy_security.o(.text)
-    __arm_cp.4_1                             0x07fc52b0   Number         4  app_easy_security.o(.text)
-    __arm_cp.5_0                             0x07fc52f0   Number         4  app_easy_security.o(.text)
-    csrk_exch_create_msg                     0x07fc52fd   Thumb Code    68  app_easy_security.o(.text)
-    __arm_cp.7_0                             0x07fc5340   Number         4  app_easy_security.o(.text)
-    __arm_cp.7_1                             0x07fc5344   Number         4  app_easy_security.o(.text)
-    __arm_cp.7_2                             0x07fc5348   Number         4  app_easy_security.o(.text)
-    __arm_cp.8_0                             0x07fc5364   Number         4  app_easy_security.o(.text)
-    ltk_exch_create_msg                      0x07fc5371   Thumb Code    44  app_easy_security.o(.text)
-    __arm_cp.10_0                            0x07fc539c   Number         4  app_easy_security.o(.text)
-    __arm_cp.10_1                            0x07fc53a0   Number         4  app_easy_security.o(.text)
-    __arm_cp.11_0                            0x07fc53bc   Number         4  app_easy_security.o(.text)
-    __arm_cp.12_0                            0x07fc53f4   Number         4  app_easy_security.o(.text)
-    __arm_cp.14_0                            0x07fc5460   Number         4  app_easy_security.o(.text)
-    encrypt_cfm_create_msg                   0x07fc5465   Thumb Code    36  app_easy_security.o(.text)
-    __arm_cp.15_0                            0x07fc5488   Number         4  app_easy_security.o(.text)
-    __arm_cp.15_1                            0x07fc548c   Number         4  app_easy_security.o(.text)
-    __arm_cp.17_0                            0x07fc54bc   Number         4  app_easy_security.o(.text)
-    __arm_cp.19_0                            0x07fc54f8   Number         4  app_easy_security.o(.text)
-    __arm_cp.19_1                            0x07fc54fc   Number         4  app_easy_security.o(.text)
-    __arm_cp.20_0                            0x07fc5518   Number         4  app_easy_security.o(.text)
-    __arm_cp.21_0                            0x07fc5544   Number         4  app_easy_security.o(.text)
-    [Anonymous Symbol]                       0x07fc55c4   Section        0  app_easy_timer.o(.text)
-    __arm_cp.0_0                             0x07fc56a8   Number         4  app_easy_timer.o(.text)
-    __arm_cp.0_1                             0x07fc56ac   Number         4  app_easy_timer.o(.text)
-    __arm_cp.0_2                             0x07fc56b0   Number         4  app_easy_timer.o(.text)
-    __arm_cp.0_3                             0x07fc56b4   Number         4  app_easy_timer.o(.text)
-    __arm_cp.0_4                             0x07fc56b8   Number         4  app_easy_timer.o(.text)
-    __arm_cp.0_5                             0x07fc56bc   Number         4  app_easy_timer.o(.text)
-    __arm_cp.0_6                             0x07fc56c0   Number         4  app_easy_timer.o(.text)
-    __arm_cp.1_0                             0x07fc5700   Number         4  app_easy_timer.o(.text)
-    __arm_cp.1_1                             0x07fc5704   Number         4  app_easy_timer.o(.text)
-    create_timer                             0x07fc5709   Thumb Code    56  app_easy_timer.o(.text)
-    __arm_cp.2_0                             0x07fc5740   Number         4  app_easy_timer.o(.text)
-    __arm_cp.3_0                             0x07fc5790   Number         4  app_easy_timer.o(.text)
-    __arm_cp.3_1                             0x07fc5794   Number         4  app_easy_timer.o(.text)
-    __arm_cp.3_2                             0x07fc5798   Number         4  app_easy_timer.o(.text)
-    timer_canceled_handler                   0x07fc579d   Thumb Code     2  app_easy_timer.o(.text)
-    __arm_cp.5_0                             0x07fc5808   Number         4  app_easy_timer.o(.text)
-    __arm_cp.5_1                             0x07fc580c   Number         4  app_easy_timer.o(.text)
-    __arm_cp.5_2                             0x07fc5810   Number         4  app_easy_timer.o(.text)
-    __arm_cp.5_3                             0x07fc5814   Number         4  app_easy_timer.o(.text)
-    timer_modified_handler                   0x07fc5819   Thumb Code     2  app_easy_timer.o(.text)
-    __arm_cp.7_0                             0x07fc5844   Number         4  app_easy_timer.o(.text)
-    __arm_cp.7_1                             0x07fc5848   Number         4  app_easy_timer.o(.text)
-    [Anonymous Symbol]                       0x07fc584c   Section        0  app_customs.o(.text)
-    __arm_cp.0_0                             0x07fc5864   Number         4  app_customs.o(.text)
-    __arm_cp.2_0                             0x07fc58a0   Number         4  app_customs.o(.text)
-    [Anonymous Symbol]                       0x07fc58a4   Section        0  app_customs_task.o(.text)
-    [Anonymous Symbol]                       0x07fc58c0   Section        0  app_utils.o(.text)
-    [Anonymous Symbol]                       0x07fc58e4   Section        0  user_periph_setup.o(.text)
-    __arm_cp.0_0                             0x07fc599c   Number         4  user_periph_setup.o(.text)
-    __arm_cp.0_1                             0x07fc59a0   Number         4  user_periph_setup.o(.text)
-    __arm_cp.1_0                             0x07fc59e4   Number         4  user_periph_setup.o(.text)
-    __arm_cp.2_0                             0x07fc5a0c   Number         4  user_periph_setup.o(.text)
-    __arm_cp.2_1                             0x07fc5a10   Number         4  user_periph_setup.o(.text)
-    __arm_cp.2_2                             0x07fc5a14   Number         4  user_periph_setup.o(.text)
-    [Anonymous Symbol]                       0x07fc5a18   Section        0  user_empty_peripheral_template.o(.text)
-    __arm_cp.0_0                             0x07fc5a54   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.0_1                             0x07fc5a58   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.0_2                             0x07fc5a5c   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.2_0                             0x07fc5a88   Number         4  user_empty_peripheral_template.o(.text)
-    .text                                    0x07fc5a8c   Section        0  patch_1.o(.text)
-    _ldo_filter_violations                   0x07fc6479   Thumb Code   158  rf_ldo_calibration.o(.text)
-    .text                                    0x07fc6478   Section        0  rf_ldo_calibration.o(.text)
-    _ldo_radio_calibration                   0x07fc6517   Thumb Code   722  rf_ldo_calibration.o(.text)
-    .text                                    0x07fc6838   Section        0  rf_diag.o(.text)
-    .text                                    0x07fc68a4   Section        0  common.o(.text)
-    loop                                     0x07fc68e1   Thumb Code     0  arch_asm.o(.text)
-    .text                                    0x07fc68e0   Section       32  arch_asm.o(.text)
-    exit                                     0x07fc68ff   Thumb Code     0  arch_asm.o(.text)
-    .text                                    0x07fc6900   Section       48  init.o(.text)
-    __tagsym$$used.0                         0x07fc6930   Number         0  hardfault_handler.o(.text.HardFault_HandlerC)
-    [Anonymous Symbol]                       0x07fc6930   Section        0  hardfault_handler.o(.text.HardFault_HandlerC)
-    __arm_cp.0_2                             0x07fc69b4   Number         4  hardfault_handler.o(.text.HardFault_HandlerC)
-    __tagsym$$used.0                         0x07fc69b8   Number         0  nmi_handler.o(.text.NMI_HandlerC)
-    [Anonymous Symbol]                       0x07fc69b8   Section        0  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_0                             0x07fc6a5c   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_1                             0x07fc6a60   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_2                             0x07fc6a64   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_4                             0x07fc6a68   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_5                             0x07fc6a6c   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_6                             0x07fc6a70   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    i.__scatterload_copy                     0x07fc6a74   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x07fc6a82   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x07fc6a84   Section       14  handlers.o(i.__scatterload_zeroinit)
-    [Anonymous Symbol]                       0x07fc6a94   Section        0  system_da14531.o(system_DA14xxx)
-    __arm_cp.1_0                             0x07fc6b08   Number         4  system_da14531.o(system_DA14xxx)
-    __arm_cp.1_1                             0x07fc6b0c   Number         4  system_da14531.o(system_DA14xxx)
-    __arm_cp.1_2                             0x07fc6b10   Number         4  system_da14531.o(system_DA14xxx)
-    __arm_cp.1_3                             0x07fc6b14   Number         4  system_da14531.o(system_DA14xxx)
-    __arm_cp.1_4                             0x07fc6b18   Number         4  system_da14531.o(system_DA14xxx)
-    SVC1_ADC_VAL_1_UUID_128                  0x07fc6b1c   Data          16  user_custs1_def.o(.rodata.SVC1_ADC_VAL_1_UUID_128)
-    [Anonymous Symbol]                       0x07fc6b1c   Section        0  user_custs1_def.o(.rodata.SVC1_ADC_VAL_1_UUID_128)
-    SVC1_ADC_VAL_2_UUID_128                  0x07fc6b2c   Data          16  user_custs1_def.o(.rodata.SVC1_ADC_VAL_2_UUID_128)
-    [Anonymous Symbol]                       0x07fc6b2c   Section        0  user_custs1_def.o(.rodata.SVC1_ADC_VAL_2_UUID_128)
-    SVC1_BUTTON_STATE_UUID_128               0x07fc6b3c   Data          16  user_custs1_def.o(.rodata.SVC1_BUTTON_STATE_UUID_128)
-    [Anonymous Symbol]                       0x07fc6b3c   Section        0  user_custs1_def.o(.rodata.SVC1_BUTTON_STATE_UUID_128)
-    SVC1_CTRL_POINT_UUID_128                 0x07fc6b4c   Data          16  user_custs1_def.o(.rodata.SVC1_CTRL_POINT_UUID_128)
-    [Anonymous Symbol]                       0x07fc6b4c   Section        0  user_custs1_def.o(.rodata.SVC1_CTRL_POINT_UUID_128)
-    SVC1_INDICATEABLE_UUID_128               0x07fc6b5c   Data          16  user_custs1_def.o(.rodata.SVC1_INDICATEABLE_UUID_128)
-    [Anonymous Symbol]                       0x07fc6b5c   Section        0  user_custs1_def.o(.rodata.SVC1_INDICATEABLE_UUID_128)
-    SVC1_LED_STATE_UUID_128                  0x07fc6b6c   Data          16  user_custs1_def.o(.rodata.SVC1_LED_STATE_UUID_128)
-    [Anonymous Symbol]                       0x07fc6b6c   Section        0  user_custs1_def.o(.rodata.SVC1_LED_STATE_UUID_128)
-    SVC1_LONG_VALUE_UUID_128                 0x07fc6b7c   Data          16  user_custs1_def.o(.rodata.SVC1_LONG_VALUE_UUID_128)
-    [Anonymous Symbol]                       0x07fc6b7c   Section        0  user_custs1_def.o(.rodata.SVC1_LONG_VALUE_UUID_128)
-    SVC2_WRITE_VAL_1_UUID_128                0x07fc6b8c   Data          16  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_1_UUID_128)
-    [Anonymous Symbol]                       0x07fc6b8c   Section        0  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_1_UUID_128)
-    SVC2_WRITE_VAL_2_UUID_128                0x07fc6b9c   Data          16  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_2_UUID_128)
-    [Anonymous Symbol]                       0x07fc6b9c   Section        0  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_2_UUID_128)
-    SVC3_READ_VAL_1_UUID_128                 0x07fc6bac   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_1_UUID_128)
-    [Anonymous Symbol]                       0x07fc6bac   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_1_UUID_128)
-    SVC3_READ_VAL_2_UUID_128                 0x07fc6bbc   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_2_UUID_128)
-    [Anonymous Symbol]                       0x07fc6bbc   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_2_UUID_128)
-    SVC3_READ_VAL_3_UUID_128                 0x07fc6bcc   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_3_UUID_128)
-    [Anonymous Symbol]                       0x07fc6bcc   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_3_UUID_128)
-    TASK_DESC_APP                            0x07fc6bdc   Data          16  app.o(.rodata.TASK_DESC_APP)
-    [Anonymous Symbol]                       0x07fc6bdc   Section        0  app.o(.rodata.TASK_DESC_APP)
-    app_diss_process_handlers                0x07fc6bec   Data           8  app_diss_task.o(.rodata.app_diss_process_handlers)
-    [Anonymous Symbol]                       0x07fc6bec   Section        0  app_diss_task.o(.rodata.app_diss_process_handlers)
-    app_gap_process_handlers                 0x07fc6bf4   Data         112  app_task.o(.rodata.app_gap_process_handlers)
-    [Anonymous Symbol]                       0x07fc6bf4   Section        0  app_task.o(.rodata.app_gap_process_handlers)
-    app_sec_process_handlers                 0x07fc6c80   Data          56  app_security_task.o(.rodata.app_sec_process_handlers)
-    [Anonymous Symbol]                       0x07fc6c80   Section        0  app_security_task.o(.rodata.app_sec_process_handlers)
-    att_decl_char                            0x07fc6d28   Data           2  user_custs1_def.o(.rodata.att_decl_char)
-    [Anonymous Symbol]                       0x07fc6d28   Section        0  user_custs1_def.o(.rodata.att_decl_char)
-    att_decl_svc                             0x07fc6d2a   Data           2  user_custs1_def.o(.rodata.att_decl_svc)
-    [Anonymous Symbol]                       0x07fc6d2a   Section        0  user_custs1_def.o(.rodata.att_decl_svc)
-    att_desc_cfg                             0x07fc6d2c   Data           2  user_custs1_def.o(.rodata.att_desc_cfg)
-    [Anonymous Symbol]                       0x07fc6d2c   Section        0  user_custs1_def.o(.rodata.att_desc_cfg)
-    att_desc_user_desc                       0x07fc6d2e   Data           2  user_custs1_def.o(.rodata.att_desc_user_desc)
-    [Anonymous Symbol]                       0x07fc6d2e   Section        0  user_custs1_def.o(.rodata.att_desc_user_desc)
-    custs1_svc1                              0x07fc7145   Data          16  user_custs1_def.o(.rodata.custs1_svc1)
-    [Anonymous Symbol]                       0x07fc7145   Section        0  user_custs1_def.o(.rodata.custs1_svc1)
-    custs1_svc2                              0x07fc7155   Data          16  user_custs1_def.o(.rodata.custs1_svc2)
-    [Anonymous Symbol]                       0x07fc7155   Section        0  user_custs1_def.o(.rodata.custs1_svc2)
-    custs1_svc3                              0x07fc7165   Data          16  user_custs1_def.o(.rodata.custs1_svc3)
-    [Anonymous Symbol]                       0x07fc7165   Section        0  user_custs1_def.o(.rodata.custs1_svc3)
-    nvds_data_storage                        0x07fc7190   Data          14  nvds.o(.rodata.nvds_data_storage)
-    [Anonymous Symbol]                       0x07fc7190   Section        0  nvds.o(.rodata.nvds_data_storage)
-    [Anonymous Symbol]                       0x07fc74b0   Section        0  app_diss_task.o(.rodata.str1.1)
-    [Anonymous Symbol]                       0x07fc74c6   Section        0  user_custs1_def.o(.rodata.str1.1)
-    [Anonymous Symbol]                       0x07fc7562   Section        0  user_empty_peripheral_template.o(.rodata.str1.1)
-    [Anonymous Symbol]                       0x07fc75b0   Section        0  app.o(.rodata.str1.4)
-    uart_cfg                                 0x07fc75c8   Data          24  user_periph_setup.o(.rodata.uart_cfg)
-    [Anonymous Symbol]                       0x07fc75c8   Section        0  user_periph_setup.o(.rodata.uart_cfg)
-    user_app_callbacks                       0x07fc75e0   Data         140  app_entry_point.o(.rodata.user_app_callbacks)
-    [Anonymous Symbol]                       0x07fc75e0   Section        0  app_entry_point.o(.rodata.user_app_callbacks)
-    user_security_conf                       0x07fc766c   Data           7  app_easy_security.o(.rodata.user_security_conf)
-    [Anonymous Symbol]                       0x07fc766c   Section        0  app_easy_security.o(.rodata.user_security_conf)
-    rfmon_samples                            0x07fc76a0   Data        1280  rf_ldo_calibration.o(.bss)
-    .bss                                     0x07fc76a0   Section     1296  rf_ldo_calibration.o(.bss)
-    NVIOL                                    0x07fc7ba0   Data          16  rf_ldo_calibration.o(.bss)
-    extra_samples                            0x07fc7bb0   Data           4  trng.o(.bss..L_MergedGlobals)
-    [Anonymous Symbol]                       0x07fc7bb0   Section        0  trng.o(.bss..L_MergedGlobals)
-    trng_bits                                0x07fc7bb4   Data          16  trng.o(.bss..L_MergedGlobals)
-    [Anonymous Symbol]                       0x07fc7bc4   Section        0  arch_system.o(.bss..L_MergedGlobals.1)
-    cal_val                                  0x07fc7bcc   Data           2  adc_531.o(.bss.cal_val)
-    [Anonymous Symbol]                       0x07fc7bcc   Section        0  adc_531.o(.bss.cal_val)
-    current_msg_buffer                       0x07fc7bf8   Data         256  arch_console.o(.bss.current_msg_buffer)
-    [Anonymous Symbol]                       0x07fc7bf8   Section        0  arch_console.o(.bss.current_msg_buffer)
-    fsm_ctrl_reg                             0x07fc7cf8   Data           4  rf_531.o(.bss.fsm_ctrl_reg)
-    [Anonymous Symbol]                       0x07fc7cf8   Section        0  rf_531.o(.bss.fsm_ctrl_reg)
-    txdiv_trim                               0x07fc7d08   Data           4  otp_cs.o(.bss.txdiv_trim)
-    [Anonymous Symbol]                       0x07fc7d08   Section        0  otp_cs.o(.bss.txdiv_trim)
-    STACK                                    0x07fc7d10   Section     1792  startup_da14531.o(STACK)
+    [Anonymous Symbol]                       0x07fc31a4   Section        0  timer2.o(.text)
+    __arm_cp.0_0                             0x07fc31c4   Number         4  timer2.o(.text)
+    __arm_cp.1_0                             0x07fc31dc   Number         4  timer2.o(.text)
+    __arm_cp.2_0                             0x07fc3270   Number         4  timer2.o(.text)
+    [Anonymous Symbol]                       0x07fc3274   Section        0  rwble.o(.text)
+    __arm_cp.0_0                             0x07fc32b4   Number         4  rwble.o(.text)
+    __arm_cp.0_1                             0x07fc32b8   Number         4  rwble.o(.text)
+    __arm_cp.0_2                             0x07fc32bc   Number         4  rwble.o(.text)
+    __arm_cp.0_3                             0x07fc32c0   Number         4  rwble.o(.text)
+    __arm_cp.0_4                             0x07fc32c4   Number         4  rwble.o(.text)
+    __arm_cp.1_0                             0x07fc3300   Number         4  rwble.o(.text)
+    __arm_cp.1_1                             0x07fc3304   Number         4  rwble.o(.text)
+    __arm_cp.1_2                             0x07fc3308   Number         4  rwble.o(.text)
+    __arm_cp.1_3                             0x07fc330c   Number         4  rwble.o(.text)
+    __arm_cp.1_4                             0x07fc3310   Number         4  rwble.o(.text)
+    __arm_cp.2_0                             0x07fc3358   Number         4  rwble.o(.text)
+    __arm_cp.2_1                             0x07fc335c   Number         4  rwble.o(.text)
+    __arm_cp.3_0                             0x07fc344c   Number         4  rwble.o(.text)
+    __arm_cp.3_1                             0x07fc3450   Number         4  rwble.o(.text)
+    __arm_cp.3_2                             0x07fc3454   Number         4  rwble.o(.text)
+    __arm_cp.3_3                             0x07fc3458   Number         4  rwble.o(.text)
+    __arm_cp.6_1                             0x07fc349c   Number         4  rwble.o(.text)
+    __arm_cp.6_2                             0x07fc34a0   Number         4  rwble.o(.text)
+    [Anonymous Symbol]                       0x07fc34a4   Section        0  rwip.o(.text)
+    __arm_cp.0_0                             0x07fc34b4   Number         4  rwip.o(.text)
+    __arm_cp.0_1                             0x07fc34b8   Number         4  rwip.o(.text)
+    __arm_cp.1_0                             0x07fc34cc   Number         4  rwip.o(.text)
+    __arm_cp.1_1                             0x07fc34d0   Number         4  rwip.o(.text)
+    __arm_cp.2_0                             0x07fc3648   Number         4  rwip.o(.text)
+    __arm_cp.2_1                             0x07fc364c   Number         4  rwip.o(.text)
+    __arm_cp.2_2                             0x07fc3650   Number         4  rwip.o(.text)
+    __arm_cp.2_4                             0x07fc3654   Number         4  rwip.o(.text)
+    __arm_cp.2_5                             0x07fc3658   Number         4  rwip.o(.text)
+    __arm_cp.2_6                             0x07fc365c   Number         4  rwip.o(.text)
+    __arm_cp.2_7                             0x07fc3660   Number         4  rwip.o(.text)
+    __arm_cp.2_8                             0x07fc3664   Number         4  rwip.o(.text)
+    __arm_cp.2_9                             0x07fc3668   Number         4  rwip.o(.text)
+    __arm_cp.2_10                            0x07fc366c   Number         4  rwip.o(.text)
+    __arm_cp.2_11                            0x07fc3670   Number         4  rwip.o(.text)
+    __arm_cp.2_12                            0x07fc3674   Number         4  rwip.o(.text)
+    __arm_cp.2_13                            0x07fc3678   Number         4  rwip.o(.text)
+    __arm_cp.2_14                            0x07fc367c   Number         4  rwip.o(.text)
+    __arm_cp.2_15                            0x07fc3680   Number         4  rwip.o(.text)
+    __arm_cp.2_16                            0x07fc3684   Number         4  rwip.o(.text)
+    __arm_cp.2_17                            0x07fc3688   Number         4  rwip.o(.text)
+    __arm_cp.2_19                            0x07fc368c   Number         4  rwip.o(.text)
+    [Anonymous Symbol]                       0x07fc3690   Section        0  ble_arp.o(.text)
+    __arm_cp.2_0                             0x07fc3788   Number         4  ble_arp.o(.text)
+    __arm_cp.2_1                             0x07fc378c   Number         4  ble_arp.o(.text)
+    __arm_cp.2_2                             0x07fc3790   Number         4  ble_arp.o(.text)
+    __arm_cp.2_3                             0x07fc3794   Number         4  ble_arp.o(.text)
+    __arm_cp.2_4                             0x07fc3798   Number         4  ble_arp.o(.text)
+    __arm_cp.2_5                             0x07fc379c   Number         4  ble_arp.o(.text)
+    __arm_cp.2_6                             0x07fc37a0   Number         4  ble_arp.o(.text)
+    __arm_cp.2_7                             0x07fc37a4   Number         4  ble_arp.o(.text)
+    __arm_cp.2_8                             0x07fc37a8   Number         4  ble_arp.o(.text)
+    __arm_cp.2_9                             0x07fc37ac   Number         4  ble_arp.o(.text)
+    __arm_cp.2_10                            0x07fc37b0   Number         4  ble_arp.o(.text)
+    __arm_cp.2_11                            0x07fc37b4   Number         4  ble_arp.o(.text)
+    __arm_cp.2_12                            0x07fc37b8   Number         4  ble_arp.o(.text)
+    __arm_cp.2_13                            0x07fc37bc   Number         4  ble_arp.o(.text)
+    __arm_cp.2_14                            0x07fc37c0   Number         4  ble_arp.o(.text)
+    __arm_cp.2_15                            0x07fc37c4   Number         4  ble_arp.o(.text)
+    __arm_cp.2_16                            0x07fc37c8   Number         4  ble_arp.o(.text)
+    rf_txpwr_dbm_get                         0x07fc37cd   Thumb Code    36  ble_arp.o(.text)
+    rf_sleep                                 0x07fc37f1   Thumb Code    24  ble_arp.o(.text)
+    __arm_cp.4_0                             0x07fc3808   Number         4  ble_arp.o(.text)
+    __arm_cp.4_1                             0x07fc380c   Number         4  ble_arp.o(.text)
+    rf_reset                                 0x07fc3811   Thumb Code     2  ble_arp.o(.text)
+    RADIOCNTL_Handler                        0x07fc3813   Thumb Code     2  ble_arp.o(.text)
+    rf_force_agc_enable                      0x07fc3815   Thumb Code     2  ble_arp.o(.text)
+    rf_rssi_convert                          0x07fc3817   Thumb Code    36  ble_arp.o(.text)
+    update_radiopwrupdn_pref_setting         0x07fc383d   Thumb Code    36  ble_arp.o(.text)
+    __arm_cp.9_0                             0x07fc3860   Number         4  ble_arp.o(.text)
+    __arm_cp.9_1                             0x07fc3864   Number         4  ble_arp.o(.text)
+    __arm_cp.9_2                             0x07fc3868   Number         4  ble_arp.o(.text)
+    rf_regs                                  0x07fc386d   Thumb Code    56  ble_arp.o(.text)
+    __arm_cp.10_0                            0x07fc38a4   Number         4  ble_arp.o(.text)
+    __arm_cp.11_0                            0x07fc3904   Number         4  ble_arp.o(.text)
+    ble_update_arp_adpll_div_val             0x07fc3909   Thumb Code    32  ble_arp.o(.text)
+    __arm_cp.12_0                            0x07fc3928   Number         4  ble_arp.o(.text)
+    __arm_cp.12_1                            0x07fc392c   Number         4  ble_arp.o(.text)
+    __arm_cp.12_2                            0x07fc3930   Number         4  ble_arp.o(.text)
+    __arm_cp.13_0                            0x07fc3950   Number         4  ble_arp.o(.text)
+    __arm_cp.13_1                            0x07fc3954   Number         4  ble_arp.o(.text)
+    __arm_cp.13_2                            0x07fc3958   Number         4  ble_arp.o(.text)
+    __arm_cp.13_3                            0x07fc395c   Number         4  ble_arp.o(.text)
+    ble_update_arp_adpll_calib_vals          0x07fc3981   Thumb Code    32  ble_arp.o(.text)
+    __arm_cp.15_0                            0x07fc39a0   Number         4  ble_arp.o(.text)
+    __arm_cp.15_1                            0x07fc39a4   Number         4  ble_arp.o(.text)
+    __arm_cp.15_2                            0x07fc39a8   Number         4  ble_arp.o(.text)
+    [Anonymous Symbol]                       0x07fc39ac   Section        0  rf_531.o(.text)
+    __arm_cp.0_0                             0x07fc3b18   Number         4  rf_531.o(.text)
+    __arm_cp.0_1                             0x07fc3b1c   Number         4  rf_531.o(.text)
+    __arm_cp.0_2                             0x07fc3b20   Number         4  rf_531.o(.text)
+    __arm_cp.0_3                             0x07fc3b24   Number         4  rf_531.o(.text)
+    __arm_cp.0_4                             0x07fc3b28   Number         4  rf_531.o(.text)
+    __arm_cp.0_5                             0x07fc3b2c   Number         4  rf_531.o(.text)
+    __arm_cp.0_6                             0x07fc3b30   Number         4  rf_531.o(.text)
+    __arm_cp.0_7                             0x07fc3b34   Number         4  rf_531.o(.text)
+    __arm_cp.0_8                             0x07fc3b38   Number         4  rf_531.o(.text)
+    __arm_cp.0_9                             0x07fc3b3c   Number         4  rf_531.o(.text)
+    __arm_cp.0_10                            0x07fc3b40   Number         4  rf_531.o(.text)
+    __arm_cp.0_11                            0x07fc3b44   Number         4  rf_531.o(.text)
+    __arm_cp.0_12                            0x07fc3b48   Number         4  rf_531.o(.text)
+    __arm_cp.0_13                            0x07fc3b4c   Number         4  rf_531.o(.text)
+    __arm_cp.0_14                            0x07fc3b50   Number         4  rf_531.o(.text)
+    __arm_cp.0_15                            0x07fc3b54   Number         4  rf_531.o(.text)
+    __arm_cp.0_16                            0x07fc3b58   Number         4  rf_531.o(.text)
+    __arm_cp.0_17                            0x07fc3b5c   Number         4  rf_531.o(.text)
+    __arm_cp.0_18                            0x07fc3b60   Number         4  rf_531.o(.text)
+    __arm_cp.0_19                            0x07fc3b64   Number         4  rf_531.o(.text)
+    __arm_cp.0_20                            0x07fc3b68   Number         4  rf_531.o(.text)
+    __arm_cp.0_21                            0x07fc3b6c   Number         4  rf_531.o(.text)
+    __arm_cp.0_22                            0x07fc3b70   Number         4  rf_531.o(.text)
+    __arm_cp.0_23                            0x07fc3b74   Number         4  rf_531.o(.text)
+    __arm_cp.0_24                            0x07fc3b78   Number         4  rf_531.o(.text)
+    __arm_cp.0_25                            0x07fc3b7c   Number         4  rf_531.o(.text)
+    __arm_cp.0_26                            0x07fc3b80   Number         4  rf_531.o(.text)
+    __arm_cp.0_27                            0x07fc3b84   Number         4  rf_531.o(.text)
+    __arm_cp.0_28                            0x07fc3b88   Number         4  rf_531.o(.text)
+    __arm_cp.0_29                            0x07fc3b8c   Number         4  rf_531.o(.text)
+    __arm_cp.0_30                            0x07fc3b90   Number         4  rf_531.o(.text)
+    __arm_cp.0_31                            0x07fc3b94   Number         4  rf_531.o(.text)
+    __arm_cp.1_0                             0x07fc3c68   Number         4  rf_531.o(.text)
+    __arm_cp.1_1                             0x07fc3c6c   Number         4  rf_531.o(.text)
+    __arm_cp.1_2                             0x07fc3c70   Number         4  rf_531.o(.text)
+    __arm_cp.1_3                             0x07fc3c74   Number         4  rf_531.o(.text)
+    __arm_cp.1_4                             0x07fc3c78   Number         4  rf_531.o(.text)
+    __arm_cp.1_5                             0x07fc3c7c   Number         4  rf_531.o(.text)
+    __arm_cp.1_6                             0x07fc3c80   Number         4  rf_531.o(.text)
+    __arm_cp.2_0                             0x07fc3d80   Number         4  rf_531.o(.text)
+    __arm_cp.2_1                             0x07fc3d84   Number         4  rf_531.o(.text)
+    __arm_cp.2_2                             0x07fc3d88   Number         4  rf_531.o(.text)
+    __arm_cp.2_3                             0x07fc3d8c   Number         4  rf_531.o(.text)
+    __arm_cp.2_4                             0x07fc3d90   Number         4  rf_531.o(.text)
+    __arm_cp.2_5                             0x07fc3d94   Number         4  rf_531.o(.text)
+    __arm_cp.2_6                             0x07fc3d98   Number         4  rf_531.o(.text)
+    __arm_cp.2_7                             0x07fc3d9c   Number         4  rf_531.o(.text)
+    __arm_cp.2_8                             0x07fc3da0   Number         4  rf_531.o(.text)
+    __arm_cp.2_9                             0x07fc3da4   Number         4  rf_531.o(.text)
+    __arm_cp.2_10                            0x07fc3da8   Number         4  rf_531.o(.text)
+    __arm_cp.2_11                            0x07fc3dac   Number         4  rf_531.o(.text)
+    __arm_cp.2_12                            0x07fc3db0   Number         4  rf_531.o(.text)
+    __arm_cp.3_0                             0x07fc3dbc   Number         4  rf_531.o(.text)
+    __arm_cp.4_0                             0x07fc3e24   Number         4  rf_531.o(.text)
+    __arm_cp.4_1                             0x07fc3e28   Number         4  rf_531.o(.text)
+    __arm_cp.5_0                             0x07fc3e34   Number         4  rf_531.o(.text)
+    __arm_cp.6_0                             0x07fc3e48   Number         4  rf_531.o(.text)
+    __arm_cp.7_0                             0x07fc3e7c   Number         4  rf_531.o(.text)
+    __arm_cp.7_1                             0x07fc3e80   Number         4  rf_531.o(.text)
+    __arm_cp.7_2                             0x07fc3e84   Number         4  rf_531.o(.text)
+    __arm_cp.7_3                             0x07fc3e88   Number         4  rf_531.o(.text)
+    __arm_cp.8_0                             0x07fc3eb0   Number         4  rf_531.o(.text)
+    __arm_cp.8_1                             0x07fc3eb4   Number         4  rf_531.o(.text)
+    __arm_cp.8_2                             0x07fc3eb8   Number         4  rf_531.o(.text)
+    __arm_cp.9_0                             0x07fc3ed4   Number         4  rf_531.o(.text)
+    __arm_cp.10_0                            0x07fc3ee4   Number         4  rf_531.o(.text)
+    __arm_cp.11_0                            0x07fc3f34   Number         4  rf_531.o(.text)
+    __arm_cp.11_1                            0x07fc3f38   Number         4  rf_531.o(.text)
+    __arm_cp.12_0                            0x07fc4098   Number         4  rf_531.o(.text)
+    __arm_cp.12_1                            0x07fc409c   Number         4  rf_531.o(.text)
+    __arm_cp.12_2                            0x07fc40a0   Number         4  rf_531.o(.text)
+    __arm_cp.12_3                            0x07fc40a4   Number         4  rf_531.o(.text)
+    __arm_cp.12_4                            0x07fc40a8   Number         4  rf_531.o(.text)
+    __arm_cp.12_5                            0x07fc40ac   Number         4  rf_531.o(.text)
+    __arm_cp.16_0                            0x07fc40c4   Number         4  rf_531.o(.text)
+    __arm_cp.17_0                            0x07fc40d4   Number         4  rf_531.o(.text)
+    __arm_cp.18_0                            0x07fc40ec   Number         4  rf_531.o(.text)
+    __arm_cp.18_1                            0x07fc40f0   Number         4  rf_531.o(.text)
+    __arm_cp.19_0                            0x07fc4104   Number         4  rf_531.o(.text)
+    __arm_cp.19_1                            0x07fc4108   Number         4  rf_531.o(.text)
+    __arm_cp.20_0                            0x07fc4124   Number         4  rf_531.o(.text)
+    __arm_cp.21_0                            0x07fc4178   Number         4  rf_531.o(.text)
+    __arm_cp.22_0                            0x07fc4190   Number         4  rf_531.o(.text)
+    __arm_cp.23_0                            0x07fc41a0   Number         4  rf_531.o(.text)
+    __arm_cp.24_0                            0x07fc41ac   Number         4  rf_531.o(.text)
+    __arm_cp.25_0                            0x07fc41b8   Number         4  rf_531.o(.text)
+    __arm_cp.26_0                            0x07fc41c4   Number         4  rf_531.o(.text)
+    __arm_cp.27_0                            0x07fc41e0   Number         4  rf_531.o(.text)
+    __arm_cp.27_1                            0x07fc41e4   Number         4  rf_531.o(.text)
+    __arm_cp.28_0                            0x07fc41fc   Number         4  rf_531.o(.text)
+    gattc_write_req_ind_handler              0x07fc4201   Thumb Code   320  custs1_task.o(.text)
+    [Anonymous Symbol]                       0x07fc4200   Section        0  custs1_task.o(.text)
+    __arm_cp.0_0                             0x07fc4340   Number         4  custs1_task.o(.text)
+    __arm_cp.0_1                             0x07fc4344   Number         4  custs1_task.o(.text)
+    __arm_cp.0_2                             0x07fc4348   Number         4  custs1_task.o(.text)
+    custs1_value_req_rsp_handler             0x07fc434d   Thumb Code   116  custs1_task.o(.text)
+    __arm_cp.1_0                             0x07fc43c0   Number         4  custs1_task.o(.text)
+    [Anonymous Symbol]                       0x07fc43c4   Section        0  prf.o(.text)
+    __arm_cp.0_0                             0x07fc4424   Number         4  prf.o(.text)
+    __arm_cp.1_0                             0x07fc4458   Number         4  prf.o(.text)
+    __arm_cp.1_1                             0x07fc445c   Number         4  prf.o(.text)
+    [Anonymous Symbol]                       0x07fc4460   Section        0  app_default_handlers.o(.text)
+    __arm_cp.2_0                             0x07fc4498   Number         4  app_default_handlers.o(.text)
+    __arm_cp.6_0                             0x07fc44d0   Number         4  app_default_handlers.o(.text)
+    __arm_cp.7_0                             0x07fc44dc   Number         4  app_default_handlers.o(.text)
+    __arm_cp.9_0                             0x07fc4528   Number         4  app_default_handlers.o(.text)
+    __arm_cp.12_0                            0x07fc45d0   Number         4  app_default_handlers.o(.text)
+    __arm_cp.14_0                            0x07fc4648   Number         4  app_default_handlers.o(.text)
+    __arm_cp.17_0                            0x07fc4730   Number         4  app_default_handlers.o(.text)
+    __arm_cp.17_1                            0x07fc4734   Number         4  app_default_handlers.o(.text)
+    __arm_cp.18_0                            0x07fc4750   Number         4  app_default_handlers.o(.text)
+    __arm_cp.19_0                            0x07fc4788   Number         4  app_default_handlers.o(.text)
+    [Anonymous Symbol]                       0x07fc47a4   Section        0  app.o(.text)
+    __arm_cp.0_0                             0x07fc47f0   Number         4  app.o(.text)
+    __arm_cp.0_1                             0x07fc47f4   Number         4  app.o(.text)
+    __arm_cp.0_2                             0x07fc47f8   Number         4  app.o(.text)
+    __arm_cp.1_0                             0x07fc4824   Number         4  app.o(.text)
+    __arm_cp.2_0                             0x07fc4858   Number         4  app.o(.text)
+    __arm_cp.2_1                             0x07fc485c   Number         4  app.o(.text)
+    __arm_cp.2_2                             0x07fc4860   Number         4  app.o(.text)
+    app_easy_gap_undirected_advertise_start_create_msg 0x07fc486d   Thumb Code    72  app.o(.text)
+    __arm_cp.4_0                             0x07fc48b4   Number         4  app.o(.text)
+    __arm_cp.4_1                             0x07fc48b8   Number         4  app.o(.text)
+    __arm_cp.4_2                             0x07fc48bc   Number         4  app.o(.text)
+    __arm_cp.4_3                             0x07fc48c0   Number         4  app.o(.text)
+    __arm_cp.5_0                             0x07fc48e0   Number         4  app.o(.text)
+    app_easy_gap_directed_advertise_start_create_msg 0x07fc48ed   Thumb Code    92  app.o(.text)
+    __arm_cp.7_0                             0x07fc4948   Number         4  app.o(.text)
+    __arm_cp.7_1                             0x07fc494c   Number         4  app.o(.text)
+    __arm_cp.7_2                             0x07fc4950   Number         4  app.o(.text)
+    user_adv_conf                            0x07fc4954   Number         0  app.o(.text)
+    __arm_cp.8_0                             0x07fc4980   Number         4  app.o(.text)
+    app_easy_gap_non_connectable_advertise_start_create_msg 0x07fc498d   Thumb Code    72  app.o(.text)
+    __arm_cp.10_0                            0x07fc49d4   Number         4  app.o(.text)
+    __arm_cp.10_1                            0x07fc49d8   Number         4  app.o(.text)
+    __arm_cp.10_2                            0x07fc49dc   Number         4  app.o(.text)
+    __arm_cp.10_3                            0x07fc49e0   Number         4  app.o(.text)
+    __arm_cp.11_0                            0x07fc4a08   Number         4  app.o(.text)
+    __arm_cp.12_0                            0x07fc4a34   Number         4  app.o(.text)
+    __arm_cp.12_1                            0x07fc4a38   Number         4  app.o(.text)
+    app_easy_gap_advertise_stop_handler      0x07fc4a3d   Thumb Code    24  app.o(.text)
+    __arm_cp.13_0                            0x07fc4a54   Number         4  app.o(.text)
+    __arm_cp.14_0                            0x07fc4a70   Number         4  app.o(.text)
+    app_easy_gap_param_update_msg_create     0x07fc4a7d   Thumb Code    68  app.o(.text)
+    __arm_cp.16_0                            0x07fc4ac0   Number         4  app.o(.text)
+    __arm_cp.16_1                            0x07fc4ac4   Number         4  app.o(.text)
+    __arm_cp.17_0                            0x07fc4ae0   Number         4  app.o(.text)
+    app_easy_gap_start_connection_to_msg_create 0x07fc4aed   Thumb Code    68  app.o(.text)
+    __arm_cp.19_0                            0x07fc4b30   Number         4  app.o(.text)
+    __arm_cp.19_1                            0x07fc4b34   Number         4  app.o(.text)
+    __arm_cp.21_0                            0x07fc4b74   Number         4  app.o(.text)
+    app_easy_gap_dev_config_create_msg       0x07fc4b81   Thumb Code    68  app.o(.text)
+    __arm_cp.23_0                            0x07fc4bc4   Number         4  app.o(.text)
+    __arm_cp.23_1                            0x07fc4bc8   Number         4  app.o(.text)
+    __arm_cp.23_2                            0x07fc4bcc   Number         4  app.o(.text)
+    __arm_cp.24_0                            0x07fc4be4   Number         4  app.o(.text)
+    __arm_cp.25_0                            0x07fc4c04   Number         4  app.o(.text)
+    [Anonymous Symbol]                       0x07fc4c08   Section        0  app_task.o(.text)
+    __arm_cp.0_0                             0x07fc4c24   Number         4  app_task.o(.text)
+    gapm_device_ready_ind_handler            0x07fc4c29   Thumb Code    40  app_task.o(.text)
+    __arm_cp.1_0                             0x07fc4c50   Number         4  app_task.o(.text)
+    gapm_cmp_evt_handler                     0x07fc4c55   Thumb Code    76  app_task.o(.text)
+    __arm_cp.2_0                             0x07fc4ca0   Number         4  app_task.o(.text)
+    __arm_cp.2_1                             0x07fc4ca4   Number         4  app_task.o(.text)
+    gapc_cmp_evt_handler                     0x07fc4ca9   Thumb Code    44  app_task.o(.text)
+    __arm_cp.3_0                             0x07fc4cd4   Number         4  app_task.o(.text)
+    gapc_connection_req_ind_handler          0x07fc4cd9   Thumb Code   104  app_task.o(.text)
+    __arm_cp.4_0                             0x07fc4d40   Number         4  app_task.o(.text)
+    __arm_cp.4_1                             0x07fc4d44   Number         4  app_task.o(.text)
+    gapc_disconnect_ind_handler              0x07fc4d49   Thumb Code    44  app_task.o(.text)
+    __arm_cp.5_0                             0x07fc4d74   Number         4  app_task.o(.text)
+    gapc_get_dev_info_req_ind_handler        0x07fc4d79   Thumb Code   164  app_task.o(.text)
+    __arm_cp.6_0                             0x07fc4e1c   Number         4  app_task.o(.text)
+    [Anonymous Symbol]                       0x07fc4e20   Section        0  app_security.o(.text)
+    __arm_cp.0_0                             0x07fc4e34   Number         4  app_security.o(.text)
+    __arm_cp.0_1                             0x07fc4e38   Number         4  app_security.o(.text)
+    __arm_cp.1_0                             0x07fc4e70   Number         4  app_security.o(.text)
+    [Anonymous Symbol]                       0x07fc4e94   Section        0  app_security_task.o(.text)
+    __arm_cp.0_0                             0x07fc4eb0   Number         4  app_security_task.o(.text)
+    gapc_bond_req_ind_handler                0x07fc4eb5   Thumb Code   100  app_security_task.o(.text)
+    __arm_cp.1_0                             0x07fc4f18   Number         4  app_security_task.o(.text)
+    __arm_cp.1_1                             0x07fc4f1c   Number         4  app_security_task.o(.text)
+    gapc_bond_ind_handler                    0x07fc4f21   Thumb Code   268  app_security_task.o(.text)
+    __arm_cp.2_0                             0x07fc502c   Number         4  app_security_task.o(.text)
+    __arm_cp.2_3                             0x07fc5044   Number         4  app_security_task.o(.text)
+    __arm_cp.2_4                             0x07fc5048   Number         4  app_security_task.o(.text)
+    gapc_encrypt_req_ind_handler             0x07fc504d   Thumb Code     4  app_security_task.o(.text)
+    gapc_encrypt_ind_handler                 0x07fc5051   Thumb Code    20  app_security_task.o(.text)
+    __arm_cp.4_0                             0x07fc5064   Number         4  app_security_task.o(.text)
+    gapm_addr_solved_ind_handler             0x07fc5069   Thumb Code     4  app_security_task.o(.text)
+    gapm_ral_size_ind_handler                0x07fc506d   Thumb Code     4  app_security_task.o(.text)
+    gapm_ral_addr_ind_handler                0x07fc5071   Thumb Code     4  app_security_task.o(.text)
+    [Anonymous Symbol]                       0x07fc5074   Section        0  app_diss.o(.text)
+    __arm_cp.1_0                             0x07fc50ac   Number         4  app_diss.o(.text)
+    [Anonymous Symbol]                       0x07fc50b0   Section        0  app_diss_task.o(.text)
+    __arm_cp.0_0                             0x07fc50cc   Number         4  app_diss_task.o(.text)
+    diss_value_req_ind_handler               0x07fc50d1   Thumb Code   124  app_diss_task.o(.text)
+    __arm_cp.1_2                             0x07fc515c   Number         4  app_diss_task.o(.text)
+    __arm_cp.1_3                             0x07fc5160   Number         4  app_diss_task.o(.text)
+    __arm_cp.1_7                             0x07fc5184   Number         4  app_diss_task.o(.text)
+    [Anonymous Symbol]                       0x07fc5188   Section        0  app_msg_utils.o(.text)
+    __arm_cp.0_0                             0x07fc51a8   Number         4  app_msg_utils.o(.text)
+    __arm_cp.0_1                             0x07fc51ac   Number         4  app_msg_utils.o(.text)
+    __arm_cp.0_2                             0x07fc51b0   Number         4  app_msg_utils.o(.text)
+    [Anonymous Symbol]                       0x07fc51cc   Section        0  app_easy_msg_utils.o(.text)
+    __arm_cp.0_0                             0x07fc51f8   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.0_1                             0x07fc51fc   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.1_0                             0x07fc5224   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.1_1                             0x07fc5228   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.1_2                             0x07fc522c   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.2_0                             0x07fc5258   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.2_1                             0x07fc525c   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.2_2                             0x07fc5260   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.3_0                             0x07fc5280   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.4_0                             0x07fc5294   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.5_0                             0x07fc52ac   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.6_0                             0x07fc52e0   Number         4  app_easy_msg_utils.o(.text)
+    __arm_cp.6_1                             0x07fc52e4   Number         4  app_easy_msg_utils.o(.text)
+    [Anonymous Symbol]                       0x07fc52e8   Section        0  app_easy_security.o(.text)
+    pairing_rsp_create_msg                   0x07fc52f1   Thumb Code    52  app_easy_security.o(.text)
+    __arm_cp.1_0                             0x07fc5324   Number         4  app_easy_security.o(.text)
+    __arm_cp.1_1                             0x07fc5328   Number         4  app_easy_security.o(.text)
+    __arm_cp.1_2                             0x07fc532c   Number         4  app_easy_security.o(.text)
+    __arm_cp.2_0                             0x07fc5348   Number         4  app_easy_security.o(.text)
+    tk_exch_create_msg                       0x07fc5355   Thumb Code    40  app_easy_security.o(.text)
+    __arm_cp.4_0                             0x07fc537c   Number         4  app_easy_security.o(.text)
+    __arm_cp.4_1                             0x07fc5380   Number         4  app_easy_security.o(.text)
+    __arm_cp.5_0                             0x07fc53c0   Number         4  app_easy_security.o(.text)
+    csrk_exch_create_msg                     0x07fc53cd   Thumb Code    68  app_easy_security.o(.text)
+    __arm_cp.7_0                             0x07fc5410   Number         4  app_easy_security.o(.text)
+    __arm_cp.7_1                             0x07fc5414   Number         4  app_easy_security.o(.text)
+    __arm_cp.7_2                             0x07fc5418   Number         4  app_easy_security.o(.text)
+    __arm_cp.8_0                             0x07fc5434   Number         4  app_easy_security.o(.text)
+    ltk_exch_create_msg                      0x07fc5441   Thumb Code    44  app_easy_security.o(.text)
+    __arm_cp.10_0                            0x07fc546c   Number         4  app_easy_security.o(.text)
+    __arm_cp.10_1                            0x07fc5470   Number         4  app_easy_security.o(.text)
+    __arm_cp.11_0                            0x07fc548c   Number         4  app_easy_security.o(.text)
+    __arm_cp.12_0                            0x07fc54c4   Number         4  app_easy_security.o(.text)
+    __arm_cp.14_0                            0x07fc5530   Number         4  app_easy_security.o(.text)
+    encrypt_cfm_create_msg                   0x07fc5535   Thumb Code    36  app_easy_security.o(.text)
+    __arm_cp.15_0                            0x07fc5558   Number         4  app_easy_security.o(.text)
+    __arm_cp.15_1                            0x07fc555c   Number         4  app_easy_security.o(.text)
+    __arm_cp.17_0                            0x07fc558c   Number         4  app_easy_security.o(.text)
+    __arm_cp.19_0                            0x07fc55c8   Number         4  app_easy_security.o(.text)
+    __arm_cp.19_1                            0x07fc55cc   Number         4  app_easy_security.o(.text)
+    __arm_cp.20_0                            0x07fc55e8   Number         4  app_easy_security.o(.text)
+    __arm_cp.21_0                            0x07fc5614   Number         4  app_easy_security.o(.text)
+    [Anonymous Symbol]                       0x07fc5694   Section        0  app_easy_timer.o(.text)
+    __arm_cp.0_0                             0x07fc5778   Number         4  app_easy_timer.o(.text)
+    __arm_cp.0_1                             0x07fc577c   Number         4  app_easy_timer.o(.text)
+    __arm_cp.0_2                             0x07fc5780   Number         4  app_easy_timer.o(.text)
+    __arm_cp.0_3                             0x07fc5784   Number         4  app_easy_timer.o(.text)
+    __arm_cp.0_4                             0x07fc5788   Number         4  app_easy_timer.o(.text)
+    __arm_cp.0_5                             0x07fc578c   Number         4  app_easy_timer.o(.text)
+    __arm_cp.0_6                             0x07fc5790   Number         4  app_easy_timer.o(.text)
+    __arm_cp.1_0                             0x07fc57d0   Number         4  app_easy_timer.o(.text)
+    __arm_cp.1_1                             0x07fc57d4   Number         4  app_easy_timer.o(.text)
+    create_timer                             0x07fc57d9   Thumb Code    56  app_easy_timer.o(.text)
+    __arm_cp.2_0                             0x07fc5810   Number         4  app_easy_timer.o(.text)
+    __arm_cp.3_0                             0x07fc5860   Number         4  app_easy_timer.o(.text)
+    __arm_cp.3_1                             0x07fc5864   Number         4  app_easy_timer.o(.text)
+    __arm_cp.3_2                             0x07fc5868   Number         4  app_easy_timer.o(.text)
+    timer_canceled_handler                   0x07fc586d   Thumb Code     2  app_easy_timer.o(.text)
+    __arm_cp.5_0                             0x07fc58d8   Number         4  app_easy_timer.o(.text)
+    __arm_cp.5_1                             0x07fc58dc   Number         4  app_easy_timer.o(.text)
+    __arm_cp.5_2                             0x07fc58e0   Number         4  app_easy_timer.o(.text)
+    __arm_cp.5_3                             0x07fc58e4   Number         4  app_easy_timer.o(.text)
+    timer_modified_handler                   0x07fc58e9   Thumb Code     2  app_easy_timer.o(.text)
+    __arm_cp.7_0                             0x07fc5914   Number         4  app_easy_timer.o(.text)
+    __arm_cp.7_1                             0x07fc5918   Number         4  app_easy_timer.o(.text)
+    [Anonymous Symbol]                       0x07fc591c   Section        0  app_customs.o(.text)
+    __arm_cp.0_0                             0x07fc5934   Number         4  app_customs.o(.text)
+    __arm_cp.2_0                             0x07fc5970   Number         4  app_customs.o(.text)
+    [Anonymous Symbol]                       0x07fc5974   Section        0  app_customs_task.o(.text)
+    [Anonymous Symbol]                       0x07fc5990   Section        0  app_utils.o(.text)
+    [Anonymous Symbol]                       0x07fc59b4   Section        0  user_periph_setup.o(.text)
+    __arm_cp.0_0                             0x07fc5af4   Number         4  user_periph_setup.o(.text)
+    __arm_cp.0_1                             0x07fc5af8   Number         4  user_periph_setup.o(.text)
+    __arm_cp.1_0                             0x07fc5b60   Number         4  user_periph_setup.o(.text)
+    __arm_cp.2_0                             0x07fc5b88   Number         4  user_periph_setup.o(.text)
+    __arm_cp.2_1                             0x07fc5b8c   Number         4  user_periph_setup.o(.text)
+    __arm_cp.2_2                             0x07fc5b90   Number         4  user_periph_setup.o(.text)
+    [Anonymous Symbol]                       0x07fc5b94   Section        0  user_empty_peripheral_template.o(.text)
+    __arm_cp.1_0                             0x07fc5bd0   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.1_2                             0x07fc5bec   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.2_0                             0x07fc5bfc   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.3_0                             0x07fc5c30   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.4_0                             0x07fc5c60   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.4_1                             0x07fc5c64   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.4_2                             0x07fc5c68   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.4_3                             0x07fc5c6c   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.5_0                             0x07fc5cdc   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.5_1                             0x07fc5ce0   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.5_2                             0x07fc5ce4   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.6_0                             0x07fc5d20   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.6_1                             0x07fc5d24   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.7_0                             0x07fc5d40   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.7_1                             0x07fc5d44   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.8_0                             0x07fc5d70   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.8_1                             0x07fc5d74   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.10_0                            0x07fc5da0   Number         4  user_empty_peripheral_template.o(.text)
+    .text                                    0x07fc5dac   Section        0  patch_1.o(.text)
+    _ldo_filter_violations                   0x07fc6799   Thumb Code   158  rf_ldo_calibration.o(.text)
+    .text                                    0x07fc6798   Section        0  rf_ldo_calibration.o(.text)
+    _ldo_radio_calibration                   0x07fc6837   Thumb Code   722  rf_ldo_calibration.o(.text)
+    .text                                    0x07fc6b58   Section        0  rf_diag.o(.text)
+    .text                                    0x07fc6bc4   Section        0  common.o(.text)
+    loop                                     0x07fc6c01   Thumb Code     0  arch_asm.o(.text)
+    .text                                    0x07fc6c00   Section       32  arch_asm.o(.text)
+    exit                                     0x07fc6c1f   Thumb Code     0  arch_asm.o(.text)
+    .text                                    0x07fc6c20   Section       48  init.o(.text)
+    __tagsym$$used.0                         0x07fc6c50   Number         0  hardfault_handler.o(.text.HardFault_HandlerC)
+    [Anonymous Symbol]                       0x07fc6c50   Section        0  hardfault_handler.o(.text.HardFault_HandlerC)
+    __arm_cp.0_2                             0x07fc6cd4   Number         4  hardfault_handler.o(.text.HardFault_HandlerC)
+    __tagsym$$used.0                         0x07fc6cd8   Number         0  nmi_handler.o(.text.NMI_HandlerC)
+    [Anonymous Symbol]                       0x07fc6cd8   Section        0  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_0                             0x07fc6d7c   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_1                             0x07fc6d80   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_2                             0x07fc6d84   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_4                             0x07fc6d88   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_5                             0x07fc6d8c   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_6                             0x07fc6d90   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    i.__scatterload_copy                     0x07fc6d94   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x07fc6da2   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x07fc6da4   Section       14  handlers.o(i.__scatterload_zeroinit)
+    [Anonymous Symbol]                       0x07fc6db4   Section        0  system_da14531.o(system_DA14xxx)
+    __arm_cp.1_0                             0x07fc6e28   Number         4  system_da14531.o(system_DA14xxx)
+    __arm_cp.1_1                             0x07fc6e2c   Number         4  system_da14531.o(system_DA14xxx)
+    __arm_cp.1_2                             0x07fc6e30   Number         4  system_da14531.o(system_DA14xxx)
+    __arm_cp.1_3                             0x07fc6e34   Number         4  system_da14531.o(system_DA14xxx)
+    __arm_cp.1_4                             0x07fc6e38   Number         4  system_da14531.o(system_DA14xxx)
+    SVC1_ADC_VAL_1_UUID_128                  0x07fc6e3c   Data          16  user_custs1_def.o(.rodata.SVC1_ADC_VAL_1_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e3c   Section        0  user_custs1_def.o(.rodata.SVC1_ADC_VAL_1_UUID_128)
+    SVC1_ADC_VAL_2_UUID_128                  0x07fc6e4c   Data          16  user_custs1_def.o(.rodata.SVC1_ADC_VAL_2_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e4c   Section        0  user_custs1_def.o(.rodata.SVC1_ADC_VAL_2_UUID_128)
+    SVC1_BUTTON_STATE_UUID_128               0x07fc6e5c   Data          16  user_custs1_def.o(.rodata.SVC1_BUTTON_STATE_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e5c   Section        0  user_custs1_def.o(.rodata.SVC1_BUTTON_STATE_UUID_128)
+    SVC1_CTRL_POINT_UUID_128                 0x07fc6e6c   Data          16  user_custs1_def.o(.rodata.SVC1_CTRL_POINT_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e6c   Section        0  user_custs1_def.o(.rodata.SVC1_CTRL_POINT_UUID_128)
+    SVC1_INDICATEABLE_UUID_128               0x07fc6e7c   Data          16  user_custs1_def.o(.rodata.SVC1_INDICATEABLE_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e7c   Section        0  user_custs1_def.o(.rodata.SVC1_INDICATEABLE_UUID_128)
+    SVC1_LED_STATE_UUID_128                  0x07fc6e8c   Data          16  user_custs1_def.o(.rodata.SVC1_LED_STATE_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e8c   Section        0  user_custs1_def.o(.rodata.SVC1_LED_STATE_UUID_128)
+    SVC1_LONG_VALUE_UUID_128                 0x07fc6e9c   Data          16  user_custs1_def.o(.rodata.SVC1_LONG_VALUE_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e9c   Section        0  user_custs1_def.o(.rodata.SVC1_LONG_VALUE_UUID_128)
+    SVC2_WRITE_VAL_1_UUID_128                0x07fc6eac   Data          16  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_1_UUID_128)
+    [Anonymous Symbol]                       0x07fc6eac   Section        0  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_1_UUID_128)
+    SVC2_WRITE_VAL_2_UUID_128                0x07fc6ebc   Data          16  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_2_UUID_128)
+    [Anonymous Symbol]                       0x07fc6ebc   Section        0  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_2_UUID_128)
+    SVC3_READ_VAL_1_UUID_128                 0x07fc6ecc   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_1_UUID_128)
+    [Anonymous Symbol]                       0x07fc6ecc   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_1_UUID_128)
+    SVC3_READ_VAL_2_UUID_128                 0x07fc6edc   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_2_UUID_128)
+    [Anonymous Symbol]                       0x07fc6edc   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_2_UUID_128)
+    SVC3_READ_VAL_3_UUID_128                 0x07fc6eec   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_3_UUID_128)
+    [Anonymous Symbol]                       0x07fc6eec   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_3_UUID_128)
+    TASK_DESC_APP                            0x07fc6efc   Data          16  app.o(.rodata.TASK_DESC_APP)
+    [Anonymous Symbol]                       0x07fc6efc   Section        0  app.o(.rodata.TASK_DESC_APP)
+    app_diss_process_handlers                0x07fc6f0c   Data           8  app_diss_task.o(.rodata.app_diss_process_handlers)
+    [Anonymous Symbol]                       0x07fc6f0c   Section        0  app_diss_task.o(.rodata.app_diss_process_handlers)
+    app_gap_process_handlers                 0x07fc6f14   Data         112  app_task.o(.rodata.app_gap_process_handlers)
+    [Anonymous Symbol]                       0x07fc6f14   Section        0  app_task.o(.rodata.app_gap_process_handlers)
+    app_sec_process_handlers                 0x07fc6fa0   Data          56  app_security_task.o(.rodata.app_sec_process_handlers)
+    [Anonymous Symbol]                       0x07fc6fa0   Section        0  app_security_task.o(.rodata.app_sec_process_handlers)
+    att_decl_char                            0x07fc7048   Data           2  user_custs1_def.o(.rodata.att_decl_char)
+    [Anonymous Symbol]                       0x07fc7048   Section        0  user_custs1_def.o(.rodata.att_decl_char)
+    att_decl_svc                             0x07fc704a   Data           2  user_custs1_def.o(.rodata.att_decl_svc)
+    [Anonymous Symbol]                       0x07fc704a   Section        0  user_custs1_def.o(.rodata.att_decl_svc)
+    att_desc_cfg                             0x07fc704c   Data           2  user_custs1_def.o(.rodata.att_desc_cfg)
+    [Anonymous Symbol]                       0x07fc704c   Section        0  user_custs1_def.o(.rodata.att_desc_cfg)
+    att_desc_user_desc                       0x07fc704e   Data           2  user_custs1_def.o(.rodata.att_desc_user_desc)
+    [Anonymous Symbol]                       0x07fc704e   Section        0  user_custs1_def.o(.rodata.att_desc_user_desc)
+    custs1_svc1                              0x07fc7465   Data          16  user_custs1_def.o(.rodata.custs1_svc1)
+    [Anonymous Symbol]                       0x07fc7465   Section        0  user_custs1_def.o(.rodata.custs1_svc1)
+    custs1_svc2                              0x07fc7475   Data          16  user_custs1_def.o(.rodata.custs1_svc2)
+    [Anonymous Symbol]                       0x07fc7475   Section        0  user_custs1_def.o(.rodata.custs1_svc2)
+    custs1_svc3                              0x07fc7485   Data          16  user_custs1_def.o(.rodata.custs1_svc3)
+    [Anonymous Symbol]                       0x07fc7485   Section        0  user_custs1_def.o(.rodata.custs1_svc3)
+    nvds_data_storage                        0x07fc74b0   Data          14  nvds.o(.rodata.nvds_data_storage)
+    [Anonymous Symbol]                       0x07fc74b0   Section        0  nvds.o(.rodata.nvds_data_storage)
+    [Anonymous Symbol]                       0x07fc77d0   Section        0  app_diss_task.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x07fc77e6   Section        0  user_custs1_def.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x07fc7882   Section        0  user_empty_peripheral_template.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x07fc78d8   Section        0  app.o(.rodata.str1.4)
+    uart_cfg                                 0x07fc78f0   Data          24  user_periph_setup.o(.rodata.uart_cfg)
+    [Anonymous Symbol]                       0x07fc78f0   Section        0  user_periph_setup.o(.rodata.uart_cfg)
+    user_app_callbacks                       0x07fc7908   Data         140  app_entry_point.o(.rodata.user_app_callbacks)
+    [Anonymous Symbol]                       0x07fc7908   Section        0  app_entry_point.o(.rodata.user_app_callbacks)
+    user_security_conf                       0x07fc7994   Data           7  app_easy_security.o(.rodata.user_security_conf)
+    [Anonymous Symbol]                       0x07fc7994   Section        0  app_easy_security.o(.rodata.user_security_conf)
+    rfmon_samples                            0x07fc79c8   Data        1280  rf_ldo_calibration.o(.bss)
+    .bss                                     0x07fc79c8   Section     1296  rf_ldo_calibration.o(.bss)
+    NVIOL                                    0x07fc7ec8   Data          16  rf_ldo_calibration.o(.bss)
+    extra_samples                            0x07fc7ed8   Data           4  trng.o(.bss..L_MergedGlobals)
+    [Anonymous Symbol]                       0x07fc7ed8   Section        0  trng.o(.bss..L_MergedGlobals)
+    trng_bits                                0x07fc7edc   Data          16  trng.o(.bss..L_MergedGlobals)
+    [Anonymous Symbol]                       0x07fc7eec   Section        0  arch_system.o(.bss..L_MergedGlobals.1)
+    cal_val                                  0x07fc7ef4   Data           2  adc_531.o(.bss.cal_val)
+    [Anonymous Symbol]                       0x07fc7ef4   Section        0  adc_531.o(.bss.cal_val)
+    current_msg_buffer                       0x07fc7f20   Data         256  arch_console.o(.bss.current_msg_buffer)
+    [Anonymous Symbol]                       0x07fc7f20   Section        0  arch_console.o(.bss.current_msg_buffer)
+    fsm_ctrl_reg                             0x07fc8020   Data           4  rf_531.o(.bss.fsm_ctrl_reg)
+    [Anonymous Symbol]                       0x07fc8020   Section        0  rf_531.o(.bss.fsm_ctrl_reg)
+    txdiv_trim                               0x07fc8030   Data           4  otp_cs.o(.bss.txdiv_trim)
+    [Anonymous Symbol]                       0x07fc8030   Section        0  otp_cs.o(.bss.txdiv_trim)
+    STACK                                    0x07fc8038   Section     1792  startup_da14531.o(STACK)
     current_msg_offset                       0x07fc8bc0   Data           1  arch_console.o(.bss.retention_mem_area0)
     [Anonymous Symbol]                       0x07fc8bc0   Section        0  arch_console.o(.bss.retention_mem_area0)
     uart_busy                                0x07fc8bc1   Data           1  arch_console.o(.bss.retention_mem_area0)
@@ -1731,7 +1755,7 @@ Image Symbol Table
     sb_read_otp_header                        - Undefined Weak Reference
     sb_set_debugger_mode                      - Undefined Weak Reference
     __Vectors_Size                           0x000000a0   Number         0  startup_da14531.o ABSOLUTE
-    Image$$ER_IROM3$$Length                  0x0000758c   Number         0  anon$$obj.o ABSOLUTE
+    Image$$ER_IROM3$$Length                  0x000078b4   Number         0  anon$$obj.o ABSOLUTE
     uECC_vli_add                             0x07f02001   Thumb Code     0  da14531_symbols.txt ABSOLUTE
     uECC_vli_sub                             0x07f02019   Thumb Code     0  da14531_symbols.txt ABSOLUTE
     uECC_vli_mult                            0x07f02035   Thumb Code     0  da14531_symbols.txt ABSOLUTE
@@ -2807,217 +2831,229 @@ Image Symbol Table
     i2c_slave_transmit_buffer_async          0x07fc303d   Thumb Code    32  i2c.o(.text)
     i2c_unregister_int                       0x07fc30fd   Thumb Code    20  i2c.o(.text)
     I2C_Handler                              0x07fc311d   Thumb Code    28  i2c.o(.text)
-    lld_sleep_compensate_func                0x07fc31a5   Thumb Code    64  rwble.o(.text)
-    BLE_WAKEUP_LP_Handler                    0x07fc31f9   Thumb Code    56  rwble.o(.text)
-    power_up                                 0x07fc3245   Thumb Code    68  rwble.o(.text)
-    rwble_isr                                0x07fc3291   Thumb Code   236  rwble.o(.text)
-    ble_tx_evt_handler                       0x07fc338d   Thumb Code     2  rwble.o(.text)
-    ble_rx_evt_handler                       0x07fc338f   Thumb Code     2  rwble.o(.text)
-    BLE_RF_DIAG_Handler                      0x07fc3391   Thumb Code    60  rwble.o(.text)
-    patched_ble_regs_push                    0x07fc33d5   Thumb Code    16  rwip.o(.text)
-    patched_ble_regs_pop                     0x07fc33ed   Thumb Code    16  rwip.o(.text)
-    rwip_sleep                               0x07fc3405   Thumb Code   372  rwip.o(.text)
-    rf_reg_rd                                0x07fc35c1   Thumb Code     4  ble_arp.o(.text)
-    rf_reg_wr                                0x07fc35c5   Thumb Code     2  ble_arp.o(.text)
-    rf_init_func                             0x07fc35c9   Thumb Code   240  ble_arp.o(.text)
-    rf_reinit_func                           0x07fc37d9   Thumb Code    92  ble_arp.o(.text)
-    ble_init_arp_func                        0x07fc3865   Thumb Code    28  ble_arp.o(.text)
-    rf_recalibration                         0x07fc3891   Thumb Code    32  ble_arp.o(.text)
-    set_recommended_settings                 0x07fc38dd   Thumb Code   364  rf_531.o(.text)
-    dcoff_calibration                        0x07fc3ac9   Thumb Code   208  rf_531.o(.text)
-    kdtc_calibration                         0x07fc3bb5   Thumb Code   252  rf_531.o(.text)
-    en_hclk                                  0x07fc3ce5   Thumb Code     8  rf_531.o(.text)
-    kdtc_cal_init                            0x07fc3cf1   Thumb Code   100  rf_531.o(.text)
-    en_kdtc_cal_mod1                         0x07fc3d5d   Thumb Code     8  rf_531.o(.text)
-    dis_hclk                                 0x07fc3d69   Thumb Code    16  rf_531.o(.text)
-    en_adpll_tx                              0x07fc3d7d   Thumb Code    48  rf_531.o(.text)
-    dis_adpll                                0x07fc3dbd   Thumb Code    36  rf_531.o(.text)
-    en_kdtc_cal_mod0                         0x07fc3ded   Thumb Code    24  rf_531.o(.text)
-    dis_kdtc_cal                             0x07fc3e09   Thumb Code    12  rf_531.o(.text)
-    kdtc_cal_end                             0x07fc3e19   Thumb Code    76  rf_531.o(.text)
-    kdco_calibration                         0x07fc3e6d   Thumb Code   348  rf_531.o(.text)
-    rf_calibration                           0x07fc3fe1   Thumb Code     8  rf_531.o(.text)
-    rf_power_up                              0x07fc3fe9   Thumb Code     2  rf_531.o(.text)
-    rf_power_down                            0x07fc3feb   Thumb Code     2  rf_531.o(.text)
-    rf_adplldig_ldo_on                       0x07fc3fed   Thumb Code     8  rf_531.o(.text)
-    rf_adplldig_txmod                        0x07fc3ff9   Thumb Code    12  rf_531.o(.text)
-    kdco_cal_init                            0x07fc4009   Thumb Code    20  rf_531.o(.text)
-    kdco_cal_end                             0x07fc4025   Thumb Code    16  rf_531.o(.text)
-    dis_kdco_cal                             0x07fc403d   Thumb Code    24  rf_531.o(.text)
-    rf_ldo_cont_mode_en                      0x07fc4059   Thumb Code    80  rf_531.o(.text)
-    rf_adplldig_activate                     0x07fc40ad   Thumb Code    20  rf_531.o(.text)
-    rf_adplldig_deactivate                   0x07fc40c5   Thumb Code    12  rf_531.o(.text)
-    rf_pa_pwr_set                            0x07fc40d5   Thumb Code     8  rf_531.o(.text)
-    rf_pa_pwr_get                            0x07fc40e1   Thumb Code     8  rf_531.o(.text)
-    rf_nfm_is_enabled                        0x07fc40ed   Thumb Code     8  rf_531.o(.text)
-    rf_nfm_enable                            0x07fc40f9   Thumb Code    24  rf_531.o(.text)
-    rf_nfm_disable                           0x07fc4119   Thumb Code    20  rf_531.o(.text)
-    prf_init_func                            0x07fc42f5   Thumb Code    96  prf.o(.text)
-    prf_create_func                          0x07fc4359   Thumb Code    48  prf.o(.text)
-    default_advertise_operation              0x07fc4391   Thumb Code     8  app_default_handlers.o(.text)
-    default_app_on_init                      0x07fc4399   Thumb Code    18  app_default_handlers.o(.text)
-    default_app_on_connection                0x07fc43ad   Thumb Code    28  app_default_handlers.o(.text)
-    default_app_on_disconnect                0x07fc43cd   Thumb Code     8  app_default_handlers.o(.text)
-    default_app_on_set_dev_config_complete   0x07fc43d5   Thumb Code    16  app_default_handlers.o(.text)
-    default_app_on_db_init_complete          0x07fc43e5   Thumb Code     8  app_default_handlers.o(.text)
-    default_app_on_get_dev_name              0x07fc43ed   Thumb Code    20  app_default_handlers.o(.text)
-    default_app_on_get_dev_appearance        0x07fc4405   Thumb Code     8  app_default_handlers.o(.text)
-    default_app_on_get_dev_slv_pref_params   0x07fc4411   Thumb Code    18  app_default_handlers.o(.text)
-    default_app_on_set_dev_info              0x07fc4425   Thumb Code    52  app_default_handlers.o(.text)
-    default_app_update_params_request        0x07fc445d   Thumb Code    12  app_default_handlers.o(.text)
-    default_app_generate_static_random_addr  0x07fc4469   Thumb Code    44  app_default_handlers.o(.text)
-    default_app_generate_unique_static_random_addr 0x07fc4495   Thumb Code   108  app_default_handlers.o(.text)
-    default_app_on_pairing_request           0x07fc4535   Thumb Code     8  app_default_handlers.o(.text)
-    default_app_on_tk_exch                   0x07fc453d   Thumb Code    60  app_default_handlers.o(.text)
-    default_app_on_csrk_exch                 0x07fc458d   Thumb Code     8  app_default_handlers.o(.text)
-    default_app_on_ltk_exch                  0x07fc4595   Thumb Code    24  app_default_handlers.o(.text)
-    default_app_on_encrypt_req_ind           0x07fc45ad   Thumb Code   180  app_default_handlers.o(.text)
-    default_app_on_pairing_succeeded         0x07fc4669   Thumb Code    24  app_default_handlers.o(.text)
-    default_app_on_addr_solved_ind           0x07fc4685   Thumb Code    52  app_default_handlers.o(.text)
-    default_app_on_addr_resolve_failed       0x07fc46bd   Thumb Code     8  app_default_handlers.o(.text)
-    default_app_on_ral_cmp_evt               0x07fc46c5   Thumb Code    16  app_default_handlers.o(.text)
-    app_db_init_next                         0x07fc46d5   Thumb Code    76  app.o(.text)
-    app_prf_enable                           0x07fc472d   Thumb Code    40  app.o(.text)
-    app_init                                 0x07fc4759   Thumb Code    48  app.o(.text)
-    app_easy_gap_undirected_advertise_get_active 0x07fc4795   Thumb Code     8  app.o(.text)
-    app_easy_gap_undirected_advertise_start  0x07fc47f5   Thumb Code    28  app.o(.text)
-    app_easy_gap_directed_advertise_get_active 0x07fc4815   Thumb Code     8  app.o(.text)
-    app_easy_gap_directed_advertise_start    0x07fc4895   Thumb Code    28  app.o(.text)
-    app_easy_gap_non_connectable_advertise_get_active 0x07fc48b5   Thumb Code     8  app.o(.text)
-    app_easy_gap_non_connectable_advertise_start 0x07fc4915   Thumb Code    36  app.o(.text)
-    app_easy_gap_undirected_advertise_with_timeout_start 0x07fc493d   Thumb Code    40  app.o(.text)
-    app_easy_gap_advertise_with_timeout_stop 0x07fc4989   Thumb Code    24  app.o(.text)
-    app_easy_gap_param_update_get_active     0x07fc49a5   Thumb Code     8  app.o(.text)
-    app_easy_gap_param_update_start          0x07fc49f9   Thumb Code    24  app.o(.text)
-    app_easy_gap_start_connection_to_get_active 0x07fc4a15   Thumb Code     8  app.o(.text)
-    app_easy_gap_start_connection_to_set     0x07fc4a69   Thumb Code    38  app.o(.text)
-    app_easy_gap_start_connection_to         0x07fc4a91   Thumb Code    20  app.o(.text)
-    app_easy_gap_dev_config_get_active       0x07fc4aa9   Thumb Code     8  app.o(.text)
-    app_easy_gap_dev_configure               0x07fc4b01   Thumb Code    20  app.o(.text)
-    app_easy_gap_get_peer_features           0x07fc4b19   Thumb Code    28  app.o(.text)
-    app_gap_process_handler                  0x07fc4b39   Thumb Code    28  app_task.o(.text)
-    app_sec_gen_tk                           0x07fc4d51   Thumb Code    20  app_security.o(.text)
-    app_sec_gen_ltk                          0x07fc4d6d   Thumb Code    52  app_security.o(.text)
-    app_sec_gen_csrk                         0x07fc4da5   Thumb Code    32  app_security.o(.text)
-    app_sec_process_handler                  0x07fc4dc5   Thumb Code    28  app_security_task.o(.text)
-    app_dis_init                             0x07fc4fa5   Thumb Code     2  app_diss.o(.text)
-    app_diss_create_db                       0x07fc4fa9   Thumb Code    52  app_diss.o(.text)
-    app_diss_process_handler                 0x07fc4fe1   Thumb Code    28  app_diss_task.o(.text)
-    app_check_BLE_active                     0x07fc50b9   Thumb Code    32  app_msg_utils.o(.text)
-    app_msg_send_wakeup_ble                  0x07fc50e5   Thumb Code    24  app_msg_utils.o(.text)
-    app_easy_msg_free_callback               0x07fc50fd   Thumb Code    44  app_easy_msg_utils.o(.text)
-    app_easy_msg_set                         0x07fc5131   Thumb Code    36  app_easy_msg_utils.o(.text)
-    app_easy_msg_modify                      0x07fc5161   Thumb Code    40  app_easy_msg_utils.o(.text)
-    app_easy_wakeup_set                      0x07fc5195   Thumb Code    28  app_easy_msg_utils.o(.text)
-    app_easy_wakeup_free                     0x07fc51b5   Thumb Code    16  app_easy_msg_utils.o(.text)
-    app_easy_wakeup                          0x07fc51c9   Thumb Code    20  app_easy_msg_utils.o(.text)
-    app_msg_utils_api_process_handler        0x07fc51e1   Thumb Code    48  app_easy_msg_utils.o(.text)
-    app_easy_security_pairing_rsp_get_active 0x07fc5219   Thumb Code     8  app_easy_security.o(.text)
-    app_easy_security_send_pairing_rsp       0x07fc5261   Thumb Code    24  app_easy_security.o(.text)
-    app_easy_security_tk_get_active          0x07fc527d   Thumb Code     8  app_easy_security.o(.text)
-    app_easy_security_tk_exch                0x07fc52b5   Thumb Code    60  app_easy_security.o(.text)
-    app_easy_security_csrk_get_active        0x07fc52f5   Thumb Code     8  app_easy_security.o(.text)
-    app_easy_security_csrk_exch              0x07fc534d   Thumb Code    24  app_easy_security.o(.text)
-    app_easy_security_ltk_exch_get_active    0x07fc5369   Thumb Code     8  app_easy_security.o(.text)
-    app_easy_security_ltk_exch               0x07fc53a5   Thumb Code    24  app_easy_security.o(.text)
-    app_easy_security_set_ltk_exch_from_sec_env 0x07fc53c1   Thumb Code    52  app_easy_security.o(.text)
-    app_easy_security_set_ltk_exch           0x07fc53f9   Thumb Code    78  app_easy_security.o(.text)
-    app_easy_security_encrypt_cfm            0x07fc5449   Thumb Code    24  app_easy_security.o(.text)
-    app_easy_security_encrypt_cfm_get_active 0x07fc5491   Thumb Code     8  app_easy_security.o(.text)
-    app_easy_security_set_encrypt_req_valid  0x07fc5499   Thumb Code    36  app_easy_security.o(.text)
-    app_easy_security_set_encrypt_req_invalid 0x07fc54c1   Thumb Code    12  app_easy_security.o(.text)
-    app_easy_security_request_get_active     0x07fc54cd   Thumb Code    44  app_easy_security.o(.text)
-    app_easy_security_request                0x07fc5501   Thumb Code    24  app_easy_security.o(.text)
-    app_easy_security_accept_encryption      0x07fc551d   Thumb Code    40  app_easy_security.o(.text)
-    app_easy_security_reject_encryption      0x07fc5549   Thumb Code    22  app_easy_security.o(.text)
-    app_easy_security_resolve_bdaddr         0x07fc555f   Thumb Code     4  app_easy_security.o(.text)
-    app_easy_security_bdb_get_number_of_stored_irks 0x07fc5563   Thumb Code     4  app_easy_security.o(.text)
-    app_easy_security_bdb_get_stored_irks    0x07fc5567   Thumb Code     4  app_easy_security.o(.text)
-    app_easy_security_ral_op                 0x07fc556b   Thumb Code    68  app_easy_security.o(.text)
-    app_easy_security_bdb_init               0x07fc55af   Thumb Code     2  app_easy_security.o(.text)
-    app_easy_security_bdb_get_size           0x07fc55b1   Thumb Code     4  app_easy_security.o(.text)
-    app_easy_security_bdb_add_entry          0x07fc55b5   Thumb Code     2  app_easy_security.o(.text)
-    app_easy_security_bdb_remove_entry       0x07fc55b7   Thumb Code     2  app_easy_security.o(.text)
-    app_easy_security_bdb_search_entry       0x07fc55b9   Thumb Code     4  app_easy_security.o(.text)
-    app_easy_security_bdb_get_device_info_from_slot 0x07fc55bd   Thumb Code     4  app_easy_security.o(.text)
-    app_easy_security_ral_sync_with_bdb      0x07fc55c1   Thumb Code     2  app_easy_security.o(.text)
-    app_timer_api_process_handler            0x07fc55c5   Thumb Code   228  app_easy_timer.o(.text)
-    app_easy_timer                           0x07fc56c5   Thumb Code    60  app_easy_timer.o(.text)
-    app_easy_timer_cancel                    0x07fc5745   Thumb Code    76  app_easy_timer.o(.text)
-    app_easy_timer_modify                    0x07fc57a1   Thumb Code   104  app_easy_timer.o(.text)
-    app_easy_timer_cancel_all                0x07fc581d   Thumb Code    40  app_easy_timer.o(.text)
-    custs_get_func_callbacks                 0x07fc584d   Thumb Code    24  app_customs.o(.text)
-    app_custs1_init                          0x07fc5869   Thumb Code     2  app_customs.o(.text)
-    app_custs1_create_db                     0x07fc586d   Thumb Code    52  app_customs.o(.text)
-    app_custs1_process_handler               0x07fc58a5   Thumb Code    26  app_customs_task.o(.text)
-    app_get_address_type                     0x07fc58c1   Thumb Code    22  app_utils.o(.text)
-    app_fill_random_byte_array               0x07fc58d7   Thumb Code    12  app_utils.o(.text)
-    GPIO_reservations                        0x07fc58e5   Thumb Code   184  user_periph_setup.o(.text)
-    set_pad_functions                        0x07fc59a5   Thumb Code    64  user_periph_setup.o(.text)
-    periph_init                              0x07fc59e9   Thumb Code    36  user_periph_setup.o(.text)
-    user_on_connection                       0x07fc5a19   Thumb Code    60  user_empty_peripheral_template.o(.text)
-    user_on_disconnect                       0x07fc5a61   Thumb Code     8  user_empty_peripheral_template.o(.text)
-    user_catch_rest_hndl                     0x07fc5a69   Thumb Code    32  user_empty_peripheral_template.o(.text)
-    JT_lld_test_mode_rx_func                 0x07fc5a8d   Thumb Code   142  patch_1.o(.text)
-    JT_l2cc_pdu_unpack_func                  0x07fc5b1b   Thumb Code   786  patch_1.o(.text)
-    JT_l2cc_pdu_recv_ind_handler_func        0x07fc5e2d   Thumb Code    72  patch_1.o(.text)
-    PATCHED_llm_con_req_ind                  0x07fc5e75   Thumb Code   814  patch_1.o(.text)
-    PATCHED_smpc_recv_pair_rand_pdu          0x07fc61a3   Thumb Code   272  patch_1.o(.text)
-    PATCHED_smpc_recv_public_key_exchange_pdu 0x07fc62b3   Thumb Code   106  patch_1.o(.text)
-    PATCHED_llc_data_ind_handler             0x07fc631d   Thumb Code   176  patch_1.o(.text)
-    lld_drop_packet_fix                      0x07fc63cd   Thumb Code    64  patch_1.o(.text)
-    PATCHED_lld_data_ind_handler             0x07fc640d   Thumb Code    58  patch_1.o(.text)
-    patch_data1                              0x07fc6447   Thumb Code    12  patch_1.o(.text)
-    patch_data2                              0x07fc6453   Thumb Code     2  patch_1.o(.text)
-    patch_global_vars_init                   0x07fc6455   Thumb Code     2  patch_1.o(.text)
-    rf_ldo_calibration                       0x07fc67e9   Thumb Code    36  rf_ldo_calibration.o(.text)
-    enable_rf_diag_irq                       0x07fc6839   Thumb Code    92  rf_diag.o(.text)
-    _WAIT                                    0x07fc68a5   Thumb Code    10  common.o(.text)
-    _WAIT10                                  0x07fc68af   Thumb Code    10  common.o(.text)
-    _WAIT100                                 0x07fc68b9   Thumb Code    10  common.o(.text)
-    _WAIT400                                 0x07fc68c3   Thumb Code    10  common.o(.text)
-    _WAIT1000                                0x07fc68cd   Thumb Code    10  common.o(.text)
-    arch_asm_delay_us                        0x07fc68e1   Thumb Code    32  arch_asm.o(.text)
-    __scatterload                            0x07fc6901   Thumb Code    38  init.o(.text)
-    __scatterload_rt2                        0x07fc6901   Thumb Code     0  init.o(.text)
-    HardFault_HandlerC                       0x07fc6931   Thumb Code   132  hardfault_handler.o(.text.HardFault_HandlerC)
-    NMI_HandlerC                             0x07fc69b9   Thumb Code   164  nmi_handler.o(.text.NMI_HandlerC)
-    __scatterload_copy                       0x07fc6a75   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x07fc6a83   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x07fc6a85   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    SystemInit                               0x07fc6a95   Thumb Code   116  system_da14531.o(system_DA14xxx)
-    app_process_handlers                     0x07fc6c64   Data          28  app_entry_point.o(.rodata.app_process_handlers)
-    arp_init_table                           0x07fc6cb8   Data         112  ble_arp.o(.rodata.arp_init_table)
-    catch_rest                               0x07fc6d30   Data           4  app_entry_point.o(.rodata.catch_rest)
-    cust_prf_funcs                           0x07fc6d34   Data          56  user_custs_config.o(.rodata.cust_prf_funcs)
-    custs1_att_db                            0x07fc6d6c   Data         900  user_custs1_def.o(.rodata.custs1_att_db)
-    custs1_default_handler                   0x07fc70f0   Data           8  custs1_task.o(.rodata.custs1_default_handler)
-    custs1_default_state                     0x07fc70f8   Data          72  custs1_task.o(.rodata.custs1_default_state)
-    custs1_services                          0x07fc7140   Data           4  user_custs1_def.o(.rodata.custs1_services)
-    custs1_services_size                     0x07fc7144   Data           1  user_custs1_def.o(.rodata.custs1_services_size)
-    my_custom_msg_handlers                   0x07fc7178   Data          24  system_library_531.o(.rodata.my_custom_msg_handlers)
-    prf_funcs                                0x07fc71a0   Data          24  app.o(.rodata.prf_funcs)
-    prf_if                                   0x07fc71b8   Data          24  prf.o(.rodata.prf_if)
-    rom_app_task_cfg                         0x07fc71d0   Data          32  app_entry_point.o(.rodata.rom_app_task_cfg)
-    rom_cfg_table_var                        0x07fc71f0   Data         236  jump_table.o(.rodata.rom_cfg_table_var)
-    rom_chacha20_cfg                         0x07fc72dc   Data          16  chacha20.o(.rodata.rom_chacha20_cfg)
-    rom_console_cfg                          0x07fc72ec   Data          36  arch_console.o(.rodata.rom_console_cfg)
-    rom_cust_prf_cfg                         0x07fc7310   Data          16  custs1.o(.rodata.rom_cust_prf_cfg)
-    rom_func_addr_table_var                  0x07fc7320   Data         380  jump_table.o(.rodata.rom_func_addr_table_var)
-    rom_nvds_cfg                             0x07fc749c   Data           8  nvds.o(.rodata.rom_nvds_cfg)
-    rom_prf_cfg                              0x07fc74a4   Data          12  prf.o(.rodata.rom_prf_cfg)
-    Region$$Table$$Base                      0x07fc7674   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x07fc7694   Number         0  anon$$obj.o(Region$$Table)
-    pa_en_dcf_tx_setting                     0x07fc7694   Data           1  rf_531.o(.data.pa_en_dcf_tx_setting)
-    startup_sleep_delay                      0x07fc7698   Data           4  arch_system.o(.data.startup_sleep_delay)
-    twirq_reset_value                        0x07fc7bc4   Data           4  arch_system.o(.bss..L_MergedGlobals.1)
-    twirq_set_value                          0x07fc7bc8   Data           4  arch_system.o(.bss..L_MergedGlobals.1)
-    calibration_res                          0x07fc7bce   Data          42  rf_531.o(.bss.calibration_res)
-    otp_hdr_timestamp                        0x07fc7cfc   Data           4  arch_system.o(.bss.otp_hdr_timestamp)
-    syscntl_dcdc_state                       0x07fc7d00   Data           2  syscntl.o(.bss.syscntl_dcdc_state)
-    twext_value                              0x07fc7d04   Data           4  rwip.o(.bss.twext_value)
-    __initial_sp                             0x07fc8410   Data           0  startup_da14531.o(STACK)
-    rwip_heap_non_ret                        0x07fc8410   Data        1036  jump_table.o(.bss.heap_mem_area_not_ret)
+    timer2_config                            0x07fc31a5   Thumb Code    32  timer2.o(.text)
+    timer2_pwm_freq_set                      0x07fc31c9   Thumb Code    20  timer2.o(.text)
+    timer2_pwm_signal_config                 0x07fc31e1   Thumb Code   144  timer2.o(.text)
+    lld_sleep_compensate_func                0x07fc3275   Thumb Code    64  rwble.o(.text)
+    BLE_WAKEUP_LP_Handler                    0x07fc32c9   Thumb Code    56  rwble.o(.text)
+    power_up                                 0x07fc3315   Thumb Code    68  rwble.o(.text)
+    rwble_isr                                0x07fc3361   Thumb Code   236  rwble.o(.text)
+    ble_tx_evt_handler                       0x07fc345d   Thumb Code     2  rwble.o(.text)
+    ble_rx_evt_handler                       0x07fc345f   Thumb Code     2  rwble.o(.text)
+    BLE_RF_DIAG_Handler                      0x07fc3461   Thumb Code    60  rwble.o(.text)
+    patched_ble_regs_push                    0x07fc34a5   Thumb Code    16  rwip.o(.text)
+    patched_ble_regs_pop                     0x07fc34bd   Thumb Code    16  rwip.o(.text)
+    rwip_sleep                               0x07fc34d5   Thumb Code   372  rwip.o(.text)
+    rf_reg_rd                                0x07fc3691   Thumb Code     4  ble_arp.o(.text)
+    rf_reg_wr                                0x07fc3695   Thumb Code     2  ble_arp.o(.text)
+    rf_init_func                             0x07fc3699   Thumb Code   240  ble_arp.o(.text)
+    rf_reinit_func                           0x07fc38a9   Thumb Code    92  ble_arp.o(.text)
+    ble_init_arp_func                        0x07fc3935   Thumb Code    28  ble_arp.o(.text)
+    rf_recalibration                         0x07fc3961   Thumb Code    32  ble_arp.o(.text)
+    set_recommended_settings                 0x07fc39ad   Thumb Code   364  rf_531.o(.text)
+    dcoff_calibration                        0x07fc3b99   Thumb Code   208  rf_531.o(.text)
+    kdtc_calibration                         0x07fc3c85   Thumb Code   252  rf_531.o(.text)
+    en_hclk                                  0x07fc3db5   Thumb Code     8  rf_531.o(.text)
+    kdtc_cal_init                            0x07fc3dc1   Thumb Code   100  rf_531.o(.text)
+    en_kdtc_cal_mod1                         0x07fc3e2d   Thumb Code     8  rf_531.o(.text)
+    dis_hclk                                 0x07fc3e39   Thumb Code    16  rf_531.o(.text)
+    en_adpll_tx                              0x07fc3e4d   Thumb Code    48  rf_531.o(.text)
+    dis_adpll                                0x07fc3e8d   Thumb Code    36  rf_531.o(.text)
+    en_kdtc_cal_mod0                         0x07fc3ebd   Thumb Code    24  rf_531.o(.text)
+    dis_kdtc_cal                             0x07fc3ed9   Thumb Code    12  rf_531.o(.text)
+    kdtc_cal_end                             0x07fc3ee9   Thumb Code    76  rf_531.o(.text)
+    kdco_calibration                         0x07fc3f3d   Thumb Code   348  rf_531.o(.text)
+    rf_calibration                           0x07fc40b1   Thumb Code     8  rf_531.o(.text)
+    rf_power_up                              0x07fc40b9   Thumb Code     2  rf_531.o(.text)
+    rf_power_down                            0x07fc40bb   Thumb Code     2  rf_531.o(.text)
+    rf_adplldig_ldo_on                       0x07fc40bd   Thumb Code     8  rf_531.o(.text)
+    rf_adplldig_txmod                        0x07fc40c9   Thumb Code    12  rf_531.o(.text)
+    kdco_cal_init                            0x07fc40d9   Thumb Code    20  rf_531.o(.text)
+    kdco_cal_end                             0x07fc40f5   Thumb Code    16  rf_531.o(.text)
+    dis_kdco_cal                             0x07fc410d   Thumb Code    24  rf_531.o(.text)
+    rf_ldo_cont_mode_en                      0x07fc4129   Thumb Code    80  rf_531.o(.text)
+    rf_adplldig_activate                     0x07fc417d   Thumb Code    20  rf_531.o(.text)
+    rf_adplldig_deactivate                   0x07fc4195   Thumb Code    12  rf_531.o(.text)
+    rf_pa_pwr_set                            0x07fc41a5   Thumb Code     8  rf_531.o(.text)
+    rf_pa_pwr_get                            0x07fc41b1   Thumb Code     8  rf_531.o(.text)
+    rf_nfm_is_enabled                        0x07fc41bd   Thumb Code     8  rf_531.o(.text)
+    rf_nfm_enable                            0x07fc41c9   Thumb Code    24  rf_531.o(.text)
+    rf_nfm_disable                           0x07fc41e9   Thumb Code    20  rf_531.o(.text)
+    prf_init_func                            0x07fc43c5   Thumb Code    96  prf.o(.text)
+    prf_create_func                          0x07fc4429   Thumb Code    48  prf.o(.text)
+    default_advertise_operation              0x07fc4461   Thumb Code     8  app_default_handlers.o(.text)
+    default_app_on_init                      0x07fc4469   Thumb Code    18  app_default_handlers.o(.text)
+    default_app_on_connection                0x07fc447d   Thumb Code    28  app_default_handlers.o(.text)
+    default_app_on_disconnect                0x07fc449d   Thumb Code     8  app_default_handlers.o(.text)
+    default_app_on_set_dev_config_complete   0x07fc44a5   Thumb Code    16  app_default_handlers.o(.text)
+    default_app_on_db_init_complete          0x07fc44b5   Thumb Code     8  app_default_handlers.o(.text)
+    default_app_on_get_dev_name              0x07fc44bd   Thumb Code    20  app_default_handlers.o(.text)
+    default_app_on_get_dev_appearance        0x07fc44d5   Thumb Code     8  app_default_handlers.o(.text)
+    default_app_on_get_dev_slv_pref_params   0x07fc44e1   Thumb Code    18  app_default_handlers.o(.text)
+    default_app_on_set_dev_info              0x07fc44f5   Thumb Code    52  app_default_handlers.o(.text)
+    default_app_update_params_request        0x07fc452d   Thumb Code    12  app_default_handlers.o(.text)
+    default_app_generate_static_random_addr  0x07fc4539   Thumb Code    44  app_default_handlers.o(.text)
+    default_app_generate_unique_static_random_addr 0x07fc4565   Thumb Code   108  app_default_handlers.o(.text)
+    default_app_on_pairing_request           0x07fc4605   Thumb Code     8  app_default_handlers.o(.text)
+    default_app_on_tk_exch                   0x07fc460d   Thumb Code    60  app_default_handlers.o(.text)
+    default_app_on_csrk_exch                 0x07fc465d   Thumb Code     8  app_default_handlers.o(.text)
+    default_app_on_ltk_exch                  0x07fc4665   Thumb Code    24  app_default_handlers.o(.text)
+    default_app_on_encrypt_req_ind           0x07fc467d   Thumb Code   180  app_default_handlers.o(.text)
+    default_app_on_pairing_succeeded         0x07fc4739   Thumb Code    24  app_default_handlers.o(.text)
+    default_app_on_addr_solved_ind           0x07fc4755   Thumb Code    52  app_default_handlers.o(.text)
+    default_app_on_addr_resolve_failed       0x07fc478d   Thumb Code     8  app_default_handlers.o(.text)
+    default_app_on_ral_cmp_evt               0x07fc4795   Thumb Code    16  app_default_handlers.o(.text)
+    app_db_init_next                         0x07fc47a5   Thumb Code    76  app.o(.text)
+    app_prf_enable                           0x07fc47fd   Thumb Code    40  app.o(.text)
+    app_init                                 0x07fc4829   Thumb Code    48  app.o(.text)
+    app_easy_gap_undirected_advertise_get_active 0x07fc4865   Thumb Code     8  app.o(.text)
+    app_easy_gap_undirected_advertise_start  0x07fc48c5   Thumb Code    28  app.o(.text)
+    app_easy_gap_directed_advertise_get_active 0x07fc48e5   Thumb Code     8  app.o(.text)
+    app_easy_gap_directed_advertise_start    0x07fc4965   Thumb Code    28  app.o(.text)
+    app_easy_gap_non_connectable_advertise_get_active 0x07fc4985   Thumb Code     8  app.o(.text)
+    app_easy_gap_non_connectable_advertise_start 0x07fc49e5   Thumb Code    36  app.o(.text)
+    app_easy_gap_undirected_advertise_with_timeout_start 0x07fc4a0d   Thumb Code    40  app.o(.text)
+    app_easy_gap_advertise_with_timeout_stop 0x07fc4a59   Thumb Code    24  app.o(.text)
+    app_easy_gap_param_update_get_active     0x07fc4a75   Thumb Code     8  app.o(.text)
+    app_easy_gap_param_update_start          0x07fc4ac9   Thumb Code    24  app.o(.text)
+    app_easy_gap_start_connection_to_get_active 0x07fc4ae5   Thumb Code     8  app.o(.text)
+    app_easy_gap_start_connection_to_set     0x07fc4b39   Thumb Code    38  app.o(.text)
+    app_easy_gap_start_connection_to         0x07fc4b61   Thumb Code    20  app.o(.text)
+    app_easy_gap_dev_config_get_active       0x07fc4b79   Thumb Code     8  app.o(.text)
+    app_easy_gap_dev_configure               0x07fc4bd1   Thumb Code    20  app.o(.text)
+    app_easy_gap_get_peer_features           0x07fc4be9   Thumb Code    28  app.o(.text)
+    app_gap_process_handler                  0x07fc4c09   Thumb Code    28  app_task.o(.text)
+    app_sec_gen_tk                           0x07fc4e21   Thumb Code    20  app_security.o(.text)
+    app_sec_gen_ltk                          0x07fc4e3d   Thumb Code    52  app_security.o(.text)
+    app_sec_gen_csrk                         0x07fc4e75   Thumb Code    32  app_security.o(.text)
+    app_sec_process_handler                  0x07fc4e95   Thumb Code    28  app_security_task.o(.text)
+    app_dis_init                             0x07fc5075   Thumb Code     2  app_diss.o(.text)
+    app_diss_create_db                       0x07fc5079   Thumb Code    52  app_diss.o(.text)
+    app_diss_process_handler                 0x07fc50b1   Thumb Code    28  app_diss_task.o(.text)
+    app_check_BLE_active                     0x07fc5189   Thumb Code    32  app_msg_utils.o(.text)
+    app_msg_send_wakeup_ble                  0x07fc51b5   Thumb Code    24  app_msg_utils.o(.text)
+    app_easy_msg_free_callback               0x07fc51cd   Thumb Code    44  app_easy_msg_utils.o(.text)
+    app_easy_msg_set                         0x07fc5201   Thumb Code    36  app_easy_msg_utils.o(.text)
+    app_easy_msg_modify                      0x07fc5231   Thumb Code    40  app_easy_msg_utils.o(.text)
+    app_easy_wakeup_set                      0x07fc5265   Thumb Code    28  app_easy_msg_utils.o(.text)
+    app_easy_wakeup_free                     0x07fc5285   Thumb Code    16  app_easy_msg_utils.o(.text)
+    app_easy_wakeup                          0x07fc5299   Thumb Code    20  app_easy_msg_utils.o(.text)
+    app_msg_utils_api_process_handler        0x07fc52b1   Thumb Code    48  app_easy_msg_utils.o(.text)
+    app_easy_security_pairing_rsp_get_active 0x07fc52e9   Thumb Code     8  app_easy_security.o(.text)
+    app_easy_security_send_pairing_rsp       0x07fc5331   Thumb Code    24  app_easy_security.o(.text)
+    app_easy_security_tk_get_active          0x07fc534d   Thumb Code     8  app_easy_security.o(.text)
+    app_easy_security_tk_exch                0x07fc5385   Thumb Code    60  app_easy_security.o(.text)
+    app_easy_security_csrk_get_active        0x07fc53c5   Thumb Code     8  app_easy_security.o(.text)
+    app_easy_security_csrk_exch              0x07fc541d   Thumb Code    24  app_easy_security.o(.text)
+    app_easy_security_ltk_exch_get_active    0x07fc5439   Thumb Code     8  app_easy_security.o(.text)
+    app_easy_security_ltk_exch               0x07fc5475   Thumb Code    24  app_easy_security.o(.text)
+    app_easy_security_set_ltk_exch_from_sec_env 0x07fc5491   Thumb Code    52  app_easy_security.o(.text)
+    app_easy_security_set_ltk_exch           0x07fc54c9   Thumb Code    78  app_easy_security.o(.text)
+    app_easy_security_encrypt_cfm            0x07fc5519   Thumb Code    24  app_easy_security.o(.text)
+    app_easy_security_encrypt_cfm_get_active 0x07fc5561   Thumb Code     8  app_easy_security.o(.text)
+    app_easy_security_set_encrypt_req_valid  0x07fc5569   Thumb Code    36  app_easy_security.o(.text)
+    app_easy_security_set_encrypt_req_invalid 0x07fc5591   Thumb Code    12  app_easy_security.o(.text)
+    app_easy_security_request_get_active     0x07fc559d   Thumb Code    44  app_easy_security.o(.text)
+    app_easy_security_request                0x07fc55d1   Thumb Code    24  app_easy_security.o(.text)
+    app_easy_security_accept_encryption      0x07fc55ed   Thumb Code    40  app_easy_security.o(.text)
+    app_easy_security_reject_encryption      0x07fc5619   Thumb Code    22  app_easy_security.o(.text)
+    app_easy_security_resolve_bdaddr         0x07fc562f   Thumb Code     4  app_easy_security.o(.text)
+    app_easy_security_bdb_get_number_of_stored_irks 0x07fc5633   Thumb Code     4  app_easy_security.o(.text)
+    app_easy_security_bdb_get_stored_irks    0x07fc5637   Thumb Code     4  app_easy_security.o(.text)
+    app_easy_security_ral_op                 0x07fc563b   Thumb Code    68  app_easy_security.o(.text)
+    app_easy_security_bdb_init               0x07fc567f   Thumb Code     2  app_easy_security.o(.text)
+    app_easy_security_bdb_get_size           0x07fc5681   Thumb Code     4  app_easy_security.o(.text)
+    app_easy_security_bdb_add_entry          0x07fc5685   Thumb Code     2  app_easy_security.o(.text)
+    app_easy_security_bdb_remove_entry       0x07fc5687   Thumb Code     2  app_easy_security.o(.text)
+    app_easy_security_bdb_search_entry       0x07fc5689   Thumb Code     4  app_easy_security.o(.text)
+    app_easy_security_bdb_get_device_info_from_slot 0x07fc568d   Thumb Code     4  app_easy_security.o(.text)
+    app_easy_security_ral_sync_with_bdb      0x07fc5691   Thumb Code     2  app_easy_security.o(.text)
+    app_timer_api_process_handler            0x07fc5695   Thumb Code   228  app_easy_timer.o(.text)
+    app_easy_timer                           0x07fc5795   Thumb Code    60  app_easy_timer.o(.text)
+    app_easy_timer_cancel                    0x07fc5815   Thumb Code    76  app_easy_timer.o(.text)
+    app_easy_timer_modify                    0x07fc5871   Thumb Code   104  app_easy_timer.o(.text)
+    app_easy_timer_cancel_all                0x07fc58ed   Thumb Code    40  app_easy_timer.o(.text)
+    custs_get_func_callbacks                 0x07fc591d   Thumb Code    24  app_customs.o(.text)
+    app_custs1_init                          0x07fc5939   Thumb Code     2  app_customs.o(.text)
+    app_custs1_create_db                     0x07fc593d   Thumb Code    52  app_customs.o(.text)
+    app_custs1_process_handler               0x07fc5975   Thumb Code    26  app_customs_task.o(.text)
+    app_get_address_type                     0x07fc5991   Thumb Code    22  app_utils.o(.text)
+    app_fill_random_byte_array               0x07fc59a7   Thumb Code    12  app_utils.o(.text)
+    GPIO_reservations                        0x07fc59b5   Thumb Code   320  user_periph_setup.o(.text)
+    set_pad_functions                        0x07fc5afd   Thumb Code   100  user_periph_setup.o(.text)
+    periph_init                              0x07fc5b65   Thumb Code    36  user_periph_setup.o(.text)
+    uvp_shdn                                 0x07fc5b95   Thumb Code    24  user_empty_peripheral_template.o(.text)
+    gpadc_timer_cb                           0x07fc5bad   Thumb Code    36  user_empty_peripheral_template.o(.text)
+    gpadc_collect_sample                     0x07fc5bf1   Thumb Code    12  user_empty_peripheral_template.o(.text)
+    gpadc_sample_to_mv                       0x07fc5c01   Thumb Code    48  user_empty_peripheral_template.o(.text)
+    gpadc_init                               0x07fc5c35   Thumb Code    44  user_empty_peripheral_template.o(.text)
+    timer2_pwm_init                          0x07fc5c71   Thumb Code   108  user_empty_peripheral_template.o(.text)
+    timer2_pwm_enable                        0x07fc5ce9   Thumb Code    56  user_empty_peripheral_template.o(.text)
+    timer2_pwm_disable                       0x07fc5d29   Thumb Code    24  user_empty_peripheral_template.o(.text)
+    user_on_connection                       0x07fc5d49   Thumb Code    40  user_empty_peripheral_template.o(.text)
+    user_on_disconnect                       0x07fc5d79   Thumb Code     8  user_empty_peripheral_template.o(.text)
+    user_catch_rest_hndl                     0x07fc5d81   Thumb Code    32  user_empty_peripheral_template.o(.text)
+    user_app_on_init                         0x07fc5da5   Thumb Code     8  user_empty_peripheral_template.o(.text)
+    JT_lld_test_mode_rx_func                 0x07fc5dad   Thumb Code   142  patch_1.o(.text)
+    JT_l2cc_pdu_unpack_func                  0x07fc5e3b   Thumb Code   786  patch_1.o(.text)
+    JT_l2cc_pdu_recv_ind_handler_func        0x07fc614d   Thumb Code    72  patch_1.o(.text)
+    PATCHED_llm_con_req_ind                  0x07fc6195   Thumb Code   814  patch_1.o(.text)
+    PATCHED_smpc_recv_pair_rand_pdu          0x07fc64c3   Thumb Code   272  patch_1.o(.text)
+    PATCHED_smpc_recv_public_key_exchange_pdu 0x07fc65d3   Thumb Code   106  patch_1.o(.text)
+    PATCHED_llc_data_ind_handler             0x07fc663d   Thumb Code   176  patch_1.o(.text)
+    lld_drop_packet_fix                      0x07fc66ed   Thumb Code    64  patch_1.o(.text)
+    PATCHED_lld_data_ind_handler             0x07fc672d   Thumb Code    58  patch_1.o(.text)
+    patch_data1                              0x07fc6767   Thumb Code    12  patch_1.o(.text)
+    patch_data2                              0x07fc6773   Thumb Code     2  patch_1.o(.text)
+    patch_global_vars_init                   0x07fc6775   Thumb Code     2  patch_1.o(.text)
+    rf_ldo_calibration                       0x07fc6b09   Thumb Code    36  rf_ldo_calibration.o(.text)
+    enable_rf_diag_irq                       0x07fc6b59   Thumb Code    92  rf_diag.o(.text)
+    _WAIT                                    0x07fc6bc5   Thumb Code    10  common.o(.text)
+    _WAIT10                                  0x07fc6bcf   Thumb Code    10  common.o(.text)
+    _WAIT100                                 0x07fc6bd9   Thumb Code    10  common.o(.text)
+    _WAIT400                                 0x07fc6be3   Thumb Code    10  common.o(.text)
+    _WAIT1000                                0x07fc6bed   Thumb Code    10  common.o(.text)
+    arch_asm_delay_us                        0x07fc6c01   Thumb Code    32  arch_asm.o(.text)
+    __scatterload                            0x07fc6c21   Thumb Code    38  init.o(.text)
+    __scatterload_rt2                        0x07fc6c21   Thumb Code     0  init.o(.text)
+    HardFault_HandlerC                       0x07fc6c51   Thumb Code   132  hardfault_handler.o(.text.HardFault_HandlerC)
+    NMI_HandlerC                             0x07fc6cd9   Thumb Code   164  nmi_handler.o(.text.NMI_HandlerC)
+    __scatterload_copy                       0x07fc6d95   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x07fc6da3   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x07fc6da5   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    SystemInit                               0x07fc6db5   Thumb Code   116  system_da14531.o(system_DA14xxx)
+    app_process_handlers                     0x07fc6f84   Data          28  app_entry_point.o(.rodata.app_process_handlers)
+    arp_init_table                           0x07fc6fd8   Data         112  ble_arp.o(.rodata.arp_init_table)
+    catch_rest                               0x07fc7050   Data           4  app_entry_point.o(.rodata.catch_rest)
+    cust_prf_funcs                           0x07fc7054   Data          56  user_custs_config.o(.rodata.cust_prf_funcs)
+    custs1_att_db                            0x07fc708c   Data         900  user_custs1_def.o(.rodata.custs1_att_db)
+    custs1_default_handler                   0x07fc7410   Data           8  custs1_task.o(.rodata.custs1_default_handler)
+    custs1_default_state                     0x07fc7418   Data          72  custs1_task.o(.rodata.custs1_default_state)
+    custs1_services                          0x07fc7460   Data           4  user_custs1_def.o(.rodata.custs1_services)
+    custs1_services_size                     0x07fc7464   Data           1  user_custs1_def.o(.rodata.custs1_services_size)
+    my_custom_msg_handlers                   0x07fc7498   Data          24  system_library_531.o(.rodata.my_custom_msg_handlers)
+    prf_funcs                                0x07fc74c0   Data          24  app.o(.rodata.prf_funcs)
+    prf_if                                   0x07fc74d8   Data          24  prf.o(.rodata.prf_if)
+    rom_app_task_cfg                         0x07fc74f0   Data          32  app_entry_point.o(.rodata.rom_app_task_cfg)
+    rom_cfg_table_var                        0x07fc7510   Data         236  jump_table.o(.rodata.rom_cfg_table_var)
+    rom_chacha20_cfg                         0x07fc75fc   Data          16  chacha20.o(.rodata.rom_chacha20_cfg)
+    rom_console_cfg                          0x07fc760c   Data          36  arch_console.o(.rodata.rom_console_cfg)
+    rom_cust_prf_cfg                         0x07fc7630   Data          16  custs1.o(.rodata.rom_cust_prf_cfg)
+    rom_func_addr_table_var                  0x07fc7640   Data         380  jump_table.o(.rodata.rom_func_addr_table_var)
+    rom_nvds_cfg                             0x07fc77bc   Data           8  nvds.o(.rodata.rom_nvds_cfg)
+    rom_prf_cfg                              0x07fc77c4   Data          12  prf.o(.rodata.rom_prf_cfg)
+    Region$$Table$$Base                      0x07fc799c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x07fc79bc   Number         0  anon$$obj.o(Region$$Table)
+    pa_en_dcf_tx_setting                     0x07fc79bc   Data           1  rf_531.o(.data.pa_en_dcf_tx_setting)
+    startup_sleep_delay                      0x07fc79c0   Data           4  arch_system.o(.data.startup_sleep_delay)
+    twirq_reset_value                        0x07fc7eec   Data           4  arch_system.o(.bss..L_MergedGlobals.1)
+    twirq_set_value                          0x07fc7ef0   Data           4  arch_system.o(.bss..L_MergedGlobals.1)
+    calibration_res                          0x07fc7ef6   Data          42  rf_531.o(.bss.calibration_res)
+    otp_hdr_timestamp                        0x07fc8024   Data           4  arch_system.o(.bss.otp_hdr_timestamp)
+    syscntl_dcdc_state                       0x07fc8028   Data           2  syscntl.o(.bss.syscntl_dcdc_state)
+    twext_value                              0x07fc802c   Data           4  rwip.o(.bss.twext_value)
+    __initial_sp                             0x07fc8738   Data           0  startup_da14531.o(STACK)
+    rwip_heap_non_ret                        0x07fc8738   Data        1036  jump_table.o(.bss.heap_mem_area_not_ret)
     clk_freq_trim_reg_value                  0x07fc8bd0   Data           2  arch_system.o(.bss.retention_mem_area0)
     lp_clk_sel                               0x07fc8bd4   Data           4  arch_system.o(.bss.retention_mem_area0)
     force_rf_cal                             0x07fc8bd8   Data           1  arch_system.o(.bss.retention_mem_area0)
@@ -3059,8 +3095,12 @@ Image Symbol Table
     device_info                              0x07fc8e0c   Data          36  app.o(.bss.retention_mem_area0)
     app_state                                0x07fc8e30   Data           1  app_task.o(.bss.retention_mem_area0)
     app_sec_env                              0x07fc8e32   Data         122  app_security.o(.bss.retention_mem_area0)
-    uvp_status                               0x07fc8f2c   Data           1  user_empty_peripheral_template.o(.bss.retention_mem_area0)
-    uart_status                              0x07fc8f30   Data           4  user_empty_peripheral_template.o(.bss.retention_mem_area0)
+    uart_busy_status                         0x07fc8f2c   Data           1  user_empty_peripheral_template.o(.bss.retention_mem_area0)
+    uvp_trigger_status                       0x07fc8f2d   Data           1  user_empty_peripheral_template.o(.bss.retention_mem_area0)
+    adc_timer                                0x07fc8f2e   Data           1  user_empty_peripheral_template.o(.bss.retention_mem_area0)
+    adc_timer_started                        0x07fc8f2f   Data           1  user_empty_peripheral_template.o(.bss.retention_mem_area0)
+    adc_input                                0x07fc8f30   Data           2  user_empty_peripheral_template.o(.bss.retention_mem_area0)
+    adc_input_volt                           0x07fc8f32   Data           2  user_empty_peripheral_template.o(.bss.retention_mem_area0)
     Image$$RET_HEAP_DB$$Base                 0x07fc8f34   Number         0  anon$$obj.o ABSOLUTE
     rwip_heap_db_ret                         0x07fc8f34   Data        1036  jump_table.o(.bss.heap_db_area)
     rwip_heap_env_ret                        0x07fc9340   Data         696  jump_table.o(.bss.heap_env_area)
@@ -3196,21 +3236,21 @@ Memory Map of the image
 
 
 
-  Load Region LR_IROM3 (Base: 0x07fc0110, Size: 0x0000758c, Max: 0x00008ab0, ABSOLUTE)
+  Load Region LR_IROM3 (Base: 0x07fc0110, Size: 0x000078b4, Max: 0x00008ab0, ABSOLUTE)
 
-    Execution Region ER_IROM3 (Exec base: 0x07fc0110, Load base: 0x07fc0110, Size: 0x0000758c, Max: 0x00008ab0, ABSOLUTE)
+    Execution Region ER_IROM3 (Exec base: 0x07fc0110, Load base: 0x07fc0110, Size: 0x000078b4, Max: 0x00008ab0, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x07fc0110   0x07fc0110   0x00000000   Code   RO          681  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x07fc0110   0x07fc0110   0x00000004   Code   RO          682    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x07fc0114   0x07fc0114   0x00000004   Code   RO          685    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x07fc0118   0x07fc0118   0x00000000   Code   RO          687    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x07fc0118   0x07fc0118   0x00000000   Code   RO          689    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x07fc0118   0x07fc0118   0x00000008   Code   RO          690    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x07fc0120   0x07fc0120   0x00000000   Code   RO          692    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
-    0x07fc0120   0x07fc0120   0x00000000   Code   RO          694    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
-    0x07fc0120   0x07fc0120   0x00000004   Code   RO          683    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x07fc0110   0x07fc0110   0x00000000   Code   RO          689  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x07fc0110   0x07fc0110   0x00000004   Code   RO          690    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x07fc0114   0x07fc0114   0x00000004   Code   RO          693    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x07fc0118   0x07fc0118   0x00000000   Code   RO          695    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x07fc0118   0x07fc0118   0x00000000   Code   RO          697    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x07fc0118   0x07fc0118   0x00000008   Code   RO          698    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x07fc0120   0x07fc0120   0x00000000   Code   RO          700    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x07fc0120   0x07fc0120   0x00000000   Code   RO          702    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x07fc0120   0x07fc0120   0x00000004   Code   RO          691    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
     0x07fc0124   0x07fc0124   0x00000050   Code   RO           16    .text               startup_da14531.o
     0x07fc0174   0x07fc0174   0x00000034   Code   RO           40    .text               arch_console.o
     0x07fc01a8   0x07fc01a8   0x000001c0   Code   RO           58    .text               arch_main.o
@@ -3230,139 +3270,140 @@ Memory Map of the image
     0x07fc2380   0x07fc2380   0x00000488   Code   RO          266    .text               uart.o
     0x07fc2808   0x07fc2808   0x00000354   Code   RO          276    .text               hw_otpc_531.o
     0x07fc2b5c   0x07fc2b5c   0x00000648   Code   RO          287    .text               i2c.o
-    0x07fc31a4   0x07fc31a4   0x00000230   Code   RO          298    .text               rwble.o
-    0x07fc33d4   0x07fc33d4   0x000001ec   Code   RO          307    .text               rwip.o
-    0x07fc35c0   0x07fc35c0   0x0000031c   Code   RO          317    .text               ble_arp.o
-    0x07fc38dc   0x07fc38dc   0x00000854   Code   RO          328    .text               rf_531.o
-    0x07fc4130   0x07fc4130   0x000001c4   Code   RO          420    .text               custs1_task.o
-    0x07fc42f4   0x07fc42f4   0x0000009c   Code   RO          432    .text               prf.o
-    0x07fc4390   0x07fc4390   0x00000344   Code   RO          444    .text               app_default_handlers.o
-    0x07fc46d4   0x07fc46d4   0x00000464   Code   RO          453    .text               app.o
-    0x07fc4b38   0x07fc4b38   0x00000218   Code   RO          466    .text               app_task.o
-    0x07fc4d50   0x07fc4d50   0x00000074   Code   RO          476    .text               app_security.o
-    0x07fc4dc4   0x07fc4dc4   0x000001e0   Code   RO          485    .text               app_security_task.o
-    0x07fc4fa4   0x07fc4fa4   0x0000003c   Code   RO          500    .text               app_diss.o
-    0x07fc4fe0   0x07fc4fe0   0x000000d8   Code   RO          508    .text               app_diss_task.o
-    0x07fc50b8   0x07fc50b8   0x00000044   Code   RO          529    .text               app_msg_utils.o
-    0x07fc50fc   0x07fc50fc   0x0000011c   Code   RO          537    .text               app_easy_msg_utils.o
-    0x07fc5218   0x07fc5218   0x000003aa   Code   RO          546    .text               app_easy_security.o
-    0x07fc55c2   0x07fc55c2   0x00000002   PAD
-    0x07fc55c4   0x07fc55c4   0x00000288   Code   RO          557    .text               app_easy_timer.o
-    0x07fc584c   0x07fc584c   0x00000058   Code   RO          567    .text               app_customs.o
-    0x07fc58a4   0x07fc58a4   0x0000001a   Code   RO          575    .text               app_customs_task.o
-    0x07fc58be   0x07fc58be   0x00000002   PAD
-    0x07fc58c0   0x07fc58c0   0x00000022   Code   RO          600    .text               app_utils.o
-    0x07fc58e2   0x07fc58e2   0x00000002   PAD
-    0x07fc58e4   0x07fc58e4   0x00000134   Code   RO          651    .text               user_periph_setup.o
-    0x07fc5a18   0x07fc5a18   0x00000074   Code   RO          660    .text               user_empty_peripheral_template.o
-    0x07fc5a8c   0x07fc5a8c   0x000009ec   Code   RO          670    .text               da14531.lib(patch_1.o)
-    0x07fc6478   0x07fc6478   0x000003c0   Code   RO          672    .text               da14531.lib(rf_ldo_calibration.o)
-    0x07fc6838   0x07fc6838   0x0000006c   Code   RO          675    .text               da14531.lib(rf_diag.o)
-    0x07fc68a4   0x07fc68a4   0x0000003c   Code   RO          677    .text               da14531.lib(common.o)
-    0x07fc68e0   0x07fc68e0   0x00000020   Code   RO          679    .text               da14531.lib(arch_asm.o)
-    0x07fc6900   0x07fc6900   0x00000030   Code   RO          696    .text               mc_p.l(init.o)
-    0x07fc6930   0x07fc6930   0x00000088   Code   RO           23    .text.HardFault_HandlerC  hardfault_handler.o
-    0x07fc69b8   0x07fc69b8   0x000000bc   Code   RO           32    .text.NMI_HandlerC  nmi_handler.o
-    0x07fc6a74   0x07fc6a74   0x0000000e   Code   RO          700    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x07fc6a82   0x07fc6a82   0x00000002   Code   RO          701    i.__scatterload_null  mc_p.l(handlers.o)
-    0x07fc6a84   0x07fc6a84   0x0000000e   Code   RO          702    i.__scatterload_zeroinit  mc_p.l(handlers.o)
-    0x07fc6a92   0x07fc6a92   0x00000002   PAD
-    0x07fc6a94   0x07fc6a94   0x00000088   Code   RO            4    system_DA14xxx      system_da14531.o
-    0x07fc6b1c   0x07fc6b1c   0x00000010   Data   RO          633    .rodata.SVC1_ADC_VAL_1_UUID_128  user_custs1_def.o
-    0x07fc6b2c   0x07fc6b2c   0x00000010   Data   RO          635    .rodata.SVC1_ADC_VAL_2_UUID_128  user_custs1_def.o
-    0x07fc6b3c   0x07fc6b3c   0x00000010   Data   RO          636    .rodata.SVC1_BUTTON_STATE_UUID_128  user_custs1_def.o
-    0x07fc6b4c   0x07fc6b4c   0x00000010   Data   RO          629    .rodata.SVC1_CTRL_POINT_UUID_128  user_custs1_def.o
-    0x07fc6b5c   0x07fc6b5c   0x00000010   Data   RO          637    .rodata.SVC1_INDICATEABLE_UUID_128  user_custs1_def.o
-    0x07fc6b6c   0x07fc6b6c   0x00000010   Data   RO          632    .rodata.SVC1_LED_STATE_UUID_128  user_custs1_def.o
-    0x07fc6b7c   0x07fc6b7c   0x00000010   Data   RO          638    .rodata.SVC1_LONG_VALUE_UUID_128  user_custs1_def.o
-    0x07fc6b8c   0x07fc6b8c   0x00000010   Data   RO          640    .rodata.SVC2_WRITE_VAL_1_UUID_128  user_custs1_def.o
-    0x07fc6b9c   0x07fc6b9c   0x00000010   Data   RO          641    .rodata.SVC2_WRITE_VAL_2_UUID_128  user_custs1_def.o
-    0x07fc6bac   0x07fc6bac   0x00000010   Data   RO          643    .rodata.SVC3_READ_VAL_1_UUID_128  user_custs1_def.o
-    0x07fc6bbc   0x07fc6bbc   0x00000010   Data   RO          644    .rodata.SVC3_READ_VAL_2_UUID_128  user_custs1_def.o
-    0x07fc6bcc   0x07fc6bcc   0x00000010   Data   RO          645    .rodata.SVC3_READ_VAL_3_UUID_128  user_custs1_def.o
-    0x07fc6bdc   0x07fc6bdc   0x00000010   Data   RO          457    .rodata.TASK_DESC_APP  app.o
-    0x07fc6bec   0x07fc6bec   0x00000008   Data   RO          510    .rodata.app_diss_process_handlers  app_diss_task.o
-    0x07fc6bf4   0x07fc6bf4   0x00000070   Data   RO          468    .rodata.app_gap_process_handlers  app_task.o
-    0x07fc6c64   0x07fc6c64   0x0000001c   Data   RO          521    .rodata.app_process_handlers  app_entry_point.o
-    0x07fc6c80   0x07fc6c80   0x00000038   Data   RO          487    .rodata.app_sec_process_handlers  app_security_task.o
-    0x07fc6cb8   0x07fc6cb8   0x00000070   Data   RO          320    .rodata.arp_init_table  ble_arp.o
-    0x07fc6d28   0x07fc6d28   0x00000002   Data   RO          628    .rodata.att_decl_char  user_custs1_def.o
-    0x07fc6d2a   0x07fc6d2a   0x00000002   Data   RO          626    .rodata.att_decl_svc  user_custs1_def.o
-    0x07fc6d2c   0x07fc6d2c   0x00000002   Data   RO          634    .rodata.att_desc_cfg  user_custs1_def.o
-    0x07fc6d2e   0x07fc6d2e   0x00000002   Data   RO          630    .rodata.att_desc_user_desc  user_custs1_def.o
-    0x07fc6d30   0x07fc6d30   0x00000004   Data   RO          522    .rodata.catch_rest  app_entry_point.o
-    0x07fc6d34   0x07fc6d34   0x00000038   Data   RO          617    .rodata.cust_prf_funcs  user_custs_config.o
-    0x07fc6d6c   0x07fc6d6c   0x00000384   Data   RO          646    .rodata.custs1_att_db  user_custs1_def.o
-    0x07fc70f0   0x07fc70f0   0x00000008   Data   RO          423    .rodata.custs1_default_handler  custs1_task.o
-    0x07fc70f8   0x07fc70f8   0x00000048   Data   RO          422    .rodata.custs1_default_state  custs1_task.o
-    0x07fc7140   0x07fc7140   0x00000004   Data   RO          623    .rodata.custs1_services  user_custs1_def.o
-    0x07fc7144   0x07fc7144   0x00000001   Data   RO          624    .rodata.custs1_services_size  user_custs1_def.o
-    0x07fc7145   0x07fc7145   0x00000010   Data   RO          627    .rodata.custs1_svc1  user_custs1_def.o
-    0x07fc7155   0x07fc7155   0x00000010   Data   RO          639    .rodata.custs1_svc2  user_custs1_def.o
-    0x07fc7165   0x07fc7165   0x00000010   Data   RO          642    .rodata.custs1_svc3  user_custs1_def.o
-    0x07fc7175   0x07fc7175   0x00000003   PAD
-    0x07fc7178   0x07fc7178   0x00000018   Data   RO          139    .rodata.my_custom_msg_handlers  system_library_531.o
-    0x07fc7190   0x07fc7190   0x0000000e   Data   RO           52    .rodata.nvds_data_storage  nvds.o
-    0x07fc719e   0x07fc719e   0x00000002   PAD
-    0x07fc71a0   0x07fc71a0   0x00000018   Data   RO          455    .rodata.prf_funcs   app.o
-    0x07fc71b8   0x07fc71b8   0x00000018   Data   RO          434    .rodata.prf_if      prf.o
-    0x07fc71d0   0x07fc71d0   0x00000020   Data   RO          524    .rodata.rom_app_task_cfg  app_entry_point.o
-    0x07fc71f0   0x07fc71f0   0x000000ec   Data   RO           75    .rodata.rom_cfg_table_var  jump_table.o
-    0x07fc72dc   0x07fc72dc   0x00000010   Data   RO          123    .rodata.rom_chacha20_cfg  chacha20.o
-    0x07fc72ec   0x07fc72ec   0x00000024   Data   RO           44    .rodata.rom_console_cfg  arch_console.o
-    0x07fc7310   0x07fc7310   0x00000010   Data   RO          415    .rodata.rom_cust_prf_cfg  custs1.o
-    0x07fc7320   0x07fc7320   0x0000017c   Data   RO           70    .rodata.rom_func_addr_table_var  jump_table.o
-    0x07fc749c   0x07fc749c   0x00000008   Data   RO           53    .rodata.rom_nvds_cfg  nvds.o
-    0x07fc74a4   0x07fc74a4   0x0000000c   Data   RO          436    .rodata.rom_prf_cfg  prf.o
-    0x07fc74b0   0x07fc74b0   0x00000016   Data   RO          511    .rodata.str1.1      app_diss_task.o
-    0x07fc74c6   0x07fc74c6   0x0000009c   Data   RO          631    .rodata.str1.1      user_custs1_def.o
-    0x07fc7562   0x07fc7562   0x0000004d   Data   RO          662    .rodata.str1.1      user_empty_peripheral_template.o
-    0x07fc75af   0x07fc75af   0x00000001   PAD
-    0x07fc75b0   0x07fc75b0   0x00000017   Data   RO          456    .rodata.str1.4      app.o
-    0x07fc75c7   0x07fc75c7   0x00000001   PAD
-    0x07fc75c8   0x07fc75c8   0x00000018   Data   RO          653    .rodata.uart_cfg    user_periph_setup.o
-    0x07fc75e0   0x07fc75e0   0x0000008c   Data   RO          523    .rodata.user_app_callbacks  app_entry_point.o
-    0x07fc766c   0x07fc766c   0x00000007   Data   RO          549    .rodata.user_security_conf  app_easy_security.o
-    0x07fc7673   0x07fc7673   0x00000001   PAD
-    0x07fc7674   0x07fc7674   0x00000020   Data   RO          699    Region$$Table       anon$$obj.o
-    0x07fc7694   0x07fc7694   0x00000001   Data   RW          330    .data.pa_en_dcf_tx_setting  rf_531.o
-    0x07fc7695   0x07fc7695   0x00000003   PAD
-    0x07fc7698   0x07fc7698   0x00000004   Data   RW           94    .data.startup_sleep_delay  arch_system.o
+    0x07fc31a4   0x07fc31a4   0x000000d0   Code   RO          297    .text               timer2.o
+    0x07fc3274   0x07fc3274   0x00000230   Code   RO          306    .text               rwble.o
+    0x07fc34a4   0x07fc34a4   0x000001ec   Code   RO          315    .text               rwip.o
+    0x07fc3690   0x07fc3690   0x0000031c   Code   RO          325    .text               ble_arp.o
+    0x07fc39ac   0x07fc39ac   0x00000854   Code   RO          336    .text               rf_531.o
+    0x07fc4200   0x07fc4200   0x000001c4   Code   RO          428    .text               custs1_task.o
+    0x07fc43c4   0x07fc43c4   0x0000009c   Code   RO          440    .text               prf.o
+    0x07fc4460   0x07fc4460   0x00000344   Code   RO          452    .text               app_default_handlers.o
+    0x07fc47a4   0x07fc47a4   0x00000464   Code   RO          461    .text               app.o
+    0x07fc4c08   0x07fc4c08   0x00000218   Code   RO          474    .text               app_task.o
+    0x07fc4e20   0x07fc4e20   0x00000074   Code   RO          484    .text               app_security.o
+    0x07fc4e94   0x07fc4e94   0x000001e0   Code   RO          493    .text               app_security_task.o
+    0x07fc5074   0x07fc5074   0x0000003c   Code   RO          508    .text               app_diss.o
+    0x07fc50b0   0x07fc50b0   0x000000d8   Code   RO          516    .text               app_diss_task.o
+    0x07fc5188   0x07fc5188   0x00000044   Code   RO          537    .text               app_msg_utils.o
+    0x07fc51cc   0x07fc51cc   0x0000011c   Code   RO          545    .text               app_easy_msg_utils.o
+    0x07fc52e8   0x07fc52e8   0x000003aa   Code   RO          554    .text               app_easy_security.o
+    0x07fc5692   0x07fc5692   0x00000002   PAD
+    0x07fc5694   0x07fc5694   0x00000288   Code   RO          565    .text               app_easy_timer.o
+    0x07fc591c   0x07fc591c   0x00000058   Code   RO          575    .text               app_customs.o
+    0x07fc5974   0x07fc5974   0x0000001a   Code   RO          583    .text               app_customs_task.o
+    0x07fc598e   0x07fc598e   0x00000002   PAD
+    0x07fc5990   0x07fc5990   0x00000022   Code   RO          608    .text               app_utils.o
+    0x07fc59b2   0x07fc59b2   0x00000002   PAD
+    0x07fc59b4   0x07fc59b4   0x000001e0   Code   RO          659    .text               user_periph_setup.o
+    0x07fc5b94   0x07fc5b94   0x00000218   Code   RO          668    .text               user_empty_peripheral_template.o
+    0x07fc5dac   0x07fc5dac   0x000009ec   Code   RO          678    .text               da14531.lib(patch_1.o)
+    0x07fc6798   0x07fc6798   0x000003c0   Code   RO          680    .text               da14531.lib(rf_ldo_calibration.o)
+    0x07fc6b58   0x07fc6b58   0x0000006c   Code   RO          683    .text               da14531.lib(rf_diag.o)
+    0x07fc6bc4   0x07fc6bc4   0x0000003c   Code   RO          685    .text               da14531.lib(common.o)
+    0x07fc6c00   0x07fc6c00   0x00000020   Code   RO          687    .text               da14531.lib(arch_asm.o)
+    0x07fc6c20   0x07fc6c20   0x00000030   Code   RO          704    .text               mc_p.l(init.o)
+    0x07fc6c50   0x07fc6c50   0x00000088   Code   RO           23    .text.HardFault_HandlerC  hardfault_handler.o
+    0x07fc6cd8   0x07fc6cd8   0x000000bc   Code   RO           32    .text.NMI_HandlerC  nmi_handler.o
+    0x07fc6d94   0x07fc6d94   0x0000000e   Code   RO          708    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x07fc6da2   0x07fc6da2   0x00000002   Code   RO          709    i.__scatterload_null  mc_p.l(handlers.o)
+    0x07fc6da4   0x07fc6da4   0x0000000e   Code   RO          710    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x07fc6db2   0x07fc6db2   0x00000002   PAD
+    0x07fc6db4   0x07fc6db4   0x00000088   Code   RO            4    system_DA14xxx      system_da14531.o
+    0x07fc6e3c   0x07fc6e3c   0x00000010   Data   RO          641    .rodata.SVC1_ADC_VAL_1_UUID_128  user_custs1_def.o
+    0x07fc6e4c   0x07fc6e4c   0x00000010   Data   RO          643    .rodata.SVC1_ADC_VAL_2_UUID_128  user_custs1_def.o
+    0x07fc6e5c   0x07fc6e5c   0x00000010   Data   RO          644    .rodata.SVC1_BUTTON_STATE_UUID_128  user_custs1_def.o
+    0x07fc6e6c   0x07fc6e6c   0x00000010   Data   RO          637    .rodata.SVC1_CTRL_POINT_UUID_128  user_custs1_def.o
+    0x07fc6e7c   0x07fc6e7c   0x00000010   Data   RO          645    .rodata.SVC1_INDICATEABLE_UUID_128  user_custs1_def.o
+    0x07fc6e8c   0x07fc6e8c   0x00000010   Data   RO          640    .rodata.SVC1_LED_STATE_UUID_128  user_custs1_def.o
+    0x07fc6e9c   0x07fc6e9c   0x00000010   Data   RO          646    .rodata.SVC1_LONG_VALUE_UUID_128  user_custs1_def.o
+    0x07fc6eac   0x07fc6eac   0x00000010   Data   RO          648    .rodata.SVC2_WRITE_VAL_1_UUID_128  user_custs1_def.o
+    0x07fc6ebc   0x07fc6ebc   0x00000010   Data   RO          649    .rodata.SVC2_WRITE_VAL_2_UUID_128  user_custs1_def.o
+    0x07fc6ecc   0x07fc6ecc   0x00000010   Data   RO          651    .rodata.SVC3_READ_VAL_1_UUID_128  user_custs1_def.o
+    0x07fc6edc   0x07fc6edc   0x00000010   Data   RO          652    .rodata.SVC3_READ_VAL_2_UUID_128  user_custs1_def.o
+    0x07fc6eec   0x07fc6eec   0x00000010   Data   RO          653    .rodata.SVC3_READ_VAL_3_UUID_128  user_custs1_def.o
+    0x07fc6efc   0x07fc6efc   0x00000010   Data   RO          465    .rodata.TASK_DESC_APP  app.o
+    0x07fc6f0c   0x07fc6f0c   0x00000008   Data   RO          518    .rodata.app_diss_process_handlers  app_diss_task.o
+    0x07fc6f14   0x07fc6f14   0x00000070   Data   RO          476    .rodata.app_gap_process_handlers  app_task.o
+    0x07fc6f84   0x07fc6f84   0x0000001c   Data   RO          529    .rodata.app_process_handlers  app_entry_point.o
+    0x07fc6fa0   0x07fc6fa0   0x00000038   Data   RO          495    .rodata.app_sec_process_handlers  app_security_task.o
+    0x07fc6fd8   0x07fc6fd8   0x00000070   Data   RO          328    .rodata.arp_init_table  ble_arp.o
+    0x07fc7048   0x07fc7048   0x00000002   Data   RO          636    .rodata.att_decl_char  user_custs1_def.o
+    0x07fc704a   0x07fc704a   0x00000002   Data   RO          634    .rodata.att_decl_svc  user_custs1_def.o
+    0x07fc704c   0x07fc704c   0x00000002   Data   RO          642    .rodata.att_desc_cfg  user_custs1_def.o
+    0x07fc704e   0x07fc704e   0x00000002   Data   RO          638    .rodata.att_desc_user_desc  user_custs1_def.o
+    0x07fc7050   0x07fc7050   0x00000004   Data   RO          530    .rodata.catch_rest  app_entry_point.o
+    0x07fc7054   0x07fc7054   0x00000038   Data   RO          625    .rodata.cust_prf_funcs  user_custs_config.o
+    0x07fc708c   0x07fc708c   0x00000384   Data   RO          654    .rodata.custs1_att_db  user_custs1_def.o
+    0x07fc7410   0x07fc7410   0x00000008   Data   RO          431    .rodata.custs1_default_handler  custs1_task.o
+    0x07fc7418   0x07fc7418   0x00000048   Data   RO          430    .rodata.custs1_default_state  custs1_task.o
+    0x07fc7460   0x07fc7460   0x00000004   Data   RO          631    .rodata.custs1_services  user_custs1_def.o
+    0x07fc7464   0x07fc7464   0x00000001   Data   RO          632    .rodata.custs1_services_size  user_custs1_def.o
+    0x07fc7465   0x07fc7465   0x00000010   Data   RO          635    .rodata.custs1_svc1  user_custs1_def.o
+    0x07fc7475   0x07fc7475   0x00000010   Data   RO          647    .rodata.custs1_svc2  user_custs1_def.o
+    0x07fc7485   0x07fc7485   0x00000010   Data   RO          650    .rodata.custs1_svc3  user_custs1_def.o
+    0x07fc7495   0x07fc7495   0x00000003   PAD
+    0x07fc7498   0x07fc7498   0x00000018   Data   RO          139    .rodata.my_custom_msg_handlers  system_library_531.o
+    0x07fc74b0   0x07fc74b0   0x0000000e   Data   RO           52    .rodata.nvds_data_storage  nvds.o
+    0x07fc74be   0x07fc74be   0x00000002   PAD
+    0x07fc74c0   0x07fc74c0   0x00000018   Data   RO          463    .rodata.prf_funcs   app.o
+    0x07fc74d8   0x07fc74d8   0x00000018   Data   RO          442    .rodata.prf_if      prf.o
+    0x07fc74f0   0x07fc74f0   0x00000020   Data   RO          532    .rodata.rom_app_task_cfg  app_entry_point.o
+    0x07fc7510   0x07fc7510   0x000000ec   Data   RO           75    .rodata.rom_cfg_table_var  jump_table.o
+    0x07fc75fc   0x07fc75fc   0x00000010   Data   RO          123    .rodata.rom_chacha20_cfg  chacha20.o
+    0x07fc760c   0x07fc760c   0x00000024   Data   RO           44    .rodata.rom_console_cfg  arch_console.o
+    0x07fc7630   0x07fc7630   0x00000010   Data   RO          423    .rodata.rom_cust_prf_cfg  custs1.o
+    0x07fc7640   0x07fc7640   0x0000017c   Data   RO           70    .rodata.rom_func_addr_table_var  jump_table.o
+    0x07fc77bc   0x07fc77bc   0x00000008   Data   RO           53    .rodata.rom_nvds_cfg  nvds.o
+    0x07fc77c4   0x07fc77c4   0x0000000c   Data   RO          444    .rodata.rom_prf_cfg  prf.o
+    0x07fc77d0   0x07fc77d0   0x00000016   Data   RO          519    .rodata.str1.1      app_diss_task.o
+    0x07fc77e6   0x07fc77e6   0x0000009c   Data   RO          639    .rodata.str1.1      user_custs1_def.o
+    0x07fc7882   0x07fc7882   0x00000055   Data   RO          670    .rodata.str1.1      user_empty_peripheral_template.o
+    0x07fc78d7   0x07fc78d7   0x00000001   PAD
+    0x07fc78d8   0x07fc78d8   0x00000017   Data   RO          464    .rodata.str1.4      app.o
+    0x07fc78ef   0x07fc78ef   0x00000001   PAD
+    0x07fc78f0   0x07fc78f0   0x00000018   Data   RO          661    .rodata.uart_cfg    user_periph_setup.o
+    0x07fc7908   0x07fc7908   0x0000008c   Data   RO          531    .rodata.user_app_callbacks  app_entry_point.o
+    0x07fc7994   0x07fc7994   0x00000007   Data   RO          557    .rodata.user_security_conf  app_easy_security.o
+    0x07fc799b   0x07fc799b   0x00000001   PAD
+    0x07fc799c   0x07fc799c   0x00000020   Data   RO          707    Region$$Table       anon$$obj.o
+    0x07fc79bc   0x07fc79bc   0x00000001   Data   RW          338    .data.pa_en_dcf_tx_setting  rf_531.o
+    0x07fc79bd   0x07fc79bd   0x00000003   PAD
+    0x07fc79c0   0x07fc79c0   0x00000004   Data   RW           94    .data.startup_sleep_delay  arch_system.o
 
 
-    Execution Region ER_PRODTEST (Exec base: 0x07fc76a0, Load base: 0x07fc769c, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE, UNINIT)
+    Execution Region ER_PRODTEST (Exec base: 0x07fc79c8, Load base: 0x07fc79c4, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE, UNINIT)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region ER_ZI (Exec base: 0x07fc76a0, Load base: 0x07fc769c, Size: 0x00000d70, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x07fc79c8, Load base: 0x07fc79c4, Size: 0x00000d70, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x07fc76a0        -       0x00000510   Zero   RW          673    .bss                da14531.lib(rf_ldo_calibration.o)
-    0x07fc7bb0        -       0x00000014   Zero   RW          220    .bss..L_MergedGlobals  trng.o
-    0x07fc7bc4        -       0x00000008   Zero   RW           97    .bss..L_MergedGlobals.1  arch_system.o
-    0x07fc7bcc        -       0x00000002   Zero   RW          209    .bss.cal_val        adc_531.o
-    0x07fc7bce        -       0x0000002a   Zero   RW          331    .bss.calibration_res  rf_531.o
-    0x07fc7bf8        -       0x00000100   Zero   RW           42    .bss.current_msg_buffer  arch_console.o
-    0x07fc7cf8        -       0x00000004   Zero   RW          332    .bss.fsm_ctrl_reg   rf_531.o
-    0x07fc7cfc        -       0x00000004   Zero   RW           95    .bss.otp_hdr_timestamp  arch_system.o
-    0x07fc7d00        -       0x00000002   Zero   RW          171    .bss.syscntl_dcdc_state  syscntl.o
-    0x07fc7d02   0x07fc769c   0x00000002   PAD
-    0x07fc7d04        -       0x00000004   Zero   RW          310    .bss.twext_value    rwip.o
-    0x07fc7d08        -       0x00000004   Zero   RW          153    .bss.txdiv_trim     otp_cs.o
-    0x07fc7d0c   0x07fc769c   0x00000004   PAD
-    0x07fc7d10        -       0x00000700   Zero   RW           13    STACK               startup_da14531.o
+    0x07fc79c8        -       0x00000510   Zero   RW          681    .bss                da14531.lib(rf_ldo_calibration.o)
+    0x07fc7ed8        -       0x00000014   Zero   RW          220    .bss..L_MergedGlobals  trng.o
+    0x07fc7eec        -       0x00000008   Zero   RW           97    .bss..L_MergedGlobals.1  arch_system.o
+    0x07fc7ef4        -       0x00000002   Zero   RW          209    .bss.cal_val        adc_531.o
+    0x07fc7ef6        -       0x0000002a   Zero   RW          339    .bss.calibration_res  rf_531.o
+    0x07fc7f20        -       0x00000100   Zero   RW           42    .bss.current_msg_buffer  arch_console.o
+    0x07fc8020        -       0x00000004   Zero   RW          340    .bss.fsm_ctrl_reg   rf_531.o
+    0x07fc8024        -       0x00000004   Zero   RW           95    .bss.otp_hdr_timestamp  arch_system.o
+    0x07fc8028        -       0x00000002   Zero   RW          171    .bss.syscntl_dcdc_state  syscntl.o
+    0x07fc802a   0x07fc79c4   0x00000002   PAD
+    0x07fc802c        -       0x00000004   Zero   RW          318    .bss.twext_value    rwip.o
+    0x07fc8030        -       0x00000004   Zero   RW          153    .bss.txdiv_trim     otp_cs.o
+    0x07fc8034   0x07fc79c4   0x00000004   PAD
+    0x07fc8038        -       0x00000700   Zero   RW           13    STACK               startup_da14531.o
 
 
-    Execution Region ER_NZI (Exec base: 0x07fc8410, Load base: 0x07fc769c, Size: 0x0000040c, Max: 0xffffffff, ABSOLUTE, UNINIT)
+    Execution Region ER_NZI (Exec base: 0x07fc8738, Load base: 0x07fc79c4, Size: 0x0000040c, Max: 0xffffffff, ABSOLUTE, UNINIT)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x07fc8410        -       0x0000040c   Zero   RW           71    .bss.heap_mem_area_not_ret  jump_table.o
+    0x07fc8738        -       0x0000040c   Zero   RW           71    .bss.heap_mem_area_not_ret  jump_table.o
 
 
-    Execution Region ER_STATEFUL_HIBERNATION (Exec base: 0x07fc881c, Load base: 0x07fc769c, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE, UNINIT)
+    Execution Region ER_STATEFUL_HIBERNATION (Exec base: 0x07fc8b44, Load base: 0x07fc79c4, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE, UNINIT)
 
     **** No section assigned to this execution region ****
 
@@ -3395,21 +3436,21 @@ Memory Map of the image
     0x07fc8d48        -       0x00000001   Zero   RW          278    .bss.retention_mem_area0  hw_otpc_531.o
     0x07fc8d49   0x07fc8bc0   0x00000003   PAD
     0x07fc8d4c        -       0x00000038   Zero   RW          289    .bss.retention_mem_area0  i2c.o
-    0x07fc8d84        -       0x00000008   Zero   RW          300    .bss.retention_mem_area0  rwble.o
-    0x07fc8d8c        -       0x0000000c   Zero   RW          309    .bss.retention_mem_area0  rwip.o
-    0x07fc8d98        -       0x00000002   Zero   RW          321    .bss.retention_mem_area0  ble_arp.o
+    0x07fc8d84        -       0x00000008   Zero   RW          308    .bss.retention_mem_area0  rwble.o
+    0x07fc8d8c        -       0x0000000c   Zero   RW          317    .bss.retention_mem_area0  rwip.o
+    0x07fc8d98        -       0x00000002   Zero   RW          329    .bss.retention_mem_area0  ble_arp.o
     0x07fc8d9a   0x07fc8bc0   0x00000002   PAD
-    0x07fc8d9c        -       0x00000008   Zero   RW          333    .bss.retention_mem_area0  rf_531.o
-    0x07fc8da4        -       0x00000030   Zero   RW          435    .bss.retention_mem_area0  prf.o
-    0x07fc8dd4        -       0x0000005c   Zero   RW          458    .bss.retention_mem_area0  app.o
-    0x07fc8e30        -       0x00000001   Zero   RW          469    .bss.retention_mem_area0  app_task.o
+    0x07fc8d9c        -       0x00000008   Zero   RW          341    .bss.retention_mem_area0  rf_531.o
+    0x07fc8da4        -       0x00000030   Zero   RW          443    .bss.retention_mem_area0  prf.o
+    0x07fc8dd4        -       0x0000005c   Zero   RW          466    .bss.retention_mem_area0  app.o
+    0x07fc8e30        -       0x00000001   Zero   RW          477    .bss.retention_mem_area0  app_task.o
     0x07fc8e31   0x07fc8bc0   0x00000001   PAD
-    0x07fc8e32        -       0x0000007a   Zero   RW          478    .bss.retention_mem_area0  app_security.o
-    0x07fc8eac        -       0x00000016   Zero   RW          539    .bss.retention_mem_area0  app_easy_msg_utils.o
+    0x07fc8e32        -       0x0000007a   Zero   RW          486    .bss.retention_mem_area0  app_security.o
+    0x07fc8eac        -       0x00000016   Zero   RW          547    .bss.retention_mem_area0  app_easy_msg_utils.o
     0x07fc8ec2   0x07fc8bc0   0x00000002   PAD
-    0x07fc8ec4        -       0x00000018   Zero   RW          548    .bss.retention_mem_area0  app_easy_security.o
-    0x07fc8edc        -       0x00000050   Zero   RW          559    .bss.retention_mem_area0  app_easy_timer.o
-    0x07fc8f2c        -       0x00000008   Zero   RW          663    .bss.retention_mem_area0  user_empty_peripheral_template.o
+    0x07fc8ec4        -       0x00000018   Zero   RW          556    .bss.retention_mem_area0  app_easy_security.o
+    0x07fc8edc        -       0x00000050   Zero   RW          567    .bss.retention_mem_area0  app_easy_timer.o
+    0x07fc8f2c        -       0x00000008   Zero   RW          671    .bss.retention_mem_area0  user_empty_peripheral_template.o
 
 
     Execution Region RET_HEAP_DB (Exec base: 0x07fc8f34, Load base: 0x07fc8bc0, Size: 0x0000040c, Max: 0xffffffff, ABSOLUTE, UNINIT)
@@ -3531,16 +3572,17 @@ Image component sizes
        136         20          0          0          0       2399   system_da14531.o
         96         56         24          0          6       1603   system_library_531.o
        180         24          0          0          4       1790   systick.o
+       208         36          0          0          0       1959   timer2.o
        132         28          0          0         24       1334   trng.o
       1160        124          0          0         64      15252   uart.o
          0          0       1309          0          0       2280   user_custs1_def.o
          0          0         56          0          0       3022   user_custs_config.o
-       116         16         77          0          8       3656   user_empty_peripheral_template.o
-       308         24         24          0          0       7128   user_periph_setup.o
+       536         96         85          0          8       7844   user_empty_peripheral_template.o
+       480         24         24          0          0       7189   user_periph_setup.o
        752        140          0          0         12       7205   wkupct_quadec.o
 
     ----------------------------------------------------------------------
-     23348       3334       3096         16       7380     325319   Object Totals
+     24148       3450       3104         16       7380     331527   Object Totals
          0          0         32          0         80          0   (incl. Generated)
          6          0          8          3         23          0   (incl. Padding)
 
@@ -3585,15 +3627,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     27148       3536       3096         16       8676     325479   Grand Totals
-     27148       3536       3096         16       8676     325479   ELF Image Totals
-     27148       3536       3096         16          0          0   ROM Totals
+     27948       3652       3104         16       8676     331667   Grand Totals
+     27948       3652       3104         16       8676     331667   ELF Image Totals
+     27948       3652       3104         16          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                30244 (  29.54kB)
+    Total RO  Size (Code + RO Data)                31052 (  30.32kB)
     Total RW  Size (RW Data + ZI Data)              8692 (   8.49kB)
-    Total ROM Size (Code + RO Data + RW Data)      30260 (  29.55kB)
+    Total ROM Size (Code + RO Data + RW Data)      31068 (  30.34kB)
 
 ==============================================================================
 

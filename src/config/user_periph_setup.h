@@ -26,10 +26,21 @@
 
 // Albert: define UVP circuit pins
 // note that pin 9 is the LED pin for USB devkit by default
+// not sure what ports do so left it alone at port 0, seems to be the default for most things
 #define UVP_TRIGGER_PORT            GPIO_PORT_0
 #define UVP_TRIGGER_PIN             GPIO_PIN_8
-#define MAX_SHDN_PORT               GPIO_PORT_0
-#define MAX_SHDN_PIN                GPIO_PIN_9
+#define UVP_MAX_SHDN_PORT           GPIO_PORT_0
+#define UVP_MAX_SHDN_PIN            GPIO_PIN_9
+
+// Albert: define ADC pins
+#define ADC_INPUT_PORT              GPIO_PORT_0
+#define ADC_INPUT_PIN               GPIO_PIN_6
+
+//Albert: define PWM pins
+#define PWM2_PORT               GPIO_PORT_0
+#define PWM2_PIN                GPIO_PIN_7
+#define PWM3_PORT               GPIO_PORT_0
+#define PWM3_PIN                GPIO_PIN_11
 
 /*
  ****************************************************************************************

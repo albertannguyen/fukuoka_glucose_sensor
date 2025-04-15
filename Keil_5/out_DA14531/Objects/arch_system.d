@@ -104,6 +104,8 @@
   ..\..\..\..\..\sdk\app_modules\api\app_prf_types.h \
   ..\..\..\..\..\sdk\app_modules\api\app_bond_db.h \
   ..\src\user_empty_peripheral_template.h \
+  ..\..\..\..\..\sdk\platform\driver\timer\timer0_2.h \
+  ..\..\..\..\..\sdk\platform\driver\timer\timer2.h \
   ..\..\..\..\..\sdk\ble_stack\controller\llc\llc.h \
   ..\..\..\..\..\sdk\ble_stack\controller\llc\llc_task.h \
   ..\..\..\..\..\sdk\ble_stack\controller\llc\llc_cntl.h \
