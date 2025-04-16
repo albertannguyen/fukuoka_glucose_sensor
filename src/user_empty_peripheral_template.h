@@ -63,7 +63,23 @@ void gpadc_timer_cb(void);
 
 // Albert: PWM functions
 void timer2_pwm_init(tim0_2_clk_div_t clk_div, tim2_clk_src_t clk_src, tim2_hw_pause_t hw_pause, uint16_t pwm_div);
+
+/**
+ ****************************************************************************************
+ * @brief Disconnection function.
+ * @param[in] dc_pwm2       Duty cycle of PWM2 (0% - 100%)
+ * @param[in] offset_pwm2   Offset of PWM2, delays the first rising edge (0% - 100%)
+ * @param[in] dc_pwm3       Duty cycle of PWM3 (0% - 100%)
+ * @param[in] offset_pwm3   Offset of PWM3, delays the first rising edge (0% - 100%)
+ ****************************************************************************************
+*/
 void timer2_pwm_enable(uint8_t dc_pwm2, uint8_t offset_pwm2, uint8_t dc_pwm3, uint8_t offset_pwm3);
+
+/**
+ ****************************************************************************************
+ * @brief Disable PWM output function.
+ ****************************************************************************************
+*/
 void timer2_pwm_disable(void);
 
 /**

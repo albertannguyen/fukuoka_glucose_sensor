@@ -35,6 +35,9 @@
 #include "timer0_2.h"
 #include "timer2.h"
 
+// for DCDC converter debug
+#include "syscntl.h"
+
 /*
  ****************************************************************************************
  * DEFINES
@@ -62,6 +65,9 @@ uint16_t adc_input __SECTION_ZERO("retention_mem_area0");
 uint16_t adc_input_volt __SECTION_ZERO("retention_mem_area0");
 bool adc_timer_started __SECTION_ZERO("retention_mem_area0");
 
+// DCDC converter debug variables
+syscntl_dcdc_level_t vdd __SECTION_ZERO("retention_mem_area0");
+
 /*
  ****************************************************************************************
  * UVP FUNCTIONS (Albert)
@@ -85,14 +91,16 @@ void uvp_shdn(void)
 */
 
 // ADC timer code, reads and prints to UART terminal in a callback loop
+// #FIXME reading from the ADC is constant (Raw: 552, Converted: 485 mV) even with an input
+// Raw changed to 555 when ammeter is connected
 void gpadc_timer_cb(void)
 {
-	// Read and print ADC value (validated)
+	// Read and print ADC value
 	adc_input = gpadc_collect_sample();
 	adc_input_volt = gpadc_sample_to_mv(adc_input);
 	
 	// arch_printf will only print once callback function returns
-	arch_printf("ADC voltage: %d mV\n\r", adc_input_volt);
+	arch_printf("Register Value: %d | Voltage: %d mV\n\r", adc_input, adc_input_volt);
 	
 	// Restart the timer
 	adc_timer = app_easy_timer(100, gpadc_timer_cb);
@@ -117,17 +125,20 @@ void gpadc_init(void)
 			.continuous = true,
 			// Set conversion to have no interval in continuous mode 
 			.interval_mult = 0,
+			
 			// Set no attenuation of input
-			.input_attenuator = ADC_INPUT_ATTN_NO,
+			// #WIP debug changed to 4x from 0x
+			.input_attenuator = ADC_INPUT_ATTN_4X,
 			
 			// Enable chopping algorithm, refer to datasheet
-			// #WIP check effect on ADC measurements
-			.chopping = true,
+			// #WIP debug changed to false
+			.chopping = false,
 			
-			// Enable oversampling to increase accuracy and stability
-			// #WIP check effect on ADC measurements
-			.oversampling = 7
+			// Enable max oversampling to increase accuracy and stability (7)
+			// #WIP debug changed to 0
+			.oversampling = 0
 	};
+	
 	// Initialize ADC with structure defined above
 	adc_init(&adc_config_struct);
 	// Disable input shifter (for measuring negative values)
@@ -192,8 +203,8 @@ void timer2_pwm_init(tim0_2_clk_div_t clk_div, tim2_clk_src_t clk_src, tim2_hw_p
 	// Define PWM parameters
 	uint32_t clk_freq = (clk_src == TIM2_CLK_SYS) ? SYS_CLK_FREQ_HZ : LP_CLK_FREQ_HZ,
 					 clk_div_int = (clk_div == TIM0_2_CLK_DIV_1) ? 1 :
-																(clk_div == TIM0_2_CLK_DIV_2) ? 2 :
-																(clk_div == TIM0_2_CLK_DIV_4) ? 4 : 8,
+												 (clk_div == TIM0_2_CLK_DIV_2) ? 2 :
+												 (clk_div == TIM0_2_CLK_DIV_4) ? 4 : 8,
 					 input_freq = clk_freq / clk_div_int;
 
 	// Set PWM parameters
@@ -292,19 +303,26 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id
  ****************************************************************************************
 */
 
-// Albert: user callback function that runs on startup/reset, good for running some peripherals quickly
 void user_app_on_init(void)
 {
 	// start the default initialization process for BLE user application
 	default_app_on_init();
 	
+	vdd = syscntl_dcdc_get_level();
+	adc_timer_started = false;
+	
 	// test PWM code with oscilloscope, done
+	// max voltage is 3.3 V on LP clock source, min is 0 V
+	// this is because GPIO is supplied by VBAT_HIGH or the 3.3 V LDO on devkit
+	// duty cycle is accurate, PWM2 and PWM3 duty cycles are independent of each other
 	/*
-	timer2_pwm_init(TIM0_2_CLK_DIV_1, TIM2_CLK_SYS, TIM2_HW_PAUSE_OFF, 2);
+	timer2_pwm_init(TIM0_2_CLK_DIV_8, TIM2_CLK_LP, TIM2_HW_PAUSE_OFF, MAX_PWM_DIV);
 	timer2_pwm_enable(50, 0, 25, 0);
 	*/
 	
-	// test uvp code, done
+	// test uvp code with multimeter, done
+	// if condition passes if trigger pin is driven low and turns off the MAX SHDN pin
+	// GPIO high is around 3 V, and low is 0 V
 	/*
 	uvp_trigger_status = GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN);
 	while(1){
