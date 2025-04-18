@@ -91,7 +91,6 @@ void set_pad_functions(void)
 	GPIO_ConfigurePin(ADC_INPUT_PORT, ADC_INPUT_PIN, INPUT, PID_ADC, false);
 	
 	// Albert: set PWM pins
-	// #WIP debug and check if last arguments can be false for PWM
 	GPIO_ConfigurePin(PWM2_PORT, PWM2_PIN, OUTPUT, PID_PWM2, false);
 	GPIO_ConfigurePin(PWM3_PORT, PWM3_PIN, OUTPUT, PID_PWM3, false);
 }

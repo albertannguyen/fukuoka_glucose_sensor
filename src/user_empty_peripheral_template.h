@@ -60,6 +60,7 @@ void gpadc_init(void);
 uint16_t gpadc_collect_sample(void);
 uint16_t gpadc_sample_to_mv(uint16_t sample);
 void gpadc_timer_cb(void);
+void gpadc_interrupt(void);
 
 // Albert: PWM functions
 void timer2_pwm_init(tim0_2_clk_div_t clk_div, tim2_clk_src_t clk_src, tim2_hw_pause_t hw_pause, uint16_t pwm_div);

@@ -90,9 +90,9 @@ void uvp_shdn(void)
  ****************************************************************************************
 */
 
-// ADC timer code, reads and prints to UART terminal in a callback loop
-// #FIXME single mode works but not continuous
-// Single mode output: Raw = 9, Volt = 31 mV with no connection (valid)
+// ADC main code, reads and prints to UART terminal in a timer callback loop
+// #WIP single mode works but not continuous
+// Single mode output: Raw = 9, Volt = 31 mV with no connection (valid floating output)
 void gpadc_timer_cb(void)
 {
 	// Read and print ADC value
@@ -106,7 +106,21 @@ void gpadc_timer_cb(void)
 	adc_timer = app_easy_timer(100, gpadc_timer_cb);
 }
 
-// ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF
+// #WIP email company about how to implement this as interrupt is not being triggered after conversion in continuous mode
+void gpadc_interrupt(void)
+{
+	// Read and print ADC value
+	adc_input = gpadc_collect_sample();
+	adc_input_volt = gpadc_sample_to_mv(adc_input);
+	
+	// arch_printf will only print once callback function returns
+	arch_printf("Register Value: %d | Voltage: %d mV\n\r", adc_input, adc_input_volt);
+	
+	// Clear the interrupt
+	adc_clear_interrupt();
+}
+
+// #TODO play with settings and see which gives the most accurate reading
 void gpadc_init(void)
 {
 	// ADC config structure, details about range of inputs for parameters found in adc_531.h
@@ -117,29 +131,29 @@ void gpadc_init(void)
 			// Set pin 6 for single ended input mode
 			.input = ADC_INPUT_SE_P0_6,
 		
-			// Sets sample time multiplier
-			// #WIP check effect on ADC measurements
-			.smpl_time_mult = 2,
+			// Sets sample time multiplier, see adc_set_sample_time
+			.smpl_time_mult = 2, // set at lowest for highest sampling rate
 		
 			// Set continuous measurement mode
 			.continuous = false,
-			// Set conversion to have no interval in continuous mode 
+			// Set interval time between conversions, see adc_set_interval
 			.interval_mult = 0,
 			
-			// Set no attenuation of input
-			// #WIP debug changed to 4x from 0x
-			.input_attenuator = ADC_INPUT_ATTN_4X,
+			// Set attenuation factor
+			.input_attenuator = ADC_INPUT_ATTN_4X, // less noise
 			
 			// Enable chopping algorithm, refer to datasheet
-			// #WIP debug changed to false
-			.chopping = false,
+			.chopping = false, // more accuracy at cost of sampling rate
 			
-			// Enable max oversampling to increase accuracy and stability (7)
-			// #WIP debug changed to 0
-			.oversampling = 0
+			// Set oversampling mode, see adc_set_oversampling
+			.oversampling = 0 // not necessary as stated by grad student Jialiang
 	};
 	
-	// Disable input shifter (for measuring negative values)
+	// Initialize ADC with structure defined above
+	// ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF
+	adc_init(&adc_config_struct);
+	
+	// Disable input shifter (only used for measuring negative values)
 	adc_input_shift_disable();
 	// Disable die temperature sensor
 	adc_temp_sensor_disable();
@@ -148,16 +162,16 @@ void gpadc_init(void)
 	adc_reset_offsets();
 	adc_offset_calibrate(ADC_INPUT_MODE_SINGLE_ENDED);
 	
-	// Initialize ADC with structure defined above
-	adc_init(&adc_config_struct);
-
-	// #WIP consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
+	// #TODO Register interrupt function to be used when ADC is on in continuous mode
+	// adc_register_interrupt(gpadc_interrupt);
+	
+	// consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
 }
 
 uint16_t gpadc_collect_sample(void)
 {
-	// Details on adc_get_sample() is in adc_531.c, not in the header file
-	// adc_get_sample() will stall if in continuous mode due to ADC always being busy, which is why it is not used here
+	// adc_get_sample() is only for single mode
+	
 	// Read data from ADC register, which always holds the latest conversion results and can be read at any time
 	
 	// Single mode operation
@@ -169,7 +183,7 @@ uint16_t gpadc_collect_sample(void)
 	return (sample);
 }
 
-// code taken and adjusted from ADC peripheral driver example section 10
+// code snippet given by Renesas
 uint16_t gpadc_sample_to_mv(uint16_t sample)
 {
     // Effective resolution of ADC sample based on oversampling rate	
@@ -313,10 +327,11 @@ void user_app_on_init(void)
 	// start the default initialization process for BLE user application
 	default_app_on_init();
 	
+	// #TODO make changes to DCDC converter and observe how it changes output of GPIOs
 	vdd = syscntl_dcdc_get_level();
 	adc_timer_started = false;
 	
-	// test PWM code with oscilloscope, done
+	// PWM test code
 	// max voltage is 3.3 V on LP clock source, min is 0 V
 	// this is because GPIO is supplied by VBAT_HIGH or the 3.3 V LDO on devkit
 	// duty cycle is accurate, PWM2 and PWM3 duty cycles are independent of each other
@@ -325,7 +340,7 @@ void user_app_on_init(void)
 	timer2_pwm_enable(50, 0, 25, 0);
 	*/
 	
-	// test uvp code with multimeter, done
+	// UVP test code
 	// if condition passes if trigger pin is driven low and turns off the MAX SHDN pin
 	// GPIO high is around 3 V, and low is 0 V
 	/*
