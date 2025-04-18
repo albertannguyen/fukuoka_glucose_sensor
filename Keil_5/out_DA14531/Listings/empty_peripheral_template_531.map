@@ -313,7 +313,7 @@ Section Cross References
     user_empty_peripheral_template.o(.text) refers to gpio.o(.text) for GPIO_GetPinStatus
     user_empty_peripheral_template.o(.text) refers to app_easy_timer.o(.text) for app_easy_timer
     user_empty_peripheral_template.o(.text) refers to user_empty_peripheral_template.o(.bss.retention_mem_area0) for [Anonymous Symbol]
-    user_empty_peripheral_template.o(.text) refers to adc_531.o(.text) for adc_correct_sample
+    user_empty_peripheral_template.o(.text) refers to adc_531.o(.text) for adc_get_sample
     user_empty_peripheral_template.o(.text) refers to timer2.o(.text) for timer2_config
     user_empty_peripheral_template.o(.text) refers to user_empty_peripheral_template.o(.rodata.str1.1) for [Anonymous Symbol]
     user_empty_peripheral_template.o(.text) refers to app_default_handlers.o(.text) for default_app_on_connection
@@ -1550,126 +1550,125 @@ Image Symbol Table
     [Anonymous Symbol]                       0x07fc5b94   Section        0  user_empty_peripheral_template.o(.text)
     __arm_cp.1_0                             0x07fc5bd4   Number         4  user_empty_peripheral_template.o(.text)
     __arm_cp.1_2                             0x07fc5c00   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.2_0                             0x07fc5c10   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.3_0                             0x07fc5c44   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.4_0                             0x07fc5c74   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.4_1                             0x07fc5c78   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.4_2                             0x07fc5c7c   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.5_0                             0x07fc5cec   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.5_1                             0x07fc5cf0   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.5_2                             0x07fc5cf4   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.6_0                             0x07fc5d30   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.6_1                             0x07fc5d34   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.7_0                             0x07fc5d50   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.7_1                             0x07fc5d54   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.8_0                             0x07fc5d80   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.8_1                             0x07fc5d84   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.10_0                            0x07fc5db0   Number         4  user_empty_peripheral_template.o(.text)
-    __arm_cp.11_0                            0x07fc5dc8   Number         4  user_empty_peripheral_template.o(.text)
-    .text                                    0x07fc5dcc   Section        0  patch_1.o(.text)
-    _ldo_filter_violations                   0x07fc67b9   Thumb Code   158  rf_ldo_calibration.o(.text)
-    .text                                    0x07fc67b8   Section        0  rf_ldo_calibration.o(.text)
-    _ldo_radio_calibration                   0x07fc6857   Thumb Code   722  rf_ldo_calibration.o(.text)
-    .text                                    0x07fc6b78   Section        0  rf_diag.o(.text)
-    .text                                    0x07fc6be4   Section        0  common.o(.text)
-    loop                                     0x07fc6c21   Thumb Code     0  arch_asm.o(.text)
-    .text                                    0x07fc6c20   Section       32  arch_asm.o(.text)
-    exit                                     0x07fc6c3f   Thumb Code     0  arch_asm.o(.text)
-    .text                                    0x07fc6c40   Section       48  init.o(.text)
-    __tagsym$$used.0                         0x07fc6c70   Number         0  hardfault_handler.o(.text.HardFault_HandlerC)
-    [Anonymous Symbol]                       0x07fc6c70   Section        0  hardfault_handler.o(.text.HardFault_HandlerC)
-    __arm_cp.0_2                             0x07fc6cf4   Number         4  hardfault_handler.o(.text.HardFault_HandlerC)
-    __tagsym$$used.0                         0x07fc6cf8   Number         0  nmi_handler.o(.text.NMI_HandlerC)
-    [Anonymous Symbol]                       0x07fc6cf8   Section        0  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_0                             0x07fc6d9c   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_1                             0x07fc6da0   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_2                             0x07fc6da4   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_4                             0x07fc6da8   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_5                             0x07fc6dac   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    __arm_cp.0_6                             0x07fc6db0   Number         4  nmi_handler.o(.text.NMI_HandlerC)
-    i.__scatterload_copy                     0x07fc6db4   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x07fc6dc2   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x07fc6dc4   Section       14  handlers.o(i.__scatterload_zeroinit)
-    [Anonymous Symbol]                       0x07fc6dd4   Section        0  system_da14531.o(system_DA14xxx)
-    __arm_cp.1_0                             0x07fc6e48   Number         4  system_da14531.o(system_DA14xxx)
-    __arm_cp.1_1                             0x07fc6e4c   Number         4  system_da14531.o(system_DA14xxx)
-    __arm_cp.1_2                             0x07fc6e50   Number         4  system_da14531.o(system_DA14xxx)
-    __arm_cp.1_3                             0x07fc6e54   Number         4  system_da14531.o(system_DA14xxx)
-    __arm_cp.1_4                             0x07fc6e58   Number         4  system_da14531.o(system_DA14xxx)
-    SVC1_ADC_VAL_1_UUID_128                  0x07fc6e5c   Data          16  user_custs1_def.o(.rodata.SVC1_ADC_VAL_1_UUID_128)
-    [Anonymous Symbol]                       0x07fc6e5c   Section        0  user_custs1_def.o(.rodata.SVC1_ADC_VAL_1_UUID_128)
-    SVC1_ADC_VAL_2_UUID_128                  0x07fc6e6c   Data          16  user_custs1_def.o(.rodata.SVC1_ADC_VAL_2_UUID_128)
-    [Anonymous Symbol]                       0x07fc6e6c   Section        0  user_custs1_def.o(.rodata.SVC1_ADC_VAL_2_UUID_128)
-    SVC1_BUTTON_STATE_UUID_128               0x07fc6e7c   Data          16  user_custs1_def.o(.rodata.SVC1_BUTTON_STATE_UUID_128)
-    [Anonymous Symbol]                       0x07fc6e7c   Section        0  user_custs1_def.o(.rodata.SVC1_BUTTON_STATE_UUID_128)
-    SVC1_CTRL_POINT_UUID_128                 0x07fc6e8c   Data          16  user_custs1_def.o(.rodata.SVC1_CTRL_POINT_UUID_128)
-    [Anonymous Symbol]                       0x07fc6e8c   Section        0  user_custs1_def.o(.rodata.SVC1_CTRL_POINT_UUID_128)
-    SVC1_INDICATEABLE_UUID_128               0x07fc6e9c   Data          16  user_custs1_def.o(.rodata.SVC1_INDICATEABLE_UUID_128)
-    [Anonymous Symbol]                       0x07fc6e9c   Section        0  user_custs1_def.o(.rodata.SVC1_INDICATEABLE_UUID_128)
-    SVC1_LED_STATE_UUID_128                  0x07fc6eac   Data          16  user_custs1_def.o(.rodata.SVC1_LED_STATE_UUID_128)
-    [Anonymous Symbol]                       0x07fc6eac   Section        0  user_custs1_def.o(.rodata.SVC1_LED_STATE_UUID_128)
-    SVC1_LONG_VALUE_UUID_128                 0x07fc6ebc   Data          16  user_custs1_def.o(.rodata.SVC1_LONG_VALUE_UUID_128)
-    [Anonymous Symbol]                       0x07fc6ebc   Section        0  user_custs1_def.o(.rodata.SVC1_LONG_VALUE_UUID_128)
-    SVC2_WRITE_VAL_1_UUID_128                0x07fc6ecc   Data          16  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_1_UUID_128)
-    [Anonymous Symbol]                       0x07fc6ecc   Section        0  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_1_UUID_128)
-    SVC2_WRITE_VAL_2_UUID_128                0x07fc6edc   Data          16  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_2_UUID_128)
-    [Anonymous Symbol]                       0x07fc6edc   Section        0  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_2_UUID_128)
-    SVC3_READ_VAL_1_UUID_128                 0x07fc6eec   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_1_UUID_128)
-    [Anonymous Symbol]                       0x07fc6eec   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_1_UUID_128)
-    SVC3_READ_VAL_2_UUID_128                 0x07fc6efc   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_2_UUID_128)
-    [Anonymous Symbol]                       0x07fc6efc   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_2_UUID_128)
-    SVC3_READ_VAL_3_UUID_128                 0x07fc6f0c   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_3_UUID_128)
-    [Anonymous Symbol]                       0x07fc6f0c   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_3_UUID_128)
-    TASK_DESC_APP                            0x07fc6f1c   Data          16  app.o(.rodata.TASK_DESC_APP)
-    [Anonymous Symbol]                       0x07fc6f1c   Section        0  app.o(.rodata.TASK_DESC_APP)
-    app_diss_process_handlers                0x07fc6f2c   Data           8  app_diss_task.o(.rodata.app_diss_process_handlers)
-    [Anonymous Symbol]                       0x07fc6f2c   Section        0  app_diss_task.o(.rodata.app_diss_process_handlers)
-    app_gap_process_handlers                 0x07fc6f34   Data         112  app_task.o(.rodata.app_gap_process_handlers)
-    [Anonymous Symbol]                       0x07fc6f34   Section        0  app_task.o(.rodata.app_gap_process_handlers)
-    app_sec_process_handlers                 0x07fc6fc0   Data          56  app_security_task.o(.rodata.app_sec_process_handlers)
-    [Anonymous Symbol]                       0x07fc6fc0   Section        0  app_security_task.o(.rodata.app_sec_process_handlers)
-    att_decl_char                            0x07fc7068   Data           2  user_custs1_def.o(.rodata.att_decl_char)
-    [Anonymous Symbol]                       0x07fc7068   Section        0  user_custs1_def.o(.rodata.att_decl_char)
-    att_decl_svc                             0x07fc706a   Data           2  user_custs1_def.o(.rodata.att_decl_svc)
-    [Anonymous Symbol]                       0x07fc706a   Section        0  user_custs1_def.o(.rodata.att_decl_svc)
-    att_desc_cfg                             0x07fc706c   Data           2  user_custs1_def.o(.rodata.att_desc_cfg)
-    [Anonymous Symbol]                       0x07fc706c   Section        0  user_custs1_def.o(.rodata.att_desc_cfg)
-    att_desc_user_desc                       0x07fc706e   Data           2  user_custs1_def.o(.rodata.att_desc_user_desc)
-    [Anonymous Symbol]                       0x07fc706e   Section        0  user_custs1_def.o(.rodata.att_desc_user_desc)
-    custs1_svc1                              0x07fc7485   Data          16  user_custs1_def.o(.rodata.custs1_svc1)
-    [Anonymous Symbol]                       0x07fc7485   Section        0  user_custs1_def.o(.rodata.custs1_svc1)
-    custs1_svc2                              0x07fc7495   Data          16  user_custs1_def.o(.rodata.custs1_svc2)
-    [Anonymous Symbol]                       0x07fc7495   Section        0  user_custs1_def.o(.rodata.custs1_svc2)
-    custs1_svc3                              0x07fc74a5   Data          16  user_custs1_def.o(.rodata.custs1_svc3)
-    [Anonymous Symbol]                       0x07fc74a5   Section        0  user_custs1_def.o(.rodata.custs1_svc3)
-    nvds_data_storage                        0x07fc74d0   Data          14  nvds.o(.rodata.nvds_data_storage)
-    [Anonymous Symbol]                       0x07fc74d0   Section        0  nvds.o(.rodata.nvds_data_storage)
-    [Anonymous Symbol]                       0x07fc77f0   Section        0  app_diss_task.o(.rodata.str1.1)
-    [Anonymous Symbol]                       0x07fc7806   Section        0  user_custs1_def.o(.rodata.str1.1)
-    [Anonymous Symbol]                       0x07fc78a2   Section        0  user_empty_peripheral_template.o(.rodata.str1.1)
-    [Anonymous Symbol]                       0x07fc78f8   Section        0  app.o(.rodata.str1.4)
-    uart_cfg                                 0x07fc7910   Data          24  user_periph_setup.o(.rodata.uart_cfg)
-    [Anonymous Symbol]                       0x07fc7910   Section        0  user_periph_setup.o(.rodata.uart_cfg)
-    user_app_callbacks                       0x07fc7928   Data         140  app_entry_point.o(.rodata.user_app_callbacks)
-    [Anonymous Symbol]                       0x07fc7928   Section        0  app_entry_point.o(.rodata.user_app_callbacks)
-    user_security_conf                       0x07fc79b4   Data           7  app_easy_security.o(.rodata.user_security_conf)
-    [Anonymous Symbol]                       0x07fc79b4   Section        0  app_easy_security.o(.rodata.user_security_conf)
-    rfmon_samples                            0x07fc79e8   Data        1280  rf_ldo_calibration.o(.bss)
-    .bss                                     0x07fc79e8   Section     1296  rf_ldo_calibration.o(.bss)
-    NVIOL                                    0x07fc7ee8   Data          16  rf_ldo_calibration.o(.bss)
-    extra_samples                            0x07fc7ef8   Data           4  trng.o(.bss..L_MergedGlobals)
-    [Anonymous Symbol]                       0x07fc7ef8   Section        0  trng.o(.bss..L_MergedGlobals)
-    trng_bits                                0x07fc7efc   Data          16  trng.o(.bss..L_MergedGlobals)
-    [Anonymous Symbol]                       0x07fc7f0c   Section        0  arch_system.o(.bss..L_MergedGlobals.1)
-    cal_val                                  0x07fc7f14   Data           2  adc_531.o(.bss.cal_val)
-    [Anonymous Symbol]                       0x07fc7f14   Section        0  adc_531.o(.bss.cal_val)
-    current_msg_buffer                       0x07fc7f40   Data         256  arch_console.o(.bss.current_msg_buffer)
-    [Anonymous Symbol]                       0x07fc7f40   Section        0  arch_console.o(.bss.current_msg_buffer)
-    fsm_ctrl_reg                             0x07fc8040   Data           4  rf_531.o(.bss.fsm_ctrl_reg)
-    [Anonymous Symbol]                       0x07fc8040   Section        0  rf_531.o(.bss.fsm_ctrl_reg)
-    txdiv_trim                               0x07fc8050   Data           4  otp_cs.o(.bss.txdiv_trim)
-    [Anonymous Symbol]                       0x07fc8050   Section        0  otp_cs.o(.bss.txdiv_trim)
-    STACK                                    0x07fc8058   Section     1792  startup_da14531.o(STACK)
+    __arm_cp.3_0                             0x07fc5c40   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.4_0                             0x07fc5c70   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.4_1                             0x07fc5c74   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.4_2                             0x07fc5c78   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.5_0                             0x07fc5ce8   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.5_1                             0x07fc5cec   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.5_2                             0x07fc5cf0   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.6_0                             0x07fc5d2c   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.6_1                             0x07fc5d30   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.7_0                             0x07fc5d4c   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.7_1                             0x07fc5d50   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.8_0                             0x07fc5d7c   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.8_1                             0x07fc5d80   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.10_0                            0x07fc5dac   Number         4  user_empty_peripheral_template.o(.text)
+    __arm_cp.11_0                            0x07fc5dc4   Number         4  user_empty_peripheral_template.o(.text)
+    .text                                    0x07fc5dc8   Section        0  patch_1.o(.text)
+    _ldo_filter_violations                   0x07fc67b5   Thumb Code   158  rf_ldo_calibration.o(.text)
+    .text                                    0x07fc67b4   Section        0  rf_ldo_calibration.o(.text)
+    _ldo_radio_calibration                   0x07fc6853   Thumb Code   722  rf_ldo_calibration.o(.text)
+    .text                                    0x07fc6b74   Section        0  rf_diag.o(.text)
+    .text                                    0x07fc6be0   Section        0  common.o(.text)
+    loop                                     0x07fc6c1d   Thumb Code     0  arch_asm.o(.text)
+    .text                                    0x07fc6c1c   Section       32  arch_asm.o(.text)
+    exit                                     0x07fc6c3b   Thumb Code     0  arch_asm.o(.text)
+    .text                                    0x07fc6c3c   Section       48  init.o(.text)
+    __tagsym$$used.0                         0x07fc6c6c   Number         0  hardfault_handler.o(.text.HardFault_HandlerC)
+    [Anonymous Symbol]                       0x07fc6c6c   Section        0  hardfault_handler.o(.text.HardFault_HandlerC)
+    __arm_cp.0_2                             0x07fc6cf0   Number         4  hardfault_handler.o(.text.HardFault_HandlerC)
+    __tagsym$$used.0                         0x07fc6cf4   Number         0  nmi_handler.o(.text.NMI_HandlerC)
+    [Anonymous Symbol]                       0x07fc6cf4   Section        0  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_0                             0x07fc6d98   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_1                             0x07fc6d9c   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_2                             0x07fc6da0   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_4                             0x07fc6da4   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_5                             0x07fc6da8   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    __arm_cp.0_6                             0x07fc6dac   Number         4  nmi_handler.o(.text.NMI_HandlerC)
+    i.__scatterload_copy                     0x07fc6db0   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x07fc6dbe   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x07fc6dc0   Section       14  handlers.o(i.__scatterload_zeroinit)
+    [Anonymous Symbol]                       0x07fc6dd0   Section        0  system_da14531.o(system_DA14xxx)
+    __arm_cp.1_0                             0x07fc6e44   Number         4  system_da14531.o(system_DA14xxx)
+    __arm_cp.1_1                             0x07fc6e48   Number         4  system_da14531.o(system_DA14xxx)
+    __arm_cp.1_2                             0x07fc6e4c   Number         4  system_da14531.o(system_DA14xxx)
+    __arm_cp.1_3                             0x07fc6e50   Number         4  system_da14531.o(system_DA14xxx)
+    __arm_cp.1_4                             0x07fc6e54   Number         4  system_da14531.o(system_DA14xxx)
+    SVC1_ADC_VAL_1_UUID_128                  0x07fc6e58   Data          16  user_custs1_def.o(.rodata.SVC1_ADC_VAL_1_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e58   Section        0  user_custs1_def.o(.rodata.SVC1_ADC_VAL_1_UUID_128)
+    SVC1_ADC_VAL_2_UUID_128                  0x07fc6e68   Data          16  user_custs1_def.o(.rodata.SVC1_ADC_VAL_2_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e68   Section        0  user_custs1_def.o(.rodata.SVC1_ADC_VAL_2_UUID_128)
+    SVC1_BUTTON_STATE_UUID_128               0x07fc6e78   Data          16  user_custs1_def.o(.rodata.SVC1_BUTTON_STATE_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e78   Section        0  user_custs1_def.o(.rodata.SVC1_BUTTON_STATE_UUID_128)
+    SVC1_CTRL_POINT_UUID_128                 0x07fc6e88   Data          16  user_custs1_def.o(.rodata.SVC1_CTRL_POINT_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e88   Section        0  user_custs1_def.o(.rodata.SVC1_CTRL_POINT_UUID_128)
+    SVC1_INDICATEABLE_UUID_128               0x07fc6e98   Data          16  user_custs1_def.o(.rodata.SVC1_INDICATEABLE_UUID_128)
+    [Anonymous Symbol]                       0x07fc6e98   Section        0  user_custs1_def.o(.rodata.SVC1_INDICATEABLE_UUID_128)
+    SVC1_LED_STATE_UUID_128                  0x07fc6ea8   Data          16  user_custs1_def.o(.rodata.SVC1_LED_STATE_UUID_128)
+    [Anonymous Symbol]                       0x07fc6ea8   Section        0  user_custs1_def.o(.rodata.SVC1_LED_STATE_UUID_128)
+    SVC1_LONG_VALUE_UUID_128                 0x07fc6eb8   Data          16  user_custs1_def.o(.rodata.SVC1_LONG_VALUE_UUID_128)
+    [Anonymous Symbol]                       0x07fc6eb8   Section        0  user_custs1_def.o(.rodata.SVC1_LONG_VALUE_UUID_128)
+    SVC2_WRITE_VAL_1_UUID_128                0x07fc6ec8   Data          16  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_1_UUID_128)
+    [Anonymous Symbol]                       0x07fc6ec8   Section        0  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_1_UUID_128)
+    SVC2_WRITE_VAL_2_UUID_128                0x07fc6ed8   Data          16  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_2_UUID_128)
+    [Anonymous Symbol]                       0x07fc6ed8   Section        0  user_custs1_def.o(.rodata.SVC2_WRITE_VAL_2_UUID_128)
+    SVC3_READ_VAL_1_UUID_128                 0x07fc6ee8   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_1_UUID_128)
+    [Anonymous Symbol]                       0x07fc6ee8   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_1_UUID_128)
+    SVC3_READ_VAL_2_UUID_128                 0x07fc6ef8   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_2_UUID_128)
+    [Anonymous Symbol]                       0x07fc6ef8   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_2_UUID_128)
+    SVC3_READ_VAL_3_UUID_128                 0x07fc6f08   Data          16  user_custs1_def.o(.rodata.SVC3_READ_VAL_3_UUID_128)
+    [Anonymous Symbol]                       0x07fc6f08   Section        0  user_custs1_def.o(.rodata.SVC3_READ_VAL_3_UUID_128)
+    TASK_DESC_APP                            0x07fc6f18   Data          16  app.o(.rodata.TASK_DESC_APP)
+    [Anonymous Symbol]                       0x07fc6f18   Section        0  app.o(.rodata.TASK_DESC_APP)
+    app_diss_process_handlers                0x07fc6f28   Data           8  app_diss_task.o(.rodata.app_diss_process_handlers)
+    [Anonymous Symbol]                       0x07fc6f28   Section        0  app_diss_task.o(.rodata.app_diss_process_handlers)
+    app_gap_process_handlers                 0x07fc6f30   Data         112  app_task.o(.rodata.app_gap_process_handlers)
+    [Anonymous Symbol]                       0x07fc6f30   Section        0  app_task.o(.rodata.app_gap_process_handlers)
+    app_sec_process_handlers                 0x07fc6fbc   Data          56  app_security_task.o(.rodata.app_sec_process_handlers)
+    [Anonymous Symbol]                       0x07fc6fbc   Section        0  app_security_task.o(.rodata.app_sec_process_handlers)
+    att_decl_char                            0x07fc7064   Data           2  user_custs1_def.o(.rodata.att_decl_char)
+    [Anonymous Symbol]                       0x07fc7064   Section        0  user_custs1_def.o(.rodata.att_decl_char)
+    att_decl_svc                             0x07fc7066   Data           2  user_custs1_def.o(.rodata.att_decl_svc)
+    [Anonymous Symbol]                       0x07fc7066   Section        0  user_custs1_def.o(.rodata.att_decl_svc)
+    att_desc_cfg                             0x07fc7068   Data           2  user_custs1_def.o(.rodata.att_desc_cfg)
+    [Anonymous Symbol]                       0x07fc7068   Section        0  user_custs1_def.o(.rodata.att_desc_cfg)
+    att_desc_user_desc                       0x07fc706a   Data           2  user_custs1_def.o(.rodata.att_desc_user_desc)
+    [Anonymous Symbol]                       0x07fc706a   Section        0  user_custs1_def.o(.rodata.att_desc_user_desc)
+    custs1_svc1                              0x07fc7481   Data          16  user_custs1_def.o(.rodata.custs1_svc1)
+    [Anonymous Symbol]                       0x07fc7481   Section        0  user_custs1_def.o(.rodata.custs1_svc1)
+    custs1_svc2                              0x07fc7491   Data          16  user_custs1_def.o(.rodata.custs1_svc2)
+    [Anonymous Symbol]                       0x07fc7491   Section        0  user_custs1_def.o(.rodata.custs1_svc2)
+    custs1_svc3                              0x07fc74a1   Data          16  user_custs1_def.o(.rodata.custs1_svc3)
+    [Anonymous Symbol]                       0x07fc74a1   Section        0  user_custs1_def.o(.rodata.custs1_svc3)
+    nvds_data_storage                        0x07fc74cc   Data          14  nvds.o(.rodata.nvds_data_storage)
+    [Anonymous Symbol]                       0x07fc74cc   Section        0  nvds.o(.rodata.nvds_data_storage)
+    [Anonymous Symbol]                       0x07fc77ec   Section        0  app_diss_task.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x07fc7802   Section        0  user_custs1_def.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x07fc789e   Section        0  user_empty_peripheral_template.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x07fc78f4   Section        0  app.o(.rodata.str1.4)
+    uart_cfg                                 0x07fc790c   Data          24  user_periph_setup.o(.rodata.uart_cfg)
+    [Anonymous Symbol]                       0x07fc790c   Section        0  user_periph_setup.o(.rodata.uart_cfg)
+    user_app_callbacks                       0x07fc7924   Data         140  app_entry_point.o(.rodata.user_app_callbacks)
+    [Anonymous Symbol]                       0x07fc7924   Section        0  app_entry_point.o(.rodata.user_app_callbacks)
+    user_security_conf                       0x07fc79b0   Data           7  app_easy_security.o(.rodata.user_security_conf)
+    [Anonymous Symbol]                       0x07fc79b0   Section        0  app_easy_security.o(.rodata.user_security_conf)
+    rfmon_samples                            0x07fc79e0   Data        1280  rf_ldo_calibration.o(.bss)
+    .bss                                     0x07fc79e0   Section     1296  rf_ldo_calibration.o(.bss)
+    NVIOL                                    0x07fc7ee0   Data          16  rf_ldo_calibration.o(.bss)
+    extra_samples                            0x07fc7ef0   Data           4  trng.o(.bss..L_MergedGlobals)
+    [Anonymous Symbol]                       0x07fc7ef0   Section        0  trng.o(.bss..L_MergedGlobals)
+    trng_bits                                0x07fc7ef4   Data          16  trng.o(.bss..L_MergedGlobals)
+    [Anonymous Symbol]                       0x07fc7f04   Section        0  arch_system.o(.bss..L_MergedGlobals.1)
+    cal_val                                  0x07fc7f0c   Data           2  adc_531.o(.bss.cal_val)
+    [Anonymous Symbol]                       0x07fc7f0c   Section        0  adc_531.o(.bss.cal_val)
+    current_msg_buffer                       0x07fc7f38   Data         256  arch_console.o(.bss.current_msg_buffer)
+    [Anonymous Symbol]                       0x07fc7f38   Section        0  arch_console.o(.bss.current_msg_buffer)
+    fsm_ctrl_reg                             0x07fc8038   Data           4  rf_531.o(.bss.fsm_ctrl_reg)
+    [Anonymous Symbol]                       0x07fc8038   Section        0  rf_531.o(.bss.fsm_ctrl_reg)
+    txdiv_trim                               0x07fc8048   Data           4  otp_cs.o(.bss.txdiv_trim)
+    [Anonymous Symbol]                       0x07fc8048   Section        0  otp_cs.o(.bss.txdiv_trim)
+    STACK                                    0x07fc8050   Section     1792  startup_da14531.o(STACK)
     current_msg_offset                       0x07fc8bc0   Data           1  arch_console.o(.bss.retention_mem_area0)
     [Anonymous Symbol]                       0x07fc8bc0   Section        0  arch_console.o(.bss.retention_mem_area0)
     uart_busy                                0x07fc8bc1   Data           1  arch_console.o(.bss.retention_mem_area0)
@@ -1756,7 +1755,7 @@ Image Symbol Table
     sb_read_otp_header                        - Undefined Weak Reference
     sb_set_debugger_mode                      - Undefined Weak Reference
     __Vectors_Size                           0x000000a0   Number         0  startup_da14531.o ABSOLUTE
-    Image$$ER_IROM3$$Length                  0x000078d4   Number         0  anon$$obj.o ABSOLUTE
+    Image$$ER_IROM3$$Length                  0x000078d0   Number         0  anon$$obj.o ABSOLUTE
     uECC_vli_add                             0x07f02001   Thumb Code     0  da14531_symbols.txt ABSOLUTE
     uECC_vli_sub                             0x07f02019   Thumb Code     0  da14531_symbols.txt ABSOLUTE
     uECC_vli_mult                            0x07f02035   Thumb Code     0  da14531_symbols.txt ABSOLUTE
@@ -2986,75 +2985,75 @@ Image Symbol Table
     uvp_shdn                                 0x07fc5b95   Thumb Code    24  user_empty_peripheral_template.o(.text)
     gpadc_timer_cb                           0x07fc5bad   Thumb Code    40  user_empty_peripheral_template.o(.text)
     gpadc_collect_sample                     0x07fc5c05   Thumb Code    12  user_empty_peripheral_template.o(.text)
-    gpadc_sample_to_mv                       0x07fc5c15   Thumb Code    48  user_empty_peripheral_template.o(.text)
-    gpadc_init                               0x07fc5c49   Thumb Code    44  user_empty_peripheral_template.o(.text)
-    timer2_pwm_init                          0x07fc5c81   Thumb Code   108  user_empty_peripheral_template.o(.text)
-    timer2_pwm_enable                        0x07fc5cf9   Thumb Code    56  user_empty_peripheral_template.o(.text)
-    timer2_pwm_disable                       0x07fc5d39   Thumb Code    24  user_empty_peripheral_template.o(.text)
-    user_on_connection                       0x07fc5d59   Thumb Code    40  user_empty_peripheral_template.o(.text)
-    user_on_disconnect                       0x07fc5d89   Thumb Code     8  user_empty_peripheral_template.o(.text)
-    user_catch_rest_hndl                     0x07fc5d91   Thumb Code    32  user_empty_peripheral_template.o(.text)
-    user_app_on_init                         0x07fc5db5   Thumb Code    20  user_empty_peripheral_template.o(.text)
-    JT_lld_test_mode_rx_func                 0x07fc5dcd   Thumb Code   142  patch_1.o(.text)
-    JT_l2cc_pdu_unpack_func                  0x07fc5e5b   Thumb Code   786  patch_1.o(.text)
-    JT_l2cc_pdu_recv_ind_handler_func        0x07fc616d   Thumb Code    72  patch_1.o(.text)
-    PATCHED_llm_con_req_ind                  0x07fc61b5   Thumb Code   814  patch_1.o(.text)
-    PATCHED_smpc_recv_pair_rand_pdu          0x07fc64e3   Thumb Code   272  patch_1.o(.text)
-    PATCHED_smpc_recv_public_key_exchange_pdu 0x07fc65f3   Thumb Code   106  patch_1.o(.text)
-    PATCHED_llc_data_ind_handler             0x07fc665d   Thumb Code   176  patch_1.o(.text)
-    lld_drop_packet_fix                      0x07fc670d   Thumb Code    64  patch_1.o(.text)
-    PATCHED_lld_data_ind_handler             0x07fc674d   Thumb Code    58  patch_1.o(.text)
-    patch_data1                              0x07fc6787   Thumb Code    12  patch_1.o(.text)
-    patch_data2                              0x07fc6793   Thumb Code     2  patch_1.o(.text)
-    patch_global_vars_init                   0x07fc6795   Thumb Code     2  patch_1.o(.text)
-    rf_ldo_calibration                       0x07fc6b29   Thumb Code    36  rf_ldo_calibration.o(.text)
-    enable_rf_diag_irq                       0x07fc6b79   Thumb Code    92  rf_diag.o(.text)
-    _WAIT                                    0x07fc6be5   Thumb Code    10  common.o(.text)
-    _WAIT10                                  0x07fc6bef   Thumb Code    10  common.o(.text)
-    _WAIT100                                 0x07fc6bf9   Thumb Code    10  common.o(.text)
-    _WAIT400                                 0x07fc6c03   Thumb Code    10  common.o(.text)
-    _WAIT1000                                0x07fc6c0d   Thumb Code    10  common.o(.text)
-    arch_asm_delay_us                        0x07fc6c21   Thumb Code    32  arch_asm.o(.text)
-    __scatterload                            0x07fc6c41   Thumb Code    38  init.o(.text)
-    __scatterload_rt2                        0x07fc6c41   Thumb Code     0  init.o(.text)
-    HardFault_HandlerC                       0x07fc6c71   Thumb Code   132  hardfault_handler.o(.text.HardFault_HandlerC)
-    NMI_HandlerC                             0x07fc6cf9   Thumb Code   164  nmi_handler.o(.text.NMI_HandlerC)
-    __scatterload_copy                       0x07fc6db5   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x07fc6dc3   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x07fc6dc5   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    SystemInit                               0x07fc6dd5   Thumb Code   116  system_da14531.o(system_DA14xxx)
-    app_process_handlers                     0x07fc6fa4   Data          28  app_entry_point.o(.rodata.app_process_handlers)
-    arp_init_table                           0x07fc6ff8   Data         112  ble_arp.o(.rodata.arp_init_table)
-    catch_rest                               0x07fc7070   Data           4  app_entry_point.o(.rodata.catch_rest)
-    cust_prf_funcs                           0x07fc7074   Data          56  user_custs_config.o(.rodata.cust_prf_funcs)
-    custs1_att_db                            0x07fc70ac   Data         900  user_custs1_def.o(.rodata.custs1_att_db)
-    custs1_default_handler                   0x07fc7430   Data           8  custs1_task.o(.rodata.custs1_default_handler)
-    custs1_default_state                     0x07fc7438   Data          72  custs1_task.o(.rodata.custs1_default_state)
-    custs1_services                          0x07fc7480   Data           4  user_custs1_def.o(.rodata.custs1_services)
-    custs1_services_size                     0x07fc7484   Data           1  user_custs1_def.o(.rodata.custs1_services_size)
-    my_custom_msg_handlers                   0x07fc74b8   Data          24  system_library_531.o(.rodata.my_custom_msg_handlers)
-    prf_funcs                                0x07fc74e0   Data          24  app.o(.rodata.prf_funcs)
-    prf_if                                   0x07fc74f8   Data          24  prf.o(.rodata.prf_if)
-    rom_app_task_cfg                         0x07fc7510   Data          32  app_entry_point.o(.rodata.rom_app_task_cfg)
-    rom_cfg_table_var                        0x07fc7530   Data         236  jump_table.o(.rodata.rom_cfg_table_var)
-    rom_chacha20_cfg                         0x07fc761c   Data          16  chacha20.o(.rodata.rom_chacha20_cfg)
-    rom_console_cfg                          0x07fc762c   Data          36  arch_console.o(.rodata.rom_console_cfg)
-    rom_cust_prf_cfg                         0x07fc7650   Data          16  custs1.o(.rodata.rom_cust_prf_cfg)
-    rom_func_addr_table_var                  0x07fc7660   Data         380  jump_table.o(.rodata.rom_func_addr_table_var)
-    rom_nvds_cfg                             0x07fc77dc   Data           8  nvds.o(.rodata.rom_nvds_cfg)
-    rom_prf_cfg                              0x07fc77e4   Data          12  prf.o(.rodata.rom_prf_cfg)
-    Region$$Table$$Base                      0x07fc79bc   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x07fc79dc   Number         0  anon$$obj.o(Region$$Table)
-    pa_en_dcf_tx_setting                     0x07fc79dc   Data           1  rf_531.o(.data.pa_en_dcf_tx_setting)
-    startup_sleep_delay                      0x07fc79e0   Data           4  arch_system.o(.data.startup_sleep_delay)
-    twirq_reset_value                        0x07fc7f0c   Data           4  arch_system.o(.bss..L_MergedGlobals.1)
-    twirq_set_value                          0x07fc7f10   Data           4  arch_system.o(.bss..L_MergedGlobals.1)
-    calibration_res                          0x07fc7f16   Data          42  rf_531.o(.bss.calibration_res)
-    otp_hdr_timestamp                        0x07fc8044   Data           4  arch_system.o(.bss.otp_hdr_timestamp)
-    syscntl_dcdc_state                       0x07fc8048   Data           2  syscntl.o(.bss.syscntl_dcdc_state)
-    twext_value                              0x07fc804c   Data           4  rwip.o(.bss.twext_value)
-    __initial_sp                             0x07fc8758   Data           0  startup_da14531.o(STACK)
-    rwip_heap_non_ret                        0x07fc8758   Data        1036  jump_table.o(.bss.heap_mem_area_not_ret)
+    gpadc_sample_to_mv                       0x07fc5c11   Thumb Code    48  user_empty_peripheral_template.o(.text)
+    gpadc_init                               0x07fc5c45   Thumb Code    44  user_empty_peripheral_template.o(.text)
+    timer2_pwm_init                          0x07fc5c7d   Thumb Code   108  user_empty_peripheral_template.o(.text)
+    timer2_pwm_enable                        0x07fc5cf5   Thumb Code    56  user_empty_peripheral_template.o(.text)
+    timer2_pwm_disable                       0x07fc5d35   Thumb Code    24  user_empty_peripheral_template.o(.text)
+    user_on_connection                       0x07fc5d55   Thumb Code    40  user_empty_peripheral_template.o(.text)
+    user_on_disconnect                       0x07fc5d85   Thumb Code     8  user_empty_peripheral_template.o(.text)
+    user_catch_rest_hndl                     0x07fc5d8d   Thumb Code    32  user_empty_peripheral_template.o(.text)
+    user_app_on_init                         0x07fc5db1   Thumb Code    20  user_empty_peripheral_template.o(.text)
+    JT_lld_test_mode_rx_func                 0x07fc5dc9   Thumb Code   142  patch_1.o(.text)
+    JT_l2cc_pdu_unpack_func                  0x07fc5e57   Thumb Code   786  patch_1.o(.text)
+    JT_l2cc_pdu_recv_ind_handler_func        0x07fc6169   Thumb Code    72  patch_1.o(.text)
+    PATCHED_llm_con_req_ind                  0x07fc61b1   Thumb Code   814  patch_1.o(.text)
+    PATCHED_smpc_recv_pair_rand_pdu          0x07fc64df   Thumb Code   272  patch_1.o(.text)
+    PATCHED_smpc_recv_public_key_exchange_pdu 0x07fc65ef   Thumb Code   106  patch_1.o(.text)
+    PATCHED_llc_data_ind_handler             0x07fc6659   Thumb Code   176  patch_1.o(.text)
+    lld_drop_packet_fix                      0x07fc6709   Thumb Code    64  patch_1.o(.text)
+    PATCHED_lld_data_ind_handler             0x07fc6749   Thumb Code    58  patch_1.o(.text)
+    patch_data1                              0x07fc6783   Thumb Code    12  patch_1.o(.text)
+    patch_data2                              0x07fc678f   Thumb Code     2  patch_1.o(.text)
+    patch_global_vars_init                   0x07fc6791   Thumb Code     2  patch_1.o(.text)
+    rf_ldo_calibration                       0x07fc6b25   Thumb Code    36  rf_ldo_calibration.o(.text)
+    enable_rf_diag_irq                       0x07fc6b75   Thumb Code    92  rf_diag.o(.text)
+    _WAIT                                    0x07fc6be1   Thumb Code    10  common.o(.text)
+    _WAIT10                                  0x07fc6beb   Thumb Code    10  common.o(.text)
+    _WAIT100                                 0x07fc6bf5   Thumb Code    10  common.o(.text)
+    _WAIT400                                 0x07fc6bff   Thumb Code    10  common.o(.text)
+    _WAIT1000                                0x07fc6c09   Thumb Code    10  common.o(.text)
+    arch_asm_delay_us                        0x07fc6c1d   Thumb Code    32  arch_asm.o(.text)
+    __scatterload                            0x07fc6c3d   Thumb Code    38  init.o(.text)
+    __scatterload_rt2                        0x07fc6c3d   Thumb Code     0  init.o(.text)
+    HardFault_HandlerC                       0x07fc6c6d   Thumb Code   132  hardfault_handler.o(.text.HardFault_HandlerC)
+    NMI_HandlerC                             0x07fc6cf5   Thumb Code   164  nmi_handler.o(.text.NMI_HandlerC)
+    __scatterload_copy                       0x07fc6db1   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x07fc6dbf   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x07fc6dc1   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    SystemInit                               0x07fc6dd1   Thumb Code   116  system_da14531.o(system_DA14xxx)
+    app_process_handlers                     0x07fc6fa0   Data          28  app_entry_point.o(.rodata.app_process_handlers)
+    arp_init_table                           0x07fc6ff4   Data         112  ble_arp.o(.rodata.arp_init_table)
+    catch_rest                               0x07fc706c   Data           4  app_entry_point.o(.rodata.catch_rest)
+    cust_prf_funcs                           0x07fc7070   Data          56  user_custs_config.o(.rodata.cust_prf_funcs)
+    custs1_att_db                            0x07fc70a8   Data         900  user_custs1_def.o(.rodata.custs1_att_db)
+    custs1_default_handler                   0x07fc742c   Data           8  custs1_task.o(.rodata.custs1_default_handler)
+    custs1_default_state                     0x07fc7434   Data          72  custs1_task.o(.rodata.custs1_default_state)
+    custs1_services                          0x07fc747c   Data           4  user_custs1_def.o(.rodata.custs1_services)
+    custs1_services_size                     0x07fc7480   Data           1  user_custs1_def.o(.rodata.custs1_services_size)
+    my_custom_msg_handlers                   0x07fc74b4   Data          24  system_library_531.o(.rodata.my_custom_msg_handlers)
+    prf_funcs                                0x07fc74dc   Data          24  app.o(.rodata.prf_funcs)
+    prf_if                                   0x07fc74f4   Data          24  prf.o(.rodata.prf_if)
+    rom_app_task_cfg                         0x07fc750c   Data          32  app_entry_point.o(.rodata.rom_app_task_cfg)
+    rom_cfg_table_var                        0x07fc752c   Data         236  jump_table.o(.rodata.rom_cfg_table_var)
+    rom_chacha20_cfg                         0x07fc7618   Data          16  chacha20.o(.rodata.rom_chacha20_cfg)
+    rom_console_cfg                          0x07fc7628   Data          36  arch_console.o(.rodata.rom_console_cfg)
+    rom_cust_prf_cfg                         0x07fc764c   Data          16  custs1.o(.rodata.rom_cust_prf_cfg)
+    rom_func_addr_table_var                  0x07fc765c   Data         380  jump_table.o(.rodata.rom_func_addr_table_var)
+    rom_nvds_cfg                             0x07fc77d8   Data           8  nvds.o(.rodata.rom_nvds_cfg)
+    rom_prf_cfg                              0x07fc77e0   Data          12  prf.o(.rodata.rom_prf_cfg)
+    Region$$Table$$Base                      0x07fc79b8   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x07fc79d8   Number         0  anon$$obj.o(Region$$Table)
+    pa_en_dcf_tx_setting                     0x07fc79d8   Data           1  rf_531.o(.data.pa_en_dcf_tx_setting)
+    startup_sleep_delay                      0x07fc79dc   Data           4  arch_system.o(.data.startup_sleep_delay)
+    twirq_reset_value                        0x07fc7f04   Data           4  arch_system.o(.bss..L_MergedGlobals.1)
+    twirq_set_value                          0x07fc7f08   Data           4  arch_system.o(.bss..L_MergedGlobals.1)
+    calibration_res                          0x07fc7f0e   Data          42  rf_531.o(.bss.calibration_res)
+    otp_hdr_timestamp                        0x07fc803c   Data           4  arch_system.o(.bss.otp_hdr_timestamp)
+    syscntl_dcdc_state                       0x07fc8040   Data           2  syscntl.o(.bss.syscntl_dcdc_state)
+    twext_value                              0x07fc8044   Data           4  rwip.o(.bss.twext_value)
+    __initial_sp                             0x07fc8750   Data           0  startup_da14531.o(STACK)
+    rwip_heap_non_ret                        0x07fc8750   Data        1036  jump_table.o(.bss.heap_mem_area_not_ret)
     clk_freq_trim_reg_value                  0x07fc8bd0   Data           2  arch_system.o(.bss.retention_mem_area0)
     lp_clk_sel                               0x07fc8bd4   Data           4  arch_system.o(.bss.retention_mem_area0)
     force_rf_cal                             0x07fc8bd8   Data           1  arch_system.o(.bss.retention_mem_area0)
@@ -3238,9 +3237,9 @@ Memory Map of the image
 
 
 
-  Load Region LR_IROM3 (Base: 0x07fc0110, Size: 0x000078d4, Max: 0x00008ab0, ABSOLUTE)
+  Load Region LR_IROM3 (Base: 0x07fc0110, Size: 0x000078d0, Max: 0x00008ab0, ABSOLUTE)
 
-    Execution Region ER_IROM3 (Exec base: 0x07fc0110, Load base: 0x07fc0110, Size: 0x000078d4, Max: 0x00008ab0, ABSOLUTE)
+    Execution Region ER_IROM3 (Exec base: 0x07fc0110, Load base: 0x07fc0110, Size: 0x000078d0, Max: 0x00008ab0, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -3297,115 +3296,115 @@ Memory Map of the image
     0x07fc5990   0x07fc5990   0x00000022   Code   RO          608    .text               app_utils.o
     0x07fc59b2   0x07fc59b2   0x00000002   PAD
     0x07fc59b4   0x07fc59b4   0x000001e0   Code   RO          659    .text               user_periph_setup.o
-    0x07fc5b94   0x07fc5b94   0x00000238   Code   RO          668    .text               user_empty_peripheral_template.o
-    0x07fc5dcc   0x07fc5dcc   0x000009ec   Code   RO          678    .text               da14531.lib(patch_1.o)
-    0x07fc67b8   0x07fc67b8   0x000003c0   Code   RO          680    .text               da14531.lib(rf_ldo_calibration.o)
-    0x07fc6b78   0x07fc6b78   0x0000006c   Code   RO          683    .text               da14531.lib(rf_diag.o)
-    0x07fc6be4   0x07fc6be4   0x0000003c   Code   RO          685    .text               da14531.lib(common.o)
-    0x07fc6c20   0x07fc6c20   0x00000020   Code   RO          687    .text               da14531.lib(arch_asm.o)
-    0x07fc6c40   0x07fc6c40   0x00000030   Code   RO          704    .text               mc_p.l(init.o)
-    0x07fc6c70   0x07fc6c70   0x00000088   Code   RO           23    .text.HardFault_HandlerC  hardfault_handler.o
-    0x07fc6cf8   0x07fc6cf8   0x000000bc   Code   RO           32    .text.NMI_HandlerC  nmi_handler.o
-    0x07fc6db4   0x07fc6db4   0x0000000e   Code   RO          708    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x07fc6dc2   0x07fc6dc2   0x00000002   Code   RO          709    i.__scatterload_null  mc_p.l(handlers.o)
-    0x07fc6dc4   0x07fc6dc4   0x0000000e   Code   RO          710    i.__scatterload_zeroinit  mc_p.l(handlers.o)
-    0x07fc6dd2   0x07fc6dd2   0x00000002   PAD
-    0x07fc6dd4   0x07fc6dd4   0x00000088   Code   RO            4    system_DA14xxx      system_da14531.o
-    0x07fc6e5c   0x07fc6e5c   0x00000010   Data   RO          641    .rodata.SVC1_ADC_VAL_1_UUID_128  user_custs1_def.o
-    0x07fc6e6c   0x07fc6e6c   0x00000010   Data   RO          643    .rodata.SVC1_ADC_VAL_2_UUID_128  user_custs1_def.o
-    0x07fc6e7c   0x07fc6e7c   0x00000010   Data   RO          644    .rodata.SVC1_BUTTON_STATE_UUID_128  user_custs1_def.o
-    0x07fc6e8c   0x07fc6e8c   0x00000010   Data   RO          637    .rodata.SVC1_CTRL_POINT_UUID_128  user_custs1_def.o
-    0x07fc6e9c   0x07fc6e9c   0x00000010   Data   RO          645    .rodata.SVC1_INDICATEABLE_UUID_128  user_custs1_def.o
-    0x07fc6eac   0x07fc6eac   0x00000010   Data   RO          640    .rodata.SVC1_LED_STATE_UUID_128  user_custs1_def.o
-    0x07fc6ebc   0x07fc6ebc   0x00000010   Data   RO          646    .rodata.SVC1_LONG_VALUE_UUID_128  user_custs1_def.o
-    0x07fc6ecc   0x07fc6ecc   0x00000010   Data   RO          648    .rodata.SVC2_WRITE_VAL_1_UUID_128  user_custs1_def.o
-    0x07fc6edc   0x07fc6edc   0x00000010   Data   RO          649    .rodata.SVC2_WRITE_VAL_2_UUID_128  user_custs1_def.o
-    0x07fc6eec   0x07fc6eec   0x00000010   Data   RO          651    .rodata.SVC3_READ_VAL_1_UUID_128  user_custs1_def.o
-    0x07fc6efc   0x07fc6efc   0x00000010   Data   RO          652    .rodata.SVC3_READ_VAL_2_UUID_128  user_custs1_def.o
-    0x07fc6f0c   0x07fc6f0c   0x00000010   Data   RO          653    .rodata.SVC3_READ_VAL_3_UUID_128  user_custs1_def.o
-    0x07fc6f1c   0x07fc6f1c   0x00000010   Data   RO          465    .rodata.TASK_DESC_APP  app.o
-    0x07fc6f2c   0x07fc6f2c   0x00000008   Data   RO          518    .rodata.app_diss_process_handlers  app_diss_task.o
-    0x07fc6f34   0x07fc6f34   0x00000070   Data   RO          476    .rodata.app_gap_process_handlers  app_task.o
-    0x07fc6fa4   0x07fc6fa4   0x0000001c   Data   RO          529    .rodata.app_process_handlers  app_entry_point.o
-    0x07fc6fc0   0x07fc6fc0   0x00000038   Data   RO          495    .rodata.app_sec_process_handlers  app_security_task.o
-    0x07fc6ff8   0x07fc6ff8   0x00000070   Data   RO          328    .rodata.arp_init_table  ble_arp.o
-    0x07fc7068   0x07fc7068   0x00000002   Data   RO          636    .rodata.att_decl_char  user_custs1_def.o
-    0x07fc706a   0x07fc706a   0x00000002   Data   RO          634    .rodata.att_decl_svc  user_custs1_def.o
-    0x07fc706c   0x07fc706c   0x00000002   Data   RO          642    .rodata.att_desc_cfg  user_custs1_def.o
-    0x07fc706e   0x07fc706e   0x00000002   Data   RO          638    .rodata.att_desc_user_desc  user_custs1_def.o
-    0x07fc7070   0x07fc7070   0x00000004   Data   RO          530    .rodata.catch_rest  app_entry_point.o
-    0x07fc7074   0x07fc7074   0x00000038   Data   RO          625    .rodata.cust_prf_funcs  user_custs_config.o
-    0x07fc70ac   0x07fc70ac   0x00000384   Data   RO          654    .rodata.custs1_att_db  user_custs1_def.o
-    0x07fc7430   0x07fc7430   0x00000008   Data   RO          431    .rodata.custs1_default_handler  custs1_task.o
-    0x07fc7438   0x07fc7438   0x00000048   Data   RO          430    .rodata.custs1_default_state  custs1_task.o
-    0x07fc7480   0x07fc7480   0x00000004   Data   RO          631    .rodata.custs1_services  user_custs1_def.o
-    0x07fc7484   0x07fc7484   0x00000001   Data   RO          632    .rodata.custs1_services_size  user_custs1_def.o
-    0x07fc7485   0x07fc7485   0x00000010   Data   RO          635    .rodata.custs1_svc1  user_custs1_def.o
-    0x07fc7495   0x07fc7495   0x00000010   Data   RO          647    .rodata.custs1_svc2  user_custs1_def.o
-    0x07fc74a5   0x07fc74a5   0x00000010   Data   RO          650    .rodata.custs1_svc3  user_custs1_def.o
-    0x07fc74b5   0x07fc74b5   0x00000003   PAD
-    0x07fc74b8   0x07fc74b8   0x00000018   Data   RO          139    .rodata.my_custom_msg_handlers  system_library_531.o
-    0x07fc74d0   0x07fc74d0   0x0000000e   Data   RO           52    .rodata.nvds_data_storage  nvds.o
-    0x07fc74de   0x07fc74de   0x00000002   PAD
-    0x07fc74e0   0x07fc74e0   0x00000018   Data   RO          463    .rodata.prf_funcs   app.o
-    0x07fc74f8   0x07fc74f8   0x00000018   Data   RO          442    .rodata.prf_if      prf.o
-    0x07fc7510   0x07fc7510   0x00000020   Data   RO          532    .rodata.rom_app_task_cfg  app_entry_point.o
-    0x07fc7530   0x07fc7530   0x000000ec   Data   RO           75    .rodata.rom_cfg_table_var  jump_table.o
-    0x07fc761c   0x07fc761c   0x00000010   Data   RO          123    .rodata.rom_chacha20_cfg  chacha20.o
-    0x07fc762c   0x07fc762c   0x00000024   Data   RO           44    .rodata.rom_console_cfg  arch_console.o
-    0x07fc7650   0x07fc7650   0x00000010   Data   RO          423    .rodata.rom_cust_prf_cfg  custs1.o
-    0x07fc7660   0x07fc7660   0x0000017c   Data   RO           70    .rodata.rom_func_addr_table_var  jump_table.o
-    0x07fc77dc   0x07fc77dc   0x00000008   Data   RO           53    .rodata.rom_nvds_cfg  nvds.o
-    0x07fc77e4   0x07fc77e4   0x0000000c   Data   RO          444    .rodata.rom_prf_cfg  prf.o
-    0x07fc77f0   0x07fc77f0   0x00000016   Data   RO          519    .rodata.str1.1      app_diss_task.o
-    0x07fc7806   0x07fc7806   0x0000009c   Data   RO          639    .rodata.str1.1      user_custs1_def.o
-    0x07fc78a2   0x07fc78a2   0x00000055   Data   RO          670    .rodata.str1.1      user_empty_peripheral_template.o
-    0x07fc78f7   0x07fc78f7   0x00000001   PAD
-    0x07fc78f8   0x07fc78f8   0x00000017   Data   RO          464    .rodata.str1.4      app.o
-    0x07fc790f   0x07fc790f   0x00000001   PAD
-    0x07fc7910   0x07fc7910   0x00000018   Data   RO          661    .rodata.uart_cfg    user_periph_setup.o
-    0x07fc7928   0x07fc7928   0x0000008c   Data   RO          531    .rodata.user_app_callbacks  app_entry_point.o
-    0x07fc79b4   0x07fc79b4   0x00000007   Data   RO          557    .rodata.user_security_conf  app_easy_security.o
-    0x07fc79bb   0x07fc79bb   0x00000001   PAD
-    0x07fc79bc   0x07fc79bc   0x00000020   Data   RO          707    Region$$Table       anon$$obj.o
-    0x07fc79dc   0x07fc79dc   0x00000001   Data   RW          338    .data.pa_en_dcf_tx_setting  rf_531.o
-    0x07fc79dd   0x07fc79dd   0x00000003   PAD
-    0x07fc79e0   0x07fc79e0   0x00000004   Data   RW           94    .data.startup_sleep_delay  arch_system.o
+    0x07fc5b94   0x07fc5b94   0x00000234   Code   RO          668    .text               user_empty_peripheral_template.o
+    0x07fc5dc8   0x07fc5dc8   0x000009ec   Code   RO          678    .text               da14531.lib(patch_1.o)
+    0x07fc67b4   0x07fc67b4   0x000003c0   Code   RO          680    .text               da14531.lib(rf_ldo_calibration.o)
+    0x07fc6b74   0x07fc6b74   0x0000006c   Code   RO          683    .text               da14531.lib(rf_diag.o)
+    0x07fc6be0   0x07fc6be0   0x0000003c   Code   RO          685    .text               da14531.lib(common.o)
+    0x07fc6c1c   0x07fc6c1c   0x00000020   Code   RO          687    .text               da14531.lib(arch_asm.o)
+    0x07fc6c3c   0x07fc6c3c   0x00000030   Code   RO          704    .text               mc_p.l(init.o)
+    0x07fc6c6c   0x07fc6c6c   0x00000088   Code   RO           23    .text.HardFault_HandlerC  hardfault_handler.o
+    0x07fc6cf4   0x07fc6cf4   0x000000bc   Code   RO           32    .text.NMI_HandlerC  nmi_handler.o
+    0x07fc6db0   0x07fc6db0   0x0000000e   Code   RO          708    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x07fc6dbe   0x07fc6dbe   0x00000002   Code   RO          709    i.__scatterload_null  mc_p.l(handlers.o)
+    0x07fc6dc0   0x07fc6dc0   0x0000000e   Code   RO          710    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x07fc6dce   0x07fc6dce   0x00000002   PAD
+    0x07fc6dd0   0x07fc6dd0   0x00000088   Code   RO            4    system_DA14xxx      system_da14531.o
+    0x07fc6e58   0x07fc6e58   0x00000010   Data   RO          641    .rodata.SVC1_ADC_VAL_1_UUID_128  user_custs1_def.o
+    0x07fc6e68   0x07fc6e68   0x00000010   Data   RO          643    .rodata.SVC1_ADC_VAL_2_UUID_128  user_custs1_def.o
+    0x07fc6e78   0x07fc6e78   0x00000010   Data   RO          644    .rodata.SVC1_BUTTON_STATE_UUID_128  user_custs1_def.o
+    0x07fc6e88   0x07fc6e88   0x00000010   Data   RO          637    .rodata.SVC1_CTRL_POINT_UUID_128  user_custs1_def.o
+    0x07fc6e98   0x07fc6e98   0x00000010   Data   RO          645    .rodata.SVC1_INDICATEABLE_UUID_128  user_custs1_def.o
+    0x07fc6ea8   0x07fc6ea8   0x00000010   Data   RO          640    .rodata.SVC1_LED_STATE_UUID_128  user_custs1_def.o
+    0x07fc6eb8   0x07fc6eb8   0x00000010   Data   RO          646    .rodata.SVC1_LONG_VALUE_UUID_128  user_custs1_def.o
+    0x07fc6ec8   0x07fc6ec8   0x00000010   Data   RO          648    .rodata.SVC2_WRITE_VAL_1_UUID_128  user_custs1_def.o
+    0x07fc6ed8   0x07fc6ed8   0x00000010   Data   RO          649    .rodata.SVC2_WRITE_VAL_2_UUID_128  user_custs1_def.o
+    0x07fc6ee8   0x07fc6ee8   0x00000010   Data   RO          651    .rodata.SVC3_READ_VAL_1_UUID_128  user_custs1_def.o
+    0x07fc6ef8   0x07fc6ef8   0x00000010   Data   RO          652    .rodata.SVC3_READ_VAL_2_UUID_128  user_custs1_def.o
+    0x07fc6f08   0x07fc6f08   0x00000010   Data   RO          653    .rodata.SVC3_READ_VAL_3_UUID_128  user_custs1_def.o
+    0x07fc6f18   0x07fc6f18   0x00000010   Data   RO          465    .rodata.TASK_DESC_APP  app.o
+    0x07fc6f28   0x07fc6f28   0x00000008   Data   RO          518    .rodata.app_diss_process_handlers  app_diss_task.o
+    0x07fc6f30   0x07fc6f30   0x00000070   Data   RO          476    .rodata.app_gap_process_handlers  app_task.o
+    0x07fc6fa0   0x07fc6fa0   0x0000001c   Data   RO          529    .rodata.app_process_handlers  app_entry_point.o
+    0x07fc6fbc   0x07fc6fbc   0x00000038   Data   RO          495    .rodata.app_sec_process_handlers  app_security_task.o
+    0x07fc6ff4   0x07fc6ff4   0x00000070   Data   RO          328    .rodata.arp_init_table  ble_arp.o
+    0x07fc7064   0x07fc7064   0x00000002   Data   RO          636    .rodata.att_decl_char  user_custs1_def.o
+    0x07fc7066   0x07fc7066   0x00000002   Data   RO          634    .rodata.att_decl_svc  user_custs1_def.o
+    0x07fc7068   0x07fc7068   0x00000002   Data   RO          642    .rodata.att_desc_cfg  user_custs1_def.o
+    0x07fc706a   0x07fc706a   0x00000002   Data   RO          638    .rodata.att_desc_user_desc  user_custs1_def.o
+    0x07fc706c   0x07fc706c   0x00000004   Data   RO          530    .rodata.catch_rest  app_entry_point.o
+    0x07fc7070   0x07fc7070   0x00000038   Data   RO          625    .rodata.cust_prf_funcs  user_custs_config.o
+    0x07fc70a8   0x07fc70a8   0x00000384   Data   RO          654    .rodata.custs1_att_db  user_custs1_def.o
+    0x07fc742c   0x07fc742c   0x00000008   Data   RO          431    .rodata.custs1_default_handler  custs1_task.o
+    0x07fc7434   0x07fc7434   0x00000048   Data   RO          430    .rodata.custs1_default_state  custs1_task.o
+    0x07fc747c   0x07fc747c   0x00000004   Data   RO          631    .rodata.custs1_services  user_custs1_def.o
+    0x07fc7480   0x07fc7480   0x00000001   Data   RO          632    .rodata.custs1_services_size  user_custs1_def.o
+    0x07fc7481   0x07fc7481   0x00000010   Data   RO          635    .rodata.custs1_svc1  user_custs1_def.o
+    0x07fc7491   0x07fc7491   0x00000010   Data   RO          647    .rodata.custs1_svc2  user_custs1_def.o
+    0x07fc74a1   0x07fc74a1   0x00000010   Data   RO          650    .rodata.custs1_svc3  user_custs1_def.o
+    0x07fc74b1   0x07fc74b1   0x00000003   PAD
+    0x07fc74b4   0x07fc74b4   0x00000018   Data   RO          139    .rodata.my_custom_msg_handlers  system_library_531.o
+    0x07fc74cc   0x07fc74cc   0x0000000e   Data   RO           52    .rodata.nvds_data_storage  nvds.o
+    0x07fc74da   0x07fc74da   0x00000002   PAD
+    0x07fc74dc   0x07fc74dc   0x00000018   Data   RO          463    .rodata.prf_funcs   app.o
+    0x07fc74f4   0x07fc74f4   0x00000018   Data   RO          442    .rodata.prf_if      prf.o
+    0x07fc750c   0x07fc750c   0x00000020   Data   RO          532    .rodata.rom_app_task_cfg  app_entry_point.o
+    0x07fc752c   0x07fc752c   0x000000ec   Data   RO           75    .rodata.rom_cfg_table_var  jump_table.o
+    0x07fc7618   0x07fc7618   0x00000010   Data   RO          123    .rodata.rom_chacha20_cfg  chacha20.o
+    0x07fc7628   0x07fc7628   0x00000024   Data   RO           44    .rodata.rom_console_cfg  arch_console.o
+    0x07fc764c   0x07fc764c   0x00000010   Data   RO          423    .rodata.rom_cust_prf_cfg  custs1.o
+    0x07fc765c   0x07fc765c   0x0000017c   Data   RO           70    .rodata.rom_func_addr_table_var  jump_table.o
+    0x07fc77d8   0x07fc77d8   0x00000008   Data   RO           53    .rodata.rom_nvds_cfg  nvds.o
+    0x07fc77e0   0x07fc77e0   0x0000000c   Data   RO          444    .rodata.rom_prf_cfg  prf.o
+    0x07fc77ec   0x07fc77ec   0x00000016   Data   RO          519    .rodata.str1.1      app_diss_task.o
+    0x07fc7802   0x07fc7802   0x0000009c   Data   RO          639    .rodata.str1.1      user_custs1_def.o
+    0x07fc789e   0x07fc789e   0x00000055   Data   RO          670    .rodata.str1.1      user_empty_peripheral_template.o
+    0x07fc78f3   0x07fc78f3   0x00000001   PAD
+    0x07fc78f4   0x07fc78f4   0x00000017   Data   RO          464    .rodata.str1.4      app.o
+    0x07fc790b   0x07fc790b   0x00000001   PAD
+    0x07fc790c   0x07fc790c   0x00000018   Data   RO          661    .rodata.uart_cfg    user_periph_setup.o
+    0x07fc7924   0x07fc7924   0x0000008c   Data   RO          531    .rodata.user_app_callbacks  app_entry_point.o
+    0x07fc79b0   0x07fc79b0   0x00000007   Data   RO          557    .rodata.user_security_conf  app_easy_security.o
+    0x07fc79b7   0x07fc79b7   0x00000001   PAD
+    0x07fc79b8   0x07fc79b8   0x00000020   Data   RO          707    Region$$Table       anon$$obj.o
+    0x07fc79d8   0x07fc79d8   0x00000001   Data   RW          338    .data.pa_en_dcf_tx_setting  rf_531.o
+    0x07fc79d9   0x07fc79d9   0x00000003   PAD
+    0x07fc79dc   0x07fc79dc   0x00000004   Data   RW           94    .data.startup_sleep_delay  arch_system.o
 
 
-    Execution Region ER_PRODTEST (Exec base: 0x07fc79e8, Load base: 0x07fc79e4, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE, UNINIT)
+    Execution Region ER_PRODTEST (Exec base: 0x07fc79e0, Load base: 0x07fc79e0, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE, UNINIT)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region ER_ZI (Exec base: 0x07fc79e8, Load base: 0x07fc79e4, Size: 0x00000d70, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x07fc79e0, Load base: 0x07fc79e0, Size: 0x00000d70, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x07fc79e8        -       0x00000510   Zero   RW          681    .bss                da14531.lib(rf_ldo_calibration.o)
-    0x07fc7ef8        -       0x00000014   Zero   RW          220    .bss..L_MergedGlobals  trng.o
-    0x07fc7f0c        -       0x00000008   Zero   RW           97    .bss..L_MergedGlobals.1  arch_system.o
-    0x07fc7f14        -       0x00000002   Zero   RW          209    .bss.cal_val        adc_531.o
-    0x07fc7f16        -       0x0000002a   Zero   RW          339    .bss.calibration_res  rf_531.o
-    0x07fc7f40        -       0x00000100   Zero   RW           42    .bss.current_msg_buffer  arch_console.o
-    0x07fc8040        -       0x00000004   Zero   RW          340    .bss.fsm_ctrl_reg   rf_531.o
-    0x07fc8044        -       0x00000004   Zero   RW           95    .bss.otp_hdr_timestamp  arch_system.o
-    0x07fc8048        -       0x00000002   Zero   RW          171    .bss.syscntl_dcdc_state  syscntl.o
-    0x07fc804a   0x07fc79e4   0x00000002   PAD
-    0x07fc804c        -       0x00000004   Zero   RW          318    .bss.twext_value    rwip.o
-    0x07fc8050        -       0x00000004   Zero   RW          153    .bss.txdiv_trim     otp_cs.o
-    0x07fc8054   0x07fc79e4   0x00000004   PAD
-    0x07fc8058        -       0x00000700   Zero   RW           13    STACK               startup_da14531.o
+    0x07fc79e0        -       0x00000510   Zero   RW          681    .bss                da14531.lib(rf_ldo_calibration.o)
+    0x07fc7ef0        -       0x00000014   Zero   RW          220    .bss..L_MergedGlobals  trng.o
+    0x07fc7f04        -       0x00000008   Zero   RW           97    .bss..L_MergedGlobals.1  arch_system.o
+    0x07fc7f0c        -       0x00000002   Zero   RW          209    .bss.cal_val        adc_531.o
+    0x07fc7f0e        -       0x0000002a   Zero   RW          339    .bss.calibration_res  rf_531.o
+    0x07fc7f38        -       0x00000100   Zero   RW           42    .bss.current_msg_buffer  arch_console.o
+    0x07fc8038        -       0x00000004   Zero   RW          340    .bss.fsm_ctrl_reg   rf_531.o
+    0x07fc803c        -       0x00000004   Zero   RW           95    .bss.otp_hdr_timestamp  arch_system.o
+    0x07fc8040        -       0x00000002   Zero   RW          171    .bss.syscntl_dcdc_state  syscntl.o
+    0x07fc8042   0x07fc79e0   0x00000002   PAD
+    0x07fc8044        -       0x00000004   Zero   RW          318    .bss.twext_value    rwip.o
+    0x07fc8048        -       0x00000004   Zero   RW          153    .bss.txdiv_trim     otp_cs.o
+    0x07fc804c   0x07fc79e0   0x00000004   PAD
+    0x07fc8050        -       0x00000700   Zero   RW           13    STACK               startup_da14531.o
 
 
-    Execution Region ER_NZI (Exec base: 0x07fc8758, Load base: 0x07fc79e4, Size: 0x0000040c, Max: 0xffffffff, ABSOLUTE, UNINIT)
+    Execution Region ER_NZI (Exec base: 0x07fc8750, Load base: 0x07fc79e0, Size: 0x0000040c, Max: 0xffffffff, ABSOLUTE, UNINIT)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x07fc8758        -       0x0000040c   Zero   RW           71    .bss.heap_mem_area_not_ret  jump_table.o
+    0x07fc8750        -       0x0000040c   Zero   RW           71    .bss.heap_mem_area_not_ret  jump_table.o
 
 
-    Execution Region ER_STATEFUL_HIBERNATION (Exec base: 0x07fc8b64, Load base: 0x07fc79e4, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE, UNINIT)
+    Execution Region ER_STATEFUL_HIBERNATION (Exec base: 0x07fc8b5c, Load base: 0x07fc79e0, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE, UNINIT)
 
     **** No section assigned to this execution region ****
 
@@ -3579,12 +3578,12 @@ Image component sizes
       1160        124          0          0         64      15252   uart.o
          0          0       1309          0          0       2280   user_custs1_def.o
          0          0         56          0          0       3022   user_custs_config.o
-       568        112         85          0         10       8958   user_empty_peripheral_template.o
+       564        108         85          0         10       8977   user_empty_peripheral_template.o
        480         24         24          0          0       7187   user_periph_setup.o
        752        140          0          0         12       7205   wkupct_quadec.o
 
     ----------------------------------------------------------------------
-     24180       3466       3104         16       7384     332639   Object Totals
+     24176       3462       3104         16       7384     332658   Object Totals
          0          0         32          0         80          0   (incl. Generated)
          6          0          8          3         25          0   (incl. Padding)
 
@@ -3629,15 +3628,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     27980       3668       3104         16       8680     332779   Grand Totals
-     27980       3668       3104         16       8680     332779   ELF Image Totals
-     27980       3668       3104         16          0          0   ROM Totals
+     27976       3664       3104         16       8680     332798   Grand Totals
+     27976       3664       3104         16       8680     332798   ELF Image Totals
+     27976       3664       3104         16          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                31084 (  30.36kB)
+    Total RO  Size (Code + RO Data)                31080 (  30.35kB)
     Total RW  Size (RW Data + ZI Data)              8696 (   8.49kB)
-    Total ROM Size (Code + RO Data + RW Data)      31100 (  30.37kB)
+    Total ROM Size (Code + RO Data + RW Data)      31096 (  30.37kB)
 
 ==============================================================================
 

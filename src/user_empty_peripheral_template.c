@@ -91,8 +91,8 @@ void uvp_shdn(void)
 */
 
 // ADC timer code, reads and prints to UART terminal in a callback loop
-// #FIXME reading from the ADC is constant (Raw: 552, Converted: 485 mV) even with an input
-// Raw changed to 555 when ammeter is connected
+// #FIXME single mode works but not continuous
+// Single mode output: Raw = 9, Volt = 31 mV with no connection (valid)
 void gpadc_timer_cb(void)
 {
 	// Read and print ADC value
@@ -119,10 +119,10 @@ void gpadc_init(void)
 		
 			// Sets sample time multiplier
 			// #WIP check effect on ADC measurements
-			.smpl_time_mult = 0,
+			.smpl_time_mult = 2,
 		
 			// Set continuous measurement mode
-			.continuous = true,
+			.continuous = false,
 			// Set conversion to have no interval in continuous mode 
 			.interval_mult = 0,
 			
@@ -139,8 +139,6 @@ void gpadc_init(void)
 			.oversampling = 0
 	};
 	
-	// Initialize ADC with structure defined above
-	adc_init(&adc_config_struct);
 	// Disable input shifter (for measuring negative values)
 	adc_input_shift_disable();
 	// Disable die temperature sensor
@@ -149,6 +147,9 @@ void gpadc_init(void)
 	// Perform offset calibration of the ADC
 	adc_reset_offsets();
 	adc_offset_calibrate(ADC_INPUT_MODE_SINGLE_ENDED);
+	
+	// Initialize ADC with structure defined above
+	adc_init(&adc_config_struct);
 
 	// #WIP consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
 }
@@ -157,9 +158,13 @@ uint16_t gpadc_collect_sample(void)
 {
 	// Details on adc_get_sample() is in adc_531.c, not in the header file
 	// adc_get_sample() will stall if in continuous mode due to ADC always being busy, which is why it is not used here
-	
 	// Read data from ADC register, which always holds the latest conversion results and can be read at any time
-	uint16_t sample = adc_correct_sample(GetWord16(GP_ADC_RESULT_REG));
+	
+	// Single mode operation
+	uint16_t sample = adc_correct_sample(adc_get_sample());
+	
+	// Continuous mode operation
+	// uint16_t sample = adc_correct_sample(GetWord16(GP_ADC_RESULT_REG));
 	
 	return (sample);
 }

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\out_DA14531\Objects\empty_peripheral_template_531.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\out_DA14531\Objects\empty_peripheral_template_531.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6230001: Last Updated: Wed Apr 16 14:42:41 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6230001: Last Updated: Thu Apr 17 20:57:03 2025
 <BR><P>
 <H3>Maximum Stack Usage =        192 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1664,6 +1664,7 @@ Global Symbols
 
 <P><STRONG><a name="[125]"></a>adc_get_sample</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, adc_531.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_offset_calibrate
+<LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpadc_collect_sample
 </UL>
 
 <P><STRONG><a name="[124]"></a>adc_offset_calibrate</STRONG> (Thumb, 272 bytes, Stack size 40 bytes, adc_531.o(.text))
@@ -2922,6 +2923,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = gpadc_collect_sample &rArr; adc_correct_sample
 </UL>
 <BR>[Calls]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_correct_sample
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_get_sample
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpadc_timer_cb
 </UL>
