@@ -22,7 +22,7 @@
 #include "gpio.h"
 #include "user_periph_setup.h"
 
-// for UART serial port output
+// for UART serial port debugging
 #include "arch_console.h"
 // #include "systick.h"
 // #include "uart.h"
@@ -55,18 +55,11 @@
  ****************************************************************************************
  */
 
-// UVP debug variables
-bool uart_busy_status __SECTION_ZERO("retention_mem_area0");
-bool uvp_trigger_status __SECTION_ZERO("retention_mem_area0");
-
-// ADC debug variables
+// ADC variables
 timer_hnd adc_timer __SECTION_ZERO("retention_mem_area0");
 uint16_t adc_input __SECTION_ZERO("retention_mem_area0");
 uint16_t adc_input_volt __SECTION_ZERO("retention_mem_area0");
 bool adc_timer_started __SECTION_ZERO("retention_mem_area0");
-
-// DCDC converter debug variables
-syscntl_dcdc_level_t vdd __SECTION_ZERO("retention_mem_area0");
 
 /*
  ****************************************************************************************
@@ -80,7 +73,7 @@ void uvp_shdn(void)
 	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
 		// shutdown MAX9913 by driving pin low
 		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN);
-		// #TODO set DA14531 to hibernate (lowest power mode)
+		// TODO set DA14531 to hibernate (lowest power mode)
 	}
 }
 
@@ -91,7 +84,7 @@ void uvp_shdn(void)
 */
 
 // ADC main code, reads and prints to UART terminal in a timer callback loop
-// #WIP single mode works but not continuous
+// WIP single mode works but not continuous
 // Single mode output: Raw = 9, Volt = 31 mV with no connection (valid floating output)
 void gpadc_timer_cb(void)
 {
@@ -106,7 +99,7 @@ void gpadc_timer_cb(void)
 	adc_timer = app_easy_timer(100, gpadc_timer_cb);
 }
 
-// #WIP email company about how to implement this as interrupt is not being triggered after conversion in continuous mode
+// WIP email company about how to implement this as interrupt is not being triggered after conversion in continuous mode
 void gpadc_interrupt(void)
 {
 	// Read and print ADC value
@@ -120,8 +113,8 @@ void gpadc_interrupt(void)
 	adc_clear_interrupt();
 }
 
-// #TODO play with settings and see which gives the most accurate reading
-// #TODO read datasheet and calculate manual mode settings that gives highest sampling rate and accuracy
+// TODO play with settings and see which gives the most accurate reading
+// TODO read datasheet and calculate manual mode settings that gives highest sampling rate and accuracy
 void gpadc_init(void)
 {
 	// ADC config structure, details about range of inputs for parameters found in adc_531.h
@@ -163,7 +156,7 @@ void gpadc_init(void)
 	adc_reset_offsets();
 	adc_offset_calibrate(ADC_INPUT_MODE_SINGLE_ENDED);
 	
-	// #TODO Register interrupt function to be used when ADC is on in continuous mode
+	// TODO Register interrupt function to be used when ADC is on in continuous mode
 	// adc_register_interrupt(gpadc_interrupt);
 	
 	// consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
@@ -328,18 +321,18 @@ void user_app_on_init(void)
 	// start the default initialization process for BLE user application
 	default_app_on_init();
 	
-	// #TODO make changes to DCDC converter and observe how it changes output of GPIOs
-	vdd = syscntl_dcdc_get_level();
+	// TODO make changes to DCDC converter and observe how it changes output of GPIOs
+	syscntl_dcdc_level_t vdd = syscntl_dcdc_get_level();
 	adc_timer_started = false;
 	
 	// PWM test code
 	// max voltage is 3.3 V on LP clock source, min is 0 V
 	// this is because GPIO is supplied by VBAT_HIGH or the 3.3 V LDO on devkit
 	// duty cycle is accurate, PWM2 and PWM3 duty cycles are independent of each other
-	/*
-	timer2_pwm_init(TIM0_2_CLK_DIV_8, TIM2_CLK_LP, TIM2_HW_PAUSE_OFF, MAX_PWM_DIV);
+	
+	timer2_pwm_init(TIM0_2_CLK_DIV_8, TIM2_CLK_LP, TIM2_HW_PAUSE_OFF, MIN_PWM_DIV - 1);
 	timer2_pwm_enable(50, 0, 25, 0);
-	*/
+	
 	
 	// UVP test code
 	// if condition passes if trigger pin is driven low and turns off the MAX SHDN pin
