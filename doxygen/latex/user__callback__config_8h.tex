@@ -1,0 +1,70 @@
+\doxysection{C\+:/\+Users/alber/\+Documents/\+DA14531/\+SDK/projects/target\+\_\+apps/template/fukuoka\+\_\+glucose\+\_\+sensor/src/config/user\+\_\+callback\+\_\+config.h File Reference}
+\hypertarget{user__callback__config_8h}{}\label{user__callback__config_8h}\index{C:/Users/alber/Documents/DA14531/SDK/projects/target\_apps/template/fukuoka\_glucose\_sensor/src/config/user\_callback\_config.h@{C:/Users/alber/Documents/DA14531/SDK/projects/target\_apps/template/fukuoka\_glucose\_sensor/src/config/user\_callback\_config.h}}
+
+
+Callback functions configuration file.  
+
+
+{\ttfamily \#include "{}app\+\_\+api.\+h"{}}\newline
+{\ttfamily \#include "{}app\+\_\+bass.\+h"{}}\newline
+{\ttfamily \#include "{}app\+\_\+findme.\+h"{}}\newline
+{\ttfamily \#include "{}app\+\_\+proxr.\+h"{}}\newline
+{\ttfamily \#include "{}app\+\_\+suotar.\+h"{}}\newline
+{\ttfamily \#include "{}app\+\_\+callback.\+h"{}}\newline
+{\ttfamily \#include "{}app\+\_\+prf\+\_\+types.\+h"{}}\newline
+{\ttfamily \#include "{}user\+\_\+empty\+\_\+peripheral\+\_\+template.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{user__callback__config_8h_a436aef52f3b068a4303379631daded81}\label{user__callback__config_8h_a436aef52f3b068a4303379631daded81} 
+\#define {\bfseries app\+\_\+process\+\_\+catch\+\_\+rest\+\_\+cb}~\mbox{\hyperlink{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}{user\+\_\+catch\+\_\+rest\+\_\+hndl}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{user__callback__config_8h_a333ba051b56b2538535a1e1b1e1c0640}{app\+\_\+advertise\+\_\+complete}} (const uint8\+\_\+t)
+\begin{DoxyCompactList}\small\item\em Function to be called on the advertising completion event. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{user__callback__config_8h_ab75fd65a1d33c7ed4755c49678a1cadb}{on\+\_\+suotar\+\_\+status\+\_\+change}} (const uint8\+\_\+t suotar\+\_\+event)
+\begin{DoxyCompactList}\small\item\em SUOTAR session start or stop event handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Callback functions configuration file. 
+
+Copyright (C) 2015-\/2023 Renesas Electronics Corporation and/or its affiliates. All rights reserved. Confidential Information.
+
+This software ("{}\+Software"{}) is supplied by Renesas Electronics Corporation and/or its affiliates ("{}\+Renesas"{}). Renesas grants you a personal, non-\/exclusive, non-\/transferable, revocable, non-\/sub-\/licensable right and license to use the Software, solely if used in or together with Renesas products. You may make copies of this Software, provided this copyright notice and disclaimer ("{}\+Notice"{}) is included in all such copies. Renesas reserves the right to change or discontinue the Software at any time without notice.
+
+THE SOFTWARE IS PROVIDED "{}\+AS IS"{}. RENESAS DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, OR STATUTORY, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-\/\+INFRINGEMENT. TO THE MAXIMUM EXTENT PERMITTED UNDER LAW, IN NO EVENT SHALL RENESAS BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE, EVEN IF RENESAS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. USE OF THIS SOFTWARE MAY BE SUBJECT TO TERMS AND CONDITIONS CONTAINED IN AN ADDITIONAL AGREEMENT BETWEEN YOU AND RENESAS. IN CASE OF CONFLICT BETWEEN THE TERMS OF THIS NOTICE AND ANY SUCH ADDITIONAL LICENSE AGREEMENT, THE TERMS OF THE AGREEMENT SHALL TAKE PRECEDENCE. BY CONTINUING TO USE THIS SOFTWARE, YOU AGREE TO THE TERMS OF THIS NOTICE.\+IF YOU DO NOT AGREE TO THESE TERMS, YOU ARE NOT PERMITTED TO USE THIS SOFTWARE. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{user__callback__config_8h_a333ba051b56b2538535a1e1b1e1c0640}\index{user\_callback\_config.h@{user\_callback\_config.h}!app\_advertise\_complete@{app\_advertise\_complete}}
+\index{app\_advertise\_complete@{app\_advertise\_complete}!user\_callback\_config.h@{user\_callback\_config.h}}
+\doxysubsubsection{\texorpdfstring{app\_advertise\_complete()}{app\_advertise\_complete()}}
+{\footnotesize\ttfamily \label{user__callback__config_8h_a333ba051b56b2538535a1e1b1e1c0640} 
+void app\+\_\+advertise\+\_\+complete (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{}{}\end{DoxyParamCaption})}
+
+
+
+Function to be called on the advertising completion event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em uint8\+\_\+t} & GAP Error code \\
+\hline
+\end{DoxyParams}
+\Hypertarget{user__callback__config_8h_ab75fd65a1d33c7ed4755c49678a1cadb}\index{user\_callback\_config.h@{user\_callback\_config.h}!on\_suotar\_status\_change@{on\_suotar\_status\_change}}
+\index{on\_suotar\_status\_change@{on\_suotar\_status\_change}!user\_callback\_config.h@{user\_callback\_config.h}}
+\doxysubsubsection{\texorpdfstring{on\_suotar\_status\_change()}{on\_suotar\_status\_change()}}
+{\footnotesize\ttfamily \label{user__callback__config_8h_ab75fd65a1d33c7ed4755c49678a1cadb} 
+void on\+\_\+suotar\+\_\+status\+\_\+change (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{suotar\+\_\+event}{}\end{DoxyParamCaption})}
+
+
+
+SUOTAR session start or stop event handler. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em suotar\+\_\+event} & SUOTAR\+\_\+\+START/\+SUOTAR\+\_\+\+STOP \\
+\hline
+\end{DoxyParams}

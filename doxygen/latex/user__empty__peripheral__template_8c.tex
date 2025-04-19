@@ -1,0 +1,66 @@
+\doxysection{C\+:/\+Users/alber/\+Documents/\+DA14531/\+SDK/projects/target\+\_\+apps/template/fukuoka\+\_\+glucose\+\_\+sensor/src/user\+\_\+empty\+\_\+peripheral\+\_\+template.c File Reference}
+\hypertarget{user__empty__peripheral__template_8c}{}\label{user__empty__peripheral__template_8c}\index{C:/Users/alber/Documents/DA14531/SDK/projects/target\_apps/template/fukuoka\_glucose\_sensor/src/user\_empty\_peripheral\_template.c@{C:/Users/alber/Documents/DA14531/SDK/projects/target\_apps/template/fukuoka\_glucose\_sensor/src/user\_empty\_peripheral\_template.c}}
+
+
+Empty peripheral template project source code.  
+
+
+{\ttfamily \#include "{}rwip\+\_\+config.\+h"{}}\newline
+{\ttfamily \#include "{}gattc\+\_\+task.\+h"{}}\newline
+{\ttfamily \#include "{}app\+\_\+api.\+h"{}}\newline
+{\ttfamily \#include "{}user\+\_\+empty\+\_\+peripheral\+\_\+template.\+h"{}}\newline
+{\ttfamily \#include "{}gpio.\+h"{}}\newline
+{\ttfamily \#include "{}user\+\_\+periph\+\_\+setup.\+h"{}}\newline
+{\ttfamily \#include "{}arch\+\_\+console.\+h"{}}\newline
+{\ttfamily \#include "{}adc.\+h"{}}\newline
+{\ttfamily \#include "{}adc\+\_\+531.\+h"{}}\newline
+{\ttfamily \#include "{}timer0\+\_\+2.\+h"{}}\newline
+{\ttfamily \#include "{}timer2.\+h"{}}\newline
+{\ttfamily \#include "{}syscntl.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries MIN\+\_\+\+PWM\+\_\+\+DIV}~2
+\item 
+\#define {\bfseries MAX\+\_\+\+PWM\+\_\+\+DIV}~16383
+\item 
+\#define {\bfseries SYS\+\_\+\+CLK\+\_\+\+FREQ\+\_\+\+HZ}~16000000
+\item 
+\#define {\bfseries LP\+\_\+\+CLK\+\_\+\+FREQ\+\_\+\+HZ}~32000
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool uart\+\_\+busy\+\_\+status {\bfseries \+\_\+\+\_\+\+SECTION\+\_\+\+ZERO} ("{}retention\+\_\+mem\+\_\+area0"{})
+\item 
+void {\bfseries uvp\+\_\+shdn} (void)
+\item 
+void {\bfseries gpadc\+\_\+timer\+\_\+cb} (void)
+\item 
+void {\bfseries gpadc\+\_\+interrupt} (void)
+\item 
+void {\bfseries gpadc\+\_\+init} (void)
+\item 
+uint16\+\_\+t {\bfseries gpadc\+\_\+collect\+\_\+sample} (void)
+\item 
+uint16\+\_\+t {\bfseries gpadc\+\_\+sample\+\_\+to\+\_\+mv} (uint16\+\_\+t sample)
+\item 
+void {\bfseries timer2\+\_\+pwm\+\_\+init} (tim0\+\_\+2\+\_\+clk\+\_\+div\+\_\+t clk\+\_\+div, tim2\+\_\+clk\+\_\+src\+\_\+t clk\+\_\+src, tim2\+\_\+hw\+\_\+pause\+\_\+t hw\+\_\+pause, uint16\+\_\+t pwm\+\_\+div)
+\item 
+void \mbox{\hyperlink{group___a_p_p_gac249834818c97dd4641fbf984bcff414}{timer2\+\_\+pwm\+\_\+enable}} (uint8\+\_\+t dc\+\_\+pwm2, uint8\+\_\+t offset\+\_\+pwm2, uint8\+\_\+t dc\+\_\+pwm3, uint8\+\_\+t offset\+\_\+pwm3)
+\begin{DoxyCompactList}\small\item\em Disconnection function. \end{DoxyCompactList}\item 
+void {\bfseries timer2\+\_\+pwm\+\_\+disable} (void)
+\begin{DoxyCompactList}\small\item\em Disable PWM output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___a_p_p_ga097fccef82db4a9dfdc1cb542a9e9e20}{user\+\_\+on\+\_\+connection}} (const uint8\+\_\+t conidx, struct gapc\+\_\+connection\+\_\+req\+\_\+ind const \texorpdfstring{$\ast$}{*}param)
+\begin{DoxyCompactList}\small\item\em Connection function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___a_p_p_ga2b05ace9fab6a68b42379e8a17d91d43}{user\+\_\+on\+\_\+disconnect}} (struct gapc\+\_\+disconnect\+\_\+ind const \texorpdfstring{$\ast$}{*}param)
+\begin{DoxyCompactList}\small\item\em Disconnection function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}{user\+\_\+catch\+\_\+rest\+\_\+hndl}} (ke\+\_\+msg\+\_\+id\+\_\+t const msgid, void const \texorpdfstring{$\ast$}{*}param, ke\+\_\+task\+\_\+id\+\_\+t const dest\+\_\+id, ke\+\_\+task\+\_\+id\+\_\+t const src\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Handles the messages that are not handled by the SDK internal mechanisms. \end{DoxyCompactList}\item 
+void {\bfseries user\+\_\+app\+\_\+on\+\_\+init} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Empty peripheral template project source code. 
+

@@ -70,7 +70,7 @@ syscntl_dcdc_level_t vdd __SECTION_ZERO("retention_mem_area0");
 
 /*
  ****************************************************************************************
- * UVP FUNCTIONS (Albert)
+ * UVP FUNCTIONS
  ****************************************************************************************
 */
 
@@ -86,7 +86,7 @@ void uvp_shdn(void)
 
 /*
  ****************************************************************************************
- * ADC FUNCTIONS (Albert)
+ * ADC FUNCTIONS
  ****************************************************************************************
 */
 
@@ -121,6 +121,7 @@ void gpadc_interrupt(void)
 }
 
 // #TODO play with settings and see which gives the most accurate reading
+// #TODO read datasheet and calculate manual mode settings that gives highest sampling rate and accuracy
 void gpadc_init(void)
 {
 	// ADC config structure, details about range of inputs for parameters found in adc_531.h
@@ -198,7 +199,7 @@ uint16_t gpadc_sample_to_mv(uint16_t sample)
 
 /*
  ****************************************************************************************
- * PWM FUNCTIONS (Albert)
+ * PWM FUNCTIONS
  ****************************************************************************************
 */
 
@@ -274,7 +275,7 @@ void timer2_pwm_disable(void)
 
 /*
  ****************************************************************************************
- * DEFAULT CALLBACK FUNCTIONS (Albert)
+ * DEFAULT CALLBACK FUNCTIONS
  ****************************************************************************************
 */
 
@@ -318,7 +319,7 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id
 
 /*
  ****************************************************************************************
- * STARTUP LOOP (Albert)
+ * STARTUP LOOP
  ****************************************************************************************
 */
 

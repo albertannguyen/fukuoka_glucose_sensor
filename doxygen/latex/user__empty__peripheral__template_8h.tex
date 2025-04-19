@@ -1,0 +1,49 @@
+\doxysection{C\+:/\+Users/alber/\+Documents/\+DA14531/\+SDK/projects/target\+\_\+apps/template/fukuoka\+\_\+glucose\+\_\+sensor/src/user\+\_\+empty\+\_\+peripheral\+\_\+template.h File Reference}
+\hypertarget{user__empty__peripheral__template_8h}{}\label{user__empty__peripheral__template_8h}\index{C:/Users/alber/Documents/DA14531/SDK/projects/target\_apps/template/fukuoka\_glucose\_sensor/src/user\_empty\_peripheral\_template.h@{C:/Users/alber/Documents/DA14531/SDK/projects/target\_apps/template/fukuoka\_glucose\_sensor/src/user\_empty\_peripheral\_template.h}}
+
+
+Empty peripheral template project header file.  
+
+
+{\ttfamily \#include "{}rwble\+\_\+config.\+h"{}}\newline
+{\ttfamily \#include "{}app\+\_\+task.\+h"{}}\newline
+{\ttfamily \#include "{}gapc\+\_\+task.\+h"{}}\newline
+{\ttfamily \#include "{}gapm\+\_\+task.\+h"{}}\newline
+{\ttfamily \#include "{}app.\+h"{}}\newline
+{\ttfamily \#include "{}co\+\_\+error.\+h"{}}\newline
+{\ttfamily \#include "{}timer0\+\_\+2.\+h"{}}\newline
+{\ttfamily \#include "{}timer2.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries user\+\_\+app\+\_\+on\+\_\+init} (void)
+\item 
+void {\bfseries uvp\+\_\+shdn} (void)
+\item 
+void {\bfseries gpadc\+\_\+init} (void)
+\item 
+uint16\+\_\+t {\bfseries gpadc\+\_\+collect\+\_\+sample} (void)
+\item 
+uint16\+\_\+t {\bfseries gpadc\+\_\+sample\+\_\+to\+\_\+mv} (uint16\+\_\+t sample)
+\item 
+void {\bfseries gpadc\+\_\+timer\+\_\+cb} (void)
+\item 
+void {\bfseries gpadc\+\_\+interrupt} (void)
+\item 
+void {\bfseries timer2\+\_\+pwm\+\_\+init} (tim0\+\_\+2\+\_\+clk\+\_\+div\+\_\+t clk\+\_\+div, tim2\+\_\+clk\+\_\+src\+\_\+t clk\+\_\+src, tim2\+\_\+hw\+\_\+pause\+\_\+t hw\+\_\+pause, uint16\+\_\+t pwm\+\_\+div)
+\item 
+void \mbox{\hyperlink{group___a_p_p_gac249834818c97dd4641fbf984bcff414}{timer2\+\_\+pwm\+\_\+enable}} (uint8\+\_\+t dc\+\_\+pwm2, uint8\+\_\+t offset\+\_\+pwm2, uint8\+\_\+t dc\+\_\+pwm3, uint8\+\_\+t offset\+\_\+pwm3)
+\begin{DoxyCompactList}\small\item\em Disconnection function. \end{DoxyCompactList}\item 
+void {\bfseries timer2\+\_\+pwm\+\_\+disable} (void)
+\begin{DoxyCompactList}\small\item\em Disable PWM output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___a_p_p_ga097fccef82db4a9dfdc1cb542a9e9e20}{user\+\_\+on\+\_\+connection}} (const uint8\+\_\+t conidx, struct gapc\+\_\+connection\+\_\+req\+\_\+ind const \texorpdfstring{$\ast$}{*}param)
+\begin{DoxyCompactList}\small\item\em Connection function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___a_p_p_ga2b05ace9fab6a68b42379e8a17d91d43}{user\+\_\+on\+\_\+disconnect}} (struct gapc\+\_\+disconnect\+\_\+ind const \texorpdfstring{$\ast$}{*}param)
+\begin{DoxyCompactList}\small\item\em Disconnection function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}{user\+\_\+catch\+\_\+rest\+\_\+hndl}} (ke\+\_\+msg\+\_\+id\+\_\+t const msgid, void const \texorpdfstring{$\ast$}{*}param, ke\+\_\+task\+\_\+id\+\_\+t const dest\+\_\+id, ke\+\_\+task\+\_\+id\+\_\+t const src\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Handles the messages that are not handled by the SDK internal mechanisms. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Empty peripheral template project header file. 
+
