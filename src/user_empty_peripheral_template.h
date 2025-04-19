@@ -48,37 +48,87 @@ i.e.
  * FUNCTION DECLARATIONS
  ****************************************************************************************
  */
- 
-// Albert: Custom rerouted callback functions from user_callback_config.h
+
+/**
+ ****************************************************************************************
+ * @brief Initialization callback function rerouted to user space.
+ * @note See user_callback_config.h for reroutes.
+ ****************************************************************************************
+*/
 void user_app_on_init(void);
 
-// Albert: UVP functions
+/**
+ ****************************************************************************************
+ * @brief Defines logic for GPIO pins of the UVP circuit.
+ ****************************************************************************************
+*/
 void uvp_shdn(void);
 
-// Albert: ADC functions
+/**
+ ****************************************************************************************
+ * @brief Initializes the ADC.
+ ****************************************************************************************
+*/
 void gpadc_init(void);
+
+/**
+ ****************************************************************************************
+ * @brief Starts an ADC conversion, reads register value, and corrects the results.
+ * @sa adc_get_sample
+ * @sa adc_correct_sample
+ * @return conversion result
+ ****************************************************************************************
+*/
 uint16_t gpadc_collect_sample(void);
+
+/**
+ ****************************************************************************************
+ * @brief Returns the raw conversion of ADC in millivolts.
+ * @param[in] sample        Raw conversion result of the ADC.
+ * @return sample in millivolts 
+ ****************************************************************************************
+*/
 uint16_t gpadc_sample_to_mv(uint16_t sample);
+
+/**
+ ****************************************************************************************
+ * @brief Callback function for interrupt-driven measurements.
+ ****************************************************************************************
+*/
 void gpadc_timer_cb(void);
+
+/**
+ ****************************************************************************************
+ * @brief Callback function for interrupt-driven measurements.
+ ****************************************************************************************
+*/
 void gpadc_interrupt(void);
 
-// Albert: PWM functions
+/**
+ ****************************************************************************************
+ * @brief Initializes Timer 2 and the PWM output.
+ * @param[in] clk_div       Clock divider for Timer 2.
+ * @param[in] clk_src       Clock source for Timer 2.
+ * @param[in] hw_pause      Pause condition configuration for Timer 2.
+ * @param[in] pwm_div       PWM frequency divider for PWM output (2 to (2^14 - 1)).
+ ****************************************************************************************
+*/
 void timer2_pwm_init(tim0_2_clk_div_t clk_div, tim2_clk_src_t clk_src, tim2_hw_pause_t hw_pause, uint16_t pwm_div);
 
 /**
  ****************************************************************************************
- * @brief Disconnection function.
- * @param[in] dc_pwm2       Duty cycle of PWM2 (0% - 100%)
- * @param[in] offset_pwm2   Offset of PWM2, delays the first rising edge (0% - 100%)
- * @param[in] dc_pwm3       Duty cycle of PWM3 (0% - 100%)
- * @param[in] offset_pwm3   Offset of PWM3, delays the first rising edge (0% - 100%)
+ * @brief Enables the PWM output.
+ * @param[in] dc_pwm2       Duty cycle of PWM2 (0% - 100%).
+ * @param[in] offset_pwm2   Offset of PWM2, delays the first rising edge (0% - 100%).
+ * @param[in] dc_pwm3       Duty cycle of PWM3 (0% - 100%).
+ * @param[in] offset_pwm3   Offset of PWM3, delays the first rising edge (0% - 100%).
  ****************************************************************************************
 */
 void timer2_pwm_enable(uint8_t dc_pwm2, uint8_t offset_pwm2, uint8_t dc_pwm3, uint8_t offset_pwm3);
 
 /**
  ****************************************************************************************
- * @brief Disable PWM output function.
+ * @brief Disables the PWM output.
  ****************************************************************************************
 */
 void timer2_pwm_disable(void);
@@ -88,9 +138,8 @@ void timer2_pwm_disable(void);
  * @brief Connection function.
  * @param[in] conidx        Connection Id index
  * @param[in] param         Pointer to GAPC_CONNECTION_REQ_IND message
+ * @note Yellow warning only shows up after building the project (they can be ignored for now).
  ****************************************************************************************
-		Albert: yellow warning only shows up after building the project (they can be ignored for now)
-		Runs when Bluethooth is initially connected
 */
 void user_on_connection(const uint8_t conidx, struct gapc_connection_req_ind const *param);
 

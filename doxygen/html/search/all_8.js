@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['user_5fadvertise_5fdata_0',['USER_ADVERTISE_DATA',['../user__config_8h.html#a60855e10cc120cdf573a09de6895cae1',1,'user_config.h']]],
+  ['user_5fadvertise_5fdata_5flen_1',['USER_ADVERTISE_DATA_LEN',['../user__config_8h.html#a567a16d876f57ca277f72b25392e5a94',1,'user_config.h']]],
+  ['user_5fadvertise_5fscan_5fresponse_5fdata_2',['USER_ADVERTISE_SCAN_RESPONSE_DATA',['../user__config_8h.html#a9aeced462c57be5db291504c9dcef3ea',1,'user_config.h']]],
+  ['user_5fadvertise_5fscan_5fresponse_5fdata_5flen_3',['USER_ADVERTISE_SCAN_RESPONSE_DATA_LEN',['../user__config_8h.html#a736ac7a3b4c242a931bdbff53f686ced',1,'user_config.h']]],
+  ['user_5fapp_5fon_5finit_4',['user_app_on_init',['../group___a_p_p.html#ga8d69ab99f9504092fa8ae723a6ab4cfa',1,'user_empty_peripheral_template.c']]],
+  ['user_5fcallback_5fconfig_2eh_5',['user_callback_config.h',['../user__callback__config_8h.html',1,'']]],
+  ['user_5fcatch_5frest_5fhndl_6',['user_catch_rest_hndl',['../group___a_p_p.html#ga0b3422baf14d93c4ca220ed9999e5a3c',1,'user_empty_peripheral_template.c']]],
+  ['user_5fconfig_7',['USER_CONFIG',['../group___u_s_e_r___c_o_n_f_i_g.html',1,'']]],
+  ['user_5fconfig_2eh_8',['user_config.h',['../user__config_8h.html',1,'']]],
+  ['user_5fcusts1_5fdef_2ec_9',['user_custs1_def.c',['../user__custs1__def_8c.html',1,'']]],
+  ['user_5fcusts1_5fdef_2eh_10',['user_custs1_def.h',['../user__custs1__def_8h.html',1,'']]],
+  ['user_5fcusts_5fconfig_2ec_11',['user_custs_config.c',['../user__custs__config_8c.html',1,'']]],
+  ['user_5fcusts_5fconfig_2eh_12',['user_custs_config.h',['../user__custs__config_8h.html',1,'']]],
+  ['user_5fdevice_5fname_13',['USER_DEVICE_NAME',['../user__config_8h.html#a607f564f4e00b267ecba5bcb131f8518',1,'user_config.h']]],
+  ['user_5fdevice_5fname_5flen_14',['USER_DEVICE_NAME_LEN',['../user__config_8h.html#a33f3189d8be868461938cf75ac71938d',1,'user_config.h']]],
+  ['user_5fempty_5fperipheral_5ftemplate_2ec_15',['user_empty_peripheral_template.c',['../user__empty__peripheral__template_8c.html',1,'']]],
+  ['user_5fempty_5fperipheral_5ftemplate_2eh_16',['user_empty_peripheral_template.h',['../user__empty__peripheral__template_8h.html',1,'']]],
+  ['user_5fmodules_5fconfig_2eh_17',['user_modules_config.h',['../user__modules__config_8h.html',1,'']]],
+  ['user_5fon_5fconnection_18',['user_on_connection',['../group___a_p_p.html#ga097fccef82db4a9dfdc1cb542a9e9e20',1,'user_empty_peripheral_template.c']]],
+  ['user_5fon_5fdisconnect_19',['user_on_disconnect',['../group___a_p_p.html#ga2b05ace9fab6a68b42379e8a17d91d43',1,'user_empty_peripheral_template.c']]],
+  ['user_5fperiph_5fsetup_2ec_20',['user_periph_setup.c',['../user__periph__setup_8c.html',1,'']]],
+  ['user_5fperiph_5fsetup_2eh_21',['user_periph_setup.h',['../user__periph__setup_8h.html',1,'']]],
+  ['user_5fprofiles_5fconfig_2eh_22',['user_profiles_config.h',['../user__profiles__config_8h.html',1,'']]],
+  ['uvp_5fshdn_23',['uvp_shdn',['../group___a_p_p.html#ga1d6b9c029ec3b57bfc9111f1f9f30a68',1,'user_empty_peripheral_template.c']]]
+];

@@ -65,43 +65,39 @@ User modules configuration.
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{group___a_p_p_gac8110217f74ae271ca59021f9ba88a74}\label{group___a_p_p_gac8110217f74ae271ca59021f9ba88a74} 
-bool uart\+\_\+busy\+\_\+status {\bfseries \+\_\+\+\_\+\+SECTION\+\_\+\+ZERO} ("{}retention\+\_\+mem\+\_\+area0"{})
+timer\+\_\+hnd adc\+\_\+timer {\bfseries \+\_\+\+\_\+\+SECTION\+\_\+\+ZERO} ("{}retention\+\_\+mem\+\_\+area0"{})
 \item 
 \Hypertarget{group___a_p_p_ga1d6b9c029ec3b57bfc9111f1f9f30a68}\label{group___a_p_p_ga1d6b9c029ec3b57bfc9111f1f9f30a68} 
 void {\bfseries uvp\+\_\+shdn} (void)
-\item 
+\begin{DoxyCompactList}\small\item\em Defines logic for GPIO pins of the UVP circuit. \end{DoxyCompactList}\item 
 \Hypertarget{group___a_p_p_ga5ec316679d3ba903bd2a9481994c0279}\label{group___a_p_p_ga5ec316679d3ba903bd2a9481994c0279} 
 void {\bfseries gpadc\+\_\+timer\+\_\+cb} (void)
-\item 
+\begin{DoxyCompactList}\small\item\em Callback function for interrupt-\/driven measurements. \end{DoxyCompactList}\item 
 \Hypertarget{group___a_p_p_gabf7bc0af1245d613383b804d714c157d}\label{group___a_p_p_gabf7bc0af1245d613383b804d714c157d} 
 void {\bfseries gpadc\+\_\+interrupt} (void)
-\item 
+\begin{DoxyCompactList}\small\item\em Callback function for interrupt-\/driven measurements. \end{DoxyCompactList}\item 
 \Hypertarget{group___a_p_p_gadc41970cc68aefce1d5867ddc7bac95a}\label{group___a_p_p_gadc41970cc68aefce1d5867ddc7bac95a} 
 void {\bfseries gpadc\+\_\+init} (void)
-\item 
-\Hypertarget{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f}\label{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f} 
-uint16\+\_\+t {\bfseries gpadc\+\_\+collect\+\_\+sample} (void)
-\item 
-\Hypertarget{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f}\label{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f} 
-uint16\+\_\+t {\bfseries gpadc\+\_\+sample\+\_\+to\+\_\+mv} (uint16\+\_\+t sample)
-\item 
-\Hypertarget{group___a_p_p_gad52bb6041e633d19633c604c84a13e32}\label{group___a_p_p_gad52bb6041e633d19633c604c84a13e32} 
-void {\bfseries timer2\+\_\+pwm\+\_\+init} (tim0\+\_\+2\+\_\+clk\+\_\+div\+\_\+t clk\+\_\+div, tim2\+\_\+clk\+\_\+src\+\_\+t clk\+\_\+src, tim2\+\_\+hw\+\_\+pause\+\_\+t hw\+\_\+pause, uint16\+\_\+t pwm\+\_\+div)
-\item 
+\begin{DoxyCompactList}\small\item\em Initializes the ADC. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f}{gpadc\+\_\+collect\+\_\+sample}} (void)
+\begin{DoxyCompactList}\small\item\em Starts an ADC conversion, reads register value, and corrects the results. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f}{gpadc\+\_\+sample\+\_\+to\+\_\+mv}} (uint16\+\_\+t sample)
+\begin{DoxyCompactList}\small\item\em Returns the raw conversion of ADC in millivolts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___a_p_p_gad52bb6041e633d19633c604c84a13e32}{timer2\+\_\+pwm\+\_\+init}} (tim0\+\_\+2\+\_\+clk\+\_\+div\+\_\+t clk\+\_\+div, tim2\+\_\+clk\+\_\+src\+\_\+t clk\+\_\+src, tim2\+\_\+hw\+\_\+pause\+\_\+t hw\+\_\+pause, uint16\+\_\+t pwm\+\_\+div)
+\begin{DoxyCompactList}\small\item\em Initializes Timer 2 and the PWM output. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group___a_p_p_gac249834818c97dd4641fbf984bcff414}{timer2\+\_\+pwm\+\_\+enable}} (uint8\+\_\+t dc\+\_\+pwm2, uint8\+\_\+t offset\+\_\+pwm2, uint8\+\_\+t dc\+\_\+pwm3, uint8\+\_\+t offset\+\_\+pwm3)
-\begin{DoxyCompactList}\small\item\em Disconnection function. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Enables the PWM output. \end{DoxyCompactList}\item 
 \Hypertarget{group___a_p_p_ga8c8e71698fc4044fef4e7990642f44e1}\label{group___a_p_p_ga8c8e71698fc4044fef4e7990642f44e1} 
 void {\bfseries timer2\+\_\+pwm\+\_\+disable} (void)
-\begin{DoxyCompactList}\small\item\em Disable PWM output function. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Disables the PWM output. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group___a_p_p_ga097fccef82db4a9dfdc1cb542a9e9e20}{user\+\_\+on\+\_\+connection}} (const uint8\+\_\+t conidx, struct gapc\+\_\+connection\+\_\+req\+\_\+ind const \texorpdfstring{$\ast$}{*}param)
 \begin{DoxyCompactList}\small\item\em Connection function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group___a_p_p_ga2b05ace9fab6a68b42379e8a17d91d43}{user\+\_\+on\+\_\+disconnect}} (struct gapc\+\_\+disconnect\+\_\+ind const \texorpdfstring{$\ast$}{*}param)
 \begin{DoxyCompactList}\small\item\em Disconnection function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}{user\+\_\+catch\+\_\+rest\+\_\+hndl}} (ke\+\_\+msg\+\_\+id\+\_\+t const msgid, void const \texorpdfstring{$\ast$}{*}param, ke\+\_\+task\+\_\+id\+\_\+t const dest\+\_\+id, ke\+\_\+task\+\_\+id\+\_\+t const src\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Handles the messages that are not handled by the SDK internal mechanisms. \end{DoxyCompactList}\item 
-\Hypertarget{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa}\label{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa} 
-void {\bfseries user\+\_\+app\+\_\+on\+\_\+init} (void)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa}{user\+\_\+app\+\_\+on\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialization callback function rerouted to user space. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -110,6 +106,42 @@ User modules configuration.
 
 
 \doxysubsection{Function Documentation}
+\Hypertarget{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f}\index{APP@{APP}!gpadc\_collect\_sample@{gpadc\_collect\_sample}}
+\index{gpadc\_collect\_sample@{gpadc\_collect\_sample}!APP@{APP}}
+\doxysubsubsection{\texorpdfstring{gpadc\_collect\_sample()}{gpadc\_collect\_sample()}}
+{\footnotesize\ttfamily \label{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f} 
+uint16\+\_\+t gpadc\+\_\+collect\+\_\+sample (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Starts an ADC conversion, reads register value, and corrects the results. 
+
+\begin{DoxySeeAlso}{See also}
+adc\+\_\+get\+\_\+sample 
+
+adc\+\_\+correct\+\_\+sample 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+conversion result 
+\end{DoxyReturn}
+\Hypertarget{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f}\index{APP@{APP}!gpadc\_sample\_to\_mv@{gpadc\_sample\_to\_mv}}
+\index{gpadc\_sample\_to\_mv@{gpadc\_sample\_to\_mv}!APP@{APP}}
+\doxysubsubsection{\texorpdfstring{gpadc\_sample\_to\_mv()}{gpadc\_sample\_to\_mv()}}
+{\footnotesize\ttfamily \label{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f} 
+uint16\+\_\+t gpadc\+\_\+sample\+\_\+to\+\_\+mv (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{sample}{}\end{DoxyParamCaption})}
+
+
+
+Returns the raw conversion of ADC in millivolts. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em sample} & Raw conversion result of the ADC. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sample in millivolts 
+\end{DoxyReturn}
 \Hypertarget{group___a_p_p_gac249834818c97dd4641fbf984bcff414}\index{APP@{APP}!timer2\_pwm\_enable@{timer2\_pwm\_enable}}
 \index{timer2\_pwm\_enable@{timer2\_pwm\_enable}!APP@{APP}}
 \doxysubsubsection{\texorpdfstring{timer2\_pwm\_enable()}{timer2\_pwm\_enable()}}
@@ -118,19 +150,53 @@ void timer2\+\_\+pwm\+\_\+enable (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{
 
 
 
-Disconnection function. 
+Enables the PWM output. 
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in}}  & {\em dc\+\_\+pwm2} & Duty cycle of PWM2 (0\% -\/ 100\%) \\
+\mbox{\texttt{ in}}  & {\em dc\+\_\+pwm2} & Duty cycle of PWM2 (0\% -\/ 100\%). \\
 \hline
-\mbox{\texttt{ in}}  & {\em offset\+\_\+pwm2} & Offset of PWM2, delays the first rising edge (0\% -\/ 100\%) \\
+\mbox{\texttt{ in}}  & {\em offset\+\_\+pwm2} & Offset of PWM2, delays the first rising edge (0\% -\/ 100\%). \\
 \hline
-\mbox{\texttt{ in}}  & {\em dc\+\_\+pwm3} & Duty cycle of PWM3 (0\% -\/ 100\%) \\
+\mbox{\texttt{ in}}  & {\em dc\+\_\+pwm3} & Duty cycle of PWM3 (0\% -\/ 100\%). \\
 \hline
-\mbox{\texttt{ in}}  & {\em offset\+\_\+pwm3} & Offset of PWM3, delays the first rising edge (0\% -\/ 100\%) \\
+\mbox{\texttt{ in}}  & {\em offset\+\_\+pwm3} & Offset of PWM3, delays the first rising edge (0\% -\/ 100\%). \\
 \hline
 \end{DoxyParams}
+\Hypertarget{group___a_p_p_gad52bb6041e633d19633c604c84a13e32}\index{APP@{APP}!timer2\_pwm\_init@{timer2\_pwm\_init}}
+\index{timer2\_pwm\_init@{timer2\_pwm\_init}!APP@{APP}}
+\doxysubsubsection{\texorpdfstring{timer2\_pwm\_init()}{timer2\_pwm\_init()}}
+{\footnotesize\ttfamily \label{group___a_p_p_gad52bb6041e633d19633c604c84a13e32} 
+void timer2\+\_\+pwm\+\_\+init (\begin{DoxyParamCaption}\item[{tim0\+\_\+2\+\_\+clk\+\_\+div\+\_\+t}]{clk\+\_\+div}{, }\item[{tim2\+\_\+clk\+\_\+src\+\_\+t}]{clk\+\_\+src}{, }\item[{tim2\+\_\+hw\+\_\+pause\+\_\+t}]{hw\+\_\+pause}{, }\item[{uint16\+\_\+t}]{pwm\+\_\+div}{}\end{DoxyParamCaption})}
+
+
+
+Initializes Timer 2 and the PWM output. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em clk\+\_\+div} & Clock divider for Timer 2. \\
+\hline
+\mbox{\texttt{ in}}  & {\em clk\+\_\+src} & Clock source for Timer 2. \\
+\hline
+\mbox{\texttt{ in}}  & {\em hw\+\_\+pause} & Pause condition configuration for Timer 2. \\
+\hline
+\mbox{\texttt{ in}}  & {\em pwm\+\_\+div} & PWM frequency divider for PWM output (2 to (2\texorpdfstring{$^\wedge$}{\string^}14 -\/ 1)). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa}\index{APP@{APP}!user\_app\_on\_init@{user\_app\_on\_init}}
+\index{user\_app\_on\_init@{user\_app\_on\_init}!APP@{APP}}
+\doxysubsubsection{\texorpdfstring{user\_app\_on\_init()}{user\_app\_on\_init()}}
+{\footnotesize\ttfamily \label{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa} 
+void user\+\_\+app\+\_\+on\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialization callback function rerouted to user space. 
+
+\begin{DoxyNote}{Note}
+See \doxylink{user__callback__config_8h}{user\+\_\+callback\+\_\+config.\+h} for reroutes. 
+\end{DoxyNote}
 \Hypertarget{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}\index{APP@{APP}!user\_catch\_rest\_hndl@{user\_catch\_rest\_hndl}}
 \index{user\_catch\_rest\_hndl@{user\_catch\_rest\_hndl}!APP@{APP}}
 \doxysubsubsection{\texorpdfstring{user\_catch\_rest\_hndl()}{user\_catch\_rest\_hndl()}}
@@ -166,12 +232,12 @@ Connection function.
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in}}  & {\em conidx} & Connection Id index \\
 \hline
-\mbox{\texttt{ in}}  & {\em param} & Pointer to GAPC\+\_\+\+CONNECTION\+\_\+\+REQ\+\_\+\+IND message \begin{DoxyVerb}Albert: yellow warning only shows up after building the project (they can be ignored for now)
-Runs when Bluethooth is initially connected
-\end{DoxyVerb}
- \\
+\mbox{\texttt{ in}}  & {\em param} & Pointer to GAPC\+\_\+\+CONNECTION\+\_\+\+REQ\+\_\+\+IND message \\
 \hline
 \end{DoxyParams}
+\begin{DoxyNote}{Note}
+Yellow warning only shows up after building the project (they can be ignored for now). 
+\end{DoxyNote}
 \Hypertarget{group___a_p_p_ga2b05ace9fab6a68b42379e8a17d91d43}\index{APP@{APP}!user\_on\_disconnect@{user\_on\_disconnect}}
 \index{user\_on\_disconnect@{user\_on\_disconnect}!APP@{APP}}
 \doxysubsubsection{\texorpdfstring{user\_on\_disconnect()}{user\_on\_disconnect()}}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['periph_5finit_0',['periph_init',['../user__periph__setup_8h.html#a2cd4bdd061501508fe71aa672f690e81',1,'periph_init(void):&#160;user_periph_setup.c'],['../user__periph__setup_8c.html#a2cd4bdd061501508fe71aa672f690e81',1,'periph_init(void):&#160;user_periph_setup.c']]]
+  ['on_5fsuotar_5fstatus_5fchange_0',['on_suotar_status_change',['../user__callback__config_8h.html#ab75fd65a1d33c7ed4755c49678a1cadb',1,'user_callback_config.h']]]
 ];

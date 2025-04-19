@@ -168,7 +168,6 @@ static const struct default_app_operations user_default_app_operations = {
 
 static const struct arch_main_loop_callbacks user_app_main_loop_callbacks = {
 		// Albert: rerouted init to user space
-	
     // .app_on_init            = default_app_on_init,
 		.app_on_init            = user_app_on_init,
 

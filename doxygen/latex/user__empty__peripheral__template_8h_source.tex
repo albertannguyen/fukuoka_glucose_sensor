@@ -39,34 +39,34 @@
 \DoxyCodeLine{00048\ \textcolor{comment}{\ *\ FUNCTION\ DECLARATIONS}}
 \DoxyCodeLine{00049\ \textcolor{comment}{\ ****************************************************************************************}}
 \DoxyCodeLine{00050\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{00051\ \ }
-\DoxyCodeLine{00052\ \textcolor{comment}{//\ Albert:\ Custom\ rerouted\ callback\ functions\ from\ user\_callback\_config.h}}
-\DoxyCodeLine{00053\ \textcolor{keywordtype}{void}\ user\_app\_on\_init(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \textcolor{comment}{//\ Albert:\ UVP\ functions}}
-\DoxyCodeLine{00056\ \textcolor{keywordtype}{void}\ uvp\_shdn(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \textcolor{comment}{//\ Albert:\ ADC\ functions}}
-\DoxyCodeLine{00059\ \textcolor{keywordtype}{void}\ gpadc\_init(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00060\ uint16\_t\ gpadc\_collect\_sample(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00061\ uint16\_t\ gpadc\_sample\_to\_mv(uint16\_t\ sample);}
-\DoxyCodeLine{00062\ \textcolor{keywordtype}{void}\ gpadc\_timer\_cb(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00063\ \textcolor{keywordtype}{void}\ gpadc\_interrupt(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00065\ \textcolor{comment}{//\ Albert:\ PWM\ functions}}
-\DoxyCodeLine{00066\ \textcolor{keywordtype}{void}\ timer2\_pwm\_init(tim0\_2\_clk\_div\_t\ clk\_div,\ tim2\_clk\_src\_t\ clk\_src,\ tim2\_hw\_pause\_t\ hw\_pause,\ uint16\_t\ pwm\_div);}
-\DoxyCodeLine{00067\ }
-\DoxyCodeLine{00077\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_gac249834818c97dd4641fbf984bcff414}{timer2\_pwm\_enable}}(uint8\_t\ dc\_pwm2,\ uint8\_t\ offset\_pwm2,\ uint8\_t\ dc\_pwm3,\ uint8\_t\ offset\_pwm3);}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00084\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga8c8e71698fc4044fef4e7990642f44e1}{timer2\_pwm\_disable}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00085\ }
-\DoxyCodeLine{00095\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga097fccef82db4a9dfdc1cb542a9e9e20}{user\_on\_connection}}(\textcolor{keyword}{const}\ uint8\_t\ conidx,\ \textcolor{keyword}{struct}\ gapc\_connection\_req\_ind\ \textcolor{keyword}{const}\ *param);}
-\DoxyCodeLine{00096\ }
-\DoxyCodeLine{00103\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga2b05ace9fab6a68b42379e8a17d91d43}{user\_on\_disconnect}}(\textcolor{keyword}{struct}\ gapc\_disconnect\_ind\ \textcolor{keyword}{const}\ *param);}
-\DoxyCodeLine{00104\ }
-\DoxyCodeLine{00114\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}{user\_catch\_rest\_hndl}}(ke\_msg\_id\_t\ \textcolor{keyword}{const}\ msgid,\ \textcolor{keywordtype}{void}\ \textcolor{keyword}{const}\ *param,\ ke\_task\_id\_t\ \textcolor{keyword}{const}\ dest\_id,\ ke\_task\_id\_t\ \textcolor{keyword}{const}\ src\_id);}
-\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00058\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa}{user\_app\_on\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00065\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga1d6b9c029ec3b57bfc9111f1f9f30a68}{uvp\_shdn}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_gadc41970cc68aefce1d5867ddc7bac95a}{gpadc\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00082\ uint16\_t\ \mbox{\hyperlink{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f}{gpadc\_collect\_sample}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00091\ uint16\_t\ \mbox{\hyperlink{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f}{gpadc\_sample\_to\_mv}}(uint16\_t\ sample);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00098\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga5ec316679d3ba903bd2a9481994c0279}{gpadc\_timer\_cb}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00105\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_gabf7bc0af1245d613383b804d714c157d}{gpadc\_interrupt}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00116\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_gad52bb6041e633d19633c604c84a13e32}{timer2\_pwm\_init}}(tim0\_2\_clk\_div\_t\ clk\_div,\ tim2\_clk\_src\_t\ clk\_src,\ tim2\_hw\_pause\_t\ hw\_pause,\ uint16\_t\ pwm\_div);}
 \DoxyCodeLine{00117\ }
-\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00127\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_gac249834818c97dd4641fbf984bcff414}{timer2\_pwm\_enable}}(uint8\_t\ dc\_pwm2,\ uint8\_t\ offset\_pwm2,\ uint8\_t\ dc\_pwm3,\ uint8\_t\ offset\_pwm3);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00134\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga8c8e71698fc4044fef4e7990642f44e1}{timer2\_pwm\_disable}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00144\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga097fccef82db4a9dfdc1cb542a9e9e20}{user\_on\_connection}}(\textcolor{keyword}{const}\ uint8\_t\ conidx,\ \textcolor{keyword}{struct}\ gapc\_connection\_req\_ind\ \textcolor{keyword}{const}\ *param);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00152\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga2b05ace9fab6a68b42379e8a17d91d43}{user\_on\_disconnect}}(\textcolor{keyword}{struct}\ gapc\_disconnect\_ind\ \textcolor{keyword}{const}\ *param);}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00163\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}{user\_catch\_rest\_hndl}}(ke\_msg\_id\_t\ \textcolor{keyword}{const}\ msgid,\ \textcolor{keywordtype}{void}\ \textcolor{keyword}{const}\ *param,\ ke\_task\_id\_t\ \textcolor{keyword}{const}\ dest\_id,\ ke\_task\_id\_t\ \textcolor{keyword}{const}\ src\_id);}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

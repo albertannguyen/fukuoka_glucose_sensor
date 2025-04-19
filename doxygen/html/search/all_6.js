@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['timer2_5fpwm_5fdisable_0',['timer2_pwm_disable',['../group___a_p_p.html#ga8c8e71698fc4044fef4e7990642f44e1',1,'user_empty_peripheral_template.c']]],
-  ['timer2_5fpwm_5fenable_1',['timer2_pwm_enable',['../group___a_p_p.html#gac249834818c97dd4641fbf984bcff414',1,'user_empty_peripheral_template.c']]]
+  ['set_5fpad_5ffunctions_0',['set_pad_functions',['../user__periph__setup_8h.html#ac55a7e5121b9797ba36f63cb1f2f6d7f',1,'set_pad_functions(void):&#160;user_periph_setup.c'],['../user__periph__setup_8c.html#ac55a7e5121b9797ba36f63cb1f2f6d7f',1,'set_pad_functions(void):&#160;user_periph_setup.c']]]
 ];
