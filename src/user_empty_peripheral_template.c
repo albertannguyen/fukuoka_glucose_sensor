@@ -44,14 +44,18 @@
  ****************************************************************************************
  */
 
+// datasheet values
 #define MIN_PWM_DIV 2
 #define MAX_PWM_DIV 16383
 #define SYS_CLK_FREQ_HZ 16000000
 #define LP_CLK_FREQ_HZ 32000
 
+// clamp macro
+#define CLAMP(value, min, max) ((value) < (min) ? (min) : ((value) > (max) ? (max) : (value)))
+
 /*
  ****************************************************************************************
- * GLOBAL VARIABLE DEFINITIONS
+ * GLOBAL RETENTION VARIABLE DEFINITIONS
  ****************************************************************************************
  */
 
@@ -88,12 +92,10 @@ void uvp_shdn(void)
 // Single mode output: Raw = 9, Volt = 31 mV with no connection (valid floating output)
 void gpadc_timer_cb(void)
 {
-	// Read and print ADC value
+	// Read and print ADC value to UART
 	adc_input = gpadc_collect_sample();
 	adc_input_volt = gpadc_sample_to_mv(adc_input);
-	
-	// arch_printf will only print once callback function returns
-	arch_printf("Register Value: %d | Voltage: %d mV\n\r", adc_input, adc_input_volt);
+	arch_printf("Register Value: %d | Voltage: %d mV \n\r", adc_input, adc_input_volt);
 	
 	// Restart the timer
 	adc_timer = app_easy_timer(100, gpadc_timer_cb);
@@ -107,7 +109,7 @@ void gpadc_interrupt(void)
 	adc_input_volt = gpadc_sample_to_mv(adc_input);
 	
 	// arch_printf will only print once callback function returns
-	arch_printf("Register Value: %d | Voltage: %d mV\n\r", adc_input, adc_input_volt);
+	arch_printf("Register Value: %d | Voltage: %d mV \n\r", adc_input, adc_input_volt);
 	
 	// Clear the interrupt
 	adc_clear_interrupt();
@@ -156,7 +158,7 @@ void gpadc_init(void)
 	adc_reset_offsets();
 	adc_offset_calibrate(ADC_INPUT_MODE_SINGLE_ENDED);
 	
-	// TODO Register interrupt function to be used when ADC is on in continuous mode
+	// FIXME Register interrupt function to be used when ADC is on in continuous mode
 	// adc_register_interrupt(gpadc_interrupt);
 	
 	// consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
@@ -214,25 +216,39 @@ void timer2_pwm_init(tim0_2_clk_div_t clk_div, tim2_clk_src_t clk_src, tim2_hw_p
 	timer2_config(&tmr_cfg);
 	
 	// Define PWM parameters
+	uint8_t clk_div_int = 1 << clk_div;
 	uint32_t clk_freq = (clk_src == TIM2_CLK_SYS) ? SYS_CLK_FREQ_HZ : LP_CLK_FREQ_HZ,
-					 clk_div_int = (clk_div == TIM0_2_CLK_DIV_1) ? 1 :
-												 (clk_div == TIM0_2_CLK_DIV_2) ? 2 :
-												 (clk_div == TIM0_2_CLK_DIV_4) ? 4 : 8,
 					 input_freq = clk_freq / clk_div_int;
 
-	// Set PWM parameters
-	// Ensure pwm_div is not beyond datasheet stated range of 2 to (2^14 - 1)
-	if(pwm_div < MIN_PWM_DIV || pwm_div > MAX_PWM_DIV){
-		// Set to min value
-		pwm_div = MIN_PWM_DIV;
-		arch_printf("pwm_div is beyond min-max range specified by datasheet; it is now set to min value\n\r");
+	// Clamp pwm_div if beyond datasheet range of 2 to (2^14 - 1)
+	pwm_div = CLAMP(pwm_div, MIN_PWM_DIV, MAX_PWM_DIV);
+	
+	// TODO fully determine compile bug if arch_printf is included
+	/*
+	if (pwm_div < MIN_PWM_DIV) {
+    pwm_div = MIN_PWM_DIV;
+    // arch_printf("pwm_div is below minimum, clamped to min value %d \n\r", MIN_PWM_DIV);
+		// __BKPT(0); // force breakpoint here because debugger cannot stop in here, it has been optimized out of build
+	} else if (pwm_div > MAX_PWM_DIV) {
+    pwm_div = MAX_PWM_DIV;
+    // arch_printf("pwm_div is above maximum, clamped to max value %d \n\r", MAX_PWM_DIV);
 	}
-	// Input and output frequency of this function is defined and set based on datasheet for timer 2
+	*/
+
+	// Set PWM frequency based on datasheet for Timer 2
 	timer2_pwm_freq_set(input_freq / pwm_div, input_freq);
 }
 
 void timer2_pwm_enable(uint8_t dc_pwm2, uint8_t offset_pwm2, uint8_t dc_pwm3, uint8_t offset_pwm3)
 {
+	// Clamp values if inputs are outside of 0-100% range
+	/*
+	dc_pwm2 = CLAMP(dc_pwm2, 0, 100);
+	offset_pwm2 = CLAMP(offset_pwm2, 0, 100);
+	dc_pwm3 = CLAMP(dc_pwm3, 0, 100);
+	offset_pwm3 = CLAMP(offset_pwm3, 0, 100);
+	*/
+	
 	// Define PWM parameters in struct
 	tim2_pwm_config_t pwm2_cfg = {
 		.pwm_signal = TIM2_PWM_2,
@@ -247,6 +263,7 @@ void timer2_pwm_enable(uint8_t dc_pwm2, uint8_t offset_pwm2, uint8_t dc_pwm3, ui
 	};
 	
 	// Set PWM parameters
+	// This function already comes with ASSERT_WARNING input protection, no need for clamping
 	timer2_pwm_signal_config(&pwm2_cfg);
 	timer2_pwm_signal_config(&pwm3_cfg);
 	
@@ -328,15 +345,16 @@ void user_app_on_init(void)
 	// PWM test code
 	// max voltage is 3.3 V on LP clock source, min is 0 V
 	// this is because GPIO is supplied by VBAT_HIGH or the 3.3 V LDO on devkit
-	// duty cycle is accurate, PWM2 and PWM3 duty cycles are independent of each other
 	
-	timer2_pwm_init(TIM0_2_CLK_DIV_8, TIM2_CLK_LP, TIM2_HW_PAUSE_OFF, MIN_PWM_DIV - 1);
+	/*
+	timer2_pwm_init(TIM0_2_CLK_DIV_8, TIM2_CLK_LP, TIM2_HW_PAUSE_OFF, 0xFFFF);
 	timer2_pwm_enable(50, 0, 25, 0);
-	
+	*/
 	
 	// UVP test code
 	// if condition passes if trigger pin is driven low and turns off the MAX SHDN pin
 	// GPIO high is around 3 V, and low is 0 V
+	
 	/*
 	uvp_trigger_status = GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN);
 	while(1){
