@@ -11,6 +11,7 @@ Empty peripheral template project header file.
 {\ttfamily \#include "{}gapm\+\_\+task.\+h"{}}\newline
 {\ttfamily \#include "{}app.\+h"{}}\newline
 {\ttfamily \#include "{}co\+\_\+error.\+h"{}}\newline
+{\ttfamily \#include "{}adc\+\_\+531.\+h"{}}\newline
 {\ttfamily \#include "{}timer0\+\_\+2.\+h"{}}\newline
 {\ttfamily \#include "{}timer2.\+h"{}}\newline
 \doxysubsubsection*{Functions}
@@ -20,14 +21,14 @@ void \mbox{\hyperlink{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa}{user\+\_
 \begin{DoxyCompactList}\small\item\em Initialization callback function rerouted to user space. \end{DoxyCompactList}\item 
 void {\bfseries uvp\+\_\+shdn} (void)
 \begin{DoxyCompactList}\small\item\em Defines logic for GPIO pins of the UVP circuit. \end{DoxyCompactList}\item 
-void {\bfseries gpadc\+\_\+init} (void)
-\begin{DoxyCompactList}\small\item\em Initializes the ADC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___a_p_p_ga41745da9df1defa8983962be9aa23e11}{gpadc\+\_\+init}} (uint8\+\_\+t smpl\+\_\+time\+\_\+mult, bool continuous, uint8\+\_\+t interval\+\_\+mult, adc\+\_\+input\+\_\+attn\+\_\+t input\+\_\+attenuator, bool chopping, uint8\+\_\+t oversampling)
+\begin{DoxyCompactList}\small\item\em Initializes the ADC with a given configuration. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f}{gpadc\+\_\+collect\+\_\+sample}} (void)
 \begin{DoxyCompactList}\small\item\em Starts an ADC conversion, reads register value, and corrects the results. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f}{gpadc\+\_\+sample\+\_\+to\+\_\+mv}} (uint16\+\_\+t sample)
 \begin{DoxyCompactList}\small\item\em Returns the raw conversion of ADC in millivolts. \end{DoxyCompactList}\item 
 void {\bfseries gpadc\+\_\+timer\+\_\+cb} (void)
-\begin{DoxyCompactList}\small\item\em Callback function for interrupt-\/driven measurements. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Callback function for timer-\/driven measurements. \end{DoxyCompactList}\item 
 void {\bfseries gpadc\+\_\+interrupt} (void)
 \begin{DoxyCompactList}\small\item\em Callback function for interrupt-\/driven measurements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group___a_p_p_gad52bb6041e633d19633c604c84a13e32}{timer2\+\_\+pwm\+\_\+init}} (tim0\+\_\+2\+\_\+clk\+\_\+div\+\_\+t clk\+\_\+div, tim2\+\_\+clk\+\_\+src\+\_\+t clk\+\_\+src, tim2\+\_\+hw\+\_\+pause\+\_\+t hw\+\_\+pause, uint16\+\_\+t pwm\+\_\+div)

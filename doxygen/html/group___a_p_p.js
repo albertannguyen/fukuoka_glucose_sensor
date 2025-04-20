@@ -2,7 +2,7 @@ var group___a_p_p =
 [
     [ "APP_CONFIG", "group___a_p_p___c_o_n_f_i_g.html", "group___a_p_p___c_o_n_f_i_g" ],
     [ "gpadc_collect_sample", "group___a_p_p.html#gaa4fb3777459834fb4d0720eaf119d94f", null ],
-    [ "gpadc_init", "group___a_p_p.html#gadc41970cc68aefce1d5867ddc7bac95a", null ],
+    [ "gpadc_init", "group___a_p_p.html#ga41745da9df1defa8983962be9aa23e11", null ],
     [ "gpadc_interrupt", "group___a_p_p.html#gabf7bc0af1245d613383b804d714c157d", null ],
     [ "gpadc_sample_to_mv", "group___a_p_p.html#ga8258035a26667ea0be70867e5e483c3f", null ],
     [ "gpadc_timer_cb", "group___a_p_p.html#ga5ec316679d3ba903bd2a9481994c0279", null ],

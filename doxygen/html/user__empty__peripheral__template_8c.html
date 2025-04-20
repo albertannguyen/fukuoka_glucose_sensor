@@ -139,28 +139,29 @@ Macros</h2></td></tr>
 <tr class="memitem:gae741c20d30f5a6a7a99fca2bf305addb" id="r_gae741c20d30f5a6a7a99fca2bf305addb"><td class="memItemLeft" align="right" valign="top">
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>LP_CLK_FREQ_HZ</b>&#160;&#160;&#160;32000</td></tr>
 <tr class="separator:gae741c20d30f5a6a7a99fca2bf305addb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafb679b492d0ccf7e55b77e1126bb312e" id="r_gafb679b492d0ccf7e55b77e1126bb312e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_p_p.html#gafb679b492d0ccf7e55b77e1126bb312e">CLAMP</a>(value,  min,  max)</td></tr>
+<tr class="separator:gafb679b492d0ccf7e55b77e1126bb312e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gac8110217f74ae271ca59021f9ba88a74" id="r_gac8110217f74ae271ca59021f9ba88a74"><td class="memItemLeft" align="right" valign="top">
+<tr class="memitem:gaa6225270b00130f1e7f4699678d05570" id="r_gaa6225270b00130f1e7f4699678d05570"><td class="memItemLeft" align="right" valign="top">
 timer_hnd adc_timer&#160;</td><td class="memItemRight" valign="bottom"><b>__SECTION_ZERO</b> (&quot;retention_mem_area0&quot;)</td></tr>
-<tr class="separator:gac8110217f74ae271ca59021f9ba88a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:gaa6225270b00130f1e7f4699678d05570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1d6b9c029ec3b57bfc9111f1f9f30a68" id="r_ga1d6b9c029ec3b57bfc9111f1f9f30a68"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>uvp_shdn</b> (void)</td></tr>
 <tr class="memdesc:ga1d6b9c029ec3b57bfc9111f1f9f30a68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines logic for GPIO pins of the UVP circuit. <br /></td></tr>
 <tr class="separator:ga1d6b9c029ec3b57bfc9111f1f9f30a68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5ec316679d3ba903bd2a9481994c0279" id="r_ga5ec316679d3ba903bd2a9481994c0279"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>gpadc_timer_cb</b> (void)</td></tr>
-<tr class="memdesc:ga5ec316679d3ba903bd2a9481994c0279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function for interrupt-driven measurements. <br /></td></tr>
+<tr class="memdesc:ga5ec316679d3ba903bd2a9481994c0279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function for timer-driven measurements. <br /></td></tr>
 <tr class="separator:ga5ec316679d3ba903bd2a9481994c0279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabf7bc0af1245d613383b804d714c157d" id="r_gabf7bc0af1245d613383b804d714c157d"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>gpadc_interrupt</b> (void)</td></tr>
 <tr class="memdesc:gabf7bc0af1245d613383b804d714c157d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function for interrupt-driven measurements. <br /></td></tr>
 <tr class="separator:gabf7bc0af1245d613383b804d714c157d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadc41970cc68aefce1d5867ddc7bac95a" id="r_gadc41970cc68aefce1d5867ddc7bac95a"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gpadc_init</b> (void)</td></tr>
-<tr class="memdesc:gadc41970cc68aefce1d5867ddc7bac95a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the ADC. <br /></td></tr>
-<tr class="separator:gadc41970cc68aefce1d5867ddc7bac95a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga41745da9df1defa8983962be9aa23e11" id="r_ga41745da9df1defa8983962be9aa23e11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_p_p.html#ga41745da9df1defa8983962be9aa23e11">gpadc_init</a> (uint8_t smpl_time_mult, bool continuous, uint8_t interval_mult, adc_input_attn_t input_attenuator, bool chopping, uint8_t oversampling)</td></tr>
+<tr class="memdesc:ga41745da9df1defa8983962be9aa23e11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the ADC with a given configuration.  <br /></td></tr>
+<tr class="separator:ga41745da9df1defa8983962be9aa23e11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa4fb3777459834fb4d0720eaf119d94f" id="r_gaa4fb3777459834fb4d0720eaf119d94f"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_p_p.html#gaa4fb3777459834fb4d0720eaf119d94f">gpadc_collect_sample</a> (void)</td></tr>
 <tr class="memdesc:gaa4fb3777459834fb4d0720eaf119d94f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts an ADC conversion, reads register value, and corrects the results.  <br /></td></tr>
 <tr class="separator:gaa4fb3777459834fb4d0720eaf119d94f"><td class="memSeparator" colspan="2">&#160;</td></tr>

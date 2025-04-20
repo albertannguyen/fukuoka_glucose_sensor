@@ -104,6 +104,7 @@
   ..\..\..\..\..\sdk\app_modules\api\app_prf_types.h \
   ..\..\..\..\..\sdk\app_modules\api\app_bond_db.h \
   ..\src\user_empty_peripheral_template.h \
+  ..\..\..\..\..\sdk\platform\driver\adc\adc_531.h \
   ..\..\..\..\..\sdk\platform\driver\timer\timer0_2.h \
   ..\..\..\..\..\sdk\platform\driver\timer\timer2.h \
   ..\..\..\..\..\sdk\ble_stack\controller\llc\llc.h \
@@ -132,6 +133,5 @@
   ..\..\..\..\..\sdk\platform\include\sdk_defs.h \
   ..\..\..\..\..\third_party\irng\iid_irng.h \
   ..\..\..\..\..\sdk\platform\driver\adc\adc.h \
-  ..\..\..\..\..\sdk\platform\driver\adc\adc_531.h \
   ..\..\..\..\..\sdk\platform\utilities\otp_cs\otp_cs.h \
   ..\..\..\..\..\sdk\platform\driver\syscntl\syscntl.h

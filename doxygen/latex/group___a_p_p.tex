@@ -60,11 +60,13 @@ User modules configuration.
 \item 
 \Hypertarget{group___a_p_p_gae741c20d30f5a6a7a99fca2bf305addb}\label{group___a_p_p_gae741c20d30f5a6a7a99fca2bf305addb} 
 \#define {\bfseries LP\+\_\+\+CLK\+\_\+\+FREQ\+\_\+\+HZ}~32000
+\item 
+\#define \mbox{\hyperlink{group___a_p_p_gafb679b492d0ccf7e55b77e1126bb312e}{CLAMP}}(value,  min,  max)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{group___a_p_p_gac8110217f74ae271ca59021f9ba88a74}\label{group___a_p_p_gac8110217f74ae271ca59021f9ba88a74} 
+\Hypertarget{group___a_p_p_gaa6225270b00130f1e7f4699678d05570}\label{group___a_p_p_gaa6225270b00130f1e7f4699678d05570} 
 timer\+\_\+hnd adc\+\_\+timer {\bfseries \+\_\+\+\_\+\+SECTION\+\_\+\+ZERO} ("{}retention\+\_\+mem\+\_\+area0"{})
 \item 
 \Hypertarget{group___a_p_p_ga1d6b9c029ec3b57bfc9111f1f9f30a68}\label{group___a_p_p_ga1d6b9c029ec3b57bfc9111f1f9f30a68} 
@@ -72,13 +74,12 @@ void {\bfseries uvp\+\_\+shdn} (void)
 \begin{DoxyCompactList}\small\item\em Defines logic for GPIO pins of the UVP circuit. \end{DoxyCompactList}\item 
 \Hypertarget{group___a_p_p_ga5ec316679d3ba903bd2a9481994c0279}\label{group___a_p_p_ga5ec316679d3ba903bd2a9481994c0279} 
 void {\bfseries gpadc\+\_\+timer\+\_\+cb} (void)
-\begin{DoxyCompactList}\small\item\em Callback function for interrupt-\/driven measurements. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Callback function for timer-\/driven measurements. \end{DoxyCompactList}\item 
 \Hypertarget{group___a_p_p_gabf7bc0af1245d613383b804d714c157d}\label{group___a_p_p_gabf7bc0af1245d613383b804d714c157d} 
 void {\bfseries gpadc\+\_\+interrupt} (void)
 \begin{DoxyCompactList}\small\item\em Callback function for interrupt-\/driven measurements. \end{DoxyCompactList}\item 
-\Hypertarget{group___a_p_p_gadc41970cc68aefce1d5867ddc7bac95a}\label{group___a_p_p_gadc41970cc68aefce1d5867ddc7bac95a} 
-void {\bfseries gpadc\+\_\+init} (void)
-\begin{DoxyCompactList}\small\item\em Initializes the ADC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___a_p_p_ga41745da9df1defa8983962be9aa23e11}{gpadc\+\_\+init}} (uint8\+\_\+t smpl\+\_\+time\+\_\+mult, bool continuous, uint8\+\_\+t interval\+\_\+mult, adc\+\_\+input\+\_\+attn\+\_\+t input\+\_\+attenuator, bool chopping, uint8\+\_\+t oversampling)
+\begin{DoxyCompactList}\small\item\em Initializes the ADC with a given configuration. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f}{gpadc\+\_\+collect\+\_\+sample}} (void)
 \begin{DoxyCompactList}\small\item\em Starts an ADC conversion, reads register value, and corrects the results. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f}{gpadc\+\_\+sample\+\_\+to\+\_\+mv}} (uint16\+\_\+t sample)
@@ -105,6 +106,20 @@ User modules configuration.
 
 
 
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group___a_p_p_gafb679b492d0ccf7e55b77e1126bb312e}\index{APP@{APP}!CLAMP@{CLAMP}}
+\index{CLAMP@{CLAMP}!APP@{APP}}
+\doxysubsubsection{\texorpdfstring{CLAMP}{CLAMP}}
+{\footnotesize\ttfamily \label{group___a_p_p_gafb679b492d0ccf7e55b77e1126bb312e} 
+\#define CLAMP(\begin{DoxyParamCaption}\item[{}]{value}{, }\item[{}]{min}{, }\item[{}]{max}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((value)\ <\ (min)\ ?\ (min)\ :\ ((value)\ >\ (max)\ ?\ (max)\ :\ (value)))}
+
+\end{DoxyCode}
+
+
 \doxysubsection{Function Documentation}
 \Hypertarget{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f}\index{APP@{APP}!gpadc\_collect\_sample@{gpadc\_collect\_sample}}
 \index{gpadc\_collect\_sample@{gpadc\_collect\_sample}!APP@{APP}}
@@ -124,6 +139,37 @@ adc\+\_\+correct\+\_\+sample
 \begin{DoxyReturn}{Returns}
 conversion result 
 \end{DoxyReturn}
+\Hypertarget{group___a_p_p_ga41745da9df1defa8983962be9aa23e11}\index{APP@{APP}!gpadc\_init@{gpadc\_init}}
+\index{gpadc\_init@{gpadc\_init}!APP@{APP}}
+\doxysubsubsection{\texorpdfstring{gpadc\_init()}{gpadc\_init()}}
+{\footnotesize\ttfamily \label{group___a_p_p_ga41745da9df1defa8983962be9aa23e11} 
+void gpadc\+\_\+init (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{smpl\+\_\+time\+\_\+mult}{, }\item[{bool}]{continuous}{, }\item[{uint8\+\_\+t}]{interval\+\_\+mult}{, }\item[{adc\+\_\+input\+\_\+attn\+\_\+t}]{input\+\_\+attenuator}{, }\item[{bool}]{chopping}{, }\item[{uint8\+\_\+t}]{oversampling}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the ADC with a given configuration. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em smpl\+\_\+time\+\_\+mult} & Sample time multiplier (1-\/15). \\
+\hline
+\mbox{\texttt{ in}}  & {\em continuous} & Enable or disable continuous conversion mode. \\
+\hline
+\mbox{\texttt{ in}}  & {\em interval\+\_\+mult} & Interval multiplier for continuous mode (0-\/255). \\
+\hline
+\mbox{\texttt{ in}}  & {\em input\+\_\+attenuator} & Attenuation factor for the ADC input. \\
+\hline
+\mbox{\texttt{ in}}  & {\em chopping} & Enable or disable chopping. \\
+\hline
+\mbox{\texttt{ in}}  & {\em oversampling} & Oversampling mode (0-\/7). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+ADC input mode and input pin are fixed in this function (single-\/ended, P0\+\_\+6). ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+adc\+\_\+init, adc\+\_\+set\+\_\+sample\+\_\+time, adc\+\_\+set\+\_\+interval, adc\+\_\+set\+\_\+oversampling 
+\end{DoxySeeAlso}
 \Hypertarget{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f}\index{APP@{APP}!gpadc\_sample\_to\_mv@{gpadc\_sample\_to\_mv}}
 \index{gpadc\_sample\_to\_mv@{gpadc\_sample\_to\_mv}!APP@{APP}}
 \doxysubsubsection{\texorpdfstring{gpadc\_sample\_to\_mv()}{gpadc\_sample\_to\_mv()}}
@@ -139,6 +185,9 @@ Returns the raw conversion of ADC in millivolts.
 \mbox{\texttt{ in}}  & {\em sample} & Raw conversion result of the ADC. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyNote}{Note}
+This is a code snippet given by Renesas. 
+\end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 sample in millivolts 
 \end{DoxyReturn}
@@ -179,7 +228,7 @@ Initializes Timer 2 and the PWM output.
 \hline
 \mbox{\texttt{ in}}  & {\em clk\+\_\+src} & Clock source for Timer 2. \\
 \hline
-\mbox{\texttt{ in}}  & {\em hw\+\_\+pause} & Pause condition configuration for Timer 2. \\
+\mbox{\texttt{ in}}  & {\em hw\+\_\+pause} & Enable or disable hardware pause for Timer 2. \\
 \hline
 \mbox{\texttt{ in}}  & {\em pwm\+\_\+div} & PWM frequency divider for PWM output (2 to (2\texorpdfstring{$^\wedge$}{\string^}14 -\/ 1)). \\
 \hline
@@ -218,6 +267,9 @@ Handles the messages that are not handled by the SDK internal mechanisms.
 \mbox{\texttt{ in}}  & {\em src\+\_\+id} & ID of the sending task instance. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyNote}{Note}
+Default callback function given by template. 
+\end{DoxyNote}
 \Hypertarget{group___a_p_p_ga097fccef82db4a9dfdc1cb542a9e9e20}\index{APP@{APP}!user\_on\_connection@{user\_on\_connection}}
 \index{user\_on\_connection@{user\_on\_connection}!APP@{APP}}
 \doxysubsubsection{\texorpdfstring{user\_on\_connection()}{user\_on\_connection()}}
@@ -236,7 +288,7 @@ Connection function.
 \hline
 \end{DoxyParams}
 \begin{DoxyNote}{Note}
-Yellow warning only shows up after building the project (they can be ignored for now). 
+Yellow warning only shows up after building the project (they can be ignored for now). Default callback function given by template. 
 \end{DoxyNote}
 \Hypertarget{group___a_p_p_ga2b05ace9fab6a68b42379e8a17d91d43}\index{APP@{APP}!user\_on\_disconnect@{user\_on\_disconnect}}
 \index{user\_on\_disconnect@{user\_on\_disconnect}!APP@{APP}}
@@ -253,4 +305,7 @@ Disconnection function.
 \mbox{\texttt{ in}}  & {\em param} & Pointer to GAPC\+\_\+\+DISCONNECT\+\_\+\+IND message \\
 \hline
 \end{DoxyParams}
+\begin{DoxyNote}{Note}
+Default callback function given by template. 
+\end{DoxyNote}
 \input{group___a_p_p___c_o_n_f_i_g}

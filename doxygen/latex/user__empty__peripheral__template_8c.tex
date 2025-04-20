@@ -27,6 +27,8 @@ Empty peripheral template project source code.
 \#define {\bfseries SYS\+\_\+\+CLK\+\_\+\+FREQ\+\_\+\+HZ}~16000000
 \item 
 \#define {\bfseries LP\+\_\+\+CLK\+\_\+\+FREQ\+\_\+\+HZ}~32000
+\item 
+\#define \mbox{\hyperlink{group___a_p_p_gafb679b492d0ccf7e55b77e1126bb312e}{CLAMP}}(value,  min,  max)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -36,11 +38,11 @@ timer\+\_\+hnd adc\+\_\+timer {\bfseries \+\_\+\+\_\+\+SECTION\+\_\+\+ZERO} ("{}
 void {\bfseries uvp\+\_\+shdn} (void)
 \begin{DoxyCompactList}\small\item\em Defines logic for GPIO pins of the UVP circuit. \end{DoxyCompactList}\item 
 void {\bfseries gpadc\+\_\+timer\+\_\+cb} (void)
-\begin{DoxyCompactList}\small\item\em Callback function for interrupt-\/driven measurements. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Callback function for timer-\/driven measurements. \end{DoxyCompactList}\item 
 void {\bfseries gpadc\+\_\+interrupt} (void)
 \begin{DoxyCompactList}\small\item\em Callback function for interrupt-\/driven measurements. \end{DoxyCompactList}\item 
-void {\bfseries gpadc\+\_\+init} (void)
-\begin{DoxyCompactList}\small\item\em Initializes the ADC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___a_p_p_ga41745da9df1defa8983962be9aa23e11}{gpadc\+\_\+init}} (uint8\+\_\+t smpl\+\_\+time\+\_\+mult, bool continuous, uint8\+\_\+t interval\+\_\+mult, adc\+\_\+input\+\_\+attn\+\_\+t input\+\_\+attenuator, bool chopping, uint8\+\_\+t oversampling)
+\begin{DoxyCompactList}\small\item\em Initializes the ADC with a given configuration. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f}{gpadc\+\_\+collect\+\_\+sample}} (void)
 \begin{DoxyCompactList}\small\item\em Starts an ADC conversion, reads register value, and corrects the results. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f}{gpadc\+\_\+sample\+\_\+to\+\_\+mv}} (uint16\+\_\+t sample)

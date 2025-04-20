@@ -61,7 +61,7 @@
 
 // ADC variables
 timer_hnd adc_timer __SECTION_ZERO("retention_mem_area0");
-uint16_t adc_input __SECTION_ZERO("retention_mem_area0");
+uint16_t adc_input_raw __SECTION_ZERO("retention_mem_area0");
 uint16_t adc_input_volt __SECTION_ZERO("retention_mem_area0");
 bool adc_timer_started __SECTION_ZERO("retention_mem_area0");
 
@@ -88,68 +88,55 @@ void uvp_shdn(void)
 */
 
 // ADC main code, reads and prints to UART terminal in a timer callback loop
-// WIP single mode works but not continuous
 // Single mode output: Raw = 9, Volt = 31 mV with no connection (valid floating output)
 void gpadc_timer_cb(void)
 {
 	// Read and print ADC value to UART
-	adc_input = gpadc_collect_sample();
-	adc_input_volt = gpadc_sample_to_mv(adc_input);
-	arch_printf("Register Value: %d | Voltage: %d mV \n\r", adc_input, adc_input_volt);
+	adc_input_raw = gpadc_collect_sample();
+	adc_input_volt = gpadc_sample_to_mv(adc_input_raw);
+	arch_printf("Register Value: %d | Voltage: %d mV \n\r", adc_input_raw, adc_input_volt);
 	
 	// Restart the timer
 	adc_timer = app_easy_timer(100, gpadc_timer_cb);
 }
 
-// WIP email company about how to implement this as interrupt is not being triggered after conversion in continuous mode
+// TODO email company about how to implement this as interrupt is not being triggered after conversion in continuous mode
 void gpadc_interrupt(void)
 {
 	// Read and print ADC value
-	adc_input = gpadc_collect_sample();
-	adc_input_volt = gpadc_sample_to_mv(adc_input);
+	adc_input_raw = gpadc_collect_sample();
+	adc_input_volt = gpadc_sample_to_mv(adc_input_raw);
 	
 	// arch_printf will only print once callback function returns
-	arch_printf("Register Value: %d | Voltage: %d mV \n\r", adc_input, adc_input_volt);
+	arch_printf("Register Value: %d | Voltage: %d mV \n\r", adc_input_raw, adc_input_volt);
 	
 	// Clear the interrupt
 	adc_clear_interrupt();
 }
 
-// TODO play with settings and see which gives the most accurate reading
 // TODO read datasheet and calculate manual mode settings that gives highest sampling rate and accuracy
-void gpadc_init(void)
+void gpadc_init(uint8_t smpl_time_mult, bool continuous, uint8_t interval_mult, adc_input_attn_t input_attenuator, bool chopping, uint8_t oversampling)
 {
-	// ADC config structure, details about range of inputs for parameters found in adc_531.h
+	// ADC config structure
 	adc_config_t adc_config_struct =
 	{
-			// Measure from 1 pin with respect to ground
-			.input_mode = ADC_INPUT_MODE_SINGLE_ENDED,
-			// Set pin 6 for single ended input mode
-			.input = ADC_INPUT_SE_P0_6,
-		
-			// Sets sample time multiplier, see adc_set_sample_time
-			.smpl_time_mult = 2, // set at lowest for highest sampling rate
-		
-			// Set continuous measurement mode
-			.continuous = false,
-			// Set interval time between conversions, see adc_set_interval
-			.interval_mult = 0,
-			
-			// Set attenuation factor
-			.input_attenuator = ADC_INPUT_ATTN_4X, // less noise
-			
-			// Enable chopping algorithm, refer to datasheet
-			.chopping = false, // more accuracy at cost of sampling rate
-			
-			// Set oversampling mode, see adc_set_oversampling
-			.oversampling = 0 // not necessary as stated by grad student Jialiang
+		// HW specific
+		.input_mode = ADC_INPUT_MODE_SINGLE_ENDED,
+		.input = ADC_INPUT_SE_P0_6,
+
+		// SW adjustable
+		.smpl_time_mult = smpl_time_mult,
+		.continuous = continuous,
+		.interval_mult = interval_mult,
+		.input_attenuator = input_attenuator,
+		.chopping = chopping,
+		.oversampling = oversampling
 	};
 	
-	// Initialize ADC with structure defined above
-	// ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF
+	// Initialize ADC with structure
 	adc_init(&adc_config_struct);
 	
-	// Disable input shifter (only used for measuring negative values)
+	// Disable input shifter
 	adc_input_shift_disable();
 	// Disable die temperature sensor
 	adc_temp_sensor_disable();
@@ -167,9 +154,6 @@ void gpadc_init(void)
 uint16_t gpadc_collect_sample(void)
 {
 	// adc_get_sample() is only for single mode
-	
-	// Read data from ADC register, which always holds the latest conversion results and can be read at any time
-	
 	// Single mode operation
 	uint16_t sample = adc_correct_sample(adc_get_sample());
 	
@@ -179,7 +163,6 @@ uint16_t gpadc_collect_sample(void)
 	return (sample);
 }
 
-// code snippet given by Renesas
 uint16_t gpadc_sample_to_mv(uint16_t sample)
 {
     // Effective resolution of ADC sample based on oversampling rate	
@@ -297,9 +280,9 @@ void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind c
 	if (!adc_timer_started)
 	{
 		// ADC test code
-		gpadc_init();
+		gpadc_init(2, false, 0, ADC_INPUT_ATTN_4X, false, 0);
 		adc_enable(); // powers on ADC
-		adc_timer = app_easy_timer(100, gpadc_timer_cb);
+		adc_timer = app_easy_timer(100, gpadc_timer_cb); // starts a 1 second timer with callback function
 		adc_timer_started = true;
 	}
 }

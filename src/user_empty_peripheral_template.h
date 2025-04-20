@@ -39,7 +39,10 @@ i.e.
 #endif
 *****************************************************************************/
 
-// Albert: includes for PWM functions
+// for ADC functions
+#include "adc_531.h"
+
+// for PWM functions
 #include "timer0_2.h"
 #include "timer2.h"
 
@@ -66,10 +69,19 @@ void uvp_shdn(void);
 
 /**
  ****************************************************************************************
- * @brief Initializes the ADC.
+ * @brief Initializes the ADC with a given configuration.
+ * @param[in] smpl_time_mult     Sample time multiplier (1-15).
+ * @param[in] continuous         Enable or disable continuous conversion mode.
+ * @param[in] interval_mult      Interval multiplier for continuous mode (0-255).
+ * @param[in] input_attenuator   Attenuation factor for the ADC input.
+ * @param[in] chopping           Enable or disable chopping.
+ * @param[in] oversampling       Oversampling mode (0-7).
+ * @note ADC input mode and input pin are fixed in this function (single-ended, P0_6).
+ *			 ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF.
+ * @sa adc_init, adc_set_sample_time, adc_set_interval, adc_set_oversampling
  ****************************************************************************************
-*/
-void gpadc_init(void);
+ */
+void gpadc_init(uint8_t smpl_time_mult, bool continuous, uint8_t interval_mult, adc_input_attn_t input_attenuator, bool chopping, uint8_t oversampling);
 
 /**
  ****************************************************************************************
@@ -85,6 +97,7 @@ uint16_t gpadc_collect_sample(void);
  ****************************************************************************************
  * @brief Returns the raw conversion of ADC in millivolts.
  * @param[in] sample        Raw conversion result of the ADC.
+ * @note This is a code snippet given by Renesas.
  * @return sample in millivolts 
  ****************************************************************************************
 */
@@ -92,7 +105,7 @@ uint16_t gpadc_sample_to_mv(uint16_t sample);
 
 /**
  ****************************************************************************************
- * @brief Callback function for interrupt-driven measurements.
+ * @brief Callback function for timer-driven measurements.
  ****************************************************************************************
 */
 void gpadc_timer_cb(void);
@@ -109,7 +122,7 @@ void gpadc_interrupt(void);
  * @brief Initializes Timer 2 and the PWM output.
  * @param[in] clk_div       Clock divider for Timer 2.
  * @param[in] clk_src       Clock source for Timer 2.
- * @param[in] hw_pause      Pause condition configuration for Timer 2.
+ * @param[in] hw_pause      Enable or disable hardware pause for Timer 2.
  * @param[in] pwm_div       PWM frequency divider for PWM output (2 to (2^14 - 1)).
  ****************************************************************************************
 */
@@ -139,6 +152,7 @@ void timer2_pwm_disable(void);
  * @param[in] conidx        Connection Id index
  * @param[in] param         Pointer to GAPC_CONNECTION_REQ_IND message
  * @note Yellow warning only shows up after building the project (they can be ignored for now).
+ *			 Default callback function given by template.
  ****************************************************************************************
 */
 void user_on_connection(const uint8_t conidx, struct gapc_connection_req_ind const *param);
@@ -147,6 +161,7 @@ void user_on_connection(const uint8_t conidx, struct gapc_connection_req_ind con
  ****************************************************************************************
  * @brief Disconnection function.
  * @param[in] param         Pointer to GAPC_DISCONNECT_IND message
+ * @note Default callback function given by template.
  ****************************************************************************************
 */
 void user_on_disconnect(struct gapc_disconnect_ind const *param);
@@ -158,6 +173,7 @@ void user_on_disconnect(struct gapc_disconnect_ind const *param);
  * @param[in] param   Pointer to the parameters of the message.
  * @param[in] dest_id ID of the receiving task instance.
  * @param[in] src_id  ID of the sending task instance.
+ * @note Default callback function given by template.
  ****************************************************************************************
 */
 void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id);

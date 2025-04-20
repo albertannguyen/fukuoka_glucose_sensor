@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\out_DA14531\Objects\empty_peripheral_template_531.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\out_DA14531\Objects\empty_peripheral_template_531.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6230001: Last Updated: Sat Apr 19 21:14:09 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6230001: Last Updated: Sat Apr 19 22:15:59 2025
 <BR><P>
 <H3>Maximum Stack Usage =        192 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -2940,8 +2940,8 @@ Global Symbols
 <LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;arch_printf
 </UL>
 
-<P><STRONG><a name="[1ef]"></a>gpadc_init</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, user_empty_peripheral_template.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = gpadc_init &rArr; adc_offset_calibrate &rArr; adc_init
+<P><STRONG><a name="[1ef]"></a>gpadc_init</STRONG> (Thumb, 60 bytes, Stack size 24 bytes, user_empty_peripheral_template.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = gpadc_init &rArr; adc_offset_calibrate &rArr; adc_init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_input_shift_disable
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_offset_calibrate
@@ -2963,8 +2963,8 @@ Global Symbols
 
 <P><STRONG><a name="[26f]"></a>timer2_pwm_disable</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, user_empty_peripheral_template.o(.text), UNUSED)
 
-<P><STRONG><a name="[c0]"></a>user_on_connection</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, user_empty_peripheral_template.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = user_on_connection &rArr; gpadc_init &rArr; adc_offset_calibrate &rArr; adc_init
+<P><STRONG><a name="[c0]"></a>user_on_connection</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, user_empty_peripheral_template.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = user_on_connection &rArr; gpadc_init &rArr; adc_offset_calibrate &rArr; adc_init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_enable
 <LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_easy_timer
@@ -3520,7 +3520,7 @@ Local Symbols
 <BR>[Address Reference Count : 1]<UL><LI> app_task.o(.rodata.app_gap_process_handlers)
 </UL>
 <P><STRONG><a name="[44]"></a>gapc_connection_req_ind_handler</STRONG> (Thumb, 104 bytes, Stack size 24 bytes, app_task.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = gapc_connection_req_ind_handler &rArr; user_on_connection &rArr; gpadc_init &rArr; adc_offset_calibrate &rArr; adc_init
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = gapc_connection_req_ind_handler &rArr; user_on_connection &rArr; gpadc_init &rArr; adc_offset_calibrate &rArr; adc_init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;user_on_connection
