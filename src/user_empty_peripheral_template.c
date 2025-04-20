@@ -38,6 +38,9 @@
 // for DCDC converter debug
 #include "syscntl.h"
 
+// TODO for UVP circuit
+#include "timer1.h"
+
 /*
  ****************************************************************************************
  * DEFINES
@@ -268,7 +271,7 @@ void timer2_pwm_disable(void)
 
 /*
  ****************************************************************************************
- * DEFAULT CALLBACK FUNCTIONS
+ * USER CALLBACK FUNCTIONS
  ****************************************************************************************
 */
 
@@ -309,12 +312,6 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id
             break;
     }
 }
-
-/*
- ****************************************************************************************
- * STARTUP LOOP
- ****************************************************************************************
-*/
 
 void user_app_on_init(void)
 {
