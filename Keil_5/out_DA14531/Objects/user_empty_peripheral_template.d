@@ -98,4 +98,5 @@
   ..\..\..\..\..\sdk\platform\driver\dma\dma.h \
   ..\..\..\..\..\sdk\platform\core_modules\arch_console\arch_console.h \
   ..\..\..\..\..\sdk\platform\driver\adc\adc.h \
-  ..\..\..\..\..\sdk\platform\driver\syscntl\syscntl.h
+  ..\..\..\..\..\sdk\platform\driver\syscntl\syscntl.h \
+  ..\..\..\..\..\sdk\platform\driver\timer\timer1.h

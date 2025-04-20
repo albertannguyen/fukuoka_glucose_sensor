@@ -39,6 +39,9 @@ i.e.
 #endif
 *****************************************************************************/
 
+// for user callback functions
+#include "arch_api.h"
+
 // for ADC functions
 #include "adc_531.h"
 
@@ -54,7 +57,7 @@ i.e.
 
 /**
  ****************************************************************************************
- * @brief Initialization callback function rerouted to user space.
+ * @brief app_on_init callback function rerouted to user space.
  * @note See user_callback_config.h for reroutes.
  ****************************************************************************************
 */
@@ -62,10 +65,24 @@ void user_app_on_init(void);
 
 /**
  ****************************************************************************************
+ * @brief app_on_system_powered callback function rerouted to user space.
+ ****************************************************************************************
+*/
+arch_main_loop_callback_ret_t user_app_on_system_powered(void);
+
+/**
+ ****************************************************************************************
  * @brief Defines logic for GPIO pins of the UVP circuit.
  ****************************************************************************************
 */
 void uvp_shdn(void);
+
+/**
+ ****************************************************************************************
+ * @brief Callback function for timer-driven UVP logic.
+ ****************************************************************************************
+*/
+void uvp_timer_cb(void);
 
 /**
  ****************************************************************************************

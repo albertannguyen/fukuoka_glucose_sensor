@@ -62,6 +62,10 @@
  ****************************************************************************************
  */
 
+// UVP variables
+timer_hnd uvp_timer __SECTION_ZERO("retention_mem_area0");
+bool uvp_timer_started __SECTION_ZERO("retention_mem_area0");
+
 // ADC variables
 timer_hnd adc_timer __SECTION_ZERO("retention_mem_area0");
 uint16_t adc_input_raw __SECTION_ZERO("retention_mem_area0");
@@ -78,10 +82,16 @@ void uvp_shdn(void)
 {
 	// if voltage supervisor drives pin low, then start system shutdown
 	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
-		// shutdown MAX9913 by driving pin low
-		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN);
+		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN); // shutdown MAX9913 by driving pin low
 		// TODO set DA14531 to hibernate (lowest power mode)
 	}
+}
+
+void uvp_timer_cb(void)
+{
+	uvp_shdn(); // check for undervoltage of battery
+	arch_printf("Ran UVP check \n\r");
+	uvp_timer = app_easy_timer(50, uvp_timer_cb); // restart the timer
 }
 
 /*
@@ -90,7 +100,6 @@ void uvp_shdn(void)
  ****************************************************************************************
 */
 
-// ADC main code, reads and prints to UART terminal in a timer callback loop
 // Single mode output: Raw = 9, Volt = 31 mV with no connection (valid floating output)
 void gpadc_timer_cb(void)
 {
@@ -103,7 +112,7 @@ void gpadc_timer_cb(void)
 	adc_timer = app_easy_timer(100, gpadc_timer_cb);
 }
 
-// TODO email company about how to implement this as interrupt is not being triggered after conversion in continuous mode
+// FIXME email company about how to implement this as interrupt is not being triggered after conversion in continuous mode
 void gpadc_interrupt(void)
 {
 	// Read and print ADC value
@@ -313,6 +322,22 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id
     }
 }
 
+
+arch_main_loop_callback_ret_t user_app_on_system_powered(void)
+{
+	wdg_freeze();
+	
+	if(!uvp_timer_started){
+		uvp_timer = app_easy_timer(50, uvp_timer_cb);
+		uvp_timer_started = true;
+	}
+	
+	wdg_resume();
+	
+	return GOTO_SLEEP; // returning KEEP_POWERED hardfaults to nmi_handler.c, likely due to how SDK handles sleep
+}
+
+
 void user_app_on_init(void)
 {
 	// start the default initialization process for BLE user application
@@ -321,6 +346,7 @@ void user_app_on_init(void)
 	// TODO make changes to DCDC converter and observe how it changes output of GPIOs
 	syscntl_dcdc_level_t vdd = syscntl_dcdc_get_level();
 	adc_timer_started = false;
+	uvp_timer_started = false;
 	
 	// PWM test code
 	// max voltage is 3.3 V on LP clock source, min is 0 V
