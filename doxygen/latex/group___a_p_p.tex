@@ -66,12 +66,15 @@ User modules configuration.
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{group___a_p_p_gaa6225270b00130f1e7f4699678d05570}\label{group___a_p_p_gaa6225270b00130f1e7f4699678d05570} 
-timer\+\_\+hnd adc\+\_\+timer {\bfseries \+\_\+\+\_\+\+SECTION\+\_\+\+ZERO} ("{}retention\+\_\+mem\+\_\+area0"{})
+\Hypertarget{group___a_p_p_gac3813dc95c5634b2d2848015a0462a41}\label{group___a_p_p_gac3813dc95c5634b2d2848015a0462a41} 
+timer\+\_\+hnd uvp\+\_\+timer {\bfseries \+\_\+\+\_\+\+SECTION\+\_\+\+ZERO} ("{}retention\+\_\+mem\+\_\+area0"{})
 \item 
 \Hypertarget{group___a_p_p_ga1d6b9c029ec3b57bfc9111f1f9f30a68}\label{group___a_p_p_ga1d6b9c029ec3b57bfc9111f1f9f30a68} 
 void {\bfseries uvp\+\_\+shdn} (void)
 \begin{DoxyCompactList}\small\item\em Defines logic for GPIO pins of the UVP circuit. \end{DoxyCompactList}\item 
+\Hypertarget{group___a_p_p_ga888c2029da7d278e7f309b8a06d97c25}\label{group___a_p_p_ga888c2029da7d278e7f309b8a06d97c25} 
+void {\bfseries uvp\+\_\+timer\+\_\+cb} (void)
+\begin{DoxyCompactList}\small\item\em Callback function for timer-\/driven UVP logic. \end{DoxyCompactList}\item 
 \Hypertarget{group___a_p_p_ga5ec316679d3ba903bd2a9481994c0279}\label{group___a_p_p_ga5ec316679d3ba903bd2a9481994c0279} 
 void {\bfseries gpadc\+\_\+timer\+\_\+cb} (void)
 \begin{DoxyCompactList}\small\item\em Callback function for timer-\/driven measurements. \end{DoxyCompactList}\item 
@@ -97,13 +100,19 @@ void \mbox{\hyperlink{group___a_p_p_ga2b05ace9fab6a68b42379e8a17d91d43}{user\+\_
 \begin{DoxyCompactList}\small\item\em Disconnection function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}{user\+\_\+catch\+\_\+rest\+\_\+hndl}} (ke\+\_\+msg\+\_\+id\+\_\+t const msgid, void const \texorpdfstring{$\ast$}{*}param, ke\+\_\+task\+\_\+id\+\_\+t const dest\+\_\+id, ke\+\_\+task\+\_\+id\+\_\+t const src\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Handles the messages that are not handled by the SDK internal mechanisms. \end{DoxyCompactList}\item 
+\Hypertarget{group___a_p_p_ga868f1e60544dc2092df4c6a7110f461b}\label{group___a_p_p_ga868f1e60544dc2092df4c6a7110f461b} 
+arch\+\_\+main\+\_\+loop\+\_\+callback\+\_\+ret\+\_\+t {\bfseries user\+\_\+app\+\_\+on\+\_\+system\+\_\+powered} (void)
+\begin{DoxyCompactList}\small\item\em app\+\_\+on\+\_\+system\+\_\+powered callback function rerouted to user space. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa}{user\+\_\+app\+\_\+on\+\_\+init}} (void)
-\begin{DoxyCompactList}\small\item\em Initialization callback function rerouted to user space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em app\+\_\+on\+\_\+init callback function rerouted to user space. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 User modules configuration. 
 
+\begin{DoxyNote}{Note}
+Albert Nguyen
+\end{DoxyNote}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -241,7 +250,7 @@ void user\+\_\+app\+\_\+on\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\
 
 
 
-Initialization callback function rerouted to user space. 
+app\+\_\+on\+\_\+init callback function rerouted to user space. 
 
 \begin{DoxyNote}{Note}
 See \doxylink{user__callback__config_8h}{user\+\_\+callback\+\_\+config.\+h} for reroutes. 

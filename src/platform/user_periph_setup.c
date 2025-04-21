@@ -29,8 +29,6 @@ bool flag_gpio_uvp = true;
  ****************************************************************************************
 		i.e. to reserve P0_1 as Generic Purpose I/O:
 		RESERVE_GPIO(DESCRIPTIVE_NAME, GPIO_PORT_0, GPIO_PIN_1, PID_GPIO);
-		
-		last argument is pin function, do not change from PID_GPIO
  */
 
 #if DEVELOPMENT_DEBUG
@@ -45,14 +43,14 @@ void GPIO_reservations(void)
 			RESERVE_GPIO(SPI_EN, SPI_EN_PORT, SPI_EN_PIN, PID_SPI_EN);
 	#endif
 
-	// Albert: reserve UVP pins as GPIO
+	// reserve UVP pins as GPIO
 	RESERVE_GPIO(UVP_TRIGGER, UVP_TRIGGER_PORT, UVP_TRIGGER_PIN, PID_GPIO);
 	RESERVE_GPIO(UVP_MAX_SHDN, UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN, PID_GPIO);
 	
-	// Albert: reserve ADC pins
+	// reserve ADC pins
 	RESERVE_GPIO(ADC_INPUT, ADC_INPUT_PORT, ADC_INPUT_PIN, PID_ADC);
 	
-	// Albert: reserve PWM pins
+	// reserve PWM pins
 	RESERVE_GPIO(PWM2_OUTPUT, PWM2_PORT, PWM2_PIN, PID_PWM2);
 	RESERVE_GPIO(PWM3_OUTPUT, PWM3_PORT, PWM3_PIN, PID_PWM3);
 }

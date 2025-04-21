@@ -11,6 +11,7 @@ Empty peripheral template project header file.
 {\ttfamily \#include "{}gapm\+\_\+task.\+h"{}}\newline
 {\ttfamily \#include "{}app.\+h"{}}\newline
 {\ttfamily \#include "{}co\+\_\+error.\+h"{}}\newline
+{\ttfamily \#include "{}arch\+\_\+api.\+h"{}}\newline
 {\ttfamily \#include "{}adc\+\_\+531.\+h"{}}\newline
 {\ttfamily \#include "{}timer0\+\_\+2.\+h"{}}\newline
 {\ttfamily \#include "{}timer2.\+h"{}}\newline
@@ -18,9 +19,13 @@ Empty peripheral template project header file.
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa}{user\+\_\+app\+\_\+on\+\_\+init}} (void)
-\begin{DoxyCompactList}\small\item\em Initialization callback function rerouted to user space. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em app\+\_\+on\+\_\+init callback function rerouted to user space. \end{DoxyCompactList}\item 
+arch\+\_\+main\+\_\+loop\+\_\+callback\+\_\+ret\+\_\+t {\bfseries user\+\_\+app\+\_\+on\+\_\+system\+\_\+powered} (void)
+\begin{DoxyCompactList}\small\item\em app\+\_\+on\+\_\+system\+\_\+powered callback function rerouted to user space. \end{DoxyCompactList}\item 
 void {\bfseries uvp\+\_\+shdn} (void)
 \begin{DoxyCompactList}\small\item\em Defines logic for GPIO pins of the UVP circuit. \end{DoxyCompactList}\item 
+void {\bfseries uvp\+\_\+timer\+\_\+cb} (void)
+\begin{DoxyCompactList}\small\item\em Callback function for timer-\/driven UVP logic. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group___a_p_p_ga41745da9df1defa8983962be9aa23e11}{gpadc\+\_\+init}} (uint8\+\_\+t smpl\+\_\+time\+\_\+mult, bool continuous, uint8\+\_\+t interval\+\_\+mult, adc\+\_\+input\+\_\+attn\+\_\+t input\+\_\+attenuator, bool chopping, uint8\+\_\+t oversampling)
 \begin{DoxyCompactList}\small\item\em Initializes the ADC with a given configuration. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f}{gpadc\+\_\+collect\+\_\+sample}} (void)
@@ -48,3 +53,6 @@ void \mbox{\hyperlink{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}{user\+\_
 \doxysubsection{Detailed Description}
 Empty peripheral template project header file. 
 
+\begin{DoxyNote}{Note}
+Albert Nguyen 
+\end{DoxyNote}

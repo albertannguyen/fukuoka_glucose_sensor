@@ -71,7 +71,6 @@ bool uvp_timer_started __SECTION_ZERO("retention_mem_area0");
 timer_hnd adc_timer __SECTION_ZERO("retention_mem_area0");
 uint16_t adc_input_raw __SECTION_ZERO("retention_mem_area0");
 uint16_t adc_input_volt __SECTION_ZERO("retention_mem_area0");
-bool adc_timer_started __SECTION_ZERO("retention_mem_area0");
 
 /*
  ****************************************************************************************
@@ -82,11 +81,13 @@ bool adc_timer_started __SECTION_ZERO("retention_mem_area0");
 void uvp_shdn(void)
 {
 	// if voltage supervisor drives pin low, then start system shutdown
+	// GPIO high is around 3 V, and low is 0 V
 	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
 		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN); // shutdown MAX9913
 		// TODO set DA14531 to hibernate (lowest power mode)
 	}else{
 		GPIO_SetActive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN); // enable MAX9913
+		// TODO wake up the DA14531
 	}
 }
 
@@ -292,20 +293,33 @@ void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind c
 	default_app_on_connection(connection_idx, param);
 	
 	/*
-	if (!adc_timer_started)
-	{
-		// ADC test code
-		gpadc_init(2, false, 0, ADC_INPUT_ATTN_4X, false, 0);
-		adc_enable(); // powers on ADC
-		adc_timer = app_easy_timer(100, gpadc_timer_cb); // starts a 1 second timer with callback function
-		adc_timer_started = true;
-	}
+	// ADC test code
+	gpadc_init(2, false, 0, ADC_INPUT_ATTN_4X, false, 0);
+	adc_enable(); // powers on ADC
+	adc_timer = app_easy_timer(100, gpadc_timer_cb); // starts a 1 second SW timer (ran in BLE core)
+	*/
+	
+	// PWM test code
+	// max voltage is 3.3 V on LP clock source, min is 0 V
+	// this is because GPIO is supplied by VBAT_HIGH or the 3.3 V LDO on devkit
+	/*
+	timer2_pwm_init(TIM0_2_CLK_DIV_8, TIM2_CLK_LP, TIM2_HW_PAUSE_OFF, 0xFFFF);
+	timer2_pwm_enable(50, 0, 25, 0);
 	*/
 }
 
 void user_on_disconnect(struct gapc_disconnect_ind const *param )
 {
 	default_app_on_disconnect(param);
+	
+	/*
+	// ADC test code
+	adc_disable(); // powers off ADC
+	app_easy_timer_cancel(adc_timer); // cancels timer
+	*/
+	
+	// PWM test code
+	// timer2_pwm_disable();
 }
 
 void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id)
@@ -347,30 +361,11 @@ void user_app_on_init(void)
 	// start the default initialization process for BLE user application
 	default_app_on_init();
 	
-	// TODO make changes to DCDC converter and observe how it changes output of GPIOs
-	syscntl_dcdc_level_t vdd = syscntl_dcdc_get_level();
-	adc_timer_started = false;
+	// initialize user retained variables
 	uvp_timer_started = false;
 	
-	// PWM test code
-	// max voltage is 3.3 V on LP clock source, min is 0 V
-	// this is because GPIO is supplied by VBAT_HIGH or the 3.3 V LDO on devkit
-	
-	/*
-	timer2_pwm_init(TIM0_2_CLK_DIV_8, TIM2_CLK_LP, TIM2_HW_PAUSE_OFF, 0xFFFF);
-	timer2_pwm_enable(50, 0, 25, 0);
-	*/
-	
-	// UVP test code
-	// if condition passes if trigger pin is driven low and turns off the MAX SHDN pin
-	// GPIO high is around 3 V, and low is 0 V
-	
-	/*
-	uvp_trigger_status = GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN);
-	while(1){
-		uvp_shdn();
-	}
-	*/
+	// TODO make changes to DCDC converter and observe how it changes output of GPIOs
+	// syscntl_dcdc_level_t vdd = syscntl_dcdc_get_level();
 }
 
 /// @} APP

@@ -107,39 +107,38 @@ $(function(){initNavTree('user__periph__setup_8h_source.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 <a href="user__periph__setup_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef _USER_PERIPH_SETUP_H_</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define _USER_PERIPH_SETUP_H_</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> ****************************************************************************************</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> * INCLUDE FILES</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> ****************************************************************************************</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;arch.h&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;gpio.h&quot;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;uart.h&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> ****************************************************************************************</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * DEFINES</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> ****************************************************************************************</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">// Albert: define UVP circuit pins</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">// note that pin 9 is the LED pin for USB devkit by default</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// not sure what ports do so left it alone at port 0, seems to be the default for most things</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef _USER_PERIPH_SETUP_H_</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define _USER_PERIPH_SETUP_H_</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> ****************************************************************************************</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> * INCLUDE FILES</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> ****************************************************************************************</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;arch.h&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;gpio.h&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;uart.h&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> ****************************************************************************************</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * DEFINES</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> ****************************************************************************************</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">// define UVP circuit pins</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// note that pin 9 is the LED pin for USB devkit by default</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#define UVP_TRIGGER_PORT            GPIO_PORT_0</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#define UVP_TRIGGER_PIN             GPIO_PIN_8 </span><span class="comment">// SDA on MikroBus</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#define UVP_MAX_SHDN_PORT           GPIO_PORT_0</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#define UVP_MAX_SHDN_PIN            GPIO_PIN_9 </span><span class="comment">// PWM on MikroBus</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// Albert: define ADC pins</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// define ADC pins</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#define ADC_INPUT_PORT              GPIO_PORT_0</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#define ADC_INPUT_PIN               GPIO_PIN_6 </span><span class="comment">// RX on MikroBus</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//Albert: define PWM pins</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// define PWM pins</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#define PWM2_PORT               GPIO_PORT_0</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#define PWM2_PIN                GPIO_PIN_7 </span><span class="comment">// CS on MikroBus</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#define PWM3_PORT               GPIO_PORT_0</span></div>
@@ -154,7 +153,7 @@ $(function(){initNavTree('user__periph__setup_8h_source.html',''); initResizable
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">// Define UART2 Tx Pad</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#if defined (__DA14531__)</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">    #define UART2_TX_PORT           GPIO_PORT_0</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="comment">// Albert: changed from pin 6 to pin 5 for USB devkit</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="comment">// changed from pin 6 to pin 5 for USB devkit</span></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">    #define UART2_TX_PIN            GPIO_PIN_5</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">    #define UART2_TX_PORT           GPIO_PORT_0</span></div>
@@ -237,8 +236,8 @@ $(function(){initNavTree('user__periph__setup_8h_source.html',''); initResizable
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="preprocessor">#endif </span><span class="comment">// _USER_PERIPH_SETUP_H_</span></div>
-<div class="ttc" id="auser__periph__setup_8h_html_a2cd4bdd061501508fe71aa672f690e81"><div class="ttname"><a href="user__periph__setup_8h.html#a2cd4bdd061501508fe71aa672f690e81">periph_init</a></div><div class="ttdeci">void periph_init(void)</div><div class="ttdoc">Initializes application&#39;s peripherals and pins.</div><div class="ttdef"><b>Definition</b> user_periph_setup.c:114</div></div>
-<div class="ttc" id="auser__periph__setup_8h_html_ac55a7e5121b9797ba36f63cb1f2f6d7f"><div class="ttname"><a href="user__periph__setup_8h.html#ac55a7e5121b9797ba36f63cb1f2f6d7f">set_pad_functions</a></div><div class="ttdeci">void set_pad_functions(void)</div><div class="ttdoc">Sets the functionality of application pads.</div><div class="ttdef"><b>Definition</b> user_periph_setup.c:70</div></div>
+<div class="ttc" id="auser__periph__setup_8h_html_a2cd4bdd061501508fe71aa672f690e81"><div class="ttname"><a href="user__periph__setup_8h.html#a2cd4bdd061501508fe71aa672f690e81">periph_init</a></div><div class="ttdeci">void periph_init(void)</div><div class="ttdoc">Initializes application&#39;s peripherals and pins.</div><div class="ttdef"><b>Definition</b> user_periph_setup.c:121</div></div>
+<div class="ttc" id="auser__periph__setup_8h_html_ac55a7e5121b9797ba36f63cb1f2f6d7f"><div class="ttname"><a href="user__periph__setup_8h.html#ac55a7e5121b9797ba36f63cb1f2f6d7f">set_pad_functions</a></div><div class="ttdeci">void set_pad_functions(void)</div><div class="ttdoc">Sets the functionality of application pads.</div><div class="ttdef"><b>Definition</b> user_periph_setup.c:72</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

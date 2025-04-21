@@ -3,39 +3,38 @@
 \mbox{\hyperlink{user__periph__setup_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
-\DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ \_USER\_PERIPH\_SETUP\_H\_}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ \_USER\_PERIPH\_SETUP\_H\_}}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00012\ \textcolor{comment}{\ ****************************************************************************************}}
-\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ INCLUDE\ FILES}}
-\DoxyCodeLine{00014\ \textcolor{comment}{\ ****************************************************************************************}}
-\DoxyCodeLine{00015\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}arch.h"{}}}
-\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}gpio.h"{}}}
-\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}uart.h"{}}}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \textcolor{comment}{/*}}
-\DoxyCodeLine{00022\ \textcolor{comment}{\ ****************************************************************************************}}
-\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ DEFINES}}
-\DoxyCodeLine{00024\ \textcolor{comment}{\ ****************************************************************************************}}
-\DoxyCodeLine{00025\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \textcolor{comment}{//\ Albert:\ define\ UVP\ circuit\ pins}}
-\DoxyCodeLine{00028\ \textcolor{comment}{//\ note\ that\ pin\ 9\ is\ the\ LED\ pin\ for\ USB\ devkit\ by\ default}}
-\DoxyCodeLine{00029\ \textcolor{comment}{//\ not\ sure\ what\ ports\ do\ so\ left\ it\ alone\ at\ port\ 0,\ seems\ to\ be\ the\ default\ for\ most\ things}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ \_USER\_PERIPH\_SETUP\_H\_}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ \_USER\_PERIPH\_SETUP\_H\_}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ ****************************************************************************************}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ INCLUDE\ FILES}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ ****************************************************************************************}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}arch.h"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}gpio.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}uart.h"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ ****************************************************************************************}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ DEFINES}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ ****************************************************************************************}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ define\ UVP\ circuit\ pins}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ note\ that\ pin\ 9\ is\ the\ LED\ pin\ for\ USB\ devkit\ by\ default}}
 \DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ UVP\_TRIGGER\_PORT\ \ \ \ \ \ \ \ \ \ \ \ GPIO\_PORT\_0}}
 \DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ UVP\_TRIGGER\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ GPIO\_PIN\_8\ }\textcolor{comment}{//\ SDA\ on\ MikroBus}}
 \DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ UVP\_MAX\_SHDN\_PORT\ \ \ \ \ \ \ \ \ \ \ GPIO\_PORT\_0}}
 \DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ UVP\_MAX\_SHDN\_PIN\ \ \ \ \ \ \ \ \ \ \ \ GPIO\_PIN\_9\ }\textcolor{comment}{//\ PWM\ on\ MikroBus}}
 \DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \textcolor{comment}{//\ Albert:\ define\ ADC\ pins}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ define\ ADC\ pins}}
 \DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ ADC\_INPUT\_PORT\ \ \ \ \ \ \ \ \ \ \ \ \ \ GPIO\_PORT\_0}}
 \DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ ADC\_INPUT\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GPIO\_PIN\_6\ }\textcolor{comment}{//\ RX\ on\ MikroBus}}
 \DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \textcolor{comment}{//Albert:\ define\ PWM\ pins}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ define\ PWM\ pins}}
 \DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ PWM2\_PORT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GPIO\_PORT\_0}}
 \DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ PWM2\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GPIO\_PIN\_7\ }\textcolor{comment}{//\ CS\ on\ MikroBus}}
 \DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ PWM3\_PORT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GPIO\_PORT\_0}}
@@ -50,7 +49,7 @@
 \DoxyCodeLine{00051\ \textcolor{comment}{//\ Define\ UART2\ Tx\ Pad}}
 \DoxyCodeLine{00052\ \textcolor{preprocessor}{\#if\ defined\ (\_\_DA14531\_\_)}}
 \DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \ \ \#define\ UART2\_TX\_PORT\ \ \ \ \ \ \ \ \ \ \ GPIO\_PORT\_0}}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Albert:\ changed\ from\ pin\ 6\ to\ pin\ 5\ for\ USB\ devkit}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ changed\ from\ pin\ 6\ to\ pin\ 5\ for\ USB\ devkit}}
 \DoxyCodeLine{00055\ \textcolor{preprocessor}{\ \ \ \ \#define\ UART2\_TX\_PIN\ \ \ \ \ \ \ \ \ \ \ \ GPIO\_PIN\_5}}
 \DoxyCodeLine{00056\ \textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{00057\ \textcolor{preprocessor}{\ \ \ \ \#define\ UART2\_TX\_PORT\ \ \ \ \ \ \ \ \ \ \ GPIO\_PORT\_0}}

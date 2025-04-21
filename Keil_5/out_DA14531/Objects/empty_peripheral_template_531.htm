@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\out_DA14531\Objects\empty_peripheral_template_531.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\out_DA14531\Objects\empty_peripheral_template_531.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6230001: Last Updated: Mon Apr 21 13:58:29 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6230001: Last Updated: Mon Apr 21 15:07:11 2025
 <BR><P>
 <H3>Maximum Stack Usage =        192 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1417,7 +1417,6 @@ Global Symbols
 
 <P><STRONG><a name="[110]"></a>syscntl_dcdc_get_level</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, syscntl.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;syscntl_dcdc_turn_on_in_boost
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;user_app_on_init
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_otpc_init
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;otpc_dcdc_cfg
 </UL>
@@ -3015,11 +3014,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[102]"></a>user_app_on_init</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, user_empty_peripheral_template.o(.text))
+<P><STRONG><a name="[102]"></a>user_app_on_init</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, user_empty_peripheral_template.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = user_app_on_init &rArr; default_app_on_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;syscntl_dcdc_get_level
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;default_app_on_init
+<BR>[Calls]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;default_app_on_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
 </UL>

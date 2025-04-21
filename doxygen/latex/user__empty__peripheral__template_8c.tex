@@ -17,6 +17,7 @@ Empty peripheral template project source code.
 {\ttfamily \#include "{}timer0\+\_\+2.\+h"{}}\newline
 {\ttfamily \#include "{}timer2.\+h"{}}\newline
 {\ttfamily \#include "{}syscntl.\+h"{}}\newline
+{\ttfamily \#include "{}timer1.\+h"{}}\newline
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -33,10 +34,12 @@ Empty peripheral template project source code.
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-timer\+\_\+hnd adc\+\_\+timer {\bfseries \+\_\+\+\_\+\+SECTION\+\_\+\+ZERO} ("{}retention\+\_\+mem\+\_\+area0"{})
+timer\+\_\+hnd uvp\+\_\+timer {\bfseries \+\_\+\+\_\+\+SECTION\+\_\+\+ZERO} ("{}retention\+\_\+mem\+\_\+area0"{})
 \item 
 void {\bfseries uvp\+\_\+shdn} (void)
 \begin{DoxyCompactList}\small\item\em Defines logic for GPIO pins of the UVP circuit. \end{DoxyCompactList}\item 
+void {\bfseries uvp\+\_\+timer\+\_\+cb} (void)
+\begin{DoxyCompactList}\small\item\em Callback function for timer-\/driven UVP logic. \end{DoxyCompactList}\item 
 void {\bfseries gpadc\+\_\+timer\+\_\+cb} (void)
 \begin{DoxyCompactList}\small\item\em Callback function for timer-\/driven measurements. \end{DoxyCompactList}\item 
 void {\bfseries gpadc\+\_\+interrupt} (void)
@@ -59,8 +62,10 @@ void \mbox{\hyperlink{group___a_p_p_ga2b05ace9fab6a68b42379e8a17d91d43}{user\+\_
 \begin{DoxyCompactList}\small\item\em Disconnection function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}{user\+\_\+catch\+\_\+rest\+\_\+hndl}} (ke\+\_\+msg\+\_\+id\+\_\+t const msgid, void const \texorpdfstring{$\ast$}{*}param, ke\+\_\+task\+\_\+id\+\_\+t const dest\+\_\+id, ke\+\_\+task\+\_\+id\+\_\+t const src\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Handles the messages that are not handled by the SDK internal mechanisms. \end{DoxyCompactList}\item 
+arch\+\_\+main\+\_\+loop\+\_\+callback\+\_\+ret\+\_\+t {\bfseries user\+\_\+app\+\_\+on\+\_\+system\+\_\+powered} (void)
+\begin{DoxyCompactList}\small\item\em app\+\_\+on\+\_\+system\+\_\+powered callback function rerouted to user space. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa}{user\+\_\+app\+\_\+on\+\_\+init}} (void)
-\begin{DoxyCompactList}\small\item\em Initialization callback function rerouted to user space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em app\+\_\+on\+\_\+init callback function rerouted to user space. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
