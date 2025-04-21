@@ -100,6 +100,7 @@
   ..\..\..\..\..\sdk\platform\driver\uart\uart.h \
   ..\..\..\..\..\sdk\platform\driver\dma\dma.h \
   ..\src\user_empty_peripheral_template.h \
+  ..\..\..\..\..\sdk\platform\driver\adc\adc_531.h \
   ..\..\..\..\..\sdk\platform\driver\timer\timer0_2.h \
   ..\..\..\..\..\sdk\platform\driver\timer\timer2.h \
   ..\src\custom_profile\user_custs_config.h

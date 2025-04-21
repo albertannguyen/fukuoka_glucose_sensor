@@ -4,6 +4,7 @@
  * @brief Empty peripheral template project source code.
  * @addtogroup APP
  * @{
+ * @note Albert Nguyen
  ****************************************************************************************
  */
 
@@ -22,7 +23,7 @@
 #include "gpio.h"
 #include "user_periph_setup.h"
 
-// for UART serial port output
+// for UART serial port debugging
 #include "arch_console.h"
 // #include "systick.h"
 // #include "uart.h"
@@ -35,102 +36,123 @@
 #include "timer0_2.h"
 #include "timer2.h"
 
+// for DCDC converter debug
+#include "syscntl.h"
+
+// TODO for UVP circuit
+#include "timer1.h"
+
 /*
  ****************************************************************************************
  * DEFINES
  ****************************************************************************************
  */
 
+// datasheet values
 #define MIN_PWM_DIV 2
 #define MAX_PWM_DIV 16383
 #define SYS_CLK_FREQ_HZ 16000000
 #define LP_CLK_FREQ_HZ 32000
 
+// clamp macro
+#define CLAMP(value, min, max) ((value) < (min) ? (min) : ((value) > (max) ? (max) : (value)))
+
 /*
  ****************************************************************************************
- * GLOBAL VARIABLE DEFINITIONS
+ * GLOBAL RETENTION VARIABLE DEFINITIONS
  ****************************************************************************************
  */
 
-// UVP debug variables
-bool uart_busy_status __SECTION_ZERO("retention_mem_area0");
-bool uvp_trigger_status __SECTION_ZERO("retention_mem_area0");
+// UVP variables
+timer_hnd uvp_timer __SECTION_ZERO("retention_mem_area0");
+bool uvp_timer_started __SECTION_ZERO("retention_mem_area0");
 
-// ADC debug variables
+// ADC variables
 timer_hnd adc_timer __SECTION_ZERO("retention_mem_area0");
-uint16_t adc_input __SECTION_ZERO("retention_mem_area0");
+uint16_t adc_input_raw __SECTION_ZERO("retention_mem_area0");
 uint16_t adc_input_volt __SECTION_ZERO("retention_mem_area0");
-bool adc_timer_started __SECTION_ZERO("retention_mem_area0");
 
 /*
  ****************************************************************************************
- * UVP FUNCTIONS (Albert)
+ * UVP FUNCTIONS
  ****************************************************************************************
 */
 
 void uvp_shdn(void)
 {
 	// if voltage supervisor drives pin low, then start system shutdown
+	// GPIO high is around 3 V, and low is 0 V
 	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
-		// shutdown MAX9913 by driving pin low
-		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN);
-		// #TODO set DA14531 to hibernate (lowest power mode)
+		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN); // shutdown MAX9913
+		// TODO set DA14531 to hibernate (lowest power mode)
+	}else{
+		GPIO_SetActive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN); // enable MAX9913
+		// TODO wake up the DA14531
 	}
+}
+
+void uvp_timer_cb(void)
+{
+	uvp_shdn(); // check for undervoltage of battery
+	arch_printf("Ran UVP check \n\r");
+	uvp_timer = app_easy_timer(50, uvp_timer_cb); // restart the timer
 }
 
 /*
  ****************************************************************************************
- * ADC FUNCTIONS (Albert)
+ * ADC FUNCTIONS
  ****************************************************************************************
 */
 
-// ADC timer code, reads and prints to UART terminal in a callback loop
+// Single mode output: Raw = 9, Volt = 31 mV with no connection (valid floating output)
 void gpadc_timer_cb(void)
 {
-	// Read and print ADC value (validated)
-	adc_input = gpadc_collect_sample();
-	adc_input_volt = gpadc_sample_to_mv(adc_input);
-	
-	// arch_printf will only print once callback function returns
-	arch_printf("ADC voltage: %d mV\n\r", adc_input_volt);
+	// Read and print ADC value to UART
+	adc_input_raw = gpadc_collect_sample();
+	adc_input_volt = gpadc_sample_to_mv(adc_input_raw);
+	arch_printf("Register Value: %d | Voltage: %d mV \n\r", adc_input_raw, adc_input_volt);
 	
 	// Restart the timer
 	adc_timer = app_easy_timer(100, gpadc_timer_cb);
 }
 
-// ANY CHANGES TO ADC CONFIG MUST BE APPLIED WHEN ADC IS OFF
-void gpadc_init(void)
+// FIXME email company about how to implement this as interrupt is not being triggered after conversion in continuous mode
+void gpadc_interrupt(void)
 {
-	// ADC config structure, details about range of inputs for parameters found in adc_531.h
+	// Read and print ADC value
+	adc_input_raw = gpadc_collect_sample();
+	adc_input_volt = gpadc_sample_to_mv(adc_input_raw);
+	
+	// arch_printf will only print once callback function returns
+	arch_printf("Register Value: %d | Voltage: %d mV \n\r", adc_input_raw, adc_input_volt);
+	
+	// Clear the interrupt
+	adc_clear_interrupt();
+}
+
+// TODO read datasheet and calculate manual mode settings that gives highest sampling rate and accuracy
+void gpadc_init(uint8_t smpl_time_mult, bool continuous, uint8_t interval_mult, adc_input_attn_t input_attenuator, bool chopping, uint8_t oversampling)
+{
+	// ADC config structure
 	adc_config_t adc_config_struct =
 	{
-			// Measure from 1 pin with respect to ground
-			.input_mode = ADC_INPUT_MODE_SINGLE_ENDED,
-			// Set pin 6 for single ended input mode
-			.input = ADC_INPUT_SE_P0_6,
-		
-			// Sets sample time multiplier
-			// #WIP check effect on ADC measurements
-			.smpl_time_mult = 0,
-		
-			// Set continuous measurement mode
-			.continuous = true,
-			// Set conversion to have no interval in continuous mode 
-			.interval_mult = 0,
-			// Set no attenuation of input
-			.input_attenuator = ADC_INPUT_ATTN_NO,
-			
-			// Enable chopping algorithm, refer to datasheet
-			// #WIP check effect on ADC measurements
-			.chopping = true,
-			
-			// Enable oversampling to increase accuracy and stability
-			// #WIP check effect on ADC measurements
-			.oversampling = 7
+		// HW specific
+		.input_mode = ADC_INPUT_MODE_SINGLE_ENDED,
+		.input = ADC_INPUT_SE_P0_6,
+
+		// SW adjustable
+		.smpl_time_mult = smpl_time_mult,
+		.continuous = continuous,
+		.interval_mult = interval_mult,
+		.input_attenuator = input_attenuator,
+		.chopping = chopping,
+		.oversampling = oversampling
 	};
-	// Initialize ADC with structure defined above
+	
+	// Initialize ADC with structure
 	adc_init(&adc_config_struct);
-	// Disable input shifter (for measuring negative values)
+	
+	// Disable input shifter
 	adc_input_shift_disable();
 	// Disable die temperature sensor
 	adc_temp_sensor_disable();
@@ -138,22 +160,25 @@ void gpadc_init(void)
 	// Perform offset calibration of the ADC
 	adc_reset_offsets();
 	adc_offset_calibrate(ADC_INPUT_MODE_SINGLE_ENDED);
-
-	// #WIP consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
+	
+	// FIXME Register interrupt function to be used when ADC is on in continuous mode
+	// adc_register_interrupt(gpadc_interrupt);
+	
+	// consider using adc_ldo_const_current_enable() if getting noisy readings at lower voltage
 }
 
 uint16_t gpadc_collect_sample(void)
 {
-	// Details on adc_get_sample() is in adc_531.c, not in the header file
-	// adc_get_sample() will stall if in continuous mode due to ADC always being busy, which is why it is not used here
+	// adc_get_sample() is only for single mode
+	// Single mode operation
+	uint16_t sample = adc_correct_sample(adc_get_sample());
 	
-	// Read data from ADC register, which always holds the latest conversion results and can be read at any time
-	uint16_t sample = adc_correct_sample(GetWord16(GP_ADC_RESULT_REG));
+	// Continuous mode operation
+	// uint16_t sample = adc_correct_sample(GetWord16(GP_ADC_RESULT_REG));
 	
 	return (sample);
 }
 
-// code taken and adjusted from ADC peripheral driver example section 10
 uint16_t gpadc_sample_to_mv(uint16_t sample)
 {
     // Effective resolution of ADC sample based on oversampling rate	
@@ -168,7 +193,7 @@ uint16_t gpadc_sample_to_mv(uint16_t sample)
 
 /*
  ****************************************************************************************
- * PWM FUNCTIONS (Albert)
+ * PWM FUNCTIONS
  ****************************************************************************************
 */
 
@@ -190,25 +215,39 @@ void timer2_pwm_init(tim0_2_clk_div_t clk_div, tim2_clk_src_t clk_src, tim2_hw_p
 	timer2_config(&tmr_cfg);
 	
 	// Define PWM parameters
+	uint8_t clk_div_int = 1 << clk_div;
 	uint32_t clk_freq = (clk_src == TIM2_CLK_SYS) ? SYS_CLK_FREQ_HZ : LP_CLK_FREQ_HZ,
-					 clk_div_int = (clk_div == TIM0_2_CLK_DIV_1) ? 1 :
-																(clk_div == TIM0_2_CLK_DIV_2) ? 2 :
-																(clk_div == TIM0_2_CLK_DIV_4) ? 4 : 8,
 					 input_freq = clk_freq / clk_div_int;
 
-	// Set PWM parameters
-	// Ensure pwm_div is not beyond datasheet stated range of 2 to (2^14 - 1)
-	if(pwm_div < MIN_PWM_DIV || pwm_div > MAX_PWM_DIV){
-		// Set to min value
-		pwm_div = MIN_PWM_DIV;
-		arch_printf("pwm_div is beyond min-max range specified by datasheet; it is now set to min value\n\r");
+	// Clamp pwm_div if beyond datasheet range of 2 to (2^14 - 1)
+	pwm_div = CLAMP(pwm_div, MIN_PWM_DIV, MAX_PWM_DIV);
+	
+	// TODO fully determine compile bug if arch_printf is included
+	/*
+	if (pwm_div < MIN_PWM_DIV) {
+    pwm_div = MIN_PWM_DIV;
+    // arch_printf("pwm_div is below minimum, clamped to min value %d \n\r", MIN_PWM_DIV);
+		// __BKPT(0); // force breakpoint here because debugger cannot stop in here, it has been optimized out of build
+	} else if (pwm_div > MAX_PWM_DIV) {
+    pwm_div = MAX_PWM_DIV;
+    // arch_printf("pwm_div is above maximum, clamped to max value %d \n\r", MAX_PWM_DIV);
 	}
-	// Input and output frequency of this function is defined and set based on datasheet for timer 2
+	*/
+
+	// Set PWM frequency based on datasheet for Timer 2
 	timer2_pwm_freq_set(input_freq / pwm_div, input_freq);
 }
 
 void timer2_pwm_enable(uint8_t dc_pwm2, uint8_t offset_pwm2, uint8_t dc_pwm3, uint8_t offset_pwm3)
 {
+	// Clamp values if inputs are outside of 0-100% range
+	/*
+	dc_pwm2 = CLAMP(dc_pwm2, 0, 100);
+	offset_pwm2 = CLAMP(offset_pwm2, 0, 100);
+	dc_pwm3 = CLAMP(dc_pwm3, 0, 100);
+	offset_pwm3 = CLAMP(offset_pwm3, 0, 100);
+	*/
+	
 	// Define PWM parameters in struct
 	tim2_pwm_config_t pwm2_cfg = {
 		.pwm_signal = TIM2_PWM_2,
@@ -223,6 +262,7 @@ void timer2_pwm_enable(uint8_t dc_pwm2, uint8_t offset_pwm2, uint8_t dc_pwm3, ui
 	};
 	
 	// Set PWM parameters
+	// This function already comes with ASSERT_WARNING input protection, no need for clamping
 	timer2_pwm_signal_config(&pwm2_cfg);
 	timer2_pwm_signal_config(&pwm3_cfg);
 	
@@ -244,7 +284,7 @@ void timer2_pwm_disable(void)
 
 /*
  ****************************************************************************************
- * DEFAULT CALLBACK FUNCTIONS (Albert)
+ * USER CALLBACK FUNCTIONS
  ****************************************************************************************
 */
 
@@ -252,20 +292,34 @@ void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind c
 {
 	default_app_on_connection(connection_idx, param);
 	
-	// Ensures that code only runs once
-	if (!adc_timer_started)
-	{
-		// ADC test code
-		gpadc_init();
-		adc_enable(); // powers on ADC
-		adc_timer = app_easy_timer(100, gpadc_timer_cb);
-		adc_timer_started = true;
-	}
+	/*
+	// ADC test code
+	gpadc_init(2, false, 0, ADC_INPUT_ATTN_4X, false, 0);
+	adc_enable(); // powers on ADC
+	adc_timer = app_easy_timer(100, gpadc_timer_cb); // starts a 1 second SW timer (ran in BLE core)
+	*/
+	
+	// PWM test code
+	// max voltage is 3.3 V on LP clock source, min is 0 V
+	// this is because GPIO is supplied by VBAT_HIGH or the 3.3 V LDO on devkit
+	/*
+	timer2_pwm_init(TIM0_2_CLK_DIV_8, TIM2_CLK_LP, TIM2_HW_PAUSE_OFF, 0xFFFF);
+	timer2_pwm_enable(50, 0, 25, 0);
+	*/
 }
 
 void user_on_disconnect(struct gapc_disconnect_ind const *param )
 {
 	default_app_on_disconnect(param);
+	
+	/*
+	// ADC test code
+	adc_disable(); // powers off ADC
+	app_easy_timer_cancel(adc_timer); // cancels timer
+	*/
+	
+	// PWM test code
+	// timer2_pwm_disable();
 }
 
 void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id)
@@ -286,31 +340,32 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid, void const *param, ke_task_id
     }
 }
 
-/*
- ****************************************************************************************
- * STARTUP LOOP (Albert)
- ****************************************************************************************
-*/
 
-// Albert: user callback function that runs on startup/reset, good for running some peripherals quickly
+arch_main_loop_callback_ret_t user_app_on_system_powered(void)
+{
+	wdg_freeze();
+	
+	if(!uvp_timer_started){
+		uvp_timer = app_easy_timer(50, uvp_timer_cb);
+		uvp_timer_started = true;
+	}
+	
+	wdg_resume();
+	
+	return GOTO_SLEEP; // returning KEEP_POWERED hardfaults to nmi_handler.c, likely due to how SDK handles sleep
+}
+
+
 void user_app_on_init(void)
 {
 	// start the default initialization process for BLE user application
 	default_app_on_init();
 	
-	// test PWM code with oscilloscope, done
-	/*
-	timer2_pwm_init(TIM0_2_CLK_DIV_1, TIM2_CLK_SYS, TIM2_HW_PAUSE_OFF, 2);
-	timer2_pwm_enable(50, 0, 25, 0);
-	*/
+	// initialize user retained variables
+	uvp_timer_started = false;
 	
-	// test uvp code, done
-	/*
-	uvp_trigger_status = GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN);
-	while(1){
-		uvp_shdn();
-	}
-	*/
+	// TODO make changes to DCDC converter and observe how it changes output of GPIOs
+	// syscntl_dcdc_level_t vdd = syscntl_dcdc_get_level();
 }
 
 /// @} APP

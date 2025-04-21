@@ -1,0 +1,82 @@
+\doxysection{user\+\_\+empty\+\_\+peripheral\+\_\+template.\+h}
+\hypertarget{user__empty__peripheral__template_8h_source}{}\label{user__empty__peripheral__template_8h_source}\index{C:/Users/alber/Documents/DA14531/SDK/projects/target\_apps/template/fukuoka\_glucose\_sensor/src/user\_empty\_peripheral\_template.h@{C:/Users/alber/Documents/DA14531/SDK/projects/target\_apps/template/fukuoka\_glucose\_sensor/src/user\_empty\_peripheral\_template.h}}
+\mbox{\hyperlink{user__empty__peripheral__template_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ \_USER\_EMPTY\_PERIPHERAL\_TEMPLATE\_H\_}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ \_USER\_EMPTY\_PERIPHERAL\_TEMPLATE\_H\_}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ ****************************************************************************************}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ INCLUDE\ FILES}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ ****************************************************************************************}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}rwble\_config.h"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}app\_task.h"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ application\ task}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}gapc\_task.h"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ gap\ functions\ and\ messages}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}gapm\_task.h"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ gap\ functions\ and\ messages}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}app.h"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ application\ definitions}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ "{}co\_error.h"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ error\ code\ definitions}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00035\ \textcolor{comment}{Add\ here\ supported\ profiles'\ application\ header\ files.}}
+\DoxyCodeLine{00036\ \textcolor{comment}{i.e.}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\#if\ (BLE\_DIS\_SERVER)}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\#include\ "{}app\_dis.h"{}}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\#include\ "{}app\_dis\_task.h"{}}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\#endif}}
+\DoxyCodeLine{00041\ \textcolor{comment}{*****************************************************************************/}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ for\ user\ callback\ functions}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#include\ "{}arch\_api.h"{}}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ for\ ADC\ functions}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#include\ "{}adc\_531.h"{}}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ for\ PWM\ functions}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#include\ "{}timer0\_2.h"{}}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#include\ "{}timer2.h"{}}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ ****************************************************************************************}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ *\ FUNCTION\ DECLARATIONS}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ ****************************************************************************************}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00065\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga8d69ab99f9504092fa8ae723a6ab4cfa}{user\_app\_on\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ arch\_main\_loop\_callback\_ret\_t\ \mbox{\hyperlink{group___a_p_p_ga868f1e60544dc2092df4c6a7110f461b}{user\_app\_on\_system\_powered}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00079\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga1d6b9c029ec3b57bfc9111f1f9f30a68}{uvp\_shdn}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00086\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga888c2029da7d278e7f309b8a06d97c25}{uvp\_timer\_cb}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00102\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga41745da9df1defa8983962be9aa23e11}{gpadc\_init}}(uint8\_t\ smpl\_time\_mult,\ \textcolor{keywordtype}{bool}\ continuous,\ uint8\_t\ interval\_mult,\ adc\_input\_attn\_t\ input\_attenuator,\ \textcolor{keywordtype}{bool}\ chopping,\ uint8\_t\ oversampling);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00112\ uint16\_t\ \mbox{\hyperlink{group___a_p_p_gaa4fb3777459834fb4d0720eaf119d94f}{gpadc\_collect\_sample}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00122\ uint16\_t\ \mbox{\hyperlink{group___a_p_p_ga8258035a26667ea0be70867e5e483c3f}{gpadc\_sample\_to\_mv}}(uint16\_t\ sample);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00129\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga5ec316679d3ba903bd2a9481994c0279}{gpadc\_timer\_cb}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00136\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_gabf7bc0af1245d613383b804d714c157d}{gpadc\_interrupt}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00147\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_gad52bb6041e633d19633c604c84a13e32}{timer2\_pwm\_init}}(tim0\_2\_clk\_div\_t\ clk\_div,\ tim2\_clk\_src\_t\ clk\_src,\ tim2\_hw\_pause\_t\ hw\_pause,\ uint16\_t\ pwm\_div);}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00158\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_gac249834818c97dd4641fbf984bcff414}{timer2\_pwm\_enable}}(uint8\_t\ dc\_pwm2,\ uint8\_t\ offset\_pwm2,\ uint8\_t\ dc\_pwm3,\ uint8\_t\ offset\_pwm3);}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00165\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga8c8e71698fc4044fef4e7990642f44e1}{timer2\_pwm\_disable}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00176\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga097fccef82db4a9dfdc1cb542a9e9e20}{user\_on\_connection}}(\textcolor{keyword}{const}\ uint8\_t\ conidx,\ \textcolor{keyword}{struct}\ gapc\_connection\_req\_ind\ \textcolor{keyword}{const}\ *param);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00185\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga2b05ace9fab6a68b42379e8a17d91d43}{user\_on\_disconnect}}(\textcolor{keyword}{struct}\ gapc\_disconnect\_ind\ \textcolor{keyword}{const}\ *param);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00197\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___a_p_p_ga0b3422baf14d93c4ca220ed9999e5a3c}{user\_catch\_rest\_hndl}}(ke\_msg\_id\_t\ \textcolor{keyword}{const}\ msgid,\ \textcolor{keywordtype}{void}\ \textcolor{keyword}{const}\ *param,\ ke\_task\_id\_t\ \textcolor{keyword}{const}\ dest\_id,\ ke\_task\_id\_t\ \textcolor{keyword}{const}\ src\_id);}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

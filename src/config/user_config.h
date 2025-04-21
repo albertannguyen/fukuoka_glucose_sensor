@@ -2,6 +2,7 @@
  ****************************************************************************************
  * @file user_config.h
  * @brief User configuration file.
+ * @note Albert Nguyen enabled ARCH_EXT_SLEEP_ON
  ****************************************************************************************
  */
 
@@ -69,10 +70,8 @@
  ******************************************
  */
  
-// Albert: enabled extended sleep mode
-// #WIP for debug turned sleep off for now
-static const sleep_state_t app_default_sleep_mode = ARCH_SLEEP_OFF;
-// static const sleep_state_t app_default_sleep_mode = ARCH_EXT_SLEEP_ON;
+// enabled extended sleep mode
+static const sleep_state_t app_default_sleep_mode = ARCH_EXT_SLEEP_ON;
 
 /*
  ****************************************************************************************

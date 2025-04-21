@@ -2,6 +2,7 @@
  ****************************************************************************************
  * @file da14531_config_basic.h
  * @brief Basic compile configuration file.
+ * @note Albert Nguyen defined CFG_PRINTF
  ****************************************************************************************
  */
 
@@ -64,7 +65,7 @@
 /* will be used.                                                                                                */
 /****************************************************************************************************************/
 
-// Albert: enabled UART by defining CFG_PRINTF, see Section 10.2 of SDK Tutorial and arch_console.h file
+// enabled UART by defining CFG_PRINTF, see Section 10.2 of SDK Tutorial and arch_console.h file
 #define CFG_PRINTF
 
 #ifdef CFG_PRINTF

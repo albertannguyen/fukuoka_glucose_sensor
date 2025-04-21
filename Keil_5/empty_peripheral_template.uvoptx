@@ -455,6 +455,10 @@
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
+          <Key>DLGUARM</Key>
+        </SetRegEntry>
+        <SetRegEntry>
+          <Number>0</Number>
           <Key>UL2CM3</Key>
           <Name>UL2CM3(-S0 -C0 -P0 )  -FC1000 -FD20000000</Name>
         </SetRegEntry>
@@ -494,9 +498,41 @@
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>timer_started</ItemText>
+          <ItemText>uvp_timer_started</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>flag_gpio_uvp</ItemText>
         </Ww>
       </WatchWindow1>
+      <WatchWindow2>
+        <Ww>
+          <count>0</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>dc_pwm2</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>dc_pwm3</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>offset_pwm2</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>offset_pwm3</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>pwm_div</ItemText>
+        </Ww>
+      </WatchWindow2>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
