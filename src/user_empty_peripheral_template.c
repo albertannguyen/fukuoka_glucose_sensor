@@ -4,6 +4,7 @@
  * @brief Empty peripheral template project source code.
  * @addtogroup APP
  * @{
+ * @note Albert Nguyen
  ****************************************************************************************
  */
 
@@ -82,8 +83,10 @@ void uvp_shdn(void)
 {
 	// if voltage supervisor drives pin low, then start system shutdown
 	if(GPIO_GetPinStatus(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN) == false){
-		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN); // shutdown MAX9913 by driving pin low
+		GPIO_SetInactive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN); // shutdown MAX9913
 		// TODO set DA14531 to hibernate (lowest power mode)
+	}else{
+		GPIO_SetActive(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN); // enable MAX9913
 	}
 }
 
@@ -288,7 +291,7 @@ void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind c
 {
 	default_app_on_connection(connection_idx, param);
 	
-	// Ensures that code only runs once
+	/*
 	if (!adc_timer_started)
 	{
 		// ADC test code
@@ -297,6 +300,7 @@ void user_on_connection(uint8_t connection_idx, struct gapc_connection_req_ind c
 		adc_timer = app_easy_timer(100, gpadc_timer_cb); // starts a 1 second timer with callback function
 		adc_timer_started = true;
 	}
+	*/
 }
 
 void user_on_disconnect(struct gapc_disconnect_ind const *param )

@@ -500,6 +500,11 @@
           <WinNumber>1</WinNumber>
           <ItemText>uvp_timer_started</ItemText>
         </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>flag_gpio_uvp</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>

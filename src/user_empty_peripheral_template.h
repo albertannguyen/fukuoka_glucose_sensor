@@ -2,6 +2,7 @@
  ****************************************************************************************
  * @file user_empty_peripheral_template.h
  * @brief Empty peripheral template project header file.
+ * @note Albert Nguyen
  ****************************************************************************************
  */
 

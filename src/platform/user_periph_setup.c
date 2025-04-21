@@ -2,6 +2,7 @@
  ****************************************************************************************
  * @file user_periph_setup.c
  * @brief Peripherals setup and initialization.
+ * @note Albert Nguyen
  ****************************************************************************************
  */
 
@@ -19,6 +20,9 @@
 #include "uart.h"
 #include "syscntl.h"
 
+// set flag for UVP GPIO
+bool flag_gpio_uvp = true;
+
 /*
  ****************************************************************************************
  * GPIO RESERVATIONS
@@ -26,7 +30,7 @@
 		i.e. to reserve P0_1 as Generic Purpose I/O:
 		RESERVE_GPIO(DESCRIPTIVE_NAME, GPIO_PORT_0, GPIO_PIN_1, PID_GPIO);
 		
-		Albert: last argument is pin function, do not change from PID_GPIO
+		last argument is pin function, do not change from PID_GPIO
  */
 
 #if DEVELOPMENT_DEBUG
@@ -62,7 +66,7 @@ void GPIO_reservations(void)
 		i.e. to set P0_1 as Generic purpose Output:
 		GPIO_ConfigurePin(GPIO_PORT_0, GPIO_PIN_1, OUTPUT, PID_GPIO, false);
 
-		Albert: last argument sets level of digital output, true is high and false is low
+		last argument sets level of digital output, true is high and false is low
 		last argument is ignored if pin is configured as an input
 		this info can be found in gpio.c and gpio.h
  */
@@ -82,15 +86,20 @@ void set_pad_functions(void)
 			GPIO_ConfigurePin(UART2_TX_PORT, UART2_TX_PIN, OUTPUT, PID_UART2_TX, false);
 	#endif
 	
-	// Albert: set pin 8 (UVP_TRIGGER) as input
+	// set pin 8 (UVP_TRIGGER) as input
 	GPIO_ConfigurePin(UVP_TRIGGER_PORT, UVP_TRIGGER_PIN, INPUT, PID_GPIO, false);
-	// Albert: set pin 9 (UVP_MAX_SHDN) as digital output high
-	GPIO_ConfigurePin(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN, OUTPUT, PID_GPIO, true);
 	
-	// Albert: set ADC pin as input
+	// set pin 9 (UVP_MAX_SHDN) as digital output high
+	// flag is so that it only initializes once
+	if(flag_gpio_uvp){
+		GPIO_ConfigurePin(UVP_MAX_SHDN_PORT, UVP_MAX_SHDN_PIN, OUTPUT, PID_GPIO, true);
+		flag_gpio_uvp = false;
+	}
+	
+	// set ADC pin as input
 	GPIO_ConfigurePin(ADC_INPUT_PORT, ADC_INPUT_PIN, INPUT, PID_ADC, false);
 	
-	// Albert: set PWM pins
+	// set PWM pins
 	GPIO_ConfigurePin(PWM2_PORT, PWM2_PIN, OUTPUT, PID_PWM2, false);
 	GPIO_ConfigurePin(PWM3_PORT, PWM3_PIN, OUTPUT, PID_PWM3, false);
 }
@@ -117,7 +126,7 @@ void periph_init(void)
 	// In Boost mode enable the DCDC converter to supply VBAT_HIGH for the used GPIOs
 	// Assumption: The connected external peripheral is powered by 3V
 	
-	// Albert: #TODO need to check this function and use it to set the DCDC converter
+	// TODO need to check this function and use it to set the DCDC converter
 	// USB devkit supplies 3.3 V to DA14531 chip in buck mode via an LDO
 			
 	syscntl_dcdc_turn_on_in_boost(SYSCNTL_DCDC_LEVEL_3V0);
