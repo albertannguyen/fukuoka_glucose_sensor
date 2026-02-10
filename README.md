@@ -63,7 +63,7 @@ This firmware leverages the `empty_peripheral_template` project framework provid
 ### Installation
 1. Clone the repository:
 ```bash
-git clone [https://github.com/albertannguyen/fukuoka_glucose_sensor.git](https://github.com/albertannguyen/fukuoka_glucose_sensor.git)
+git clone https://github.com/albertannguyen/fukuoka_glucose_sensor.git
 ```
 2. Open the project file `*.uvprojx` in Keil uVision.
 3. Ensure your SDK path is correctly configured in the Project Options.
