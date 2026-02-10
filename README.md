@@ -1,9 +1,9 @@
 # [ARCHIVE] Fukuoka Glucose Sensor - Initial Prototype
 
 ![C](https://img.shields.io/badge/Language-C-blue.svg)
-![SoC](https://img.shields.io/badge/SoC-DA14531-orange.svg)
+![SoC](https://img.shields.io/badge/SoC-DA14531--00-orange.svg)
 ![SDK](https://img.shields.io/badge/SDK-Dialog--6.0.22.1401-green.svg)
-![Build](https://img.shields.io/badge/Build-Keil--uVision-lightgrey.svg)
+![Build](https://img.shields.io/badge/Build-Keil--uVision--5-lightgrey.svg)
 
 ## 📖 Introduction
 This repository contains the **Initial Proof-of-Concept** firmware for the Fukuoka Glucose Sensor, developed on the **DA14531 SmartBond TINY™ SoC**. 
@@ -52,7 +52,7 @@ This build focuses on three primary low-level subsystems:
 ## ⚙️ Getting Started
 ### Prerequisites
 * **Keil uVision 5** with ARM Compiler support.
-* **Dialog SDK6** (DA145xx_SDK_6.0.22.1401 or similar).
+* **Dialog SDK6** (DA145xx_SDK_6.0.22.1401 or compatible).
 * **DA14531 Development Kit**.
 
 ### Installation
@@ -68,4 +68,4 @@ git clone [https://github.com/albertannguyen/fukuoka_glucose_sensor.git](https:/
 
 ## 📝 Known Limitations
 * **ADC Interrupts:** Continuous mode interrupts were unstable in this build; current implementation utilizes a 1-second software timer for stable polling.
-* **Documentation:** In-code Doxygen comments are minimal; full documentation was prioritized in the subsequent `fukuoka_uric_acid_sensor` repository.
+* **Documentation:** In-code Doxygen comments are minimal; full documentation was prioritized in the subsequent [fukuoka_uric_acid_sensor](https://github.com/albertannguyen/fukuoka_uric_acid_sensor) repository.
