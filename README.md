@@ -6,10 +6,10 @@
 ![Build](https://img.shields.io/badge/Build-Keil--uVision-lightgrey.svg)
 
 ## 📖 Introduction
-This repository contains the **Initial Proof-of-Concept (Phase 1)** firmware for the Fukuoka Glucose Sensor, developed on the **DA14531 SmartBond TINY™ SoC**. 
+This repository contains the **Initial Proof-of-Concept** firmware for the Fukuoka Glucose Sensor, developed on the **DA14531 SmartBond TINY™ SoC**. 
 
 ### The Context
-I assumed the role of Firmware Lead during a critical 14-day development gap at the end of the semester. The objective was to stabilize the hardware abstraction layer (HAL) and implement core sensing logic to ensure project viability for Phase 2. While this version is a rapid prototype, it established the foundational power management and data acquisition architecture.
+I assumed the additional role of firmware development during a critical 2-week development gap at the end of the first semester. The objective was to implement core sensing logic to ensure project viability for the next semester. While this version is a rapid prototype, it established the foundational power management and data acquisition architecture that was later expanded on.
 
 > **Looking for the final version?** Please see the **fukuoka_uric_acid_sensor** repository for the production-ready firmware, full Doxygen documentation, and optimized power profiles.
 
@@ -20,7 +20,7 @@ This Phase 1 build focuses on three primary low-level subsystems:
 
 ### 1. Electrochemical Sensing (GPADC)
 * **Driver:** Custom implementation for the General Purpose ADC to sample at `P0_6`.
-* **Logic:** Timer-based polling using `app_easy_timer` (100ms intervals) to handle electrochemical signal acquisition.
+* **Logic:** Timer-based polling using `app_easy_timer` (1-second intervals) to handle electrochemical signal acquisition.
 * **Conversion:** Manual voltage calculation logic to account for ADC attenuation and bit-shifting based on oversampling rates.
 
 ### 2. Undervoltage Protection (UVP)
@@ -36,7 +36,7 @@ This Phase 1 build focuses on three primary low-level subsystems:
 ## 🛠 Tech Stack
 * **Microcontroller:** Dialog Semiconductor (Renesas) DA14531 (ARM Cortex-M0+)
 * **Development Environment:** Keil uVision 5
-* **SDK:** Dialog SmartBond SDK6 (v6.0.14)
+* **SDK:** Dialog SmartBond SDK6 (v6.0.22.1401)
 * **Communication:** Bluetooth Low Energy (BLE 5.1)
 
 ---
@@ -47,6 +47,7 @@ This Phase 1 build focuses on three primary low-level subsystems:
 ├── user_empty_peripheral_template.h  # Hardware definitions & function prototypes
 ├── user_periph_setup.c               # GPIO and peripheral configuration
 └── user_periph_setup.h               # Pin mapping and hardware constants
+```
 
 ## ⚙️ Getting Started
 ### Prerequisites
@@ -56,6 +57,6 @@ This Phase 1 build focuses on three primary low-level subsystems:
 
 ### Installation
 1. Clone the repository:
-   ```bash
-   git clone [https://github.com/yourusername/fukuoka_glucose_sensor.git](https://github.com/yourusername/fukuoka_glucose_sensor.git)
-   ```
+```bash
+git clone [https://github.com/yourusername/fukuoka_glucose_sensor.git](https://github.com/yourusername/fukuoka_glucose_sensor.git)
+```
