@@ -43,12 +43,14 @@ This build focuses on three primary low-level subsystems:
 
 ## 📂 Project Structure
 This firmware leverages the `empty_peripheral_template` project framework provided by the Dialog SDK. While the skeletal structure follows the SDK’s design patterns, the core application logic and peripheral driver integrations are custom implementations tailored for the prototype.
-```text
-├── user_empty_peripheral_template.c  # Application logic and BLE event callbacks
-├── user_empty_peripheral_template.h  # Peripheral definitions and prototypes
-├── user_periph_setup.c               # GPIO/Peripheral hardware initialization
-└── user_periph_setup.h               # Pin mapping and hardware constants
-```
+
+* **Application & Logic**
+  * `user_empty_peripheral_template.c/.h`: Main user application logic, including BLE event handling and electrochemical sensing routines.
+  * `user_periph_setup.c/.h`: Defined the GPIO pinmuxing and peripheral hardware initialization.
+* **System & Kernel Configuration**
+  * `user_callback_config.h`: Rerouted the SDK main loop by implementing custom `app_on_init` and `app_on_system_powered` callbacks to take direct control of system execution.
+  * `user_config.h`: Enabled `ARCH_EXT_SLEEP_ON` for power optimization and sleep mode.
+  * `da14531_config_basic.h`: Enabled `CFG_PRINTF` via UART to establish a serial debugging interface for hardware bring-up.
 
 ---
 
