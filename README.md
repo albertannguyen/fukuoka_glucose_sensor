@@ -1,4 +1,4 @@
-# Fukuoka Glucose Sensor - Phase 1 (MVP)
+# [ARCHIVE] Fukuoka Glucose Sensor - Initial Prototype
 
 ![C](https://img.shields.io/badge/Language-C-blue.svg)
 ![SoC](https://img.shields.io/badge/SoC-DA14531-orange.svg)
@@ -11,12 +11,12 @@ This repository contains the **Initial Proof-of-Concept** firmware for the Fukuo
 ### The Context
 I assumed the additional role of firmware development during a critical 2-week development gap at the end of the first semester. The objective was to implement core sensing logic to ensure project viability for the next semester. While this version is a rapid prototype, it established the foundational power management and data acquisition architecture that was later expanded on.
 
-> **Looking for the final version?** Please see the **fukuoka_uric_acid_sensor** repository for the production-ready firmware, full Doxygen documentation, and optimized power profiles.
+> **Looking for the final version?** Please see the **fukuoka_uric_acid_sensor** repository for the production-ready firmware with full Doxygen documentation.
 
 ---
 
 ## 🚀 Key Features & Implementation
-This Phase 1 build focuses on three primary low-level subsystems:
+This build focuses on three primary low-level subsystems:
 
 ### 1. Electrochemical Sensing (GPADC)
 * **Driver:** Custom implementation for the General Purpose ADC to sample at `P0_6`.
@@ -43,20 +43,29 @@ This Phase 1 build focuses on three primary low-level subsystems:
 
 ## 📂 Project Structure
 ```text
-├── user_empty_peripheral_template.c  # Main application logic & BLE callbacks
-├── user_empty_peripheral_template.h  # Hardware definitions & function prototypes
-├── user_periph_setup.c               # GPIO and peripheral configuration
+├── user_empty_peripheral_template.c  # Main application logic and BLE callbacks
+├── user_empty_peripheral_template.h  # Function prototypes
+├── user_periph_setup.c               # GPIO configuration
 └── user_periph_setup.h               # Pin mapping and hardware constants
 ```
 
 ## ⚙️ Getting Started
 ### Prerequisites
-* **Keil uVision 5** with ARM Compiler 6 support.
-* **Dialog SDK6** (DA145xx_SDK_6.0.14.1114 or similar).
-* **DA14531 Development Kit** (Pro or Tiny).
+* **Keil uVision 5** with ARM Compiler support.
+* **Dialog SDK6** (DA145xx_SDK_6.0.22.1401 or similar).
+* **DA14531 Development Kit** (USB).
 
 ### Installation
 1. Clone the repository:
 ```bash
-git clone [https://github.com/yourusername/fukuoka_glucose_sensor.git](https://github.com/yourusername/fukuoka_glucose_sensor.git)
+git clone [https://github.com/albertannguyen/fukuoka_glucose_sensor.git](https://github.com/albertannguyen/fukuoka_glucose_sensor.git)
 ```
+2. Open the project file `*.uvprojx` in Keil uVision.
+3. Ensure your SDK path is correctly configured in the Project Options.
+4. Build target and flash using the **J-Link** debugger on any DevKit.
+
+---
+
+## 📝 Known Limitations (Phase 1)
+* **ADC Interrupts:** Continuous mode interrupts were unstable in this build; current implementation utilizes a 1-second software timer for stable polling.
+* **Documentation:** In-code Doxygen comments are minimal; full documentation was prioritized in the subsequent Uric Acid repository.
