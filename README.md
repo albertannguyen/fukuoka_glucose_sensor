@@ -18,23 +18,23 @@ I stepped in to lead the firmware development during a critical 2-week gap at th
 ## 🚀 Key Features & Implementation
 This build focuses on three primary low-level subsystems:
 
-### 1. Electrochemical Sensing (GPADC)
-* **Driver:** Custom implementation for the General Purpose ADC to sample at `P0_6`.
+### 1. Electrochemical Sensing
+* **Driver:** Custom implementation for the **General Purpose Analog-to-Digital Converter (GPADC)** to sample at `P0_6`.
 * **Logic:** Timer-based polling via the `app_easy_timer` API (1-second intervals) to handle electrochemical signal acquisition.
-* **Conversion:** Manual voltage calculation logic to account for ADC attenuation and bit-shifting based on effective resolution/oversampling.
+* **Conversion:** Manual voltage calculation logic to account for ADC attenuation and bit-shifting based on effective resolution and oversampling rates.
 
-### 2. Undervoltage Protection (UVP)
+### 2. Undervoltage Protection
 * **Mechanism:** Interfaces with an external hardware voltage supervisor circuit.
-* **Functionality:** The firmware monitors the `UVP_TRIGGER_PIN`. Upon detecting a low state from the supervisor, the DA14531 enters a low-power sleep state (`GOTO_SLEEP`) to preserve battery integrity and stop active sensing.
+* **Functionality:** The firmware monitors the **Undervoltage Protection (UVP)** trigger pin. Upon detecting a low state from the supervisor, the SoC enters a low-power sleep state (`GOTO_SLEEP`) to preserve battery integrity and stop active sensing.
 
 ### 3. PWM Generation
-* **Timer 2 Control:** Implemented PWM signal generation with adjustable duty cycles and offsets to drive external sensor conditioning circuitry.
-* **Clock Management:** Integrated frequency clamping logic to maintain stability across the 16 MHz (System) and 32 kHz (Low Power) domains.
+* **Timer 2 Control:** Implemented **Pulse Width Modulation (PWM)** signal generation with adjustable duty cycles and offsets to drive external sensor conditioning circuitry.
+* **Clock Management:** Integrated frequency clamping logic to maintain stability across the 16MHz (System) and 32kHz (Low Power) clock domains.
 
 ---
 
 ## 🛠 Tech Stack
-* **Microcontroller:** Dialog Semiconductor (Renesas) DA14531 (ARM Cortex-M0+)
+* **Microcontroller:** Dialog Semiconductor (Renesas) DA14531-00 (Base variant)
 * **Development Environment:** Keil uVision 5
 * **SDK:** Dialog SmartBond SDK6 (v6.0.22.1401)
 * **Communication:** Bluetooth Low Energy (BLE 5.1)
