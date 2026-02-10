@@ -42,12 +42,15 @@ This build focuses on three primary low-level subsystems:
 ---
 
 ## 📂 Project Structure
+This firmware leverages the `empty_peripheral_template` project framework provided by the Dialog SDK. While the skeletal structure follows the SDK’s design patterns, the core application logic and peripheral driver integrations are custom implementations tailored for the prototype.
 ```text
 ├── user_empty_peripheral_template.c  # Application logic and BLE event callbacks
 ├── user_empty_peripheral_template.h  # Peripheral definitions and prototypes
 ├── user_periph_setup.c               # GPIO/Peripheral hardware initialization
 └── user_periph_setup.h               # Pin mapping and hardware constants
 ```
+
+---
 
 ## ⚙️ Getting Started
 ### Prerequisites
