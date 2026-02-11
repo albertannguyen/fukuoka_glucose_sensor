@@ -4,6 +4,7 @@
 ![SoC](https://img.shields.io/badge/SoC-DA14531--00-orange.svg)
 ![SDK](https://img.shields.io/badge/SDK-Dialog--6.0.22.1401-green.svg)
 ![Build](https://img.shields.io/badge/Build-Keil--uVision--5-lightgrey.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## 📖 Introduction
 This repository contains the **Initial Proof-of-Concept** firmware for the **Fukuoka Glucose Sensor**, developed on the **DA14531 SmartBond TINY™ System-on-Chip (SoC)**. 
