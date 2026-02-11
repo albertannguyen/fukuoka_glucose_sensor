@@ -34,10 +34,14 @@ This build focuses on three primary low-level subsystems:
 ---
 
 ## 🛠 Tech Stack
-* **Microcontroller:** Dialog Semiconductor (Renesas) DA14531-00 (Base variant)
-* **Development Environment:** Keil uVision 5
-* **SDK:** Dialog SmartBond SDK6 (v6.0.22.1401)
-* **Communication:** Bluetooth Low Energy (BLE 5.1)
+
+**Microcontroller:** Renesas (Dialog) DA14531-00 (Base variant)
+
+**Development Environment:** Keil µVision 5
+
+**SDK:** Dialog SmartBond Software Development Kit (SDK6 v6.0.22.1401)
+
+**Communication:** Bluetooth Low Energy (BLE 5.1)
 
 ---
 
