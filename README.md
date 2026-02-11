@@ -72,10 +72,15 @@ git clone https://github.com/albertannguyen/fukuoka_glucose_sensor.git
 ```
 2. Open the project file `*.uvprojx` in Keil µVision.
 3. Ensure your SDK path is correctly configured in the Project Options.
-4. Build the target and flash to the device.
+4. Build the target and flash it to the device.
 
 ---
 
 ## 📝 Known Limitations
-* **ADC Interrupts:** Continuous mode interrupts were unstable in this build; current implementation utilizes a 1 second software timer for stable polling.
+* **ADC Interrupts:** Continuous mode interrupts were unstable in this build. The current implementation utilizes a 1-second software timer for stable polling.
 * **Documentation:** In-code Doxygen comments are minimal; full documentation was prioritized in the subsequent [fukuoka_uric_acid_sensor](https://github.com/albertannguyen/fukuoka_uric_acid_sensor) repository.
+
+---
+
+## 👥 Credits & History
+This repository reflects the initial development phase of the Fukuoka Glucose Sensor project. While the current codebase focuses exclusively on the C firmware developed by **Albert Nguyen**, the repository history includes legacy commits from a previous collaborator who contributed Swift-based iOS mobile application assets.
