@@ -1,2 +1,14 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Hide everything from language stats by default
+* linguist-vendored
+
+# Explicitly count only your C source code
+src/*.c linguist-vendored=false
+src/*.h linguist-vendored=false
+Keil_5/*.c linguist-vendored=false
+Keil_5/*.h linguist-vendored=false
+
+# Keep documentation labeled as documentation
+doxygen/** linguist-documentation
